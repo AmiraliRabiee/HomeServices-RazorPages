@@ -28,7 +28,6 @@ namespace App.Domain.Core.Entites
         [Required(ErrorMessage = "Last name is required.")]
         [MaxLength(50, ErrorMessage = "Last name cannot exceed 50 characters.")]
         public string? LastName { get; set; }
-        public bool IsActive { get; set; }
         public bool IsDeleted { get; set; } = false;
 
 
