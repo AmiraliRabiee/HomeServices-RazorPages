@@ -8,7 +8,7 @@ namespace App.Infrastructure.EFCore.Migrations
     /// <inheritdoc />
     public partial class two : Migration
     {
-
+        //
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
