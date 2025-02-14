@@ -9,7 +9,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
     public class SuggestionRepository(AppDbContext _appDbContext) : ISuggestionRepository
     {        
         #region SuggestionCrud
-        public async Task<Result> CreateSuggestion(SummSuggestionDto suggestion, CancellationToken cancellationToken)
+        public async Task<Result> CreateSuggestion(Suggestion suggestion, CancellationToken cancellationToken)
         {
             try
             {
@@ -20,7 +20,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
                 newSuggestion.DeliverDate = suggestion.DeliverDate;
                 newSuggestion.CityId = suggestion.CityId;
                 newSuggestion.OrderId = suggestion.OrderId;
-                newSuggestion.HomeServiceId = suggestion.HomeServiceId;
+                newSuggestion.HouseWorkId = suggestion.HouseWorkId;
 
                 await _appDbContext.Suggestions.AddAsync(newSuggestion, cancellationToken);
                 await _appDbContext.SaveChangesAsync(cancellationToken);
@@ -37,7 +37,8 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
         {
             try
             {
-                var result = await _appDbContext.Suggestions.FirstOrDefaultAsync(s => s.Id == suggestion.Id);
+                var result = await _appDbContext.Suggestions
+                    .FirstOrDefaultAsync(s => s.Id == suggestion.Id, cancellationToken);
 
                 if (result is null)
                     return new Result { IsSuccess = false, Message = ".سفارشی با این شناسه یافت نشد" };
@@ -54,11 +55,33 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
             }
         }
 
+        public async Task<Result> SoftDeleteSuggestion(Suggestion suggestion, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var result = await _appDbContext.Suggestions
+                    .FirstOrDefaultAsync(s => s.Id == suggestion.Id, cancellationToken);
+
+                if (result is null)
+                    return new Result { IsSuccess = false, Message = ".سفارشی با این شناسه یافت نشد" };
+
+                result.IsDeleted = true;
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+
+                return new Result { IsSuccess = true, Message = "با موفقیت حذف شد" };
+            }
+            catch (Exception ex)
+            {
+                return new Result { IsSuccess = false, Message = $"{ex.Message}" };
+            }
+        }
+
         public async Task<Result> UpdateSuggestion(Suggestion suggestion, CancellationToken cancellationToken)
         {
             try
             {
-                var current = await _appDbContext.Suggestions.FirstOrDefaultAsync(s => s.Id == suggestion.Id);
+                var current = await _appDbContext.Suggestions
+                    .FirstOrDefaultAsync(s => s.Id == suggestion.Id, cancellationToken);
 
                 if (current is null)
                     return new Result { IsSuccess = false, Message = ".سفارشی با این شناسه یافت نشد" };
@@ -80,8 +103,8 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
         public async Task<Suggestion> GetSuggestionById(int id, CancellationToken cancellationToken)
         {
             var suggestion = await _appDbContext.Suggestions
-            .Include(s => s.HomeService)
-            .FirstOrDefaultAsync(s => s.Id == id);
+            .Include(s => s.HouseWork)
+            .FirstOrDefaultAsync(s => s.Id == id, cancellationToken);
 
             if (suggestion is null)
                 throw new Exception(".سفارشی با این شناسه یافت نشد");
@@ -91,15 +114,15 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
         public async Task<List<SummSuggestionDto>> GetSuggestion()
         {
             var suggestions = await _appDbContext.Suggestions
-                .Include(s => s.HomeService)
+                .Include(s => s.HouseWork)
             .Select(s => new SummSuggestionDto
             {
                 Description = s.Description,
                 SuggestPrice = s.SuggestPrice,
                 DeliverDate = s.DeliverDate,
-                HomeServiceId = s.HomeServiceId,
-                ExpertId = s.ExpertId,
-                CityId = s.CityId,
+                HouseWork = s.HouseWork.Title,
+                ExpertId = s.Expert.Id,
+                City = s.City.Name,
             }).ToListAsync();
 
             if (suggestions is null)

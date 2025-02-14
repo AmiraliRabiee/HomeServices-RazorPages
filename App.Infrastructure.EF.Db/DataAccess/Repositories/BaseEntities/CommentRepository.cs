@@ -37,7 +37,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities
             {
                 var current = await _appDbContext.Comments
                 .Include(x => x.ExpertId)
-                .FirstOrDefaultAsync(c => c.Id == comment.Id);
+                .FirstOrDefaultAsync(c => c.Id == comment.Id, cancellationToken);
 
                 if (current is null)
                     return new Result { IsSuccess = false, Message = ".نظری با این شناسه یافت نشد" };
@@ -60,12 +60,28 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities
             //For Admin 
             var current = await _appDbContext.Comments
                 .Include(x => x.ExpertId)
-                .FirstOrDefaultAsync(c => c.Id == comment.Id);
+                .FirstOrDefaultAsync(c => c.Id == comment.Id, cancellationToken);
 
             if (current is null)
                 return new Result { IsSuccess = false, Message = ".نظری با این شناسه یافت نشد" };
 
             _appDbContext.Comments.Remove(current);
+            await _appDbContext.SaveChangesAsync(cancellationToken);
+
+            return new Result { IsSuccess = true, Message = ".با موفقیت حذف شد" };
+        }
+
+        public async Task<Result> SoftDeleteComment(Comment comment, CancellationToken cancellationToken)
+        {
+            //For Admin 
+            var current = await _appDbContext.Comments
+                .Include(x => x.ExpertId)
+                .FirstOrDefaultAsync(c => c.Id == comment.Id, cancellationToken);
+
+            if (current is null)
+                return new Result { IsSuccess = false, Message = ".نظری با این شناسه یافت نشد" };
+
+            comment.IsDeleted = true;
             await _appDbContext.SaveChangesAsync(cancellationToken);
 
             return new Result { IsSuccess = true, Message = ".با موفقیت حذف شد" };

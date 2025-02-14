@@ -13,7 +13,7 @@ namespace App.Infrastructure.DataBase.EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new HomeServiceConfigurations());
+            modelBuilder.ApplyConfiguration(new HouseWorkConfigurations());
             modelBuilder.ApplyConfiguration(new SuggestionConfigurations());
             modelBuilder.ApplyConfiguration(new OrderConfigurations());
             modelBuilder.ApplyConfiguration(new CategoryConfigurations());
@@ -21,6 +21,8 @@ namespace App.Infrastructure.DataBase.EFCore
             modelBuilder.ApplyConfiguration(new CommentConfigurations());
             modelBuilder.ApplyConfiguration(new ImageConfigurations());
             modelBuilder.ApplyConfiguration(new CustomerConfigurations());
+            modelBuilder.ApplyConfiguration(new ExpertConfigurations());
+            modelBuilder.ApplyConfiguration(new UserConfigurations());
 
 
             UserConfigurations.SeedUsers(modelBuilder);
@@ -28,7 +30,7 @@ namespace App.Infrastructure.DataBase.EFCore
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<HomeService> HomeServices { get; set; }
+        public DbSet<HouseWork> HouseWorks { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Suggestion> Suggestions { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -38,6 +40,6 @@ namespace App.Infrastructure.DataBase.EFCore
         public DbSet<AppUser> Users { get; set; }
         public DbSet<Expert> Experts { get; set; }
         public DbSet<Customer> Customers { get; set; }
-
+        public DbSet<Admin> Admins { get; set; }
     }
 }

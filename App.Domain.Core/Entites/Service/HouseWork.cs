@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 namespace App.Domain.Core.Entites
 {
-    public class HomeService
+    public class HouseWork
     {
         [Key]
         public int Id { get; set; }
@@ -21,6 +21,8 @@ namespace App.Domain.Core.Entites
         [Range(0.01, 5000000, ErrorMessage = "Base price must be between 0.01 and 5,000,000.")]
         public decimal BasePrice { get; set; }
         public string? ImagePath { get; set; }
+        public bool IsDeleted { get; set; } = false;
+
 
         public int CategoryId { get; set; }
         public int? CustomerId { get; set; }

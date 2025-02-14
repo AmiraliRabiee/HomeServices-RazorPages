@@ -12,6 +12,13 @@ namespace App.Infrastructure.EFCore.Configurations
                    .WithOne(x => x.Customer)
                    .HasForeignKey(x => x.CustomerId)
                    .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(u => u.Address).HasMaxLength(255);
+
+            builder.HasData(new List<Customer>
+            {
+                new Customer{Id = 1 , Address = "اینجا"}
+            });
         }
     }
 

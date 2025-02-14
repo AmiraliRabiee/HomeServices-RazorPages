@@ -23,8 +23,6 @@ namespace App.Infrastructure.EFCore.Configurations
             .HasForeignKey<Customer>(c => c.Id)
             .OnDelete(DeleteBehavior.NoAction);
 
-            builder.Property(u => u.Address).HasMaxLength(255);
-
             builder.Property(u => u.Balance).IsRequired().HasDefaultValue(1000);
         }
 
@@ -49,7 +47,9 @@ namespace App.Infrastructure.EFCore.Configurations
                 FirstName = "Admin",
                 LastName = "Admin",
                 SecurityStamp = Guid.NewGuid().ToString(),
-                RoleId = 1
+                RoleId = 1,
+                RegisterAt = DateTime.Now,
+
             },
             new AppUser()
             {
@@ -62,7 +62,8 @@ namespace App.Infrastructure.EFCore.Configurations
                 LastName = "Amiri",
                 SecurityStamp = Guid.NewGuid().ToString(),
                 Balance = 1000 ,
-                RoleId = 2
+                RoleId = 2,
+                RegisterAt = DateTime.Now,
 
             },
             new AppUser()
@@ -76,7 +77,9 @@ namespace App.Infrastructure.EFCore.Configurations
                 LastName = "Amiri",
                 SecurityStamp = Guid.NewGuid().ToString(),
                 Balance = 1000,
-                RoleId = 3
+                RoleId = 3,
+                RegisterAt = DateTime.Now,
+
             }
         };
 

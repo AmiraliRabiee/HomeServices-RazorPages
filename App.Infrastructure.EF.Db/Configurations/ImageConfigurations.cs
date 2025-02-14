@@ -14,9 +14,9 @@ namespace App.Infrastructure.EFCore.Configurations
                 .IsRequired()
                 .HasMaxLength(500); 
 
-            builder.HasOne(i => i.HomeService)
+            builder.HasOne(i => i.HouseWork)
                 .WithOne(h => h.Image)
-                .HasForeignKey<Image>(i => i.HomeServiceId)
+                .HasForeignKey<Image>(i => i.HouseWorkId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

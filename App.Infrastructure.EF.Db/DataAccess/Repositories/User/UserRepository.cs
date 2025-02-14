@@ -19,7 +19,6 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
 
                 user.UserName = model.UserName;
                 user.Email = model.Email;
-                user.Address = model.Address;
                 user.Password = model.Password;
                 user.RePassword = model.RePassword;
                 user.Balance = model.Balance;
@@ -27,43 +26,16 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
                 user.LastName = model.LastName;
                 user.RegisterAt = DateTime.Now;
 
-                if (model.RoleId <= 0)
-                    return new Result { IsSuccess = false, Message = "نقش نامعتبر است" };
-
                 await _appDbContext.Users.AddAsync(user, cancellationToken);
-                await _appDbContext.SaveChangesAsync(cancellationToken); 
-
-                if (model.RoleId == 3)
-                {
-                    var expert = new Expert();
-                    expert.Id = user.Id;
-                    expert.Biographi = model.Expert?.Biographi;
-                    expert.Points = 0;
-
-                    await _appDbContext.Experts.AddAsync(expert, cancellationToken);
-                }
-                else if (model.RoleId == 2)
-                {
-                    var customer = new Customer();
-                    customer.Id = user.Id;
-
-                    await _appDbContext.Customers.AddAsync(customer, cancellationToken);
-                }
-
-                var userRole = new IdentityUserRole<int>();
-
-                userRole.UserId = user.Id;
-                userRole.RoleId = model.RoleId;
-
-                await _appDbContext.UserRoles.AddAsync(userRole, cancellationToken);
                 await _appDbContext.SaveChangesAsync(cancellationToken);
 
-                return new Result { IsSuccess = true, Message = "با موفقیت افزوده شد" };
+                return new Result { IsSuccess = true, Message = "کاربر ایجاد شد"};
             }
             catch (Exception ex)
             {
                 return new Result { IsSuccess = false, Message = $"{ex.Message}" };
             }
+        
         }
 
 
@@ -72,7 +44,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
             try
             {
                 var currentUser = await _appDbContext.Users
-                    .FirstOrDefaultAsync(u => u.Id == user.Id);
+                    .FirstOrDefaultAsync(u => u.Id == user.Id, cancellationToken);
 
                 if (currentUser is null)
                     return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
@@ -87,12 +59,32 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
             }
         }
 
+        public async Task<Result> SoftDeleteUser(AppUser user, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var currentUser = await _appDbContext.Users
+                    .FirstOrDefaultAsync(u => u.Id == user.Id, cancellationToken);
+
+                if (currentUser is null)
+                    return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
+
+                currentUser.IsDeleted = true;
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+                return new Result { IsSuccess = true, Message = "با موفقیت حذف شد" };
+            }
+            catch (Exception ex)
+            {
+                return new Result { IsSuccess = false, Message = $"{ex.Message}" };
+            }
+        }
+
         public async Task<Result> UpdateUser(AppUser user, CancellationToken cancellationToken)
         {
             try
             {
                 var currentUser = await _appDbContext.Users
-                    .FirstOrDefaultAsync(u => u.Id == user.Id);
+                    .FirstOrDefaultAsync(u => u.Id == user.Id ,cancellationToken);
 
                 if (currentUser is null)
                     return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
@@ -103,7 +95,6 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
                 currentUser.LastName = user.LastName;
                 currentUser.Email = user.Email;
                 currentUser.Password = user.Password;
-                currentUser.Address = user.Address;
 
                 await _appDbContext.SaveChangesAsync(cancellationToken);
                 return new Result { IsSuccess = true, Message = ".به روزرسانی انجام شد" };
@@ -119,7 +110,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
             try
             {
                 var currentUser = await _appDbContext.Users
-                    .FirstOrDefaultAsync(u => u.Id == user.Id);
+                    .FirstOrDefaultAsync(u => u.Id == user.Id, cancellationToken);
 
                 if (currentUser is null)
                     return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
@@ -140,7 +131,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
             try
             {
                 var currentUser = await _appDbContext.Users
-                    .FirstOrDefaultAsync(u => u.Id == user.Id);
+                    .FirstOrDefaultAsync(u => u.Id == user.Id, cancellationToken);
 
                 if (currentUser is null)
                     return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
@@ -159,7 +150,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
         public async Task<UserDto> GetUserDetails(int id , CancellationToken cancellationToken)
         {
             var result = await _appDbContext.Users
-                .FirstOrDefaultAsync(u => u.Id == id);
+                .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
 
             if (result is not null)
             {
@@ -167,7 +158,6 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
                 {
                     FullName = $" {result.FirstName} {result.LastName}",
                     UserName = $"{result.UserName}",
-                    Address = $"{result.Address}",
                     Balance = result.Balance,
                     RoleId = result.RoleId,
                     ImagePath = result.ImagePath

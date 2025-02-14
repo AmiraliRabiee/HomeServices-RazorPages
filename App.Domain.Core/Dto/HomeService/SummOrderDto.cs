@@ -11,8 +11,8 @@ namespace App.Domain.Core.Dto.HomeService
         public DateTime? CreateAt { get; set; }
         public StausServiceEnum StausService { get; set; }
         public float BasePrice { get; set; }
-        public int HomeServiceId { get; set; }
+        public string HouseWork { get; set; }
         public int CustomerId { get; set; }
-        public int CityId { get; set; }
+        public string City { get; set; }
     }
 }

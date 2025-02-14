@@ -10,6 +10,8 @@ public class Comment
     public DateTime CreateAt { get; set; }
     public StausServiceEnum? stausService { get; set; }
     public ExpertRatingEnum? ExpertRating { get; set; }
+    public bool IsDeleted { get; set; } = false;
+
 
     public int ExpertId { get; set; }
 

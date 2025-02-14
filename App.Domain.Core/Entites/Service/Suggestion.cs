@@ -14,14 +14,16 @@ public class Suggestion
     [Range(0, double.MaxValue, ErrorMessage = "Suggested price must be a non-negative number.")]
     public float SuggestPrice { get; set; }
     public DateTime DeliverDate { get; set; }
+    public bool IsDeleted { get; set; } = false;
+
 
     public int CityId { get; set; }
-    public int HomeServiceId { get; set; }
+    public int HouseWorkId { get; set; }
     public int OrderId { get; set; }
     public int ExpertId { get; set; }
 
     public Expert Expert { get; set; }
     public Order Order { get; set; }
-    public HomeService HomeService { get; set; }
+    public HouseWork HouseWork { get; set; }
     public City City { get; set; }
 }
