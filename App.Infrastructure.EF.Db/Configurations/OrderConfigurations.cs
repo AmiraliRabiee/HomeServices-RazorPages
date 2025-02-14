@@ -16,9 +16,9 @@ namespace App.Infrastructure.EFCore.Configurations
             builder.Property(x => x.RunningTime).IsRequired(); 
 
 
-            builder.HasOne(h => h.HomeService)
+            builder.HasOne(h => h.HouseWork)
                 .WithMany(h => h.Orders)
-                .HasForeignKey(h => h.HomeServiceId)
+                .HasForeignKey(h => h.HouseWorkId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Customer)

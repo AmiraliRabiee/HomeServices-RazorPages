@@ -4,6 +4,7 @@ using App.Infrastructure.DataBase.EFCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250214083800_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,7 +145,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "b44573d5-801e-4e99-b1d2-4e05cfc039f9",
+                            ConcurrencyStamp = "a297aa3a-520d-4f9c-a1c3-422ef3b55427",
                             EmailConfirmed = false,
                             FirstName = "Admin",
                             IsActive = false,
@@ -150,11 +153,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LastName = "Admin",
                             LockoutEnabled = false,
                             Password = "123456",
-                            PasswordHash = "AQAAAAIAAYagAAAAENuImFk9dkVW6GcoO+LfsAxNgwiKwE9b8QhflkPz5Xys4sTgmqI6lzEBO8ANxk0Kcg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDXLO092AuBNTSvZTgVQ5dyKjZPrVK4rtBWTMcCVP/lxNsuL9F6aqq3d4p0/3fDTdw==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 14, 12, 9, 34, 462, DateTimeKind.Local).AddTicks(3179),
+                            RegisterAt = new DateTime(2025, 2, 14, 12, 8, 0, 260, DateTimeKind.Local).AddTicks(3232),
                             RoleId = 1,
-                            SecurityStamp = "e06d9631-2568-423d-96b5-3f5bc356475e",
+                            SecurityStamp = "5c781d48-5e65-46b7-b444-15781e50a19c",
                             TwoFactorEnabled = false,
                             UserName = "Admin@gmail.com"
                         },
@@ -164,7 +167,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "ae56c95c-e345-47bd-a5ad-b3a85f3a01b1",
+                            ConcurrencyStamp = "3fe0360c-e645-4e4c-b207-42c2cb79ad83",
                             EmailConfirmed = false,
                             FirstName = "Amir",
                             IsActive = false,
@@ -172,11 +175,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LastName = "Amiri",
                             LockoutEnabled = false,
                             Password = "456789",
-                            PasswordHash = "AQAAAAIAAYagAAAAECUDueXMYmu0FTLcyD3vPhEZZ/HD7WdPTuMBWqQz5AMdtVLvlWhX6Hjt5OlpjgMxiQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEZCbR0yabfWPhrdwVG2pTzsnKk1aCcvcGdD0x3Z9ECQqcGSjYXpP16blRdJ4HYsog==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 14, 12, 9, 34, 462, DateTimeKind.Local).AddTicks(3199),
+                            RegisterAt = new DateTime(2025, 2, 14, 12, 8, 0, 260, DateTimeKind.Local).AddTicks(3266),
                             RoleId = 2,
-                            SecurityStamp = "ec549ff5-4c31-4b49-8e26-ea73a7ceeaef",
+                            SecurityStamp = "bb75d03c-dfa6-403a-8e1d-fed87a45ce34",
                             TwoFactorEnabled = false,
                             UserName = "Customer@gmail.com"
                         },
@@ -186,7 +189,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "5e92eef0-f9fb-48e9-bb0d-0e85e145885c",
+                            ConcurrencyStamp = "9eabcc45-0321-483c-a622-53a893a2314c",
                             EmailConfirmed = false,
                             FirstName = "Amir",
                             IsActive = false,
@@ -194,11 +197,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LastName = "Amiri",
                             LockoutEnabled = false,
                             Password = "258852",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOT5/yjMgYk0XMO/goHwJHxCX/UHb/n+6Z3ISCg89bYcF5Iif7K3YGa5+JigfSdNhg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJTHUPv+19dVQOvhwqrJA9RxcNAAaGAQThrY7CAHn6ZxfFudG0r5cgkM04d/xmIXEQ==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 14, 12, 9, 34, 462, DateTimeKind.Local).AddTicks(3217),
+                            RegisterAt = new DateTime(2025, 2, 14, 12, 8, 0, 260, DateTimeKind.Local).AddTicks(3276),
                             RoleId = 3,
-                            SecurityStamp = "e1f131e4-e163-4591-a09f-d360716116a8",
+                            SecurityStamp = "e2f14191-b6a1-4901-b4a8-96ea2e2cee2a",
                             TwoFactorEnabled = false,
                             UserName = "Expert@gmail.com"
                         });
@@ -431,15 +434,6 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Expert", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "اینجا",
-                            Biographi = "بیوگرافی",
-                            IsDeleted = false
-                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entites.HouseWork", b =>

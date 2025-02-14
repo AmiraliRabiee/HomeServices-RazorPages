@@ -17,13 +17,14 @@ public class Order
     public StausServiceEnum StausService { get; set; }
     [Range(0, double.MaxValue, ErrorMessage = "Price must be a non-negative number.")]
     public float Price { get; set; }
-    public int HomeServiceId { get; set; }
+    public bool IsDeleted { get; set; } = false;
+    public int HouseWorkId { get; set; }
     public int CustomerId { get; set; }
     public int CityId { get; set; }
     public int ExpertId { get; set; }
 
     public City City { get; set; }
-    public HomeService HomeService { get; set; }
+    public HouseWork HouseWork { get; set; }
     public Customer Customer { get; set; }
     public Expert Expert { get; set; }
 }

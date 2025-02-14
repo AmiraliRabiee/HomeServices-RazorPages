@@ -1,5 +1,15 @@
+using App.Domain.Core.Contracts.Repository;
+using App.Domain.Core.Contracts.Repository.BaseEntities;
+using App.Domain.Core.Contracts.Repository.HomeServices;
+using App.Domain.Core.Contracts.Repository.User;
+using App.Domain.Core.Contracts.Service;
 using App.Domain.Core.Entites;
+using App.Domain.Services;
 using App.Infrastructure.DataBase.EFCore;
+using App.Infrastructure.EFCore.DataAccess.Repositories;
+using App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities;
+using App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices;
+using App.Infrastructure.EFCore.DataAccess.Repositories.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +22,23 @@ builder.Services.AddRazorPages();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+#region User Injects
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IExpertRepository, ExpertRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+#endregion
+
+#region HomeService Injects
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<ISuggestionRepository, SuggestionRepository>();
+builder.Services.AddScoped<IHouseWorkRepository, HouseWorkRepository>();
+#endregion
+
+#region BaseEntities Injects
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+#endregion
 
 builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
 {

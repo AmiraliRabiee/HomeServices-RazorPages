@@ -16,10 +16,8 @@ namespace App.Domain.Core.Entites
         public string? ImagePath { get; set; }
 
         public int? ParentId { get; set; }
-        //test
-        //test
-        //soltan
-        public List<HomeService> HomeServices { get; set; }
+
+        //public List<HouseWork> HouseWorks { get; set; }
         public Category? ParentCategory { get; set; }
         public List<Category> SubCategories { get; set; }
     }

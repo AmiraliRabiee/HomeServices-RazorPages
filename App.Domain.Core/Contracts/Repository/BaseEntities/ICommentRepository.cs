@@ -6,6 +6,7 @@ namespace App.Domain.Core.Contracts.Repository.BaseEntities
     {
         Task<Result> AddComment(Comment comment, CancellationToken cancellationToken);
         Task<Result> UpdateComment(Comment comment, CancellationToken cancellationToken);
+        Task<Result> SoftDeleteComment(Comment comment, CancellationToken cancellationToken);
         Task<Result> DeleteComment(Comment comment, CancellationToken cancellationToken);
     }
 }

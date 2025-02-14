@@ -13,9 +13,9 @@ namespace App.Infrastructure.EFCore.Configurations
             builder.Property(x => x.SuggestPrice).IsRequired();
             builder.Property(x => x.DeliverDate).IsRequired();
 
-            builder.HasOne(x => x.HomeService)
+            builder.HasOne(x => x.HouseWork)
                 .WithMany(x => x.Suggestions)
-                .HasForeignKey(x => x.HomeServiceId)
+                .HasForeignKey(x => x.HouseWorkId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Expert)

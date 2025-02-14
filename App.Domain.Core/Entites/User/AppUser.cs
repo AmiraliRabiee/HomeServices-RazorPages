@@ -28,9 +28,9 @@ namespace App.Domain.Core.Entites
         [Required(ErrorMessage = "Last name is required.")]
         [MaxLength(50, ErrorMessage = "Last name cannot exceed 50 characters.")]
         public string? LastName { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
-        [MaxLength(255, ErrorMessage = "Address cannot exceed 255 characters.")]
-        public string? Address { get; set; }
 
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = "Balance must be a non-negative number.")]
