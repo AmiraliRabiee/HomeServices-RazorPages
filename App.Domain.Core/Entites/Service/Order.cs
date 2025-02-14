@@ -27,4 +27,5 @@ public class Order
     public HouseWork HouseWork { get; set; }
     public Customer Customer { get; set; }
     public Expert Expert { get; set; }
+    public List<Suggestion>? Suggestions { get; set; }
 }

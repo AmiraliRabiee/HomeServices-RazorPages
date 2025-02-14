@@ -22,6 +22,11 @@ namespace App.Infrastructure.EFCore.Configurations
                 .WithMany(x => x.Suggestions)
                 .HasForeignKey(x => x.ExpertId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(x => x.Order)
+                .WithMany(x => x.Suggestions)
+                .HasForeignKey(x => x.OrderId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

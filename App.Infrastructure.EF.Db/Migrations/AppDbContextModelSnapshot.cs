@@ -139,18 +139,18 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "d849a7cc-da1e-4239-a440-512e4708929f",
+                            ConcurrencyStamp = "fabbb91b-8010-4e98-9a21-b23e848ab922",
                             EmailConfirmed = false,
                             FirstName = "Admin",
                             IsDeleted = false,
                             LastName = "Admin",
                             LockoutEnabled = false,
                             Password = "123456",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHZWc/OeSjvpsiFlFiZLIhSTjAZxVIMTt1EUtdJEPYEfUZgeNJR+vhzn1ZbOKxJFUQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK4QBzofRMeV5JnM+yI0r9C3G8ZXQrXjMF9AeSukQazNpppBpCYt2oNhZxRrhWGtOA==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 14, 13, 7, 1, 634, DateTimeKind.Local).AddTicks(4376),
+                            RegisterAt = new DateTime(2025, 2, 14, 14, 24, 56, 531, DateTimeKind.Local).AddTicks(5141),
                             RoleId = 1,
-                            SecurityStamp = "f9683057-55c5-49db-9efb-4e8ed7516cd6",
+                            SecurityStamp = "1d5c482e-02c5-4bf6-b7cb-e6b35b945a81",
                             TwoFactorEnabled = false,
                             UserName = "Admin@gmail.com"
                         },
@@ -160,18 +160,18 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "077c13e3-00de-4f38-a8fe-3bfbeff21b7c",
+                            ConcurrencyStamp = "7a85e93f-8963-4f98-ab86-37e54a7dbe58",
                             EmailConfirmed = false,
                             FirstName = "Amir",
                             IsDeleted = false,
                             LastName = "Amiri",
                             LockoutEnabled = false,
                             Password = "456789",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJOwfoRfey8c9+hKSt+9J5XnRNxhYvYCUNjUZiCmH3fF3b2++l4Y+CKPfmcLbwjTWA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPpu54YZ7Ez+HqDHrbiHT8TRpBfy5G6iAYFWI6cFKuLUGW1Z/zn0h/cTrCKSAbBk0g==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 14, 13, 7, 1, 634, DateTimeKind.Local).AddTicks(4421),
+                            RegisterAt = new DateTime(2025, 2, 14, 14, 24, 56, 531, DateTimeKind.Local).AddTicks(5190),
                             RoleId = 2,
-                            SecurityStamp = "5316fa3e-67e2-4e40-a710-546d0a140de9",
+                            SecurityStamp = "e5cf9ce2-f194-4395-8aa5-dbb41c068f95",
                             TwoFactorEnabled = false,
                             UserName = "Customer@gmail.com"
                         },
@@ -181,18 +181,18 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "f89aa78a-748f-44a0-ab59-94e2404780dc",
+                            ConcurrencyStamp = "d453e607-653c-4c62-a458-4e4be18e7aff",
                             EmailConfirmed = false,
                             FirstName = "Amir",
                             IsDeleted = false,
                             LastName = "Amiri",
                             LockoutEnabled = false,
                             Password = "258852",
-                            PasswordHash = "AQAAAAIAAYagAAAAEInZRjNp+iTOsRW94W6QWhqcgQlCTiNWnF62XfDbSJ/b88Y5eZqgLGMIb+rzYVoGTg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH9uKI3vgY4nNKotAG50NtrDYoCg43x9qVCT44EkQBm2DId14MCwsDHtDSHia0zdpw==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 14, 13, 7, 1, 634, DateTimeKind.Local).AddTicks(4434),
+                            RegisterAt = new DateTime(2025, 2, 14, 14, 24, 56, 531, DateTimeKind.Local).AddTicks(5203),
                             RoleId = 3,
-                            SecurityStamp = "276fdad5-ee0f-406d-a720-ba4cb0733bc1",
+                            SecurityStamp = "7ed85f6e-ebea-4914-8bbe-5953300c05dd",
                             TwoFactorEnabled = false,
                             UserName = "Expert@gmail.com"
                         });
@@ -2194,9 +2194,9 @@ namespace App.Infrastructure.EFCore.Migrations
                         .IsRequired();
 
                     b.HasOne("Order", "Order")
-                        .WithMany()
+                        .WithMany("Suggestions")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("City");
@@ -2248,6 +2248,11 @@ namespace App.Infrastructure.EFCore.Migrations
                 {
                     b.Navigation("Orders");
 
+                    b.Navigation("Suggestions");
+                });
+
+            modelBuilder.Entity("Order", b =>
+                {
                     b.Navigation("Suggestions");
                 });
 #pragma warning restore 612, 618

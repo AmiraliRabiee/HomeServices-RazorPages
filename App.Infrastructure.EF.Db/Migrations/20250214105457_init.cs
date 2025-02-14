@@ -37,7 +37,6 @@ namespace App.Infrastructure.EFCore.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Balance = table.Column<float>(type: "real", nullable: false, defaultValue: 1000f),
                     RoleId = table.Column<int>(type: "int", nullable: false),
@@ -417,8 +416,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         name: "FK_Suggestions_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -433,12 +431,12 @@ namespace App.Infrastructure.EFCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ActivationUser", "Balance", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "FirstName", "ImagePath", "IsActive", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RegisterAt", "RoleId", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ActivationUser", "Balance", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "FirstName", "ImagePath", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RegisterAt", "RoleId", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, 3, 1000f, "a297aa3a-520d-4f9c-a1c3-422ef3b55427", "AppUser", null, false, "Admin", null, false, false, "Admin", false, null, null, null, "123456", "AQAAAAIAAYagAAAAEDXLO092AuBNTSvZTgVQ5dyKjZPrVK4rtBWTMcCVP/lxNsuL9F6aqq3d4p0/3fDTdw==", null, false, new DateTime(2025, 2, 14, 12, 8, 0, 260, DateTimeKind.Local).AddTicks(3232), 1, "5c781d48-5e65-46b7-b444-15781e50a19c", false, "Admin@gmail.com" },
-                    { 2, 0, 3, 1000f, "3fe0360c-e645-4e4c-b207-42c2cb79ad83", "AppUser", null, false, "Amir", null, false, false, "Amiri", false, null, null, null, "456789", "AQAAAAIAAYagAAAAEEZCbR0yabfWPhrdwVG2pTzsnKk1aCcvcGdD0x3Z9ECQqcGSjYXpP16blRdJ4HYsog==", null, false, new DateTime(2025, 2, 14, 12, 8, 0, 260, DateTimeKind.Local).AddTicks(3266), 2, "bb75d03c-dfa6-403a-8e1d-fed87a45ce34", false, "Customer@gmail.com" },
-                    { 3, 0, 3, 1000f, "9eabcc45-0321-483c-a622-53a893a2314c", "AppUser", null, false, "Amir", null, false, false, "Amiri", false, null, null, null, "258852", "AQAAAAIAAYagAAAAEJTHUPv+19dVQOvhwqrJA9RxcNAAaGAQThrY7CAHn6ZxfFudG0r5cgkM04d/xmIXEQ==", null, false, new DateTime(2025, 2, 14, 12, 8, 0, 260, DateTimeKind.Local).AddTicks(3276), 3, "e2f14191-b6a1-4901-b4a8-96ea2e2cee2a", false, "Expert@gmail.com" }
+                    { 1, 0, 3, 1000f, "fabbb91b-8010-4e98-9a21-b23e848ab922", "AppUser", null, false, "Admin", null, false, "Admin", false, null, null, null, "123456", "AQAAAAIAAYagAAAAEK4QBzofRMeV5JnM+yI0r9C3G8ZXQrXjMF9AeSukQazNpppBpCYt2oNhZxRrhWGtOA==", null, false, new DateTime(2025, 2, 14, 14, 24, 56, 531, DateTimeKind.Local).AddTicks(5141), 1, "1d5c482e-02c5-4bf6-b7cb-e6b35b945a81", false, "Admin@gmail.com" },
+                    { 2, 0, 3, 1000f, "7a85e93f-8963-4f98-ab86-37e54a7dbe58", "AppUser", null, false, "Amir", null, false, "Amiri", false, null, null, null, "456789", "AQAAAAIAAYagAAAAEPpu54YZ7Ez+HqDHrbiHT8TRpBfy5G6iAYFWI6cFKuLUGW1Z/zn0h/cTrCKSAbBk0g==", null, false, new DateTime(2025, 2, 14, 14, 24, 56, 531, DateTimeKind.Local).AddTicks(5190), 2, "e5cf9ce2-f194-4395-8aa5-dbb41c068f95", false, "Customer@gmail.com" },
+                    { 3, 0, 3, 1000f, "d453e607-653c-4c62-a458-4e4be18e7aff", "AppUser", null, false, "Amir", null, false, "Amiri", false, null, null, null, "258852", "AQAAAAIAAYagAAAAEH9uKI3vgY4nNKotAG50NtrDYoCg43x9qVCT44EkQBm2DId14MCwsDHtDSHia0zdpw==", null, false, new DateTime(2025, 2, 14, 14, 24, 56, 531, DateTimeKind.Local).AddTicks(5203), 3, "7ed85f6e-ebea-4914-8bbe-5953300c05dd", false, "Expert@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -527,6 +525,11 @@ namespace App.Infrastructure.EFCore.Migrations
                 table: "Customers",
                 columns: new[] { "Id", "Address", "IsDeleted" },
                 values: new object[] { 1, "اینجا", false });
+
+            migrationBuilder.InsertData(
+                table: "Expert",
+                columns: new[] { "Id", "Address", "Biographi", "IsDeleted", "Points" },
+                values: new object[] { 1, "اینجا", "بیوگرافی", false, null });
 
             migrationBuilder.InsertData(
                 table: "HouseWorks",
