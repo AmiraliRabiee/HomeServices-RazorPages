@@ -20,6 +20,7 @@ namespace App.Infrastructure.EFCore.Configurations
             builder.HasData(new List<Expert>{
                 new Expert { Id = 1, Address = "اینجا", Biographi = "بیوگرافی" ,IsDeleted = false}
             });
+
         }
 
     }
