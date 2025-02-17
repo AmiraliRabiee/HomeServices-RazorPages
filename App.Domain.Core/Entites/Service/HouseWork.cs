@@ -25,10 +25,8 @@ namespace App.Domain.Core.Entites
 
 
         public int CategoryId { get; set; }
-        public int? CustomerId { get; set; }
 
         public List<Expert>? Expert { get; set; }
-        public Customer? Customer { get; set; }
         public Category Category { get; set; }
         public List<Order> Orders { get; set; }
         public List<Suggestion>? Suggestions { get; set; }

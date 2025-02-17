@@ -5,6 +5,7 @@ using App.Domain.Core.Contracts.Repository.User;
 using App.Domain.Core.Contracts.Service;
 using App.Domain.Core.Entites;
 using App.Domain.Services;
+using App.Domain.Services.BaseEntities;
 using App.Infrastructure.DataBase.EFCore;
 using App.Infrastructure.EFCore.DataAccess.Repositories;
 using App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities;
@@ -25,6 +26,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 #region User Injects
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IExpertRepository, ExpertRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
@@ -37,7 +41,9 @@ builder.Services.AddScoped<IHouseWorkRepository, HouseWorkRepository>();
 #endregion
 
 #region BaseEntities Injects
-builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 #endregion
 
 builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>

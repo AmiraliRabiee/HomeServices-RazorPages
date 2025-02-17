@@ -30,6 +30,16 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities
             }
         }
 
+        public async Task<Result> AcceptComment(Comment model , CancellationToken cancellationToken)
+        {
+            var comment = await _appDbContext.Comments.FindAsync(model.Id);
+            if (comment == null)
+                return new Result { IsSuccess = false, Message = ".نظری با این شناسه یاقت نشد" };
+            comment.IsPlayable = true;
+            await _appDbContext.SaveChangesAsync(cancellationToken);
+            return new Result { IsSuccess = true, Message = ".تایید شد" };
+        }
+
         public async Task<Result> UpdateComment(Comment comment, CancellationToken cancellationToken)
         {
             //For Customer

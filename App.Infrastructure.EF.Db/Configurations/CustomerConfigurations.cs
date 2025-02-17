@@ -15,6 +15,11 @@ namespace App.Infrastructure.EFCore.Configurations
 
             builder.Property(u => u.Address).HasMaxLength(255);
 
+            builder.HasOne(c => c.City)
+                .WithMany()
+                .HasForeignKey(c => c.CityId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasData(new List<Customer>
             {
                 new Customer{Id = 1 , Address = "اینجا"}

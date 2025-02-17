@@ -16,10 +16,13 @@ namespace App.Infrastructure.EFCore.Configurations
                 .HasForeignKey(x => x.CityId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasMany(x => x.Suggestions)
-                .WithOne(x => x.City)
-                .HasForeignKey(x => x.CityId)
+
+            builder.HasMany(e => e.Experts)
+                .WithOne(e => e.City)
+                .HasForeignKey(e => e.CityId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+
 
             builder.HasData(new List<City>()
             {

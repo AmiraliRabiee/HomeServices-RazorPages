@@ -23,13 +23,7 @@ namespace App.Infrastructure.EFCore.Configurations
 
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.Orders)
-                .HasForeignKey(x => x.CustomerId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder.HasOne(o => o.Expert)
-                .WithMany(o => o.AcceptedOrders)
-                .HasForeignKey(o => o.ExpertId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(x => x.CustomerId);
         }
     }
 }

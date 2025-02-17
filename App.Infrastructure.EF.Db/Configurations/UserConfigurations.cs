@@ -23,6 +23,11 @@ namespace App.Infrastructure.EFCore.Configurations
             .HasForeignKey<Customer>(c => c.Id)
             .OnDelete(DeleteBehavior.NoAction);
 
+            builder.HasOne(a => a.Admin)
+            .WithOne()
+            .HasForeignKey<Admin>(a => a.Id)
+            .OnDelete(DeleteBehavior.NoAction);
+
             builder.Property(u => u.Balance).IsRequired().HasDefaultValue(1000);
         }
 

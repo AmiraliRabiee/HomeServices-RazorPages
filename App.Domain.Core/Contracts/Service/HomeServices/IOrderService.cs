@@ -3,15 +3,15 @@ using App.Domain.Core.Entites.Result;
 
 namespace App.Domain.Core.Contracts.Repository.HomeServices
 {
-    public interface IOrderRepository
+    public interface IOrderService
     {
-        Task<Result> CreateOrder(Order order, CancellationToken cancellationToken);
-        Task<Result> DeleteOrder(Order order, CancellationToken cancellationToken);
-        Task<Result> SoftDeleteOrder(Order order, CancellationToken cancellationToken);
-        Task<Result> UpdateOrder(Order order, CancellationToken cancellationToken);
+        Task<Result> Create(Order order, CancellationToken cancellationToken);
+        Task<Result> Delete(Order order, CancellationToken cancellationToken);
+        Task<Result> SoftDelete(Order order, CancellationToken cancellationToken);
+        Task<Result> Update(Order order, CancellationToken cancellationToken);
         Task<Order> GetOrderById(int id, CancellationToken cancellationToken);
         Task<List<Order>> GetOrdersForExpert(Order model, CancellationToken cancellationToken);
-        Task<List<SummOrderDto>> GetOrders();
+        Task<List<SummOrderDto>> GetAll();
         Task ChangeToNewlyRegistered(Order model, CancellationToken cancellationToken);
         Task ChangeToExpertSelection(Order model, CancellationToken cancellationToken);
         Task ChangeToWaitingForService(Order model, CancellationToken cancellationToken);

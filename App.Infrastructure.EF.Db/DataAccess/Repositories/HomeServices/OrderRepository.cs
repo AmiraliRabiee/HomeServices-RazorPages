@@ -104,6 +104,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
             }
         }
 
+        
 
         public async Task<Order> GetOrderById(int id, CancellationToken cancellationToken)
         {
@@ -135,6 +136,47 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
             if (orders is null)
                 throw new Exception(".لیست سفارش ها خالی میباشد");
 
+            return orders;
+        }
+
+        public async Task ChangeToDone(Order model,CancellationToken cancellationToken)
+        {
+            //4
+            var order = await _appDbContext.Orders.FindAsync(model.Id);
+            order.StausService = StausServiceEnum.Done;
+            await _appDbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task ChangeToExpertSelection(Order model, CancellationToken cancellationToken)
+        {
+            //2
+            var order = await _appDbContext.Orders.FindAsync(model.Id);
+            order.StausService = StausServiceEnum.ExpertSelectionQueue;
+            await _appDbContext.SaveChangesAsync(cancellationToken);
+        }
+        public async Task ChangeToWaitingForService(Order model, CancellationToken cancellationToken)
+        {
+            //3
+            var order = await _appDbContext.Orders.FindAsync(model.Id);
+            order.StausService = StausServiceEnum.WaitingForService;
+            await _appDbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task ChangeToNewlyRegistered(Order model, CancellationToken cancellationToken)
+        {
+            //1
+            var order = await _appDbContext.Orders.FindAsync(model.Id);
+            order.StausService = StausServiceEnum.NewlyRegistered;
+            await _appDbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<List<Order>> GetOrdersForExpert(Order model , CancellationToken cancellationToken)
+        {
+            var orders = await _appDbContext.Orders
+                .Where( o => o.CityId == model.Expert.CityId && o.HouseWork == model.Expert.Skills)
+                .ToListAsync(cancellationToken);
+            if (orders == null)
+                throw new Exception(".لیست سفارش ها خالی میباشد");
             return orders;
         }
         #endregion

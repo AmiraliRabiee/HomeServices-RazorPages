@@ -6,6 +6,7 @@ using App.Domain.Core.Entites.User;
 using App.Infrastructure.DataBase.EFCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
 
 namespace App.Infrastructure.EFCore.DataAccess.Repositories
 {
@@ -29,13 +30,13 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
                 await _appDbContext.Users.AddAsync(user, cancellationToken);
                 await _appDbContext.SaveChangesAsync(cancellationToken);
 
-                return new Result { IsSuccess = true, Message = "کاربر ایجاد شد"};
+                return new Result { IsSuccess = true, Message = "کاربر ایجاد شد" };
             }
             catch (Exception ex)
             {
                 return new Result { IsSuccess = false, Message = $"{ex.Message}" };
             }
-        
+
         }
 
 
@@ -84,7 +85,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
             try
             {
                 var currentUser = await _appDbContext.Users
-                    .FirstOrDefaultAsync(u => u.Id == user.Id ,cancellationToken);
+                    .FirstOrDefaultAsync(u => u.Id == user.Id, cancellationToken);
 
                 if (currentUser is null)
                     return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
@@ -147,26 +148,64 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
             }
         }
 
-        public async Task<UserDto> GetUserDetails(int id , CancellationToken cancellationToken)
+        public async Task<UserDto> GetUserDetails(int id, CancellationToken cancellationToken)
         {
             var result = await _appDbContext.Users
                 .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
 
-            if (result is not null)
+            if (result is null)
+                throw new Exception("کاربر پیدا نشد");
+
+            if (result.RoleId == 2)
             {
+                //customer
                 return new UserDto
                 {
                     FullName = $" {result.FirstName} {result.LastName}",
                     UserName = $"{result.UserName}",
                     Balance = result.Balance,
                     RoleId = result.RoleId,
-                    ImagePath = result.ImagePath
+                    ImagePath = result.ImagePath,
+                    CityId = result.Customer.City.Id,
+                    Address = result.Customer.Address,
+                    Orders = result.Customer.Orders, //inline if
                 };
             }
-            else
+            if (result.RoleId == 3)
             {
-                throw new Exception("کاربر پیدا نشد");
+                //expert
+                return new UserDto
+                {
+                    FullName = $" {result.FirstName} {result.LastName}",
+                    UserName = $"{result.UserName}",
+                    Balance = result.Balance,
+                    RoleId = result.RoleId,
+                    ImagePath = result.ImagePath,
+                    CityId = result.Expert.City.Id,
+                    Suggestions = result.Expert.Suggestions, // inline if
+                };
             }
+            return null;
+        }
+
+
+
+        public async Task<List<Customer>> GetAllCustomers()
+        {
+            var customers = await _appDbContext.Customers.ToListAsync();
+            if (customers is null)
+                throw new Exception(".مشتری ای وجود ندارد");
+
+            return customers;
+        }
+
+        public async Task<List<Expert>> GetAllExperts()
+        {
+            var experts = await _appDbContext.Experts.ToListAsync();
+            if (experts is null)
+                throw new Exception(".مشتری ای وجود ندارد");
+
+            return experts;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App.Domain.Core.Contracts.Repository.BaseEntities
 {
-    public interface ICommentRepository
+    public interface ICommentService
     {
         Task<Result> AddComment(Comment comment, CancellationToken cancellationToken);
         Task<Result> UpdateComment(Comment comment, CancellationToken cancellationToken);

@@ -14,10 +14,10 @@ namespace App.Domain.Core.Entites
         [Required(ErrorMessage = "Image is required.")]
         [MaxLength(500, ErrorMessage = "Image path cannot exceed 500 characters.")]
         public string? ImagePath { get; set; }
+        public bool? IsDeleted { get; set; }
 
         public int? ParentId { get; set; }
 
-        //public List<HouseWork> HouseWorks { get; set; }
         public Category? ParentCategory { get; set; }
         public List<Category> SubCategories { get; set; }
     }

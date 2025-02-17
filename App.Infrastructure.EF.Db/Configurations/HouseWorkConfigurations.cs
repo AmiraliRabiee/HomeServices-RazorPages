@@ -20,10 +20,6 @@ namespace App.Infrastructure.EFCore.Configurations
                 .HasForeignKey(h => h.CategoryId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(h => h.Customer)
-                .WithMany()
-                .HasForeignKey(h => h.CustomerId);
-
             builder.HasMany(h => h.Expert)
                 .WithMany(e => e.Skills);
 

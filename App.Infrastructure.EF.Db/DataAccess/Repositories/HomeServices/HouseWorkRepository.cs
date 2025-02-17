@@ -18,7 +18,6 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
                 newService.Description = service.Description;
                 newService.BasePrice = service.BasePrice;
                 newService.ImagePath = service.ImagePath;
-                newService.CustomerId = service.CustomerId;
                 newService.CategoryId = service.CategoryId;
 
                 await _appDbContext.HouseWorks.AddAsync(newService, cancellationToken);
@@ -103,7 +102,6 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
         {
             var service = await _appDbContext.HouseWorks
             .Include(h => h.Category)
-            .Include(h => h.Customer)
             .FirstOrDefaultAsync(h => h.Id == id, cancellationToken);
 
             if (service is null)

@@ -21,11 +21,11 @@ public class Order
     public int HouseWorkId { get; set; }
     public int CustomerId { get; set; }
     public int CityId { get; set; }
-    public int ExpertId { get; set; }
+    public int? ExpertId { get; set; }
 
     public City City { get; set; }
     public HouseWork HouseWork { get; set; }
     public Customer Customer { get; set; }
-    public Expert Expert { get; set; }
+    public Expert? Expert { get; set; }
     public List<Suggestion>? Suggestions { get; set; }
 }

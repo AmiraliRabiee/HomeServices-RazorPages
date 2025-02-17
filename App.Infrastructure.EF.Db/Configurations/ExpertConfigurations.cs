@@ -18,8 +18,9 @@ namespace App.Infrastructure.EFCore.Configurations
             builder.Property(u => u.Biographi).HasMaxLength(2000);
 
             builder.HasData(new List<Expert>{
-                new Expert { Id = 1, Address = "اینجا", Biographi = "بیوگرافی" ,IsDeleted = false}
+                new Expert { Id = 1, Address = "اینجا", Biographi = "بیوگرافی" ,IsDeleted = false, CityId = 1}
             });
+
 
         }
 

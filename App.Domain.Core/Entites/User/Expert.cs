@@ -13,11 +13,12 @@ namespace App.Domain.Core.Entites
         [MaxLength(2000, ErrorMessage = "Biography cannot exceed 2000 characters.")]
         public string? Biographi { get; set; }
         public bool IsDeleted { get; set; } = false;
+        public int CityId { get; set; }
 
 
         public List<Comment>? Comments { get; set; }
         public List<Suggestion>? Suggestions { get; set; }
-        public List<Order> AcceptedOrders { get; set; }
         public List<HouseWork> Skills { get; set; }
+        public City City { get; set; }
     }
 }

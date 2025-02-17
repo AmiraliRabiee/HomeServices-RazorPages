@@ -11,6 +11,7 @@ public class Comment
     public StausServiceEnum? stausService { get; set; }
     public ExpertRatingEnum? ExpertRating { get; set; }
     public bool IsDeleted { get; set; } = false;
+    public bool IsPlayable { get; set; } = false;
 
 
     public int ExpertId { get; set; }

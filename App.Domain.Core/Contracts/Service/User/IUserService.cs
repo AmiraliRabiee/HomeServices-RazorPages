@@ -1,13 +1,12 @@
-﻿using App.Domain.Core.Entites.Result;
-using App.Domain.Core.Entites;
-using App.Domain.Core.Dto.User;
+﻿using App.Domain.Core.Dto.User;
+using App.Domain.Core.Entites.Result;
 using App.Domain.Core.Entites.User;
+using App.Domain.Core.Entites;
 
-namespace App.Domain.Core.Contracts.Repository
+namespace App.Domain.Core.Contracts.Service
 {
-    public interface IUserRepository
+    public interface IUserService
     {
-        Task<Result> Create(AppUser model, CancellationToken cancellationToken);
         Task<Result> DeleteUser(AppUser user, CancellationToken cancellationToken);
         Task<Result> SoftDeleteUser(AppUser user, CancellationToken cancellationToken);
         Task<Result> UpdateUser(AppUser user, CancellationToken cancellationToken);

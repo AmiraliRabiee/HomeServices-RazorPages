@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.Contracts.Repository.HomeServices;
 using App.Domain.Core.Dto.HomeService;
+using App.Domain.Core.Entites;
 using App.Domain.Core.Entites.Result;
 using App.Infrastructure.DataBase.EFCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,11 +17,8 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
                 var newSuggestion = new Suggestion();
 
                 newSuggestion.Description = suggestion.Description;
-                newSuggestion.SuggestPrice = suggestion.SuggestPrice;
                 newSuggestion.DeliverDate = suggestion.DeliverDate;
-                newSuggestion.CityId = suggestion.CityId;
                 newSuggestion.OrderId = suggestion.OrderId;
-                newSuggestion.HouseWorkId = suggestion.HouseWorkId;
 
                 await _appDbContext.Suggestions.AddAsync(newSuggestion, cancellationToken);
                 await _appDbContext.SaveChangesAsync(cancellationToken);
@@ -88,8 +86,6 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
 
                 current.DeliverDate = suggestion.DeliverDate;
                 current.Description = suggestion.Description;
-                current.SuggestPrice = suggestion.SuggestPrice;
-                current.SuggestPrice = suggestion.SuggestPrice;
 
                 await _appDbContext.SaveChangesAsync(cancellationToken);
                 return new Result { IsSuccess = true, Message = ".به روزرسانی انجام شد" };
@@ -103,26 +99,24 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
         public async Task<Suggestion> GetSuggestionById(int id, CancellationToken cancellationToken)
         {
             var suggestion = await _appDbContext.Suggestions
-            .Include(s => s.HouseWork)
-            .FirstOrDefaultAsync(s => s.Id == id, cancellationToken);
+            .FirstOrDefaultAsync(s => s.Id == id, cancellationToken );
 
             if (suggestion is null)
                 throw new Exception(".سفارشی با این شناسه یافت نشد");
             return suggestion;
         }
 
-        public async Task<List<SummSuggestionDto>> GetSuggestion()
+        public async Task<List<SummSuggestionDto>> GetSuggestionDetails(Suggestion model, CancellationToken cancellationToken)
         {
-            var suggestions = await _appDbContext.Suggestions
-                .Include(s => s.HouseWork)
+            var suggestions = await _appDbContext
+                .Suggestions.Where(s => s.OrderId == model.OrderId)
             .Select(s => new SummSuggestionDto
             {
+                HouseWork = s.Order.HouseWork.Title,
                 Description = s.Description,
-                SuggestPrice = s.SuggestPrice,
                 DeliverDate = s.DeliverDate,
-                HouseWork = s.HouseWork.Title,
-                ExpertId = s.Expert.Id,
-                City = s.City.Name,
+                StausService = s.Order.StausService,
+                City = s.Expert.City.Name,
             }).ToListAsync();
 
             if (suggestions is null)
