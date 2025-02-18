@@ -1,4 +1,4 @@
-﻿using App.Domain.Core.Enums;
+﻿using App.Domain.Core.Enum;
 
 namespace App.Domain.Core.Dto.HomeService
 {

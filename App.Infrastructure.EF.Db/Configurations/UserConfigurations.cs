@@ -1,6 +1,4 @@
-﻿using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.User;
-using App.Domain.Core.Enums;
+﻿using App.Domain.Core.Entites.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

@@ -1,9 +1,9 @@
 ﻿using App.Domain.Core.Contracts.Repository.User;
-using App.Domain.Core.Contracts.Service.UserService;
-using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.Result;
+using App.Domain.Core.Contracts.Service.User;
+using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Entites.User;
 
-namespace App.Domain.Services.UserServices
+namespace App.Domain.Services.User
 {
     public class ExpertService(IExpertRepository _expertRepository) : IExpertService
     {
@@ -14,7 +14,7 @@ namespace App.Domain.Services.UserServices
             => _expertRepository.DeleteExpert(expertId, cancellationToken);
 
         public Task<Result> SoftDeleteExpert(int expertId, CancellationToken cancellationToken)
-            => _expertRepository.SoftDeleteExpert(expertId, cancellationToken); 
+            => _expertRepository.SoftDeleteExpert(expertId, cancellationToken);
 
         public Task<Result> UpdateExpert(Expert model, CancellationToken cancellationToken)
             => _expertRepository.UpdateExpert(model, cancellationToken);

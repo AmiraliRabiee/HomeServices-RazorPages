@@ -1,11 +1,10 @@
-﻿using App.Domain.Core.Contracts.Repository;
-using App.Domain.Core.Contracts.Service;
+﻿using App.Domain.Core.Contracts.Repository.User;
+using App.Domain.Core.Contracts.Service.User;
 using App.Domain.Core.Dto.User;
-using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.Result;
+using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
 
-namespace App.Domain.Services
+namespace App.Domain.Services.User
 {
     public class UserService(IUserRepository _userRepository) : IUserService
     {
@@ -24,12 +23,12 @@ namespace App.Domain.Services
             => _userRepository.GetUserDetails(id, cancellationToken);
 
         public Task<Result> SoftDeleteUser(AppUser user, CancellationToken cancellationToken)
-            => _userRepository.SoftDeleteUser(user, cancellationToken); 
+            => _userRepository.SoftDeleteUser(user, cancellationToken);
 
-        public Task<Result> UpdateBalance(AppUser user, CancellationToken cancellationToken) 
+        public Task<Result> UpdateBalance(AppUser user, CancellationToken cancellationToken)
             => _userRepository.UpdateBalance(user, cancellationToken);
 
         public Task<Result> UpdateUser(AppUser user, CancellationToken cancellationToken)
-            => _userRepository.UpdateUser(user, cancellationToken); 
+            => _userRepository.UpdateUser(user, cancellationToken);
     }
 }

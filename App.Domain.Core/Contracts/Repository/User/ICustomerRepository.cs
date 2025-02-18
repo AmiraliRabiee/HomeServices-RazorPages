@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Entites.Result;
+﻿using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Entites.User;
 
 namespace App.Domain.Core.Contracts.Repository.User
 {
@@ -7,5 +8,6 @@ namespace App.Domain.Core.Contracts.Repository.User
         Task CreateCustomer(int userId, string? address, CancellationToken cancellationToken);
         Task<Result> DeleteCustomer(int customerId, CancellationToken cancellationToken);
         Task<Result> SoftDeleteCustomer(int customerId, CancellationToken cancellationToken);
+        Task<Result> UpdateCustomer(Customer model, CancellationToken cancellationToken);
     }
 }

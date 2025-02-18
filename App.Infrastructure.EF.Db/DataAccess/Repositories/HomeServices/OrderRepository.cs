@@ -1,7 +1,7 @@
 ﻿using App.Domain.Core.Contracts.Repository.HomeServices;
 using App.Domain.Core.Dto.HomeService;
-using App.Domain.Core.Entites.Result;
-using App.Domain.Core.Enums;
+using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Enum;
 using App.Infrastructure.DataBase.EFCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -170,15 +170,18 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<List<Order>> GetOrdersForExpert(Order model , CancellationToken cancellationToken)
-        {
-            var orders = await _appDbContext.Orders
-                .Where( o => o.CityId == model.Expert.CityId && o.HouseWork == model.Expert.Skills)
-                .ToListAsync(cancellationToken);
-            if (orders == null)
-                throw new Exception(".لیست سفارش ها خالی میباشد");
-            return orders;
-        }
+        //public async Task<List<Order>> GetOrdersForExpert(Order model , CancellationToken cancellationToken)
+        //{
+        //    var orders = await _appDbContext.Orders
+        //        .Where( o => o.CityId == model.Expert.CityId && o.HouseWork == model.Expert.Skills)
+        //        .ToListAsync(cancellationToken);
+        //    if (orders == null)
+        //        throw new Exception(".لیست سفارش ها خالی میباشد");
+        //    return orders;
+        //}
+
+
+
         #endregion
     }
 }

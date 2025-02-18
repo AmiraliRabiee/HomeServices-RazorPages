@@ -1,7 +1,7 @@
 ﻿using App.Domain.Core.Contracts.Repository.HomeServices;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.Result;
+using App.Domain.Core.Entites.OutputResult;
 using App.Infrastructure.DataBase.EFCore;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,5 +1,4 @@
-﻿using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.User;
+﻿using App.Domain.Core.Entites.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Net;

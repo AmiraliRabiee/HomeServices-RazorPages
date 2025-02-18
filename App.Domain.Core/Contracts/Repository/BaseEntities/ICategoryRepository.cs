@@ -1,5 +1,5 @@
-﻿using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.Result;
+﻿using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Entites.Service;
 
 namespace App.Domain.Core.Contracts.Repository.BaseEntities
 {
@@ -8,6 +8,6 @@ namespace App.Domain.Core.Contracts.Repository.BaseEntities
         Task<Result> CreateCategpry(Category category, CancellationToken cancellationToken);
         Task<Result> UpdateCategory(Category category, CancellationToken cancellationToken);
         Task<Result> DeleteCategory(Category category, CancellationToken cancellationToken);
-        Task<Result> SoftDeleteComment(Category category, CancellationToken cancellationToken);
+        Task<Result> SoftDeleteCategory(Category category, CancellationToken cancellationToken);
     }
 }

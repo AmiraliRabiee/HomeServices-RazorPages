@@ -1,7 +1,7 @@
-﻿using App.Domain.Core.Enums;
+﻿using App.Domain.Core.Entites.Service;
 using System.ComponentModel.DataAnnotations;
 
-namespace App.Domain.Core.Entites
+namespace App.Domain.Core.Entites.User
 {
     public class Expert
     {

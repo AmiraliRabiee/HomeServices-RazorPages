@@ -1,6 +1,6 @@
-﻿using App.Domain.Core.Entites;
+﻿using App.Domain.Core.Entites.Service;
 using App.Domain.Core.Entites.User;
-using App.Domain.Core.Enums;
+using App.Domain.Core.Enum;
 using System.ComponentModel.DataAnnotations;
 
 public class Order

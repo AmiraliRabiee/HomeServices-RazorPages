@@ -1,4 +1,4 @@
-﻿using App.Domain.Core.Entites;
+﻿using App.Domain.Core.Entites.User;
 using System.ComponentModel.DataAnnotations;
 
 public class Suggestion

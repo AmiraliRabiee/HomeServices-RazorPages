@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace App.Domain.Core.Contracts.Service
+namespace App.Domain.Core.Contracts.Service.BaseEntities
 {
     public interface IBaseDataService
     {

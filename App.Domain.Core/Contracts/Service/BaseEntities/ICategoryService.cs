@@ -1,8 +1,7 @@
-﻿
-using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.Result;
+﻿using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Entites.Service;
 
-namespace App.Domain.Core.Contracts.Repository.BaseEntities
+namespace App.Domain.Core.Contracts.Service.BaseEntities
 {
     public interface ICategoryService
     {

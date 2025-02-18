@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace App.Domain.Core.Enums
+namespace App.Domain.Core.Enum
 {
     public enum StausServiceEnum
     {

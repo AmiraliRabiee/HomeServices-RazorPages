@@ -1,7 +1,7 @@
 ﻿using App.Domain.Core.Dto.HomeService;
-using App.Domain.Core.Entites.Result;
+using App.Domain.Core.Entites.OutputResult;
 
-namespace App.Domain.Core.Contracts.Repository.HomeServices
+namespace App.Domain.Core.Contracts.Service.HomeServices
 {
     public interface IOrderService
     {
@@ -10,7 +10,6 @@ namespace App.Domain.Core.Contracts.Repository.HomeServices
         Task<Result> SoftDelete(Order order, CancellationToken cancellationToken);
         Task<Result> Update(Order order, CancellationToken cancellationToken);
         Task<Order> GetOrderById(int id, CancellationToken cancellationToken);
-        Task<List<Order>> GetOrdersForExpert(Order model, CancellationToken cancellationToken);
         Task<List<SummOrderDto>> GetAll();
         Task ChangeToNewlyRegistered(Order model, CancellationToken cancellationToken);
         Task ChangeToExpertSelection(Order model, CancellationToken cancellationToken);

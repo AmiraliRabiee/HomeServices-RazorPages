@@ -1,8 +1,8 @@
-﻿using App.Domain.Core.Contracts.Service;
+﻿using App.Domain.Core.Contracts.Service.BaseEntities;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 
-namespace App.Domain.Services
+namespace App.Domain.Services.Base
 {
     public class BaseDataService : IBaseDataService
     {
@@ -17,7 +17,7 @@ namespace App.Domain.Services
                 filePath = Path.Combine($"wwwroot/~/UserTemplate/images/{folderName}", fileName);
                 try
                 {
-                    using (var stream = System.IO.File.Create(filePath))
+                    using (var stream = File.Create(filePath))
                     {
                         await FormFile.CopyToAsync(stream, cancellationToken);
                     }

@@ -1,6 +1,6 @@
 ﻿using App.Domain.Core.Contracts.Repository.BaseEntities;
-using App.Domain.Core.Entites.Result;
-using App.Domain.Core.Enums;
+using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Enum;
 using App.Infrastructure.DataBase.EFCore;
 using Microsoft.EntityFrameworkCore;
 

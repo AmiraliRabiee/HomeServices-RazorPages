@@ -1,9 +1,8 @@
-﻿using App.Domain.Core.Entites.Result;
-using App.Domain.Core.Entites;
-using App.Domain.Core.Dto.User;
+﻿using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.User;
+using App.Domain.Core.Entites.OutputResult;
 
-namespace App.Domain.Core.Contracts.Repository
+namespace App.Domain.Core.Contracts.Repository.User
 {
     public interface IUserRepository
     {

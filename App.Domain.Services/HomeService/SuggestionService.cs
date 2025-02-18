@@ -1,8 +1,9 @@
 ﻿using App.Domain.Core.Contracts.Repository.HomeServices;
+using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Dto.HomeService;
-using App.Domain.Core.Entites.Result;
+using App.Domain.Core.Entites.OutputResult;
 
-namespace App.Domain.Services.HouseWorkServices
+namespace App.Domain.Services.HomeService
 {
     public class SuggestionService(ISuggestionRepository _suggestionRepository) : ISuggestionService
     {

@@ -1,6 +1,6 @@
 ﻿using App.Domain.Core.Contracts.Repository.User;
 using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.Result;
+using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
 using App.Infrastructure.DataBase.EFCore;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +49,29 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.User
                 await _appDbContext.SaveChangesAsync(cancellationToken);
 
                 return new Result { IsSuccess = true, Message = "مشتری حذف شد" };
+            }
+            catch (Exception ex)
+            {
+                return new Result { IsSuccess = false, Message = $"{ex.Message}" };
+            }
+        }
+
+        public async Task<Result> UpdateCustomer(Customer model, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var customer = await _appDbContext.Customers
+                    .FirstOrDefaultAsync(e => e.Id == model.Id, cancellationToken);
+                if (customer is null)
+                    return new Result { IsSuccess = false, Message = "کارشناس یافت نشد" };
+
+                customer.Address = model.Address;
+                customer.CityId = model.City.Id;
+
+                _appDbContext.Customers.Update(customer);
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+
+                return new Result { IsSuccess = true, Message = "کارشناس به‌روزرسانی شد" };
             }
             catch (Exception ex)
             {

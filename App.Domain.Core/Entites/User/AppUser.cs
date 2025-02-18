@@ -1,12 +1,9 @@
-﻿using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.User;
-using App.Domain.Core.Enum;
-using App.Domain.Core.Enums;
+﻿using App.Domain.Core.Enum;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace App.Domain.Core.Entites
+namespace App.Domain.Core.Entites.User
 {
     public class AppUser : IdentityUser<int>
     {

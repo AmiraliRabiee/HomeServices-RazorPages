@@ -1,8 +1,8 @@
-﻿using App.Domain.Core.Entites.Result;
-using App.Domain.Core.Entites;
-using App.Infrastructure.DataBase.EFCore;
+﻿using App.Infrastructure.DataBase.EFCore;
 using App.Domain.Core.Contracts.Repository.User;
 using Microsoft.EntityFrameworkCore;
+using App.Domain.Core.Entites.User;
+using App.Domain.Core.Entites.OutputResult;
 
 namespace App.Infrastructure.EFCore.DataAccess.Repositories.User
 {

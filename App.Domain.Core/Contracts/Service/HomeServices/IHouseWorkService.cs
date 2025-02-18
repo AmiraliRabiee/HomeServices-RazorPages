@@ -1,8 +1,8 @@
 ﻿using App.Domain.Core.Dto.HomeService;
-using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.Result;
+using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Entites.Service;
 
-namespace App.Domain.Core.Contracts.Repository
+namespace App.Domain.Core.Contracts.Service.HomeServices
 {
     public interface IHouseWorkService
     {
@@ -11,6 +11,6 @@ namespace App.Domain.Core.Contracts.Repository
         Task<Result> SoftDeleteHomeService(HouseWork service, CancellationToken cancellationToken);
         Task<Result> UpdateHomeService(HouseWork service, CancellationToken cancellationToken);
         Task<HouseWork> GetById(int id, CancellationToken cancellationToken);
-        Task<List<SummHouseWorkDto>> GetAll();
+        Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken);
     }
 }

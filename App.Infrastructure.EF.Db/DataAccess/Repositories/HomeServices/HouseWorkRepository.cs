@@ -1,7 +1,8 @@
 ﻿using App.Domain.Core.Contracts.Repository;
+using App.Domain.Core.Contracts.Repository.HomeServices;
 using App.Domain.Core.Dto.HomeService;
-using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.Result;
+using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Entites.Service;
 using App.Infrastructure.DataBase.EFCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -110,7 +111,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
             return service;
         }
 
-        public async Task<List<SummHouseWorkDto>> GetHomeService()
+        public async Task<List<SummHouseWorkDto>> GetHomeServices(CancellationToken cancellationToken)
         {
             var services = await _appDbContext.HouseWorks
             .Select(h => new SummHouseWorkDto
@@ -121,7 +122,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
                 BasePrice = h.BasePrice,
                 SubCategory = h.Category.Title,
                 ImagePath = h.Image.Path == null ? null : h.Image.Path
-            }).ToListAsync();
+            }).ToListAsync(cancellationToken);
 
             if (services is null)
                 throw new Exception(".لیست سفارش ها خالی میباشد");

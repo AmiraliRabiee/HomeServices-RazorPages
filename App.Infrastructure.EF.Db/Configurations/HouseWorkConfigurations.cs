@@ -1,6 +1,6 @@
-﻿using App.Domain.Core.Entites;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using App.Domain.Core.Entites.Service;
 
 namespace App.Infrastructure.EFCore.Configurations
 {

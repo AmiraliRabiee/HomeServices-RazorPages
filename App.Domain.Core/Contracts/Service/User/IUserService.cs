@@ -1,9 +1,8 @@
 ﻿using App.Domain.Core.Dto.User;
-using App.Domain.Core.Entites.Result;
+using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
-using App.Domain.Core.Entites;
 
-namespace App.Domain.Core.Contracts.Service
+namespace App.Domain.Core.Contracts.Service.User
 {
     public interface IUserService
     {

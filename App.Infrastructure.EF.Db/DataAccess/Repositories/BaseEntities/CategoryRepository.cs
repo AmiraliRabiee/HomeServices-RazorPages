@@ -1,7 +1,6 @@
 ﻿using App.Domain.Core.Contracts.Repository.BaseEntities;
-using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.Result;
-using App.Domain.Core.Enums;
+using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Entites.Service;
 using App.Infrastructure.DataBase.EFCore;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
@@ -69,7 +68,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities
             return new Result { IsSuccess = true, Message = ".با موفقیت حذف شد" };
         }
 
-        public async Task<Result> SoftDeleteComment(Category category, CancellationToken cancellationToken)
+        public async Task<Result> SoftDeleteCategory(Category category, CancellationToken cancellationToken)
         {
             //For Admin 
             var current = await _appDbContext.Categories

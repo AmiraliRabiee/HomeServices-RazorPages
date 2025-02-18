@@ -1,4 +1,4 @@
-﻿using App.Domain.Core.Entites;
+﻿using App.Domain.Core.Entites.Service;
 using System.ComponentModel.DataAnnotations;
 
 public class Image

@@ -1,16 +1,22 @@
 ﻿using App.Domain.Core.Contracts.AppService;
-using App.Domain.Core.Contracts.Service;
+using App.Domain.Core.Contracts.Service.BaseEntities;
+using App.Domain.Core.Contracts.Service.User;
 using App.Domain.Core.Dto.User;
-using App.Domain.Core.Entites;
+using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
 using App.Domain.Core.Enum;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Threading;
 
-namespace App.Domain.AppServices
+namespace App.Domain.AppServices.User
 {
-    public class UserAppService(SignInManager<AppUser> _signInManager, UserManager<AppUser> _userManager,IBaseDataService _baseDataService) : IUserAppService
+    public class UserAppService(SignInManager<AppUser> _signInManager,
+        UserManager<AppUser> _userManager
+        , IBaseDataService _baseDataService
+        , IUserService _userService
+        , IExpertService _expertService
+        , ICustomerService _customerService) : IUserAppService
     {
         public async Task<IdentityResult> Login(string username, string password)
         {
@@ -114,6 +120,58 @@ namespace App.Domain.AppServices
         {
             await _signInManager.SignOutAsync();
             return IdentityResult.Success;
+        }
+
+        public async Task<Result> RemoveUser(AppUser model, CancellationToken cancellationToken)
+        {
+            try
+            {
+                if (model.RoleId == 2)
+                {
+                    var delete = await _customerService.DeleteCustomer(model.Id, cancellationToken);
+                    if (delete.IsSuccess)
+                        return new Result { Message = ".کاربر حذف شد" };
+                    return new Result { Message = ".حذف کاربر با خطا مواجه شد" };
+                }
+                if (model.RoleId == 3)
+                {
+                    var delete = await _expertService.DeleteExpert(model.Id, cancellationToken);
+                    if (delete.IsSuccess)
+                        return new Result { Message = ".کاربر حذف شد" };
+                    return new Result { Message = ".حذف کاربر با خطا مواجه شد" };
+                }
+                return new Result { IsSuccess = false };
+            }
+            catch (Exception ex)
+            {
+                return new Result { IsSuccess = false, Message = ex.Message };
+            }
+        }
+
+        public async Task<Result> UpdateInformation(AppUser model, CancellationToken cancellationToken)
+        {
+            try
+            {
+                if (model.RoleId == 2)
+                {
+                    var delete = await _customerService.UpdateCustomer(model.Customer, cancellationToken);
+                    if (delete.IsSuccess)
+                        return new Result { Message = ".کاربر حذف شد" };
+                    return new Result { Message = ".حذف کاربر با خطا مواجه شد" };
+                }
+                if (model.RoleId == 3)
+                {
+                    var delete = await _expertService.UpdateExpert(model.Expert, cancellationToken);
+                    if (delete.IsSuccess)
+                        return new Result { Message = ".کاربر حذف شد" };
+                    return new Result { Message = ".حذف کاربر با خطا مواجه شد" };
+                }
+                return new Result { IsSuccess = false };
+            }
+            catch (Exception ex)
+            {
+                return new Result { IsSuccess = false, Message = ex.Message };
+            }
         }
     }
 }

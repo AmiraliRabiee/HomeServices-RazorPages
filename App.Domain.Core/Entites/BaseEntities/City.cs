@@ -1,5 +1,4 @@
-﻿using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.User;
+﻿using App.Domain.Core.Entites.User;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Principal;
 

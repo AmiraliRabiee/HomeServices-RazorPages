@@ -1,9 +1,10 @@
-﻿using App.Domain.Core.Contracts.Repository;
+﻿using App.Domain.Core.Contracts.Repository.HomeServices;
+using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Dto.HomeService;
-using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.Result;
+using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Entites.Service;
 
-namespace App.Domain.Services
+namespace App.Domain.Services.HomeService
 {
     public class HouseWorkService(IHouseWorkRepository _houseWorkRepository) : IHouseWorkService
     {
@@ -13,8 +14,8 @@ namespace App.Domain.Services
         public Task<Result> DeleteHomeService(HouseWork work, CancellationToken cancellationToken)
             => _houseWorkRepository.DeleteHomeService(work, cancellationToken);
 
-        public Task<List<SummHouseWorkDto>> GetAll()
-            => _houseWorkRepository.GetHomeService();
+        public Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken)
+            => _houseWorkRepository.GetHomeServices(cancellationToken);
 
         public Task<HouseWork> GetById(int id, CancellationToken cancellationToken)
             => _houseWorkRepository.GetHomeServiceById(id, cancellationToken);

@@ -1,6 +1,6 @@
-﻿using App.Domain.Core.Entites.Result;
+﻿using App.Domain.Core.Entites.OutputResult;
 
-namespace App.Domain.Core.Contracts.Repository.BaseEntities
+namespace App.Domain.Core.Contracts.Service.BaseEntities
 {
     public interface ICommentService
     {

@@ -1,6 +1,6 @@
 ﻿using App.Domain.Core.Entites.User;
 using System.ComponentModel.DataAnnotations;
-namespace App.Domain.Core.Entites
+namespace App.Domain.Core.Entites.Service
 {
     public class HouseWork
     {
@@ -29,7 +29,6 @@ namespace App.Domain.Core.Entites
         public List<Expert>? Expert { get; set; }
         public Category Category { get; set; }
         public List<Order> Orders { get; set; }
-        public List<Suggestion>? Suggestions { get; set; }
         public Image Image { get; set; }
     }
 }

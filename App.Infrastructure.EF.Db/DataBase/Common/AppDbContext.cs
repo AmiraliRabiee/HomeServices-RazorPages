@@ -1,4 +1,4 @@
-﻿using App.Domain.Core.Entites;
+﻿using App.Domain.Core.Entites.Service;
 using App.Domain.Core.Entites.User;
 using App.Infrastructure.EFCore.Configurations;
 using Microsoft.AspNetCore.Identity;
