@@ -13,11 +13,11 @@ namespace App.Domain.AppServices.HomeService
         public async  Task<Result> DeleteCategoryAsync(Category category, CancellationToken cancellationToken)
             => await _categoryService.DeleteCategory(category, cancellationToken);
 
-        public List<Category> GetAll()
-            => _categoryService.GetAll();
+        public List<Category> GetAllCategories()
+            => _categoryService.GetAllCategories();
 
-        public Category GetById(int id)
-            => _categoryService.GetById(id);
+        public Category GetCategory(int id)
+            => _categoryService.GetCategory(id);
 
         public async Task<Result> SoftDeleteCategoryAsync(Category category, CancellationToken cancellationToken)
             => await _categoryService.SoftDeleteComment(category, cancellationToken);

@@ -1,11 +1,15 @@
-﻿using App.Domain.Core.Contracts.Service.BaseEntities;
+﻿using App.Domain.Core.Contracts.Repository.BaseEntities;
+using App.Domain.Core.Contracts.Service.BaseEntities;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 
 namespace App.Domain.Services.Base
 {
-    public class BaseDataService : IBaseDataService
+    public class BaseDataService(ICityRepository _cityRepository) : IBaseDataService
     {
+        public Task<List<City>> GetCities(CancellationToken cancellationToken)
+            => _cityRepository.GetCities(cancellationToken);
+
         public async Task<string> UploadImage(IFormFile FormFile, string folderName, CancellationToken cancellationToken)
         {
             string filePath;

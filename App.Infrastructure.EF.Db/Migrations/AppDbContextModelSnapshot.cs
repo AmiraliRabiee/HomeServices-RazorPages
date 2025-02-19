@@ -22,174 +22,7 @@ namespace App.Infrastructure.EFCore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("App.Domain.Core.Entites.AppUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ActivationUser")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Balance")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(1000f);
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("RegisterAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ActivationUser = 3,
-                            Balance = 1000f,
-                            ConcurrencyStamp = "d74be311-7d6e-4a7b-ba57-7408b47e440e",
-                            EmailConfirmed = false,
-                            FirstName = "Admin",
-                            IsDeleted = false,
-                            LastName = "Admin",
-                            LockoutEnabled = false,
-                            Password = "123456",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHn6OQMa/Ob8xM7JwA7x4OniHe1mw23bvQ+vqsuVScuK4F76HAuA5Qh2bB2yJIn0bg==",
-                            PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 15, 12, 44, 4, 466, DateTimeKind.Local).AddTicks(8541),
-                            RoleId = 1,
-                            SecurityStamp = "7d2b4451-df36-43b9-b1cf-8af782a2ffcc",
-                            TwoFactorEnabled = false,
-                            UserName = "Admin@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ActivationUser = 3,
-                            Balance = 1000f,
-                            ConcurrencyStamp = "8be7275f-06cc-4d90-ac24-08deb575e52c",
-                            EmailConfirmed = false,
-                            FirstName = "Amir",
-                            IsDeleted = false,
-                            LastName = "Amiri",
-                            LockoutEnabled = false,
-                            Password = "456789",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAm5Uo/EbDGNWjlwABXIM/wp/j6L9rcRFi0+Sks29fu/UWGjZx42rA341dzQ8VWgwg==",
-                            PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 15, 12, 44, 4, 466, DateTimeKind.Local).AddTicks(8578),
-                            RoleId = 2,
-                            SecurityStamp = "924489f8-0bbc-4f76-9cd5-3faeb139d1cd",
-                            TwoFactorEnabled = false,
-                            UserName = "Customer@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ActivationUser = 3,
-                            Balance = 1000f,
-                            ConcurrencyStamp = "b73c48f1-8b2a-42b4-b222-95384f36c1d8",
-                            EmailConfirmed = false,
-                            FirstName = "Amir",
-                            IsDeleted = false,
-                            LastName = "Amiri",
-                            LockoutEnabled = false,
-                            Password = "258852",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKB1RZusW7bIxF0gKfFAD9ID81w29b+BgoCcsiCPC40FEhYb3QRpH2MwLbQGTH/KqA==",
-                            PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 15, 12, 44, 4, 466, DateTimeKind.Local).AddTicks(8601),
-                            RoleId = 3,
-                            SecurityStamp = "00da4340-0796-459b-9d5e-53cc6c98827f",
-                            TwoFactorEnabled = false,
-                            UserName = "Expert@gmail.com"
-                        });
-                });
-
-            modelBuilder.Entity("App.Domain.Core.Entites.Category", b =>
+            modelBuilder.Entity("App.Domain.Core.Entites.Service.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -201,6 +34,9 @@ namespace App.Infrastructure.EFCore.Migrations
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
@@ -394,46 +230,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entites.Expert", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("Biographi")
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("Points")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("Expert", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "اینجا",
-                            Biographi = "بیوگرافی",
-                            CityId = 1,
-                            IsDeleted = false
-                        });
-                });
-
-            modelBuilder.Entity("App.Domain.Core.Entites.HouseWork", b =>
+            modelBuilder.Entity("App.Domain.Core.Entites.Service.HouseWork", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1487,6 +1284,171 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.ToTable("Admins");
                 });
 
+            modelBuilder.Entity("App.Domain.Core.Entites.User.AppUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ActivationUser")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Balance")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("real")
+                        .HasDefaultValue(1000f);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("RegisterAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ActivationUser = 3,
+                            Balance = 1000f,
+                            ConcurrencyStamp = "379095fe-d09e-4786-8cae-b27ef4f33d53",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            IsDeleted = false,
+                            LastName = "Admin",
+                            LockoutEnabled = false,
+                            Password = "123456",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBardcB/8Xkw748wfIwaAKuf0fvE9PFMc31RlgnpIZKrDrmMMbH6UZTpkWmMujNWew==",
+                            PhoneNumberConfirmed = false,
+                            RegisterAt = new DateTime(2025, 2, 19, 13, 45, 12, 710, DateTimeKind.Local).AddTicks(3195),
+                            RoleId = 1,
+                            SecurityStamp = "02d69cbb-2fc8-4895-bfa1-6db5f03b6d46",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin@gmail.com"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ActivationUser = 3,
+                            Balance = 1000f,
+                            ConcurrencyStamp = "b5ab801d-7c59-4624-8c8f-fe0785249356",
+                            EmailConfirmed = false,
+                            FirstName = "Amir",
+                            IsDeleted = false,
+                            LastName = "Amiri",
+                            LockoutEnabled = false,
+                            Password = "456789",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI/F9yD4cLxtCobfrCNjIAkG5YTauW9KQvGoSocdHFKXvuQQSke+UHVkOICl/8mSUg==",
+                            PhoneNumberConfirmed = false,
+                            RegisterAt = new DateTime(2025, 2, 19, 13, 45, 12, 710, DateTimeKind.Local).AddTicks(3217),
+                            RoleId = 2,
+                            SecurityStamp = "bb8cc166-f721-46bd-8c6f-737581dc12c0",
+                            TwoFactorEnabled = false,
+                            UserName = "Customer@gmail.com"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            ActivationUser = 3,
+                            Balance = 1000f,
+                            ConcurrencyStamp = "880d7515-100e-45ca-ae72-a79fc80bdcc6",
+                            EmailConfirmed = false,
+                            FirstName = "Amir",
+                            IsDeleted = false,
+                            LastName = "Amiri",
+                            LockoutEnabled = false,
+                            Password = "258852",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI0Sr2EaXPetPMpo+0jswoE8QMk4pp9NyDG4ejCe9Tpa6BMlksA7tHY6Pmrizp4CGw==",
+                            PhoneNumberConfirmed = false,
+                            RegisterAt = new DateTime(2025, 2, 19, 13, 45, 12, 710, DateTimeKind.Local).AddTicks(3235),
+                            RoleId = 3,
+                            SecurityStamp = "86ffb8c4-6b5d-432d-8af5-d804b607fec7",
+                            TwoFactorEnabled = false,
+                            UserName = "Expert@gmail.com"
+                        });
+                });
+
             modelBuilder.Entity("App.Domain.Core.Entites.User.Customer", b =>
                 {
                     b.Property<int>("Id")
@@ -1496,11 +1458,16 @@ namespace App.Infrastructure.EFCore.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasMaxLength(255)
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CityId");
 
                     b.ToTable("Customers");
 
@@ -1509,6 +1476,46 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 1,
                             Address = "اینجا",
+                            CityId = 1,
+                            IsDeleted = false
+                        });
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entites.User.Expert", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Biographi")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("Points")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Expert", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "اینجا",
+                            Biographi = "بیوگرافی",
+                            CityId = 1,
                             IsDeleted = false
                         });
                 });
@@ -1975,32 +1982,24 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<int>("ExpertId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("HouseWorkId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<float>("SuggestPrice")
-                        .HasColumnType("real");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ExpertId");
-
-                    b.HasIndex("HouseWorkId");
 
                     b.HasIndex("OrderId");
 
                     b.ToTable("Suggestions");
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entites.Category", b =>
+            modelBuilder.Entity("App.Domain.Core.Entites.Service.Category", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entites.Category", "ParentCategory")
+                    b.HasOne("App.Domain.Core.Entites.Service.Category", "ParentCategory")
                         .WithMany("SubCategories")
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -2008,26 +2007,9 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Navigation("ParentCategory");
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entites.Expert", b =>
+            modelBuilder.Entity("App.Domain.Core.Entites.Service.HouseWork", b =>
                 {
-                    b.HasOne("City", "City")
-                        .WithMany("Experts")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("App.Domain.Core.Entites.AppUser", null)
-                        .WithOne("Expert")
-                        .HasForeignKey("App.Domain.Core.Entites.Expert", "Id")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("City");
-                });
-
-            modelBuilder.Entity("App.Domain.Core.Entites.HouseWork", b =>
-                {
-                    b.HasOne("App.Domain.Core.Entites.Category", "Category")
+                    b.HasOne("App.Domain.Core.Entites.Service.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2038,7 +2020,7 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("App.Domain.Core.Entites.User.Admin", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entites.AppUser", null)
+                    b.HasOne("App.Domain.Core.Entites.User.AppUser", null)
                         .WithOne("Admin")
                         .HasForeignKey("App.Domain.Core.Entites.User.Admin", "Id")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2047,16 +2029,41 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("App.Domain.Core.Entites.User.Customer", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entites.AppUser", null)
+                    b.HasOne("City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("App.Domain.Core.Entites.User.AppUser", null)
                         .WithOne("Customer")
                         .HasForeignKey("App.Domain.Core.Entites.User.Customer", "Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entites.User.Expert", b =>
+                {
+                    b.HasOne("City", "City")
+                        .WithMany("Experts")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("App.Domain.Core.Entites.User.AppUser", null)
+                        .WithOne("Expert")
+                        .HasForeignKey("App.Domain.Core.Entites.User.Expert", "Id")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("Comment", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entites.Expert", "Expert")
+                    b.HasOne("App.Domain.Core.Entites.User.Expert", "Expert")
                         .WithMany("Comments")
                         .HasForeignKey("ExpertId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2067,13 +2074,13 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("ExpertHouseWork", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entites.Expert", null)
+                    b.HasOne("App.Domain.Core.Entites.User.Expert", null)
                         .WithMany()
                         .HasForeignKey("ExpertId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("App.Domain.Core.Entites.HouseWork", null)
+                    b.HasOne("App.Domain.Core.Entites.Service.HouseWork", null)
                         .WithMany()
                         .HasForeignKey("SkillsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2082,7 +2089,7 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Image", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entites.HouseWork", "HouseWork")
+                    b.HasOne("App.Domain.Core.Entites.Service.HouseWork", "HouseWork")
                         .WithOne("Image")
                         .HasForeignKey("Image", "HouseWorkId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2102,7 +2109,7 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entites.AppUser", null)
+                    b.HasOne("App.Domain.Core.Entites.User.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2111,7 +2118,7 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entites.AppUser", null)
+                    b.HasOne("App.Domain.Core.Entites.User.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2126,7 +2133,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("App.Domain.Core.Entites.AppUser", null)
+                    b.HasOne("App.Domain.Core.Entites.User.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2135,7 +2142,7 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entites.AppUser", null)
+                    b.HasOne("App.Domain.Core.Entites.User.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2156,11 +2163,11 @@ namespace App.Infrastructure.EFCore.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("App.Domain.Core.Entites.Expert", "Expert")
+                    b.HasOne("App.Domain.Core.Entites.User.Expert", "Expert")
                         .WithMany()
                         .HasForeignKey("ExpertId");
 
-                    b.HasOne("App.Domain.Core.Entites.HouseWork", "HouseWork")
+                    b.HasOne("App.Domain.Core.Entites.Service.HouseWork", "HouseWork")
                         .WithMany("Orders")
                         .HasForeignKey("HouseWorkId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2177,15 +2184,11 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Suggestion", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entites.Expert", "Expert")
+                    b.HasOne("App.Domain.Core.Entites.User.Expert", "Expert")
                         .WithMany("Suggestions")
                         .HasForeignKey("ExpertId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.HasOne("App.Domain.Core.Entites.HouseWork", null)
-                        .WithMany("Suggestions")
-                        .HasForeignKey("HouseWorkId");
 
                     b.HasOne("Order", "Order")
                         .WithMany("Suggestions")
@@ -2198,7 +2201,20 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entites.AppUser", b =>
+            modelBuilder.Entity("App.Domain.Core.Entites.Service.Category", b =>
+                {
+                    b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entites.Service.HouseWork", b =>
+                {
+                    b.Navigation("Image")
+                        .IsRequired();
+
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entites.User.AppUser", b =>
                 {
                     b.Navigation("Admin");
 
@@ -2207,31 +2223,16 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Navigation("Expert");
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entites.Category", b =>
+            modelBuilder.Entity("App.Domain.Core.Entites.User.Customer", b =>
                 {
-                    b.Navigation("SubCategories");
+                    b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entites.Expert", b =>
+            modelBuilder.Entity("App.Domain.Core.Entites.User.Expert", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("Suggestions");
-                });
-
-            modelBuilder.Entity("App.Domain.Core.Entites.HouseWork", b =>
-                {
-                    b.Navigation("Image")
-                        .IsRequired();
-
-                    b.Navigation("Orders");
-
-                    b.Navigation("Suggestions");
-                });
-
-            modelBuilder.Entity("App.Domain.Core.Entites.User.Customer", b =>
-                {
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("City", b =>

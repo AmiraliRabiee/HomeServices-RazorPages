@@ -10,6 +10,7 @@ namespace App.Domain.Core.Dto.User
         public string? RePassword { get; set; }
         public string? Address { get; set; }
         public RoleEnum Role { get; set; }
+        public int RoleId { get; set; }
         public IFormFile? ProfileImgFile { get; set; }
         public string? ImagePath { get; set; }
         public City City { get; set; }

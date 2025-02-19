@@ -1,5 +1,5 @@
-﻿@* @page
-@model 
+﻿@page
+@model HomeServices_RazorPages.Areas.Admin.Pages.IndexModel
 @{
     ViewData["Title"] = "پیشخوان";
 }
@@ -18,10 +18,10 @@
                 <div class="col-lg-3 col-6">
                     <div class="stat-box use-cyan shadow">
                         <a href="#">
-                            <div class="stat">
+@*                             <div class="stat">
                                 <div class="counter-down"><div class="num">@Model.DashboardData.UserCount</div></div>
                                 <div class="h3">کاربر</div>
-                            </div><!-- /.stat -->
+                            </div><!-- /.stat --> *@
                             <div class="visual">
                                 <i class="icon-people"></i>
                             </div><!-- /.visual -->
@@ -31,10 +31,10 @@
                 <div class="col-lg-3 col-6">
                     <div class="stat-box use-blue shadow">
                         <a href="#">
-                            <div class="stat">
+@*                             <div class="stat">
                                 <div class="counter-down"><div class="num">@Model.DashboardData.CategoryCount</div></div>
                                 <div class="h3">تعداد دسته بندی ها</div>
-                            </div><!-- /.stat -->
+                            </div><!-- /.stat --> *@
                             <div class="visual">
                                 <i class="icon-present"></i>
                             </div><!-- /.visual -->
@@ -44,10 +44,10 @@
                 <div class="col-lg-3 col-6">
                     <div class="stat-box use-green shadow">
                         <a href="#">
-                            <div class="stat">
+@*                             <div class="stat">
                                 <div class="counter-down"><div class="num">@Model.DashboardData.AdvertisementCount</div></div>
                                 <div class="h3">تعداد آگهی ها</div>
-                            </div><!-- /.stat -->
+                            </div><!-- /.stat --> *@
                             <div class="visual">
                                 <i class="icon-diamond"></i>
                             </div><!-- /.visual -->
@@ -56,7 +56,7 @@
                 </div><!-- /.col-lg-3 -->
                 <div class="col-lg-3 col-6">
                     <div class="stat-box use-purple shadow">
-                        <a href="#">
+ @*                        <a href="#">
                             <div class="stat">
                                 <div class="counter-down"><div class="num">@Model.DashboardData.BrandCount</div></div>
                                 <div class="h3">تعداد برندها</div>
@@ -64,11 +64,10 @@
                             <div class="visual">
                                 <i class="icon-bubbles"></i>
                             </div><!-- /.visual -->
-                        </a>
+                        </a> *@
                     </div><!-- /.stat-box -->
                 </div><!-- /.col-lg-3 -->
             </div>
         </div><!-- /.portlet-body -->
     </div><!-- /.portlet -->
 </div><!-- /.col-lg-12 -->
- *@

@@ -22,7 +22,7 @@ namespace App.Infrastructure.EFCore.Configurations
 
             builder.HasData(new List<Customer>
             {
-                new Customer{Id = 1 , Address = "اینجا"}
+                new Customer{Id = 1 , Address = "اینجا" , CityId = 1 , IsDeleted = false }
             });
         }
     }

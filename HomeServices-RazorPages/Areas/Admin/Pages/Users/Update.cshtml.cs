@@ -11,10 +11,10 @@ namespace HomeServices_RazorPages.Areas.Admin.Pages.Users
         [BindProperty]
         public UserDto User { get; set; }
 
-        public void OnGet(int id)
-        {
-            User = _userAppService.GetById(id);
-        }
+        //public void OnGet(int id)
+        //{
+        //    User = _userAppService.GetById(id);
+        //}
 
         public async Task<IActionResult> OnPost(CancellationToken cancellationToken)
         {

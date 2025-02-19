@@ -79,7 +79,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
             }
         }
 
-        public async Task<Result> UpdateUser(AppUser user, CancellationToken cancellationToken)
+        public async Task<Result> UpdateUser(UserDto user, CancellationToken cancellationToken)
         {
             try
             {
@@ -89,12 +89,18 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
                 if (currentUser is null)
                     return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
 
-                var newUser = new UserDto();
-
-                currentUser.FirstName = user.FirstName;
-                currentUser.LastName = user.LastName;
-                currentUser.Email = user.Email;
-                currentUser.Password = user.Password;
+                var newUser = new UserDto()
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    ProfileImgFile = user.ProfileImgFile,
+                    UserName = user.UserName,
+                    Password = user.Password,
+                    Address = user.Address,
+                    CityId = user.City.Id,
+                    RoleId = user.RoleId,
+                };
 
                 await _appDbContext.SaveChangesAsync(cancellationToken);
                 return new Result { IsSuccess = true, Message = ".به روزرسانی انجام شد" };
@@ -205,6 +211,34 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
                 throw new Exception(".مشتری ای وجود ندارد");
 
             return experts;
+        }
+
+        public List<AppUser> GetAll()
+        {
+            var users = _appDbContext.Users.ToList();
+            if (users is null)
+                throw new Exception(".کاربری وجود ندارد");
+            return users;
+        }
+
+        public AppUser GetById(int id)
+        {
+            var user = _appDbContext.Users.FirstOrDefault(u => u.Id == id);
+            if (user is null)
+                throw new Exception(".کاربری با این شناسه وجود ندارد");
+            return user;
+        }
+
+        public UserDto GetDtoById(int id)
+        {
+            var res = _appDbContext.Users.Select(u => new UserDto
+            {
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Email = u.Email,
+                UserName = u.UserName,
+            }).First();
+            return res;
         }
     }
 }

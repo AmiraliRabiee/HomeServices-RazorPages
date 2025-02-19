@@ -82,5 +82,21 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities
 
             return new Result { IsSuccess = true, Message = ".با موفقیت حذف شد" };
         }
+
+        public Category GetCategory(int id)
+        {
+            var category = _appDbContext.Categories.FirstOrDefault(c => c.Id == id);
+            if (category is null)
+                throw new Exception("دسته بندی ها خالی میباشد");
+            return category;
+        }
+
+        public List<Category> GetAllCategories()
+        {
+            var categories = _appDbContext.Categories.ToList();
+            if (categories is null)
+                throw new Exception("دسته بندی ها خالی میباشد");
+            return categories;
+        }
     }
 }

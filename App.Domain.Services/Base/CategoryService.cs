@@ -13,6 +13,12 @@ namespace App.Domain.Services.Base
         public Task<Result> DeleteCategory(Category category, CancellationToken cancellationToken)
             => _categoryRepository.DeleteCategory(category, cancellationToken);
 
+        public List<Category> GetAllCategories()
+            => _categoryRepository.GetAllCategories();
+
+        public Category GetCategory(int id)
+            => _categoryRepository.GetCategory(id);
+
         public Task<Result> SoftDeleteComment(Category category, CancellationToken cancellationToken)
             => _categoryRepository.SoftDeleteCategory(category, cancellationToken);
 

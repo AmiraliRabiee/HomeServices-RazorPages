@@ -9,5 +9,7 @@ namespace App.Domain.Core.Contracts.AppService
         Task<Result> UpdateCategoryAsync(Category category, CancellationToken cancellationToken);
         Task<Result> DeleteCategoryAsync(Category category, CancellationToken cancellationToken);
         Task<Result> SoftDeleteCategoryAsync(Category category, CancellationToken cancellationToken);
+        Category GetCategory(int id);
+        List<Category> GetAllCategories();
     }
 }

@@ -35,8 +35,8 @@ namespace App.Infrastructure.EFCore.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Balance = table.Column<float>(type: "real", nullable: false, defaultValue: 1000f),
                     RoleId = table.Column<int>(type: "int", nullable: false),
@@ -444,9 +444,9 @@ namespace App.Infrastructure.EFCore.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ActivationUser", "Balance", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "ImagePath", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RegisterAt", "RoleId", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, 3, 1000f, "82b293ed-7225-4771-b98a-67c5d1294ba9", null, false, "Admin", null, false, "Admin", false, null, null, null, "123456", "AQAAAAIAAYagAAAAEPWbAbUm5M2+XMQu5GsSCT5qLNSSOYTrr7Un6vdTNYUXbn1pmk3Lb1LVWFytotg/Ew==", null, false, new DateTime(2025, 2, 19, 7, 47, 56, 216, DateTimeKind.Local).AddTicks(4870), 1, "6f4bc1bc-4853-4601-9dbc-f408e98dcb2d", false, "Admin@gmail.com" },
-                    { 2, 0, 3, 1000f, "848a9b58-e478-4c79-87f5-642de9e373e8", null, false, "Amir", null, false, "Amiri", false, null, null, null, "456789", "AQAAAAIAAYagAAAAEHIWS75Jdki0h+vQr5FUf7xyrTyhNdclJruQj68xqRWMxnQ58WOtftpcnyg9vB0F0g==", null, false, new DateTime(2025, 2, 19, 7, 47, 56, 216, DateTimeKind.Local).AddTicks(4901), 2, "2096055b-1155-461e-9fc7-c86b3524f492", false, "Customer@gmail.com" },
-                    { 3, 0, 3, 1000f, "7608a4f9-799e-47d7-a73e-ed08b9380b33", null, false, "Amir", null, false, "Amiri", false, null, null, null, "258852", "AQAAAAIAAYagAAAAEL1fMPK82Mk+Er3Ikyuazncg8bS4PqsV7rTcHGDjRJ7p28bULo4+tADcG63Kbv628w==", null, false, new DateTime(2025, 2, 19, 7, 47, 56, 216, DateTimeKind.Local).AddTicks(4926), 3, "2f14651a-33a3-4f25-94da-3b1461c84298", false, "Expert@gmail.com" }
+                    { 1, 0, 3, 1000f, "379095fe-d09e-4786-8cae-b27ef4f33d53", null, false, "Admin", null, false, "Admin", false, null, null, null, "123456", "AQAAAAIAAYagAAAAEBardcB/8Xkw748wfIwaAKuf0fvE9PFMc31RlgnpIZKrDrmMMbH6UZTpkWmMujNWew==", null, false, new DateTime(2025, 2, 19, 13, 45, 12, 710, DateTimeKind.Local).AddTicks(3195), 1, "02d69cbb-2fc8-4895-bfa1-6db5f03b6d46", false, "Admin@gmail.com" },
+                    { 2, 0, 3, 1000f, "b5ab801d-7c59-4624-8c8f-fe0785249356", null, false, "Amir", null, false, "Amiri", false, null, null, null, "456789", "AQAAAAIAAYagAAAAEI/F9yD4cLxtCobfrCNjIAkG5YTauW9KQvGoSocdHFKXvuQQSke+UHVkOICl/8mSUg==", null, false, new DateTime(2025, 2, 19, 13, 45, 12, 710, DateTimeKind.Local).AddTicks(3217), 2, "bb8cc166-f721-46bd-8c6f-737581dc12c0", false, "Customer@gmail.com" },
+                    { 3, 0, 3, 1000f, "880d7515-100e-45ca-ae72-a79fc80bdcc6", null, false, "Amir", null, false, "Amiri", false, null, null, null, "258852", "AQAAAAIAAYagAAAAEI0Sr2EaXPetPMpo+0jswoE8QMk4pp9NyDG4ejCe9Tpa6BMlksA7tHY6Pmrizp4CGw==", null, false, new DateTime(2025, 2, 19, 13, 45, 12, 710, DateTimeKind.Local).AddTicks(3235), 3, "86ffb8c4-6b5d-432d-8af5-d804b607fec7", false, "Expert@gmail.com" }
                 });
 
             migrationBuilder.InsertData(

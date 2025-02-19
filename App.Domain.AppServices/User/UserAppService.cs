@@ -35,7 +35,6 @@ namespace App.Domain.AppServices.User
 
         public async Task<IdentityResult> Register(CreateUserDto model, CancellationToken cancellationToken)
         {
-            string role = string.Empty;
 
             if (string.IsNullOrEmpty(model.UserName) || string.IsNullOrEmpty(model.Password))
             {
@@ -58,59 +57,50 @@ namespace App.Domain.AppServices.User
                 UserName = model.UserName,
                 Password = model.Password,
                 RePassword = model.RePassword,
+                RoleId = model.RoleId
             };
 
-            if (model.Role == RoleEnum.Admin)
+            string role = model.RoleId switch
             {
-                role = "Admin";
-            }
-            else if (model.Role == RoleEnum.Customer)
+                2 => "Customer",
+                3 => "Expert",
+                _ => throw new InvalidOperationException("نقش کاربر معتبر نمی باشد.")
+            };
+
+            if (model.RoleId == 2)
             {
-                role = "Customer";
                 user.Customer = new Customer()
                 {
-                    Address = model.Address,
+                    Address = model.Address
                 };
             }
-            else if (model.Role == RoleEnum.Expert)
+            else if (model.RoleId == 3)
             {
-                role = "Expert";
                 user.Expert = new Expert()
                 {
-                    CityId = model.City.Id,
+                    CityId = model.City?.Id ?? 0
                 };
-            }
-            else
-            {
-                return IdentityResult.Failed(new IdentityError { Description = "نقش کاربر معتبر نمی باشد." });
             }
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
-                if (model.ProfileImgFile is not null)
-                {
-                    model.ImagePath = await _baseDataService.UploadImage(model.ProfileImgFile!, "Profiles", cancellationToken);
-                }
-
                 await _userManager.AddToRoleAsync(user, role);
 
-
-                if (model.Role == RoleEnum.Customer)
+                if (model.RoleId == 2)
                 {
-                    await _userManager.AddClaimAsync(user, new Claim("CustomerId", user.Customer.Id.ToString()));
+                    await _userManager.AddClaimAsync(user, new Claim("CustomerId", user.Customer!.Id.ToString()));
                 }
-
-                if (model.Role == RoleEnum.Expert)
+                else if (model.RoleId == 3)
                 {
-                    await _userManager.AddClaimAsync(user, new Claim("ExpertId", user.Expert.Id.ToString()));
+                    await _userManager.AddClaimAsync(user, new Claim("ExpertId", user.Expert!.Id.ToString()));
                 }
 
                 var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, true, false);
                 if (!signInResult.Succeeded)
                 {
-                    // Handle sign-in failure (e.g., log the error or return a specific message)
+                    // Handle sign-in failure
                 }
             }
             return result;
@@ -148,7 +138,7 @@ namespace App.Domain.AppServices.User
             }
         }
 
-        public async Task<Result> UpdateInformation(AppUser model, CancellationToken cancellationToken)
+        public async Task<Result> UpdateInformation(UserDto model, CancellationToken cancellationToken)
         {
             try
             {
@@ -173,5 +163,14 @@ namespace App.Domain.AppServices.User
                 return new Result { IsSuccess = false, Message = ex.Message };
             }
         }
+
+        public List<AppUser> GetAll()
+            => _userService.GetAll();
+
+        public AppUser GetById(int id)
+            => _userService.GetById(id);
+
+        public UserDto GetDtoById(int id)
+            => _userService.GetUserDto(id);
     }
 }

@@ -3,5 +3,6 @@
     public interface IBaseDataAppService
     {
         Task<List<City>> GetCities(CancellationToken cancellationToken);
+
     }
 }

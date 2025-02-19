@@ -11,7 +11,7 @@ namespace HomeServices_RazorPages.Pages.Categories
         public List<Category> Categories { get; set; }
         public void OnGet()
         {
-            Categories = _categoryAppService.GetAll();
+            Categories = _categoryAppService.GetAllCategories();
         }
     }
 }

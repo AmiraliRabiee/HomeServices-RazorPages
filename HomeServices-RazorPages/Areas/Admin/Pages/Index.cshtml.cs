@@ -1,28 +1,28 @@
 
-//using Microsoft.AspNetCore.Authorization;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-//namespace
-//{
-//    [Authorize(Roles = "Admin")]
-//    public class IndexModel : PageModel
-//    {
-//        private readonly IDashboardAppService _dashboardAppService;
+namespace HomeServices_RazorPages.Areas.Admin.Pages
+{
+    [Authorize(Roles = "Admin")]
+    public class IndexModel : PageModel
+    {
+        //private readonly IDashboardAppService _dashboardAppService;
 
 
-//        public IndexModel(IDashboardAppService dashboardAppService)
-//        {
-//            _dashboardAppService = dashboardAppService;
-//        }
+        //public IndexModel(IDashboardAppService dashboardAppService)
+        //{
+        //    _dashboardAppService = dashboardAppService;
+        //}
 
-//        [BindProperty]
-//        public StatisticsDataDto DashboardData { get; set; }
+        //[BindProperty]
+        //public StatisticsDataDto DashboardData { get; set; }
 
-//        public void OnGet()
-//        {
-//            var data = User;
-//            DashboardData = _dashboardAppService.GetStatisticsData();
-//        }
-//    }
-//}
+        public void OnGet()
+        {
+            var data = User;
+            //DashboardData = _dashboardAppService.GetStatisticsData();
+        }
+    }
+}

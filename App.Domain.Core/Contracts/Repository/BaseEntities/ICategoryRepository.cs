@@ -9,5 +9,7 @@ namespace App.Domain.Core.Contracts.Repository.BaseEntities
         Task<Result> UpdateCategory(Category category, CancellationToken cancellationToken);
         Task<Result> DeleteCategory(Category category, CancellationToken cancellationToken);
         Task<Result> SoftDeleteCategory(Category category, CancellationToken cancellationToken);
+        Category GetCategory(int id);
+        List<Category> GetAllCategories();
     }
 }
