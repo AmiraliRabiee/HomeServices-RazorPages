@@ -6,11 +6,12 @@ namespace App.Domain.Core.Contracts.Service.HomeServices
 {
     public interface IHouseWorkService
     {
-        Task<Result> CreateService(HouseWork service, CancellationToken cancellationToken);
-        Task<Result> DeleteHomeService(HouseWork work, CancellationToken cancellationToken);
+        Task<Result> CreateService(SummHouseWorkDto service, CancellationToken cancellationToken);
+        Task<Result> DeleteHomeService(int id, CancellationToken cancellationToken);
         Task<Result> SoftDeleteHomeService(HouseWork service, CancellationToken cancellationToken);
-        Task<Result> UpdateHomeService(HouseWork service, CancellationToken cancellationToken);
-        Task<HouseWork> GetById(int id, CancellationToken cancellationToken);
+        Task<Result> UpdateHomeService(UpdateHouseWork service, CancellationToken cancellationToken);
+        HouseWork GetById(int id);
         Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken);
+        UpdateHouseWork GetServiceDto(int id);
     }
 }

@@ -6,7 +6,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities
 {
     public class CityRepository(AppDbContext _appDbContext) : ICityRepository
     {
-        public Task<List<City>> GetCities(CancellationToken cancellationToken)
-            => _appDbContext.Cities.ToListAsync(cancellationToken);
+        public List<City> GetCities()
+            =>  _appDbContext.Cities.ToList();
     }
 }

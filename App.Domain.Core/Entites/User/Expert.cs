@@ -14,11 +14,11 @@ namespace App.Domain.Core.Entites.User
         public string? Biographi { get; set; }
         public bool IsDeleted { get; set; } = false;
         public int CityId { get; set; }
+        public int AppUserId { get; set; }
 
-
-        public List<Comment>? Comments { get; set; }
+        public List<ExpertHouseWork>? ExpertWorksSkills { get; set; } = new();
+        public AppUser? User { get; set; }
         public List<Suggestion>? Suggestions { get; set; }
-        public List<HouseWork> Skills { get; set; }
         public City City { get; set; }
     }
 }

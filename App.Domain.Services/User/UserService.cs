@@ -11,8 +11,8 @@ namespace App.Domain.Services.User
         public Task<Result> ChangeStatus(AppUser user, CancellationToken cancellationToken)
             => _userRepository.ChangeStatus(user, cancellationToken);
 
-        public Task<Result> DeleteUser(AppUser user, CancellationToken cancellationToken)
-            => _userRepository.DeleteUser(user, cancellationToken);
+        public Task<Result> DeleteUser(int id, CancellationToken cancellationToken)
+            => _userRepository.DeleteUser(id, cancellationToken);
 
         public List<AppUser> GetAll()
             => _userRepository.GetAll();
@@ -26,6 +26,9 @@ namespace App.Domain.Services.User
         public AppUser GetById(int id)
             => _userRepository.GetById(id);
 
+        public int GetCount()
+            => _userRepository.GetCount();
+
         public Task<UserDto> GetUserDetails(int id, CancellationToken cancellationToken)
             => _userRepository.GetUserDetails(id, cancellationToken);
 
@@ -38,17 +41,7 @@ namespace App.Domain.Services.User
         public Task<Result> UpdateBalance(AppUser user, CancellationToken cancellationToken)
             => _userRepository.UpdateBalance(user, cancellationToken);
 
-        public Task<Result> UpdateBalance(UserDto user, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<Result> UpdateUser(UserDto user, CancellationToken cancellationToken)
             => _userRepository.UpdateUser(user, cancellationToken);
-
-        public Task<Result> UpdateUser(AppUser user, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

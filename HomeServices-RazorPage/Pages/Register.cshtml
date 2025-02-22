@@ -1,0 +1,119 @@
+﻿@page
+@using App.Domain.Core.Contracts.AppService
+@using App.Domain.Core.Contracts.Service.BaseEntities
+@model RegisterModel
+@inject IBaseDataAppService _BaseDataAppService;
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ثبت‌نام</title>
+</head>
+<body>
+    <section id="main">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                    <div class="user-account">
+                        <h2>ساخت اکانت</h2>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                            <!-- Username Field -->
+                            <div class="form-group">
+                                <input asp-for="User.UserName" type="text" class="form-control" placeholder="نام کاربری" required>
+                                <span asp-validation-for="User.UserName" class="text-danger"></span>
+                            </div>
+
+                            <!-- Password Field -->
+                            <div class="form-group">
+                                <input asp-for="User.Password" type="password" class="form-control" placeholder="رمزعبور" required>
+                                <span asp-validation-for="User.Password" class="text-danger"></span>
+                            </div>
+
+                            <!-- RePassword Field -->
+                            <div class="form-group">
+                                <input asp-for="User.RePassword" type="password" class="form-control" placeholder="تایید رمزعبور" required>
+                                <span asp-validation-for="User.RePassword" class="text-danger"></span>
+                            </div>
+
+                            <!-- Role Selection Field -->
+                            <div class="form-group">
+                                <select asp-for="User.RoleId" class="form-control" id="roleSelect" required>
+                                    <option value="">انتخاب نقش</option>
+                                    <option value="2">مشتری</option>
+                                    <option value="3">متخصص</option>
+                                </select>
+                                <span asp-validation-for="User.RoleId" class="text-danger"></span>
+                            </div>
+
+                            <!-- Customer-Specific Fields (Address & City) -->
+                            <div id="customerFields" class="d-none">
+                                <div class="form-group">
+                                    <input asp-for="User.Address" type="text" class="form-control" placeholder="آدرس">
+                                    <span asp-validation-for="User.Address" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Shared City Selection for both Customer & Expert -->
+                            <div id="cityFields" class="d-none">
+                                <div class="form-group">
+                                    <select asp-for="User.CityId" class="form-control">
+                                        <option value="">انتخاب شهر</option>
+                                        @foreach (var city in _BaseDataAppService.GetCities())
+                                        {
+                                            <option value="@city.Id">@city.Name</option>
+                                        }
+                                    </select><!-- select -->
+                                    <span asp-validation-for="User.CityId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Terms and Conditions Checkbox -->
+                            <div class="checkbox">
+                                <label for="signing">
+                                    <input type="checkbox" name="signing" id="signing" required>
+                                    با ثبت نام اقرار میکنم تمامی قوانین و مقررات سایت را قبول کرده‌ام
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn">ثبت‌نام</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var roleSelect = document.getElementById("roleSelect");
+            var customerFields = document.getElementById("customerFields");
+            var cityFields = document.getElementById("cityFields");
+
+            function toggleFields() {
+                var selectedRole = roleSelect.value;
+
+                // Show Address field only for Customers (RoleId = 2)
+                customerFields.classList.toggle("d-none", selectedRole !== "2");
+
+                // Show City selection for both Customers (2) and Experts (3)
+                cityFields.classList.toggle("d-none", selectedRole !== "2" && selectedRole !== "3");
+            }
+
+            roleSelect.addEventListener("change", toggleFields);
+            toggleFields(); // Initialize fields based on the selected role
+
+            document.querySelector("form").addEventListener("submit", function (e) {
+                var signingCheckbox = document.getElementById("signing");
+                if (!signingCheckbox.checked) {
+                    alert("لطفا قوانین و مقررات را تایید کنید.");
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

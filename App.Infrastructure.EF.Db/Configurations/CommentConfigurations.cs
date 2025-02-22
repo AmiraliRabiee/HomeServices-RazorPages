@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Xml.Linq;
 
 namespace App.Infrastructure.EFCore.Configurations
 {
@@ -10,11 +11,20 @@ namespace App.Infrastructure.EFCore.Configurations
             builder.HasKey(e => e.Id);
 
             builder.Property(e => e.CreateAt).IsRequired();
+            builder.Property(c => c.Opinion).IsRequired();
 
             builder.HasOne(e => e.Expert)
-                .WithMany(expert => expert.Comments)
+                .WithMany()
                 .HasForeignKey(e => e.ExpertId)
                 .OnDelete(DeleteBehavior.NoAction);
+            
+            
+            builder.HasData(new List<Comment>
+                  {
+                      new Comment {Id = 1 , CreateAt = DateTime.Now ,Opinion = "بسیار تمیز و بادقت",Points = 9 ,IsPlayable = true , ExpertId = 1 },
+                      new Comment {Id = 2 , CreateAt = DateTime.Now ,Opinion = "تحویل به موقع",Points = 9, IsPlayable = true, ExpertId = 1 },
+                      new Comment {Id = 3 , CreateAt = DateTime.Now ,Opinion = "پاسخگویی بد", Points = 6, IsPlayable = true, ExpertId = 1 },
+                });
         }
 
     }

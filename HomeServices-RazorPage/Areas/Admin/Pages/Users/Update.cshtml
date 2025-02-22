@@ -1,0 +1,119 @@
+﻿@page
+@using App.Domain.Core.Contracts.AppService
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using HomeServices_RazorPage.Areas.Admin.Pages.Users
+@model UpdateModel
+@{
+    ViewData["Title"] = "هوم سرویس > مدیریت کاربران > ویرایش کاربر";
+
+}
+@inject IBaseDataAppService BaseDataAppService;
+
+<div class="col-lg-12">
+    <div class="portlet box shadow">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                <h3 class="title">
+                    کاربران
+                </h3>
+            </div><!-- /.portlet-title -->
+        </div><!-- /.portlet-heading -->
+        <div class="portlet-body">
+            <div class="top-buttons-box mb-2">
+            </div>
+            <div class="row">
+                <form enctype="multipart/form-data" id="simple-form" role="form" method="post">
+                    <img style="border-radius : 50%" src="@Model.User.ImagePath" width="80" height="80" />
+                    <hr />
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input asp-for="@Model.User.UserName" class="form-control" type="text" placeholder="@Model.User.UserName">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input asp-for="@Model.User.FirstName" class="form-control" type="text" placeholder="@Model.User.FirstName ">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input asp-for="@Model.User.LastName" class="form-control" type="text" placeholder="@Model.User.LastName">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input asp-for="@Model.User.Email" class="form-control" type="email" placeholder="@Model.User.Email" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <select asp-for="@Model.User.RoleId" class="form-control" id="roleSelect" required>
+                                <option value="">انتخاب نقش</option>
+                                <option value="1">ادمین</option>
+                                <option value="2">مشتری</option>
+                                <option value="3">متخصص</option>
+                            </select>
+                            <span asp-validation-for="@Model.User.RoleId" class="text-danger"></span>
+                        </div>
+
+                        <div id="customerFields" class="form-group d-none">
+                            <input asp-for="@Model.User.Address" type="text" class="form-control" placeholder="آدرس">
+                            <span asp-validation-for="@Model.User.Address" class="text-danger"></span>
+                            <select asp-for="@Model.User.City.Id" class="form-control" id="citySelect">
+                                <option value="">انتخاب شهر</option>
+                                @foreach (var city in Model.Cities)
+                                {
+                                    <option value="@city.Id">@city.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="@Model.User.City.Id" class="text-danger"></span>
+                        </div>
+
+                        <div id="expertFields" class="form-group d-none">
+                            <select asp-for="@Model.User.City.Id" class="form-control" id="citySelect">
+                                <option value="">انتخاب شهر</option>
+                                @foreach (var city in Model.Cities)
+                                {
+                                    <option value="@city.Id">@city.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="@Model.User.City.Id" class="text-danger"></span>
+                        </div> 
+
+                        <div class="form-group relative">
+                            <input asp-for="@Model.User.ProfileImgFile" type="file" class="form-control">
+                            <label>آپلود عکس</label>
+                            <div class="input-group round">
+                                <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success">
+                                        <i class="icon-picture"></i>
+                                        آپلود عکس
+                                        <div class="paper-ripple">
+                                            <div class="paper-ripple__background"></div>
+                                            <div class="paper-ripple__waves"></div>
+                                        </div>
+                                    </button>
+                                </span>
+                            </div><!-- /.input-group -->
+                            <div class="help-block"></div>
+                        </div> 
+
+                    </div>
+                    <hr>
+                    <div class="form-actions">
+                        <button  type="submit" asp-page-handler="Update" class="btn btn-primary">به روزرسانی</button>
+                        <a asp-page="Index" class="btn btn-warning">
+                            بازگشت
+                        </a>
+                    </div>
+                 </form>
+             </div>
+        </div><!-- /.portlet-body -->
+    </div><!-- /.portlet -->
+</div><!-- /.col-lg-12 -->

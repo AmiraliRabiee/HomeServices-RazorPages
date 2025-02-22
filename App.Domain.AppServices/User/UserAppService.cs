@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Contracts.AppService;
+﻿using App.Domain.AppServices.Base;
+using App.Domain.Core.Contracts.AppService;
 using App.Domain.Core.Contracts.Service.BaseEntities;
 using App.Domain.Core.Contracts.Service.User;
 using App.Domain.Core.Dto.User;
@@ -35,7 +36,6 @@ namespace App.Domain.AppServices.User
 
         public async Task<IdentityResult> Register(CreateUserDto model, CancellationToken cancellationToken)
         {
-
             if (string.IsNullOrEmpty(model.UserName) || string.IsNullOrEmpty(model.Password))
             {
                 return IdentityResult.Failed(new IdentityError { Description = "نام کاربری و رمز عبور اجباری میباشد." });
@@ -52,12 +52,19 @@ namespace App.Domain.AppServices.User
                 return IdentityResult.Failed(new IdentityError { Description = "رمز عبور و تکرار آن باید یکسان باشند." });
             }
 
+            bool cityExists = _baseDataService.GetCities().Any(city => city.Id == model.CityId);
+            if (!cityExists)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "شهر انتخابی معتبر نمی باشد." });
+            }
+
             var user = new AppUser
             {
                 UserName = model.UserName,
                 Password = model.Password,
                 RePassword = model.RePassword,
                 RoleId = model.RoleId
+
             };
 
             string role = model.RoleId switch
@@ -71,21 +78,30 @@ namespace App.Domain.AppServices.User
             {
                 user.Customer = new Customer()
                 {
-                    Address = model.Address
+                    Address = model.Address,
+                    CityId = model.CityId,
+                    Id = user.Id
                 };
             }
             else if (model.RoleId == 3)
             {
                 user.Expert = new Expert()
                 {
-                    CityId = model.City?.Id ?? 0
+                    CityId = model.CityId,
+                     Id = user.Id
                 };
             }
+            user.RegisterAt = DateTime.Now;
 
+            if (model.ProfileImgFile is not null)
+            {
+                user.ImagePath = await _baseDataService.UploadImage(model.ProfileImgFile!, "Profiles", cancellationToken);
+            }
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
+
                 await _userManager.AddToRoleAsync(user, role);
 
                 if (model.RoleId == 2)
@@ -103,8 +119,10 @@ namespace App.Domain.AppServices.User
                     // Handle sign-in failure
                 }
             }
+
             return result;
         }
+
 
         public async Task<IdentityResult> Logout()
         {
@@ -112,25 +130,29 @@ namespace App.Domain.AppServices.User
             return IdentityResult.Success;
         }
 
-        public async Task<Result> RemoveUser(AppUser model, CancellationToken cancellationToken)
+        public async Task<Result> RemoveUser(int id, CancellationToken cancellationToken)
         {
             try
             {
-                if (model.RoleId == 2)
-                {
-                    var delete = await _customerService.DeleteCustomer(model.Id, cancellationToken);
-                    if (delete.IsSuccess)
-                        return new Result { Message = ".کاربر حذف شد" };
-                    return new Result { Message = ".حذف کاربر با خطا مواجه شد" };
-                }
-                if (model.RoleId == 3)
-                {
-                    var delete = await _expertService.DeleteExpert(model.Id, cancellationToken);
-                    if (delete.IsSuccess)
-                        return new Result { Message = ".کاربر حذف شد" };
-                    return new Result { Message = ".حذف کاربر با خطا مواجه شد" };
-                }
-                return new Result { IsSuccess = false };
+                var result = await _userService.DeleteUser(id, cancellationToken);
+                //if (model.RoleId == 2)
+                //{
+                //    var delete = await _customerService.DeleteCustomer(model.Id, cancellationToken);
+                //    if (delete.IsSuccess)
+                //        return new Result { Message = ".کاربر حذف شد" };
+                //    return new Result { Message = ".حذف کاربر با خطا مواجه شد" };
+                //}
+                //if (model.RoleId == 3)
+                //{
+                //    var delete = await _expertService.DeleteExpert(model.Id, cancellationToken);
+                //    if (delete.IsSuccess)
+                //        return new Result { Message = ".کاربر حذف شد" };
+                //    return new Result { Message = ".حذف کاربر با خطا مواجه شد" };
+                //}
+                //return new Result { IsSuccess = false };
+                if (result.IsSuccess)
+                    return new Result { IsSuccess = true, Message = result.Message };
+                return result;
             }
             catch (Exception ex)
             {
@@ -144,17 +166,29 @@ namespace App.Domain.AppServices.User
             {
                 if (model.RoleId == 2)
                 {
-                    var delete = await _customerService.UpdateCustomer(model.Customer, cancellationToken);
-                    if (delete.IsSuccess)
-                        return new Result { Message = ".کاربر حذف شد" };
-                    return new Result { Message = ".حذف کاربر با خطا مواجه شد" };
+                    if (model.ProfileImgFile is not null)
+                    {
+                        model.ImagePath = await _baseDataService.UploadImage(model.ProfileImgFile!, "Profiles", cancellationToken);
+                    }
+                    var update1 = await _customerService.UpdateCustomer(model.Customer, cancellationToken);
+                    if (update1.IsSuccess)
+                    {
+                        return new Result {IsSuccess = true, Message = ".کاربر به روزرسانی شد" };
+                    }
+                    return new Result {IsSuccess = false , Message = ".حذف کاربر با خطا مواجه شد" };
                 }
                 if (model.RoleId == 3)
                 {
-                    var delete = await _expertService.UpdateExpert(model.Expert, cancellationToken);
-                    if (delete.IsSuccess)
-                        return new Result { Message = ".کاربر حذف شد" };
-                    return new Result { Message = ".حذف کاربر با خطا مواجه شد" };
+                    if (model.ProfileImgFile is not null)
+                    {
+                        model.ImagePath = await _baseDataService.UploadImage(model.ProfileImgFile!, "Profiles", cancellationToken);
+                    }
+                    var update2 = await _expertService.UpdateExpert(model.Expert, cancellationToken);
+                    if (update2.IsSuccess)
+                    {
+                        return new Result {IsSuccess = true, Message = ".کاربر به روزرسانی شد" };
+                    }
+                    return new Result {IsSuccess = false, Message = ".حذف کاربر با خطا مواجه شد" };
                 }
                 return new Result { IsSuccess = false };
             }
@@ -172,5 +206,6 @@ namespace App.Domain.AppServices.User
 
         public UserDto GetDtoById(int id)
             => _userService.GetUserDto(id);
+
     }
 }

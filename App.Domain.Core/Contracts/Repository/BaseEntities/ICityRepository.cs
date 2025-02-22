@@ -8,6 +8,6 @@ namespace App.Domain.Core.Contracts.Repository.BaseEntities
 {
     public interface ICityRepository
     {
-        Task<List<City>> GetCities(CancellationToken cancellationToken);
+        List<City> GetCities();
     }
 }

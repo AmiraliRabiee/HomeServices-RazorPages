@@ -56,178 +56,219 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 1,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\tasisat1.jpg",
+                            IsDeleted = false,
                             Title = "تاسیسات"
                         },
                         new
                         {
                             Id = 2,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\Home.jpg",
+                            IsDeleted = false,
                             Title = "خانه"
                         },
                         new
                         {
                             Id = 3,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\3 فعلی.jpg",
+                            IsDeleted = false,
                             Title = "نظافت"
                         },
                         new
                         {
                             Id = 4,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\zibaii.jpg",
+                            IsDeleted = false,
                             Title = "زیبایی"
                         },
                         new
                         {
                             Id = 5,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\tamirat.jpg",
+                            IsDeleted = false,
                             Title = "تعمیرات اشیا"
                         },
                         new
                         {
                             Id = 6,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\6 فعلی (2).jpg",
+                            IsDeleted = false,
                             Title = " خودرو و حمل بار"
                         },
                         new
                         {
                             Id = 7,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\7 فعلی.jpg",
+                            IsDeleted = false,
                             Title = "سلامت"
                         },
                         new
                         {
                             Id = 8,
-                            ImagePath = "D:\\photos\\برقکاری کوچک.png",
+                            ImagePath = "\\Images\\Categories\\8 فعلی.png",
+                            IsDeleted = false,
                             ParentId = 1,
                             Title = "برقکاری"
                         },
                         new
                         {
                             Id = 9,
-                            ImagePath = "D:\\photos\\لوله کشی.png",
+                            ImagePath = "\\Images\\Categories\\9 فعلی.png",
+                            IsDeleted = false,
                             ParentId = 1,
                             Title = "لوله کشی"
                         },
                         new
                         {
                             Id = 10,
-                            ImagePath = "D:\\photos\\سرمایش گرمایش.png",
+                            ImagePath = "\\Images\\Categories\\10 فعلی.png",
+                            IsDeleted = false,
                             ParentId = 1,
                             Title = "سرمایش و گرمایش"
                         },
                         new
                         {
                             Id = 11,
-                            ImagePath = "D:\\photos\\تعمیرات ساختمان.png",
+                            ImagePath = "\\Images\\Categories\\11 فعلی.png",
+                            IsDeleted = false,
                             ParentId = 2,
                             Title = "تعمیرات ساختمان"
                         },
                         new
                         {
                             Id = 12,
-                            ImagePath = "D:\\photos\\بازسازی.png",
+                            ImagePath = "\\Images\\Categories\\12 فعلی.jpg",
+                            IsDeleted = false,
                             ParentId = 2,
                             Title = "شیشه کاری"
                         },
                         new
                         {
                             Id = 13,
-                            ImagePath = "D:\\photos\\باغبانی.png",
+                            ImagePath = "\\Images\\Categories\\13 فعلی.png",
+                            IsDeleted = false,
                             ParentId = 2,
                             Title = "باغبانی"
                         },
                         new
                         {
                             Id = 14,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\916efcce-9fdb-45ac-9d9b-8b821748a1f5-category_image (2).png",
+                            IsDeleted = false,
                             ParentId = 3,
                             Title = "نظافت و پذیرایی"
                         },
                         new
                         {
                             Id = 15,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\15فعلی.png",
+                            IsDeleted = false,
                             ParentId = 3,
                             Title = "شستشو"
                         },
                         new
                         {
                             Id = 16,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\16 فعلی.png",
+                            IsDeleted = false,
                             ParentId = 3,
                             Title = "کارواش و دیتیلینگ"
                         },
                         new
                         {
                             Id = 17,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\17.png",
+                            IsDeleted = false,
                             ParentId = 4,
                             Title = "زیبایی بانوان"
                         },
                         new
                         {
                             Id = 18,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\18.png",
+                            IsDeleted = false,
                             ParentId = 4,
                             Title = "پیرایش و زیبایی آقایان"
                         },
                         new
                         {
                             Id = 19,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\19.png",
+                            IsDeleted = false,
                             ParentId = 4,
                             Title = "تندرستی و ورزش"
                         },
                         new
                         {
                             Id = 20,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\20.png",
+                            IsDeleted = false,
                             ParentId = 5,
                             Title = "نصب و تعمیر لوازم خانگی"
                         },
                         new
                         {
                             Id = 21,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\21.png",
+                            IsDeleted = false,
                             ParentId = 5,
                             Title = "خدمات کامپیوتری"
                         },
                         new
                         {
                             Id = 22,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\22.png",
+                            IsDeleted = false,
                             ParentId = 5,
                             Title = "تعمیرات موبایل"
                         },
                         new
                         {
                             Id = 23,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\23.png",
+                            IsDeleted = false,
                             ParentId = 6,
                             Title = "خدمات و تعمیرات خودرو"
                         },
                         new
                         {
                             Id = 24,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\24.png",
+                            IsDeleted = false,
                             ParentId = 6,
                             Title = "باربری و جابجایی"
                         },
                         new
                         {
                             Id = 25,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\25.png",
+                            IsDeleted = false,
                             ParentId = 7,
                             Title = "پرشکی و پرستاری"
                         },
                         new
                         {
                             Id = 26,
-                            ImagePath = "",
+                            ImagePath = "\\Images\\Categories\\26.png",
+                            IsDeleted = false,
                             ParentId = 7,
                             Title = "حیوانات خانگی"
                         });
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entites.Service.ExpertHouseWork", b =>
+                {
+                    b.Property<int>("ExpertId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HouseWorkId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ExpertId", "HouseWorkId");
+
+                    b.HasIndex("HouseWorkId");
+
+                    b.ToTable("ExpertHouseWorks");
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entites.Service.HouseWork", b =>
@@ -238,12 +279,11 @@ namespace App.Infrastructure.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("BasePrice")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,2)")
-                        .HasDefaultValue(10000m);
+                    b.Property<decimal?>("BasePrice")
+                        .IsRequired()
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -260,7 +300,8 @@ namespace App.Infrastructure.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ViewCount")
+                    b.Property<int?>("ViewCount")
+                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
@@ -278,9 +319,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 5000m,
                             CategoryId = 10,
                             Description = "نیاز به توضیحات تکمیلی مشکل",
+                            ImagePath = "\\Images\\HomeServices\\1h.jpg",
                             IsDeleted = false,
-                            Title = "تعمیر و سرویس پکیج",
-                            ViewCount = 0
+                            Title = "تعمیر و سرویس پکیج"
                         },
                         new
                         {
@@ -288,9 +329,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3000m,
                             CategoryId = 10,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\2h.jpg",
                             IsDeleted = false,
-                            Title = "تعمیر و سرویس آبگرمکن",
-                            ViewCount = 0
+                            Title = "تعمیر و سرویس آبگرمکن"
                         },
                         new
                         {
@@ -298,9 +339,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 10,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\3h.jpg",
                             IsDeleted = false,
-                            Title = "نصب و تعمیر رادیاتور شوفاژ",
-                            ViewCount = 0
+                            Title = "نصب و تعمیر رادیاتور شوفاژ"
                         },
                         new
                         {
@@ -308,9 +349,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 4000m,
                             CategoryId = 10,
                             Description = "پرتقاضا",
+                            ImagePath = "\\Images\\HomeServices\\4h.jpg",
                             IsDeleted = false,
-                            Title = "تعمیر و سرویس کولر آبی",
-                            ViewCount = 0
+                            Title = "تعمیر و سرویس کولر آبی"
                         },
                         new
                         {
@@ -318,9 +359,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2500m,
                             CategoryId = 10,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\5h.jpg",
                             IsDeleted = false,
-                            Title = "تعمیر و نصب کولر گازی",
-                            ViewCount = 0
+                            Title = "تعمیر و نصب کولر گازی"
                         },
                         new
                         {
@@ -328,9 +369,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 5000m,
                             CategoryId = 9,
                             Description = "نیاز به توضیحات تکمیلی مشکل",
+                            ImagePath = "\\Images\\HomeServices\\6h.jpg",
                             IsDeleted = false,
-                            Title = "نصب و تعمیر شیرآلات",
-                            ViewCount = 0
+                            Title = "نصب و تعمیر شیرآلات"
                         },
                         new
                         {
@@ -338,9 +379,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 4000m,
                             CategoryId = 9,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\7h.jpg",
                             IsDeleted = false,
-                            Title = "تخلیه چاه و لوله بازکنی",
-                            ViewCount = 0
+                            Title = "تخلیه چاه و لوله بازکنی"
                         },
                         new
                         {
@@ -348,9 +389,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 9,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\8h.jpg",
                             IsDeleted = false,
-                            Title = "نصب و تعمیر دستگاه تصفیه آب",
-                            ViewCount = 0
+                            Title = "نصب و تعمیر دستگاه تصفیه آب"
                         },
                         new
                         {
@@ -358,9 +399,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 9,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\9h.jpg",
                             IsDeleted = false,
-                            Title = "لوله کشی گاز",
-                            ViewCount = 0
+                            Title = "لوله کشی گاز"
                         },
                         new
                         {
@@ -368,9 +409,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 4000m,
                             CategoryId = 9,
                             Description = "به صورت تخصصی",
+                            ImagePath = "\\Images\\HomeServices\\10h.jpg",
                             IsDeleted = false,
-                            Title = "اتصال به شبکه فاضلاب شهری",
-                            ViewCount = 0
+                            Title = "اتصال به شبکه فاضلاب شهری"
                         },
                         new
                         {
@@ -378,9 +419,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 8,
                             Description = "به صورت تخصصی",
+                            ImagePath = "\\Images\\HomeServices\\11h.png",
                             IsDeleted = false,
-                            Title = "سیم و کابل کشی",
-                            ViewCount = 0
+                            Title = "سیم و کابل کشی"
                         },
                         new
                         {
@@ -388,9 +429,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 8,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\12h.jpg",
                             IsDeleted = false,
-                            Title = "رفع اتصالی",
-                            ViewCount = 0
+                            Title = "رفع اتصالی"
                         },
                         new
                         {
@@ -398,9 +439,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 8,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\13h.jpg",
                             IsDeleted = false,
-                            Title = "کلید و پریز",
-                            ViewCount = 0
+                            Title = "کلید و پریز"
                         },
                         new
                         {
@@ -408,9 +449,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 8,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\14h.jpg",
                             IsDeleted = false,
-                            Title = "نصب و تعویض فیوز",
-                            ViewCount = 0
+                            Title = "نصب و تعویض فیوز"
                         },
                         new
                         {
@@ -418,9 +459,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 8,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\15h.jpg",
                             IsDeleted = false,
-                            Title = "نصب و تعمیر دوربین مداربسته",
-                            ViewCount = 0
+                            Title = "نصب و تعمیر دوربین مداربسته"
                         },
                         new
                         {
@@ -428,9 +469,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 11,
                             Description = "به صورت تخصصی",
+                            ImagePath = "\\Images\\HomeServices\\16h.png",
                             IsDeleted = false,
-                            Title = "نقاشی ساختمان",
-                            ViewCount = 0
+                            Title = "نقاشی ساختمان"
                         },
                         new
                         {
@@ -438,9 +479,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 11,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\17h.jpg",
                             IsDeleted = false,
-                            Title = "نصب کاغذ دیواری",
-                            ViewCount = 0
+                            Title = "نصب کاغذ دیواری"
                         },
                         new
                         {
@@ -448,9 +489,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 11,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\18h.jpg",
                             IsDeleted = false,
-                            Title = "ساخت و نصب توری",
-                            ViewCount = 0
+                            Title = "ساخت و نصب توری"
                         },
                         new
                         {
@@ -458,9 +499,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 11,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\19h.jpg",
                             IsDeleted = false,
-                            Title = "بنایی",
-                            ViewCount = 0
+                            Title = "بنایی"
                         },
                         new
                         {
@@ -468,9 +509,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 11,
                             Description = "به صورت تخصصی",
+                            ImagePath = "\\Images\\HomeServices\\20h.jpg",
                             IsDeleted = false,
-                            Title = "کفسابی",
-                            ViewCount = 0
+                            Title = "کفسابی"
                         },
                         new
                         {
@@ -478,9 +519,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 12,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\21h.jpg",
                             IsDeleted = false,
-                            Title = "ساخت و نصب درب و پنجره",
-                            ViewCount = 0
+                            Title = "ساخت و نصب درب و پنجره"
                         },
                         new
                         {
@@ -488,9 +529,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 12,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\22h.jpg",
                             IsDeleted = false,
-                            Title = "شیشه بری و آینه کاری",
-                            ViewCount = 0
+                            Title = "شیشه بری و آینه کاری"
                         },
                         new
                         {
@@ -498,9 +539,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 12,
                             Description = "جدید",
+                            ImagePath = "\\Images\\HomeServices\\23h.jpg",
                             IsDeleted = false,
-                            Title = "هندریل شیشه ای",
-                            ViewCount = 0
+                            Title = "هندریل شیشه ای"
                         },
                         new
                         {
@@ -508,9 +549,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 12,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\24h.jpg",
                             IsDeleted = false,
-                            Title = "پارتیشن شیشه ای",
-                            ViewCount = 0
+                            Title = "پارتیشن شیشه ای"
                         },
                         new
                         {
@@ -518,9 +559,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 12,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\25h.jpg",
                             IsDeleted = false,
-                            Title = "نصب و تعمیر درب اتوماتیک",
-                            ViewCount = 0
+                            Title = "نصب و تعمیر درب اتوماتیک"
                         },
                         new
                         {
@@ -528,9 +569,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 13,
                             Description = "به صورت تخصصی",
+                            ImagePath = "\\Images\\HomeServices\\26h.png",
                             IsDeleted = false,
-                            Title = " مشاوره گل و گیاه",
-                            ViewCount = 0
+                            Title = " مشاوره گل و گیاه"
                         },
                         new
                         {
@@ -538,9 +579,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 13,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\27h.jpg",
                             IsDeleted = false,
-                            Title = "تشخیص و کنترل آفت",
-                            ViewCount = 0
+                            Title = "تشخیص و کنترل آفت"
                         },
                         new
                         {
@@ -548,9 +589,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 13,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\28h.jpg",
                             IsDeleted = false,
-                            Title = "رسیگی به فضای سبز",
-                            ViewCount = 0
+                            Title = "رسیگی به فضای سبز"
                         },
                         new
                         {
@@ -558,9 +599,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 14,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\29h.jpg",
                             IsDeleted = false,
-                            Title = "سرویس عادی نظافت",
-                            ViewCount = 0
+                            Title = "سرویس عادی نظافت"
                         },
                         new
                         {
@@ -568,9 +609,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 14,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\30h.jpg",
                             IsDeleted = false,
-                            Title = "سرویس لوکس نظافت",
-                            ViewCount = 0
+                            Title = "سرویس لوکس نظافت"
                         },
                         new
                         {
@@ -578,9 +619,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 14,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\31h.jpg",
                             IsDeleted = false,
-                            Title = "پذیرایی",
-                            ViewCount = 0
+                            Title = "پذیرایی"
                         },
                         new
                         {
@@ -588,9 +629,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 14,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\32h.jpg",
                             IsDeleted = false,
-                            Title = "کارگر ساده",
-                            ViewCount = 0
+                            Title = "کارگر ساده"
                         },
                         new
                         {
@@ -598,9 +639,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 14,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\33h.jpg",
                             IsDeleted = false,
-                            Title = "نظافت راه پله",
-                            ViewCount = 0
+                            Title = "نظافت راه پله"
                         },
                         new
                         {
@@ -608,9 +649,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 15,
                             Description = "(فرش ، موکت ، مبل)",
+                            ImagePath = "",
                             IsDeleted = false,
-                            Title = "شستشو در منزل",
-                            ViewCount = 0
+                            Title = "شستشو در منزل"
                         },
                         new
                         {
@@ -618,9 +659,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 15,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
-                            Title = "قالیشویی",
-                            ViewCount = 0
+                            Title = "قالیشویی"
                         },
                         new
                         {
@@ -628,9 +669,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 15,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
-                            Title = "خشکشویی",
-                            ViewCount = 0
+                            Title = "خشکشویی"
                         },
                         new
                         {
@@ -638,9 +679,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 15,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
-                            Title = "پرده شویی",
-                            ViewCount = 0
+                            Title = "پرده شویی"
                         },
                         new
                         {
@@ -648,9 +689,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 16,
                             Description = "(آب ، نانو)",
+                            ImagePath = "",
                             IsDeleted = false,
-                            Title = "کارواش",
-                            ViewCount = 0
+                            Title = "کارواش"
                         },
                         new
                         {
@@ -658,9 +699,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 16,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
-                            Title = "صفرشویی خودرو",
-                            ViewCount = 0
+                            Title = "صفرشویی خودرو"
                         },
                         new
                         {
@@ -668,9 +709,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 16,
                             Description = "جدید",
+                            ImagePath = "",
                             IsDeleted = false,
-                            Title = "سرامیک حودرو",
-                            ViewCount = 0
+                            Title = "سرامیک حودرو"
                         },
                         new
                         {
@@ -678,9 +719,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 16,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
-                            Title = "واکس و پولیش",
-                            ViewCount = 0
+                            Title = "واکس و پولیش"
                         },
                         new
                         {
@@ -688,9 +729,9 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 16,
                             Description = "به صورت تخصصی",
+                            ImagePath = "",
                             IsDeleted = false,
-                            Title = "صافکاری و نقاشی",
-                            ViewCount = 0
+                            Title = "صافکاری و نقاشی"
                         },
                         new
                         {
@@ -699,8 +740,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 17,
                             Description = "",
                             IsDeleted = false,
-                            Title = "خدمات ناخن",
-                            ViewCount = 0
+                            Title = "خدمات ناخن"
                         },
                         new
                         {
@@ -709,8 +749,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 17,
                             Description = "",
                             IsDeleted = false,
-                            Title = " رنگ مو در منزل",
-                            ViewCount = 0
+                            Title = " رنگ مو در منزل"
                         },
                         new
                         {
@@ -719,8 +758,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 17,
                             Description = "جدید",
                             IsDeleted = false,
-                            Title = "پاکسازی و لایه برداری پوست",
-                            ViewCount = 0
+                            Title = "پاکسازی و لایه برداری پوست"
                         },
                         new
                         {
@@ -729,8 +767,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 17,
                             Description = "",
                             IsDeleted = false,
-                            Title = "آرایش صورت در منزل",
-                            ViewCount = 0
+                            Title = "آرایش صورت در منزل"
                         },
                         new
                         {
@@ -739,8 +776,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 17,
                             Description = "",
                             IsDeleted = false,
-                            Title = "لیفت و لیمنت مژه",
-                            ViewCount = 0
+                            Title = "لیفت و لیمنت مژه"
                         },
                         new
                         {
@@ -749,8 +785,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 18,
                             Description = "",
                             IsDeleted = false,
-                            Title = "کوتاهی مو و اصلاح صورت",
-                            ViewCount = 0
+                            Title = "کوتاهی مو و اصلاح صورت"
                         },
                         new
                         {
@@ -759,8 +794,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 18,
                             Description = "",
                             IsDeleted = false,
-                            Title = "مراقب و زیبایی آقایان",
-                            ViewCount = 0
+                            Title = "مراقب و زیبایی آقایان"
                         },
                         new
                         {
@@ -769,8 +803,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 18,
                             Description = "",
                             IsDeleted = false,
-                            Title = "گریم داماد",
-                            ViewCount = 0
+                            Title = "گریم داماد"
                         },
                         new
                         {
@@ -779,8 +812,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 19,
                             Description = "به صورت تخصصی",
                             IsDeleted = false,
-                            Title = "برنامه ورزشی و تغذیه",
-                            ViewCount = 0
+                            Title = "برنامه ورزشی و تغذیه"
                         },
                         new
                         {
@@ -789,8 +821,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 19,
                             Description = "",
                             IsDeleted = false,
-                            Title = "کلاس یوگا در خانه",
-                            ViewCount = 0
+                            Title = "کلاس یوگا در خانه"
                         },
                         new
                         {
@@ -799,8 +830,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 19,
                             Description = "",
                             IsDeleted = false,
-                            Title = "کلاس پیلاتس در خانه",
-                            ViewCount = 0
+                            Title = "کلاس پیلاتس در خانه"
                         },
                         new
                         {
@@ -809,8 +839,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 19,
                             Description = "جدید",
                             IsDeleted = false,
-                            Title = "کلاس سی ایکس در خانه",
-                            ViewCount = 0
+                            Title = "کلاس سی ایکس در خانه"
                         },
                         new
                         {
@@ -819,8 +848,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 19,
                             Description = "",
                             IsDeleted = false,
-                            Title = "حرکات اصلاحی",
-                            ViewCount = 0
+                            Title = "حرکات اصلاحی"
                         },
                         new
                         {
@@ -829,8 +857,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 20,
                             Description = "",
                             IsDeleted = false,
-                            Title = "نصب و تعمیر یخچال فریزر",
-                            ViewCount = 0
+                            Title = "نصب و تعمیر یخچال فریزر"
                         },
                         new
                         {
@@ -839,8 +866,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 20,
                             Description = "",
                             IsDeleted = false,
-                            Title = " نصب و تعمیر ماشین ظرفشویی",
-                            ViewCount = 0
+                            Title = " نصب و تعمیر ماشین ظرفشویی"
                         },
                         new
                         {
@@ -849,8 +875,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 20,
                             Description = "",
                             IsDeleted = false,
-                            Title = "نصب و تعمیر ماشین لباسشویی",
-                            ViewCount = 0
+                            Title = "نصب و تعمیر ماشین لباسشویی"
                         },
                         new
                         {
@@ -859,8 +884,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 20,
                             Description = "",
                             IsDeleted = false,
-                            Title = "نصب و تعمیر فر",
-                            ViewCount = 0
+                            Title = "نصب و تعمیر فر"
                         },
                         new
                         {
@@ -869,8 +893,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 20,
                             Description = "",
                             IsDeleted = false,
-                            Title = "نصب و تعمیر هود آشپرخانه",
-                            ViewCount = 0
+                            Title = "نصب و تعمیر هود آشپرخانه"
                         },
                         new
                         {
@@ -879,8 +902,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 20,
                             Description = "",
                             IsDeleted = false,
-                            Title = "نصب و تعمیر اجاق گاز",
-                            ViewCount = 0
+                            Title = "نصب و تعمیر اجاق گاز"
                         },
                         new
                         {
@@ -889,8 +911,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 20,
                             Description = "به صورت تخصصی",
                             IsDeleted = false,
-                            Title = " تعمیرات تلویزیون",
-                            ViewCount = 0
+                            Title = " تعمیرات تلویزیون"
                         },
                         new
                         {
@@ -899,8 +920,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 20,
                             Description = "جدید",
                             IsDeleted = false,
-                            Title = "تعمیر چای ساز و قهوه ساز",
-                            ViewCount = 0
+                            Title = "تعمیر چای ساز و قهوه ساز"
                         },
                         new
                         {
@@ -909,8 +929,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 20,
                             Description = "",
                             IsDeleted = false,
-                            Title = "تعمیر جاروبرقی",
-                            ViewCount = 0
+                            Title = "تعمیر جاروبرقی"
                         },
                         new
                         {
@@ -919,8 +938,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 20,
                             Description = "",
                             IsDeleted = false,
-                            Title = "نصب و تعویض فیلتر آب",
-                            ViewCount = 0
+                            Title = "نصب و تعویض فیلتر آب"
                         },
                         new
                         {
@@ -929,8 +947,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 21,
                             Description = "",
                             IsDeleted = false,
-                            Title = "تعمیر کامپیوتر و لپتاپ",
-                            ViewCount = 0
+                            Title = "تعمیر کامپیوتر و لپتاپ"
                         },
                         new
                         {
@@ -939,8 +956,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 21,
                             Description = "",
                             IsDeleted = false,
-                            Title = " تعمیر ماشین های اداری",
-                            ViewCount = 0
+                            Title = " تعمیر ماشین های اداری"
                         },
                         new
                         {
@@ -949,8 +965,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 21,
                             Description = "",
                             IsDeleted = false,
-                            Title = "پشتیبانی شبکه وسرور",
-                            ViewCount = 0
+                            Title = "پشتیبانی شبکه وسرور"
                         },
                         new
                         {
@@ -959,8 +974,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 21,
                             Description = "به صورت تخصصی",
                             IsDeleted = false,
-                            Title = "طراحی سایت و لوگو",
-                            ViewCount = 0
+                            Title = "طراحی سایت و لوگو"
                         },
                         new
                         {
@@ -969,8 +983,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 21,
                             Description = "",
                             IsDeleted = false,
-                            Title = "مودم و اینترنت",
-                            ViewCount = 0
+                            Title = "مودم و اینترنت"
                         },
                         new
                         {
@@ -979,8 +992,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 22,
                             Description = "",
                             IsDeleted = false,
-                            Title = "خدمات تاچ و ال سی دی",
-                            ViewCount = 0
+                            Title = "خدمات تاچ و ال سی دی"
                         },
                         new
                         {
@@ -989,8 +1001,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 22,
                             Description = "",
                             IsDeleted = false,
-                            Title = " خدمات باتری",
-                            ViewCount = 0
+                            Title = " خدمات باتری"
                         },
                         new
                         {
@@ -999,8 +1010,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 22,
                             Description = "جدید",
                             IsDeleted = false,
-                            Title = "خدمات نرم افزاری",
-                            ViewCount = 0
+                            Title = "خدمات نرم افزاری"
                         },
                         new
                         {
@@ -1009,8 +1019,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 22,
                             Description = "",
                             IsDeleted = false,
-                            Title = "خدمات اسپیکر",
-                            ViewCount = 0
+                            Title = "خدمات اسپیکر"
                         },
                         new
                         {
@@ -1019,8 +1028,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 22,
                             Description = "",
                             IsDeleted = false,
-                            Title = "خدمات دوربین",
-                            ViewCount = 0
+                            Title = "خدمات دوربین"
                         },
                         new
                         {
@@ -1029,8 +1037,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 23,
                             Description = "زیر قیمت کارخانه",
                             IsDeleted = false,
-                            Title = "تعویض باتری خودرو",
-                            ViewCount = 0
+                            Title = "تعویض باتری خودرو"
                         },
                         new
                         {
@@ -1039,8 +1046,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 23,
                             Description = "",
                             IsDeleted = false,
-                            Title = " برق و باتری خودرو",
-                            ViewCount = 0
+                            Title = " برق و باتری خودرو"
                         },
                         new
                         {
@@ -1049,8 +1055,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 23,
                             Description = "",
                             IsDeleted = false,
-                            Title = "مکانیکی خودرو",
-                            ViewCount = 0
+                            Title = "مکانیکی خودرو"
                         },
                         new
                         {
@@ -1059,8 +1064,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 23,
                             Description = "",
                             IsDeleted = false,
-                            Title = "امداد خودرو",
-                            ViewCount = 0
+                            Title = "امداد خودرو"
                         },
                         new
                         {
@@ -1069,8 +1073,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 23,
                             Description = "",
                             IsDeleted = false,
-                            Title = "پنچرگیری",
-                            ViewCount = 0
+                            Title = "پنچرگیری"
                         },
                         new
                         {
@@ -1079,8 +1082,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 23,
                             Description = "",
                             IsDeleted = false,
-                            Title = "کارشناسی خودرو",
-                            ViewCount = 0
+                            Title = "کارشناسی خودرو"
                         },
                         new
                         {
@@ -1089,8 +1091,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 23,
                             Description = "",
                             IsDeleted = false,
-                            Title = "تعویض لاستیک",
-                            ViewCount = 0
+                            Title = "تعویض لاستیک"
                         },
                         new
                         {
@@ -1099,8 +1100,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 23,
                             Description = "",
                             IsDeleted = false,
-                            Title = "تعویض لنت خودرو",
-                            ViewCount = 0
+                            Title = "تعویض لنت خودرو"
                         },
                         new
                         {
@@ -1109,8 +1109,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 23,
                             Description = "",
                             IsDeleted = false,
-                            Title = "سوخت رسانی",
-                            ViewCount = 0
+                            Title = "سوخت رسانی"
                         },
                         new
                         {
@@ -1119,8 +1118,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 23,
                             Description = "",
                             IsDeleted = false,
-                            Title = "تعمیر موتور سیکلت",
-                            ViewCount = 0
+                            Title = "تعمیر موتور سیکلت"
                         },
                         new
                         {
@@ -1129,8 +1127,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 24,
                             Description = "",
                             IsDeleted = false,
-                            Title = "اسباب کشی با خاور و کامیون",
-                            ViewCount = 0
+                            Title = "اسباب کشی با خاور و کامیون"
                         },
                         new
                         {
@@ -1139,8 +1136,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 24,
                             Description = "",
                             IsDeleted = false,
-                            Title = " اسباب کشی با وانت و نیسان",
-                            ViewCount = 0
+                            Title = " اسباب کشی با وانت و نیسان"
                         },
                         new
                         {
@@ -1149,8 +1145,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 24,
                             Description = "نیاز به توضیح",
                             IsDeleted = false,
-                            Title = "اسباب کشی و حمل بین شهری",
-                            ViewCount = 0
+                            Title = "اسباب کشی و حمل بین شهری"
                         },
                         new
                         {
@@ -1159,8 +1154,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 24,
                             Description = "",
                             IsDeleted = false,
-                            Title = "کارگر جابجایی",
-                            ViewCount = 0
+                            Title = "کارگر جابجایی"
                         },
                         new
                         {
@@ -1169,8 +1163,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 24,
                             Description = "",
                             IsDeleted = false,
-                            Title = "حمل نخاله و ضایعات ساختمانی",
-                            ViewCount = 0
+                            Title = "حمل نخاله و ضایعات ساختمانی"
                         },
                         new
                         {
@@ -1179,8 +1172,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 25,
                             Description = "",
                             IsDeleted = false,
-                            Title = "مراقبت و نگهداری",
-                            ViewCount = 0
+                            Title = "مراقبت و نگهداری"
                         },
                         new
                         {
@@ -1189,8 +1181,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 25,
                             Description = "",
                             IsDeleted = false,
-                            Title = " پرستاری و تزریقات",
-                            ViewCount = 0
+                            Title = " پرستاری و تزریقات"
                         },
                         new
                         {
@@ -1199,8 +1190,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 25,
                             Description = "",
                             IsDeleted = false,
-                            Title = "معاینه پزشکی",
-                            ViewCount = 0
+                            Title = "معاینه پزشکی"
                         },
                         new
                         {
@@ -1209,8 +1199,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 25,
                             Description = "",
                             IsDeleted = false,
-                            Title = "پیراپزشکی",
-                            ViewCount = 0
+                            Title = "پیراپزشکی"
                         },
                         new
                         {
@@ -1219,8 +1208,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 25,
                             Description = "",
                             IsDeleted = false,
-                            Title = "آزمایش و نمونه گیری",
-                            ViewCount = 0
+                            Title = "آزمایش و نمونه گیری"
                         },
                         new
                         {
@@ -1229,8 +1217,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 26,
                             Description = "جدید",
                             IsDeleted = false,
-                            Title = "هتل های حیوانات خانگی",
-                            ViewCount = 0
+                            Title = "هتل های حیوانات خانگی"
                         },
                         new
                         {
@@ -1239,8 +1226,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 26,
                             Description = "",
                             IsDeleted = false,
-                            Title = " خدماتدامپزشکی در محل",
-                            ViewCount = 0
+                            Title = " خدماتدامپزشکی در محل"
                         },
                         new
                         {
@@ -1249,8 +1235,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 26,
                             Description = "به صورت تخصصی",
                             IsDeleted = false,
-                            Title = "خدمات تربیتی حیوانات خانگی",
-                            ViewCount = 0
+                            Title = "خدمات تربیتی حیوانات خانگی"
                         },
                         new
                         {
@@ -1259,8 +1244,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 26,
                             Description = "",
                             IsDeleted = false,
-                            Title = "خدمات شستشو و آرایشی",
-                            ViewCount = 0
+                            Title = "خدمات شستشو و آرایشی"
                         },
                         new
                         {
@@ -1269,8 +1253,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             CategoryId = 26,
                             Description = "",
                             IsDeleted = false,
-                            Title = "پت شاپ",
-                            ViewCount = 0
+                            Title = "پت شاپ"
                         });
                 });
 
@@ -1390,18 +1373,18 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "379095fe-d09e-4786-8cae-b27ef4f33d53",
+                            ConcurrencyStamp = "141f7026-5ed7-4fbf-b133-1d021d24ceb7",
                             EmailConfirmed = false,
                             FirstName = "Admin",
                             IsDeleted = false,
                             LastName = "Admin",
                             LockoutEnabled = false,
                             Password = "123456",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBardcB/8Xkw748wfIwaAKuf0fvE9PFMc31RlgnpIZKrDrmMMbH6UZTpkWmMujNWew==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEG+RY3+sqYlQSUadMQfXWY21WZ79KGthGWWqn3D1gheN9BHkpvxJjsdmFtDBy5zDNw==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 19, 13, 45, 12, 710, DateTimeKind.Local).AddTicks(3195),
+                            RegisterAt = new DateTime(2025, 2, 22, 22, 55, 24, 186, DateTimeKind.Local).AddTicks(5969),
                             RoleId = 1,
-                            SecurityStamp = "02d69cbb-2fc8-4895-bfa1-6db5f03b6d46",
+                            SecurityStamp = "edd363f4-53d5-4784-8d21-e25ed6edf0ba",
                             TwoFactorEnabled = false,
                             UserName = "Admin@gmail.com"
                         },
@@ -1411,18 +1394,18 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "b5ab801d-7c59-4624-8c8f-fe0785249356",
+                            ConcurrencyStamp = "2f196737-edf9-4cde-9bae-1d94efb5ca51",
                             EmailConfirmed = false,
                             FirstName = "Amir",
                             IsDeleted = false,
                             LastName = "Amiri",
                             LockoutEnabled = false,
                             Password = "456789",
-                            PasswordHash = "AQAAAAIAAYagAAAAEI/F9yD4cLxtCobfrCNjIAkG5YTauW9KQvGoSocdHFKXvuQQSke+UHVkOICl/8mSUg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPvXVC4iC+CL9Du+y5/38oiu4+GLrBEVpi2VEz2wqXf1DTUI7L1mHkwqTv6+Pc2Dlg==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 19, 13, 45, 12, 710, DateTimeKind.Local).AddTicks(3217),
+                            RegisterAt = new DateTime(2025, 2, 22, 22, 55, 24, 186, DateTimeKind.Local).AddTicks(5996),
                             RoleId = 2,
-                            SecurityStamp = "bb8cc166-f721-46bd-8c6f-737581dc12c0",
+                            SecurityStamp = "9b828d95-1e25-43a7-858f-7b774e85da77",
                             TwoFactorEnabled = false,
                             UserName = "Customer@gmail.com"
                         },
@@ -1432,18 +1415,18 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "880d7515-100e-45ca-ae72-a79fc80bdcc6",
+                            ConcurrencyStamp = "f02da627-3209-4c4e-a53e-cdcd31bebad5",
                             EmailConfirmed = false,
                             FirstName = "Amir",
                             IsDeleted = false,
                             LastName = "Amiri",
                             LockoutEnabled = false,
                             Password = "258852",
-                            PasswordHash = "AQAAAAIAAYagAAAAEI0Sr2EaXPetPMpo+0jswoE8QMk4pp9NyDG4ejCe9Tpa6BMlksA7tHY6Pmrizp4CGw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMUxkdeC4Y8WCL63N6dYRC1fR2DDS1Xe2KxYdbREF7Su0+wFtEIwhyTwJ5riWmzY7w==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 19, 13, 45, 12, 710, DateTimeKind.Local).AddTicks(3235),
+                            RegisterAt = new DateTime(2025, 2, 22, 22, 55, 24, 186, DateTimeKind.Local).AddTicks(6011),
                             RoleId = 3,
-                            SecurityStamp = "86ffb8c4-6b5d-432d-8af5-d804b607fec7",
+                            SecurityStamp = "573d5e84-0de4-4ab2-946a-23fc30e2255d",
                             TwoFactorEnabled = false,
                             UserName = "Expert@gmail.com"
                         });
@@ -1458,6 +1441,9 @@ namespace App.Infrastructure.EFCore.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
@@ -1466,6 +1452,8 @@ namespace App.Infrastructure.EFCore.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("CityId");
 
@@ -1476,6 +1464,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 1,
                             Address = "اینجا",
+                            AppUserId = 2,
                             CityId = 1,
                             IsDeleted = false
                         });
@@ -1489,6 +1478,9 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<string>("Address")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Biographi")
                         .HasMaxLength(2000)
@@ -1505,6 +1497,8 @@ namespace App.Infrastructure.EFCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AppUserId");
+
                     b.HasIndex("CityId");
 
                     b.ToTable("Expert", (string)null);
@@ -1514,6 +1508,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 1,
                             Address = "اینجا",
+                            AppUserId = 3,
                             Biographi = "بیوگرافی",
                             CityId = 1,
                             IsDeleted = false
@@ -1688,6 +1683,13 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<bool>("IsPlayable")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Opinion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Points")
+                        .HasColumnType("int");
+
                     b.Property<int?>("stausService")
                         .HasColumnType("int");
 
@@ -1696,21 +1698,38 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.HasIndex("ExpertId");
 
                     b.ToTable("Comments");
-                });
 
-            modelBuilder.Entity("ExpertHouseWork", b =>
-                {
-                    b.Property<int>("ExpertId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SkillsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ExpertId", "SkillsId");
-
-                    b.HasIndex("SkillsId");
-
-                    b.ToTable("ExpertHouseWork");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreateAt = new DateTime(2025, 2, 22, 22, 55, 24, 179, DateTimeKind.Local).AddTicks(3509),
+                            ExpertId = 1,
+                            IsDeleted = false,
+                            IsPlayable = true,
+                            Opinion = "بسیار تمیز و بادقت",
+                            Points = 9
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreateAt = new DateTime(2025, 2, 22, 22, 55, 24, 179, DateTimeKind.Local).AddTicks(3525),
+                            ExpertId = 1,
+                            IsDeleted = false,
+                            IsPlayable = true,
+                            Opinion = "تحویل به موقع",
+                            Points = 9
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreateAt = new DateTime(2025, 2, 22, 22, 55, 24, 179, DateTimeKind.Local).AddTicks(3528),
+                            ExpertId = 1,
+                            IsDeleted = false,
+                            IsPlayable = true,
+                            Opinion = "پاسخگویی بد",
+                            Points = 6
+                        });
                 });
 
             modelBuilder.Entity("Image", b =>
@@ -1915,9 +1934,6 @@ namespace App.Infrastructure.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CompletionDate")
                         .HasColumnType("datetime2");
 
@@ -1938,21 +1954,22 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<int>("HouseWorkId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsConfrim")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
+                    b.Property<bool?>("IsFinish")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime>("RunningTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeOnly>("RunningTime")
+                        .HasColumnType("time");
 
                     b.Property<int>("StausService")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("CustomerId");
 
@@ -1961,6 +1978,44 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.HasIndex("HouseWorkId");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreateAt = new DateTime(2025, 2, 22, 22, 55, 24, 178, DateTimeKind.Local).AddTicks(5118),
+                            CustomerId = 1,
+                            Description = "فوری",
+                            HouseWorkId = 5,
+                            IsDeleted = false,
+                            RunningTime = new TimeOnly(0, 0, 0).Add(TimeSpan.FromTicks(11)),
+                            StausService = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreateAt = new DateTime(2025, 2, 22, 22, 55, 24, 178, DateTimeKind.Local).AddTicks(5147),
+                            CustomerId = 1,
+                            Description = "",
+                            HouseWorkId = 6,
+                            IsDeleted = false,
+                            RunningTime = new TimeOnly(10, 30, 0),
+                            StausService = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreateAt = new DateTime(2025, 2, 22, 22, 55, 24, 178, DateTimeKind.Local).AddTicks(5152),
+                            CustomerId = 1,
+                            Description = "فوری",
+                            HouseWorkId = 25,
+                            IsDeleted = false,
+                            RunningTime = new TimeOnly(4, 30, 0),
+                            StausService = 1
+                        });
                 });
 
             modelBuilder.Entity("Suggestion", b =>
@@ -1995,6 +2050,17 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("Suggestions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DeliverDate = new DateTime(2025, 2, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "آمادگی برای انجام کار با قیمت پایین تر",
+                            ExpertId = 1,
+                            IsDeleted = false,
+                            OrderId = 1
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entites.Service.Category", b =>
@@ -2007,13 +2073,31 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Navigation("ParentCategory");
                 });
 
+            modelBuilder.Entity("App.Domain.Core.Entites.Service.ExpertHouseWork", b =>
+                {
+                    b.HasOne("App.Domain.Core.Entites.User.Expert", "Expert")
+                        .WithMany("ExpertWorksSkills")
+                        .HasForeignKey("ExpertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("App.Domain.Core.Entites.Service.HouseWork", "HouseWork")
+                        .WithMany("ExpertHouseWorks")
+                        .HasForeignKey("HouseWorkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Expert");
+
+                    b.Navigation("HouseWork");
+                });
+
             modelBuilder.Entity("App.Domain.Core.Entites.Service.HouseWork", b =>
                 {
                     b.HasOne("App.Domain.Core.Entites.Service.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Category");
                 });
@@ -2029,6 +2113,12 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("App.Domain.Core.Entites.User.Customer", b =>
                 {
+                    b.HasOne("App.Domain.Core.Entites.User.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("City", "City")
                         .WithMany()
                         .HasForeignKey("CityId")
@@ -2042,12 +2132,20 @@ namespace App.Infrastructure.EFCore.Migrations
                         .IsRequired();
 
                     b.Navigation("City");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entites.User.Expert", b =>
                 {
+                    b.HasOne("App.Domain.Core.Entites.User.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("City", "City")
-                        .WithMany("Experts")
+                        .WithMany()
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -2059,32 +2157,19 @@ namespace App.Infrastructure.EFCore.Migrations
                         .IsRequired();
 
                     b.Navigation("City");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Comment", b =>
                 {
                     b.HasOne("App.Domain.Core.Entites.User.Expert", "Expert")
-                        .WithMany("Comments")
+                        .WithMany()
                         .HasForeignKey("ExpertId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Expert");
-                });
-
-            modelBuilder.Entity("ExpertHouseWork", b =>
-                {
-                    b.HasOne("App.Domain.Core.Entites.User.Expert", null)
-                        .WithMany()
-                        .HasForeignKey("ExpertId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("App.Domain.Core.Entites.Service.HouseWork", null)
-                        .WithMany()
-                        .HasForeignKey("SkillsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Image", b =>
@@ -2151,12 +2236,6 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Order", b =>
                 {
-                    b.HasOne("City", "City")
-                        .WithMany("Orders")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("App.Domain.Core.Entites.User.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
@@ -2172,8 +2251,6 @@ namespace App.Infrastructure.EFCore.Migrations
                         .HasForeignKey("HouseWorkId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("City");
 
                     b.Navigation("Customer");
 
@@ -2208,6 +2285,8 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("App.Domain.Core.Entites.Service.HouseWork", b =>
                 {
+                    b.Navigation("ExpertHouseWorks");
+
                     b.Navigation("Image")
                         .IsRequired();
 
@@ -2230,16 +2309,9 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("App.Domain.Core.Entites.User.Expert", b =>
                 {
-                    b.Navigation("Comments");
+                    b.Navigation("ExpertWorksSkills");
 
                     b.Navigation("Suggestions");
-                });
-
-            modelBuilder.Entity("City", b =>
-                {
-                    b.Navigation("Experts");
-
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Order", b =>

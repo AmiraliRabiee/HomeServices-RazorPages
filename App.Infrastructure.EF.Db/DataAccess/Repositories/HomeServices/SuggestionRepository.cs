@@ -106,15 +106,51 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
             return suggestion;
         }
 
-        public async Task<List<SummSuggestionDto>> GetSuggestionDetails(Suggestion model, CancellationToken cancellationToken)
+        public async Task<List<SummSuggestionDto>> GetSuggestionDetails(int id, CancellationToken cancellationToken)
         {
             var suggestions = await _appDbContext
-                .Suggestions.Where(s => s.OrderId == model.OrderId)
+                .Suggestions.Where(s => s.OrderId == id)
             .Select(s => new SummSuggestionDto
             {
                 HouseWork = s.Order.HouseWork.Title,
                 Description = s.Description,
-                DeliverDate = s.DeliverDate,
+                DeliverDate = s.DeliverDate.ToString("yyyy-MM-dd"),
+                StausService = s.Order.StausService,
+                City = s.Expert.City.Name,
+                ExpertName = s.Expert.User.FirstName + s.Expert.User.LastName,
+            }).ToListAsync();
+
+            if (suggestions is null)
+                throw new Exception(".پیشنهادی برای این سفارش ثبت نشده است");
+
+            return suggestions;
+        }
+
+        public async Task<SummSuggestionDto> GetSuggestionDto(int id, CancellationToken cancellationToken)
+        {
+            var suggestion = await _appDbContext.Suggestions
+            .Select(s => new SummSuggestionDto
+            {
+                HouseWork = s.Order.HouseWork.Title,
+                City = s.Order.Customer.City.Name,
+                RunungTimeOrder = s.Order.RunningTime,
+                DeliverDate = s.DeliverDate.ToString("yyyy-MM-dd"),
+                Description = s.Description,
+                StausService = s.Order.StausService,
+            }).FirstOrDefaultAsync();
+            if (suggestion is null)
+                throw new Exception(".سفارشی با این شناسه یافت نشد");
+            return suggestion;
+        }
+
+        public async Task<List<SummSuggestionDto>> GetAllDto(CancellationToken cancellationToken)
+        {
+            var suggestions = await _appDbContext.Suggestions
+            .Select(s => new SummSuggestionDto
+            {
+                HouseWork = s.Order.HouseWork.Title,
+                Description = s.Description,
+                DeliverDate = s.DeliverDate.ToString("yyyy-MM-dd"),
                 StausService = s.Order.StausService,
                 City = s.Expert.City.Name,
             }).ToListAsync();

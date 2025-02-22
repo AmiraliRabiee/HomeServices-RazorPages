@@ -5,7 +5,7 @@ namespace App.Domain.AppServices.Base
 {
     public class BaseDataAppService(IBaseDataService _baseDataService) : IBaseDataAppService
     {
-        public Task<List<City>> GetCities(CancellationToken cancellationToken)
-            => _baseDataService.GetCities(cancellationToken);
+        public List<City> GetCities()
+            => _baseDataService.GetCities();
     }
 }

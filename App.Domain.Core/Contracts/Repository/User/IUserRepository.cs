@@ -7,7 +7,7 @@ namespace App.Domain.Core.Contracts.Repository.User
     public interface IUserRepository
     {
         Task<Result> Create(AppUser model, CancellationToken cancellationToken);
-        Task<Result> DeleteUser(AppUser user, CancellationToken cancellationToken);
+        Task<Result> DeleteUser(int id, CancellationToken cancellationToken);
         Task<Result> SoftDeleteUser(AppUser user, CancellationToken cancellationToken);
         Task<Result> UpdateUser(UserDto user, CancellationToken cancellationToken);
         Task<Result> UpdateBalance(AppUser user, CancellationToken cancellationToken);
@@ -18,5 +18,6 @@ namespace App.Domain.Core.Contracts.Repository.User
         List<AppUser> GetAll();
         AppUser GetById(int id);
         UserDto GetDtoById(int id);
+        int GetCount();
     }
 }

@@ -14,6 +14,7 @@ namespace App.Domain.Core.Dto.User
         public IFormFile? ProfileImgFile { get; set; }
         public string? ImagePath { get; set; }
         public City City { get; set; }
-
+        public int CityId { get; set; }
+        public string CityName { get; set; }
     }
 }

@@ -39,18 +39,18 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
         }
 
 
-        public async Task<Result> DeleteUser(AppUser user, CancellationToken cancellationToken)
+        public async Task<Result> DeleteUser(int id, CancellationToken cancellationToken)
         {
             try
             {
                 var currentUser = await _appDbContext.Users
-                    .FirstOrDefaultAsync(u => u.Id == user.Id, cancellationToken);
+                    .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
 
                 if (currentUser is null)
                     return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
 
                 _appDbContext.Users.Remove(currentUser);
-                await _appDbContext.SaveChangesAsync(cancellationToken);
+                 await _appDbContext.SaveChangesAsync(cancellationToken);
                 return new Result { IsSuccess = true, Message = "با موفقیت حذف شد" };
             }
             catch (Exception ex)
@@ -237,8 +237,14 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
                 LastName = u.LastName,
                 Email = u.Email,
                 UserName = u.UserName,
+                Address = u.Customer.Address,
+                Balance = u.Balance,
+                Password = u.Password,
             }).First();
             return res;
         }
+
+        public int GetCount()
+            => _appDbContext.Users.Count();
     }
 }

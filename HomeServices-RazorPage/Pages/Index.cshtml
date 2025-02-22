@@ -1,0 +1,102 @@
+﻿@page
+@using App.Domain.AppServices
+@using App.Domain.Core.Contracts.AppService
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IndexModel
+@{
+	ViewData["Title"] = "Home page";
+}
+@inject ICategoryAppService CategoryAppService;
+
+<section id="main" class="clearfix home-default">
+	<div class="container">
+		<!-- banner -->
+		<div class="banner-section text-center">
+			<h1 class="title"> خدمات دهی پیشرفته و سریع</h1>
+			<h3> جستجو در بیش از  150  خدمات  طبقه بندی شده و ارسال سفارش های نامحدود رایگان!</h3>
+			<!-- banner-form -->
+			<div class="banner-form">
+				<form action="#">
+					<!-- category-change -->
+					<div class="dropdown category-dropdown">
+						<a data-toggle="dropdown" href="#"><span class="change-text">انتخاب دسته‌بندی</span> <i class="fa fa-angle-down"></i></a>
+						<ul class="dropdown-menu category-change">
+							<li><a href="#">تاسیسات</a></li>
+							<li><a href="#">خانه</a></li>
+							<li><a href="details.html">نظافت</a></li>
+							<li><a href="#">زیبایی</a></li>
+							<li><a href="#">تعمیرات اشیا</a></li>
+							<li><a href="#">خودرو و حمل بار</a></li>
+							<li><a href="#">سلامت</a></li>
+
+						</ul>
+					</div><!-- category-change -->
+
+					<input type="text" class="form-control" placeholder="عبارت مورد نظر خود را تایپ کنید">
+					<button type="submit" class="form-control" value="Search">جستجو</button>
+				</form>
+			</div><!-- banner-form -->
+			<!-- banner-socail -->
+			<ul class="banner-socail list-inline">
+				<li><a href="#" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+				<li><a href="#" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+				<li><a href="#" title="Google Plus"><i class="fa fa-google-plus"></i></a></li>
+				<li><a href="#" title="Youtube"><i class="fa fa-youtube"></i></a></li>
+			</ul><!-- banner-socail -->
+		</div><!-- banner -->
+		<!-- main-content -->
+		<div class="main-content">
+			<!-- row -->
+			<div class="row">
+				<div class="d-none d-md-block col-md-2 text-center">
+					<div class="advertisement">
+						<a href="#"><img src="~/UserTemplate/images/ads/2.jpg" alt="Images" class="img-fluid"></a>
+					</div>
+				</div>
+
+				<!-- product-list -->
+				<div class="col-md-8">
+					<!-- categorys -->
+					<div class="section category-ad text-center">
+@* 						<ul class="category-list">
+							@foreach (var category in @CategoryAppService.GetAllCategories())
+							{
+								<li class="category-item">
+									<a href="#">
+										<div class="category-icon"><img src="@category.ImagePath" alt="@category.Title" class="img-fluid"></div>
+										<span class="category-title">@category.Title</span>
+									</a>
+								</li>
+
+								<!-- category-item -->
+							}
+						</ul> *@
+					</div><!-- category-ad -->
+					<div class="ad-section text-center">
+						<a href="#"><img src="~/UserTemplate/images/ads/3.jpg" alt="Image" class="img-fluid"></a>
+					</div><!-- ad-section -->
+					<!-- trending-ads -->
+					<div class="section trending-ads">
+						<div class="section-title tab-manu">
+							<h4>پربازدیدترین آگهی‌ها</h4>
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation"><a class="active" href="#recent-ads" data-toggle="tab">آخرین آگهی‌ها</a></li>
+								<li role="presentation"><a href="#popular" data-toggle="tab">محبوبترین سرویس‌ها</a></li>
+								<li role="presentation"><a href="#hot-ads" data-toggle="tab">پربازدیدترین سرویس‌ها</a></li>
+							</ul>
+						</div>
+
+
+					</div><!-- trending-ads -->
+				</div><!-- product-list -->
+				<!-- advertisement -->
+				<div class="d-none d-md-block col-md-2">
+					<div class="advertisement text-center">
+						<a href="#"><img src="~/UserTemplate/images/ads/1.jpg" alt="Images" class="img-fluid"></a>
+					</div>
+				</div><!-- advertisement -->
+			</div><!-- row -->
+		</div><!-- main-content -->
+	</div><!-- container -->
+</section><!-- main -->

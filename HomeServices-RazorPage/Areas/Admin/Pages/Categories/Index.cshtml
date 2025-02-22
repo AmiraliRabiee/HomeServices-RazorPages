@@ -1,0 +1,78 @@
+﻿@page
+@using App.Domain.AppServices.HomeService
+@using App.Domain.Core.Contracts.AppService
+@model HomeServices_RazorPage.Areas.Admin.Pages.Categories.IndexModel
+@{
+    ViewData["Title"] = "هوم سرویس > مدیریت دسته بندی ها > لیست دسته بندی ها";
+}
+
+@inject ICategoryAppService _categoryAppService
+<div class="col-lg-12">
+    <div class="portlet box shadow">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                <h3 class="title">
+                    دسته بندی ها
+                </h3>
+            </div><!-- /.portlet-title -->
+        </div><!-- /.portlet-heading -->
+        <div class="portlet-body">
+            <div class="top-buttons-box mb-2">
+                <a class="btn btn-success" href="/Admin/Categories/create">
+                    <i class="icon-plus"></i>
+                    افزودن
+                    <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                </a>
+            </div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped" id="data-table">
+                        <thead>
+                            <tr>
+                                <th class="p-low"><input type="checkbox" id="btn-check-all-toggle"></th>
+                                <th>#</th>
+                                <th>عکس</th>
+                                <th>عنوان</th>
+                                <th>زیرشاخه</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var category in _categoryAppService.GetAllCategories())
+                            {
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>@category.Id</td>
+
+                                    <td>
+                                        <img style="border-radius: 50%" src="@(string.IsNullOrEmpty(category.ImagePath) ? "~/AdminTemplate/images/user/placeholder.jpg"
+                                        : category.ImagePath)" width="80" height="80" />
+                                    </td>
+
+                                    <td>@category.Title</td>
+                                    <td>@category.ParentId</td>
+
+                                    <td>
+                                        <a method="post" asp-page="update" asp-route-Id="@category.Id" class="btn btn-info">ویرایش</a>
+
+                                        <a onclick="return confirm('آیا از حذف این دسته بندی اطمینان دارید؟')"
+                                           asp-page-handler="Delete"
+                                           asp-route-id="@category.Id"
+                                           class="btn btn-danger">
+                                            حذف
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!-- /.portlet-body -->
+    </div><!-- /.portlet -->
+</div><!-- /.col-lg-12 -->
+@section Scripts
+{
+    <script src="~/AdminTemplate/plugins/data-table/js/jquery.dataTables.min.js"></script>
+    <script src="~/AdminTemplate/js/pages/datatable.js"></script>
+}

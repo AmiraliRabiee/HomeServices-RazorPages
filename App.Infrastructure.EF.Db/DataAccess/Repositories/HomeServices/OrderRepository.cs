@@ -17,14 +17,12 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
                 var newOrder = new Order();
 
                 newOrder.Description = order.Description;
-                newOrder.Price = order.Price;
                 newOrder.CompletionDate = order.CompletionDate;
                 newOrder.RunningTime = order.RunningTime;
                 newOrder.CreateAt = DateTime.Now;
                 newOrder.StausService = StausServiceEnum.NewlyRegistered;
                 newOrder.CustomerId = order.CustomerId;
                 newOrder.HouseWorkId = order.HouseWorkId;
-                newOrder.CityId = order.CityId;
 
                 await _appDbContext.Orders.AddAsync(newOrder, cancellationToken);
                 await _appDbContext.SaveChangesAsync(cancellationToken);
@@ -92,8 +90,8 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
                     return new Result { IsSuccess = false, Message = ".سفارشی با این شناسه یافت نشد" };
 
                 currentOrder.Description = order.Description;
-                currentOrder.Price = order.Price;
-                currentOrder.CityId = order.CityId;
+                currentOrder.CompletionDate = order.CompletionDate;
+                currentOrder.RunningTime = order.RunningTime;
 
                 await _appDbContext.SaveChangesAsync(cancellationToken);
                 return new Result { IsSuccess = true, Message = ".به روزرسانی انجام شد" };
@@ -124,13 +122,13 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
             var orders = await _appDbContext.Orders
             .Select(o => new SummOrderDto
             {
+                Id = o.Id,
                 Description = o.Description,
-                BasePrice = o.Price,
                 HouseWork = o.HouseWork.Title,
                 CustomerId = o.Customer.Id,
-                City = o.City.Name,
                 CompletionDate = o.CompletionDate,
                 RunningTime = o.RunningTime,
+                StausService = o.StausService,
             }).ToListAsync();
 
             if (orders is null)

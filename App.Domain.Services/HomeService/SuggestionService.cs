@@ -7,22 +7,28 @@ namespace App.Domain.Services.HomeService
 {
     public class SuggestionService(ISuggestionRepository _suggestionRepository) : ISuggestionService
     {
-        public Task<Result> Create(Suggestion suggestion, CancellationToken cancellationToken)
-            => _suggestionRepository.CreateSuggestion(suggestion, cancellationToken);
+        public async Task<Result> Create(Suggestion suggestion, CancellationToken cancellationToken)
+            => await _suggestionRepository.CreateSuggestion(suggestion, cancellationToken);
 
-        public Task<Result> Delete(Suggestion suggestion, CancellationToken cancellationToken)
-            => _suggestionRepository.DeleteSuggestion(suggestion, cancellationToken);
+        public async Task<Result> Delete(Suggestion suggestion, CancellationToken cancellationToken)
+            => await _suggestionRepository.DeleteSuggestion(suggestion, cancellationToken);
 
-        public Task<List<SummSuggestionDto>> GetDetails(Suggestion model, CancellationToken cancellationToken)
-            => _suggestionRepository.GetSuggestionDetails(model, cancellationToken);
+        public async Task<List<SummSuggestionDto>> GetAllDto(CancellationToken cancellationToken)
+            => await _suggestionRepository.GetAllDto(cancellationToken);
 
-        public Task<Suggestion> GetnById(int id, CancellationToken cancellationToken)
-            => _suggestionRepository.GetSuggestionById(id, cancellationToken);
+        public async Task<Suggestion> GetnById(int id, CancellationToken cancellationToken)
+            => await  _suggestionRepository.GetSuggestionById(id, cancellationToken);
 
-        public Task<Result> SoftDelete(Suggestion suggestion, CancellationToken cancellationToken)
-            => _suggestionRepository.SoftDeleteSuggestion(suggestion, cancellationToken);
+        public Task<List<SummSuggestionDto>> GetSuggestionDetails(int id, CancellationToken cancellationToken)
+            => _suggestionRepository.GetSuggestionDetails(id,cancellationToken);
 
-        public Task<Result> Update(Suggestion suggestion, CancellationToken cancellationToken)
-            => _suggestionRepository.UpdateSuggestion(suggestion, cancellationToken);
+        public async Task<SummSuggestionDto> GetSuggestionDto(int id, CancellationToken cancellationToken)
+            => await _suggestionRepository.GetSuggestionDto(id, cancellationToken);
+
+        public async Task<Result> SoftDelete(Suggestion suggestion, CancellationToken cancellationToken)
+            => await _suggestionRepository.SoftDeleteSuggestion(suggestion, cancellationToken);
+
+        public async Task<Result> Update(Suggestion suggestion, CancellationToken cancellationToken)
+            => await _suggestionRepository.UpdateSuggestion(suggestion, cancellationToken);
     }
 }

@@ -11,7 +11,7 @@ namespace App.Domain.Core.Contracts.AppService
         Task<IdentityResult> Register(CreateUserDto model,CancellationToken cancellationToken);
         Task<IdentityResult> Logout();
         Task<Result> UpdateInformation(UserDto model, CancellationToken cancellationToken);
-        Task<Result> RemoveUser(AppUser model, CancellationToken cancellationToken);
+        Task<Result> RemoveUser(int id, CancellationToken cancellationToken);
         List<AppUser> GetAll();
         AppUser GetById(int id);
         UserDto GetDtoById(int id);

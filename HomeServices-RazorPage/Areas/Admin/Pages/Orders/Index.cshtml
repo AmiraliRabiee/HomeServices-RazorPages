@@ -1,0 +1,76 @@
+﻿@page
+@using App.Domain.Core.Helpers
+@model HomeServices_RazorPage.Areas.Admin.Pages.Orders.IndexModel
+@{
+}
+<div class="col-lg-12">
+    <div class="portlet box shadow">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                <h3 class="title">
+                    سفارشات
+                </h3>
+            </div><!-- /.portlet-title -->
+        </div><!-- /.portlet-heading -->
+        <div class="portlet-body">
+            <div class="top-buttons-box mb-2">
+                <a class="btn btn-success" href="#">
+                    <i class="icon-plus"></i>
+                    افزودن
+                    <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                </a>
+            </div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped" id="data-table">
+                        <thead>
+                            <tr>
+                                <th class="p-low"><input type="checkbox" id="btn-check-all-toggle"></th>
+                                <th>عنوان خدمات</th>
+                                <th>توضیحات</th>
+                                <th>تاریخ اجرا</th>
+                                <th>زمان اجرا</th>
+                                <th>شناسه مشتری</th>
+                                <th>وضعیت سفارش</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.Orders)
+                            {
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>@order.HouseWork</td>
+                                    <td>@order.Description</td>
+                                    <td>@order.CompletionDate</td>
+                                    <td>@order.RunningTime</td>
+                                    <td>@order.CustomerId</td>
+                                    <td>@order.StausService.GetDisplayName()</td>
+                                    <td>
+                                        <a asp-page="UpdateOrder" asp-route-Id="@order.Id" class="btn btn-info">ویرایش</a>
+                                        
+                                        <a asp-page="/suggestions/index" asp-route-Id="@order.Id" class="btn btn-primary">پیشنهاد ها</a>
+
+@*                                         <a asp-page="Updateorder" asp-route-Id="@order.Id" class="btn btn-info">ویرایش</a>
+
+                                        <a onclick="return confirm('آیا از حذف این دسته بندی اطمینان دارید؟')"
+                                           asp-page-handler="Delete"
+                                           asp-route-id="@order.Id"
+                                           class="btn btn-danger">
+                                            حذف
+                                        </a> *@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!-- /.portlet-body -->
+    </div><!-- /.portlet -->
+</div><!-- /.col-lg-12 -->
+@section Scripts
+{
+    <script src="~/AdminTemplate/plugins/data-table/js/jquery.dataTables.min.js"></script>
+    <script src="~/AdminTemplate/js/pages/datatable.js"></script>
+}

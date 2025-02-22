@@ -12,19 +12,19 @@ namespace App.Infrastructure.EFCore.Configurations
             builder.HasKey(u => u.Id);
 
             builder.HasOne(u => u.Expert)
-            .WithOne()
-            .HasForeignKey<Expert>(e => e.Id)
-            .OnDelete(DeleteBehavior.NoAction);
+                .WithOne()
+                .HasForeignKey<Expert>(e => e.Id)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(u => u.Customer)
-            .WithOne()
-            .HasForeignKey<Customer>(c => c.Id)
-            .OnDelete(DeleteBehavior.NoAction);
+                .WithOne()
+                .HasForeignKey<Customer>(c => c.Id)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(a => a.Admin)
-            .WithOne()
-            .HasForeignKey<Admin>(a => a.Id)
-            .OnDelete(DeleteBehavior.NoAction);
+                .WithOne()
+                .HasForeignKey<Admin>(a => a.Id)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(u => u.Balance).IsRequired().HasDefaultValue(1000);
         }
@@ -41,7 +41,6 @@ namespace App.Infrastructure.EFCore.Configurations
             new AppUser()
             {
                 Id = 1,
-
                 UserName = "Admin@gmail.com",
                 LockoutEnabled = false,
                 Password = "123456",

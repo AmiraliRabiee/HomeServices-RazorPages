@@ -10,6 +10,8 @@ namespace App.Domain.Core.Contracts.Repository.HomeServices
         Task<Result> SoftDeleteSuggestion(Suggestion suggestion, CancellationToken cancellationToken);
         Task<Result> UpdateSuggestion(Suggestion suggestion, CancellationToken cancellationToken);
         Task<Suggestion> GetSuggestionById(int id, CancellationToken cancellationToken);
-        Task<List<SummSuggestionDto>> GetSuggestionDetails(Suggestion model, CancellationToken cancellationToken);
+        Task<List<SummSuggestionDto>> GetSuggestionDetails(int id, CancellationToken cancellationToken);
+        Task<SummSuggestionDto> GetSuggestionDto(int id, CancellationToken cancellationToken);
+        Task<List<SummSuggestionDto>> GetAllDto(CancellationToken cancellationToken);
     }
 }

@@ -23,7 +23,7 @@ namespace App.Infrastructure.DataBase.EFCore
             modelBuilder.ApplyConfiguration(new CustomerConfigurations());
             modelBuilder.ApplyConfiguration(new ExpertConfigurations());
             modelBuilder.ApplyConfiguration(new UserConfigurations());
-
+            modelBuilder.ApplyConfiguration(new ExpertHouseWorkConfigurations());
 
             UserConfigurations.SeedUsers(modelBuilder);
 
@@ -41,5 +41,6 @@ namespace App.Infrastructure.DataBase.EFCore
         public DbSet<Expert> Experts { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<ExpertHouseWork> ExpertHouseWorks { get; set; }
     }
 }
