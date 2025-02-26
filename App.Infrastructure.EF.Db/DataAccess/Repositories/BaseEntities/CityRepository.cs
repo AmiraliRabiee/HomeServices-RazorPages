@@ -1,5 +1,5 @@
 ﻿using App.Domain.Core.Contracts.Repository.BaseEntities;
-using App.Infrastructure.DataBase.EFCore;
+using App.Infrastructure.EFCore.DataBase.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities

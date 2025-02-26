@@ -12,81 +12,92 @@
     <title>ثبت‌نام</title>
 </head>
 <body>
-    <section id="main">
+
+    <!-- ======================= Login Detail ======================== -->
+    <section class="gray">
         <div class="container">
-            <div class="row text-center">
-                <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-                    <div class="user-account">
-                        <h2>ساخت اکانت</h2>
-                        <form method="post">
-                            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="row align-items-start justify-content-center">
+                <div class="col-xl-6 col-lg-8 col-md-12">
 
-                            <!-- Username Field -->
-                            <div class="form-group">
-                                <input asp-for="User.UserName" type="text" class="form-control" placeholder="نام کاربری" required>
-                                <span asp-validation-for="User.UserName" class="text-danger"></span>
+                    <div class="signup-screen-wrap">
+                        <div class="signup-screen-single light">
+                            <div class="text-center mb-4">
+                                <h4 class="m-0 ft-medium">ثبت نـام</h4>
                             </div>
 
-                            <!-- Password Field -->
-                            <div class="form-group">
-                                <input asp-for="User.Password" type="password" class="form-control" placeholder="رمزعبور" required>
-                                <span asp-validation-for="User.Password" class="text-danger"></span>
-                            </div>
+                            <form method="post" class="submit-form">
+                                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
-                            <!-- RePassword Field -->
-                            <div class="form-group">
-                                <input asp-for="User.RePassword" type="password" class="form-control" placeholder="تایید رمزعبور" required>
-                                <span asp-validation-for="User.RePassword" class="text-danger"></span>
-                            </div>
+                                <input type="hidden" asp-for="User.Id" />
 
-                            <!-- Role Selection Field -->
-                            <div class="form-group">
-                                <select asp-for="User.RoleId" class="form-control" id="roleSelect" required>
-                                    <option value="">انتخاب نقش</option>
-                                    <option value="2">مشتری</option>
-                                    <option value="3">متخصص</option>
-                                </select>
-                                <span asp-validation-for="User.RoleId" class="text-danger"></span>
-                            </div>
-
-                            <!-- Customer-Specific Fields (Address & City) -->
-                            <div id="customerFields" class="d-none">
                                 <div class="form-group">
-                                    <input asp-for="User.Address" type="text" class="form-control" placeholder="آدرس">
-                                    <span asp-validation-for="User.Address" class="text-danger"></span>
+                                    <label class="mb-1">نام کاربری</label>
+                                    <input asp-for="@Model.User.UserName" type="text" class="form-control rounded" placeholder="نام کاربری*">
                                 </div>
-                            </div>
 
-                            <!-- Shared City Selection for both Customer & Expert -->
-                            <div id="cityFields" class="d-none">
                                 <div class="form-group">
-                                    <select asp-for="User.CityId" class="form-control">
-                                        <option value="">انتخاب شهر</option>
-                                        @foreach (var city in _BaseDataAppService.GetCities())
-                                        {
-                                            <option value="@city.Id">@city.Name</option>
-                                        }
-                                    </select><!-- select -->
-                                    <span asp-validation-for="User.CityId" class="text-danger"></span>
+                                    <label class="mb-1">رمز عبور</label>
+                                    <input asp-for="@Model.User.Password" type="password" class="form-control rounded" placeholder="رمز عبور*">
                                 </div>
-                            </div>
 
-                            <!-- Terms and Conditions Checkbox -->
-                            <div class="checkbox">
-                                <label for="signing">
-                                    <input type="checkbox" name="signing" id="signing" required>
-                                    با ثبت نام اقرار میکنم تمامی قوانین و مقررات سایت را قبول کرده‌ام
-                                </label>
-                            </div>
+                                <div class="form-group">
+                                    <label class="mb-1">تکرار رمز عبور</label>
+                                    <input asp-for="@Model.User.RePassword" type="password" class="form-control rounded" placeholder="تکرار رمز عبور*">
+                                </div>
 
-                            <button type="submit" class="btn">ثبت‌نام</button>
-                        </form>
+                                <div class="form-group">
+                                    <select asp-for="User.RoleId" class="form-control" id="roleSelect" required>
+                                        <option value="">انتخاب نقش</option>
+                                        <option value="2">مشتری</option>
+                                        <option value="3">متخصص</option>
+                                    </select>
+                                </div>
+
+
+                                <div id="customerFields" class="d-none">
+                                    <div class="form-group">
+                                        <input asp-for="User.Address" type="text" class="form-control" placeholder="آدرس">
+                                        <span asp-validation-for="User.Address" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Shared City Selection for both Customer & Expert -->
+                                <div id="cityFields" class="d-none">
+                                    <div class="form-group">
+                                        <select asp-for="User.CityId" class="form-control">
+                                            <option value="">انتخاب شهر</option>
+                                            @foreach (var city in _BaseDataAppService.GetCities())
+                                            {
+                                                <option value="@city.Id">@city.Name</option>
+                                            }
+                                        </select><!-- select -->
+                                        <span asp-validation-for="User.CityId" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group relative">
+                                    <label>آپلود عکس</label>
+                                    <div class="input-group round">
+                                        <input asp-for="@Model.User.ImagePath" type="file" class="form-control">
+                                        <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                                    </div><!-- /.input-group -->
+                                    <div class="help-block"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-md full-width bg-sky text-light rounded ft-medium">ثبت نام</button>
+                                </div>
+                                <div class="form-group text-center mt-4 mb-0">
+                                    <p class="mb-0">آیا قبلا ثبت نام کرده اید؟ <a asp-page="login" class="ft-medium text-success">ورود به حساب کاربری</a></p>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var roleSelect = document.getElementById("roleSelect");
@@ -115,5 +126,6 @@
             });
         });
     </script>
+    <!-- ======================= Login End ======================== -->
 </body>
 </html>

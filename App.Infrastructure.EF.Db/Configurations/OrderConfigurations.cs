@@ -56,7 +56,7 @@ namespace App.Infrastructure.EFCore.Configurations
                 new Order {
                 Id = 3,
                 Description = "فوری",
-                HouseWorkId = 25,
+                HouseWorkId = 30,
                 CompletionDate = new DateTime(2025, 2, 21),
                 RunningTime = new TimeOnly(4,30),
                 CreateAt = DateTime.Now,

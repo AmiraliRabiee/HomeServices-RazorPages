@@ -22,15 +22,20 @@ namespace App.Infrastructure.EFCore.Configurations
             builder.Property(u => u.Address).HasMaxLength(255);
             builder.Property(u => u.Biographi).HasMaxLength(2000);
 
+            builder.HasOne(c => c.User)
+            .WithOne(u => u.Expert)
+            .HasForeignKey<Expert>(c => c.Id)
+            .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasData(new List<Expert>
             {
                 new Expert
-                { Id = 1,
+                { 
+                    Id = 1,
                   Address = "اینجا",
                   Biographi = "بیوگرافی" ,
                   IsDeleted = false,
                   CityId = 1 ,
-                  AppUserId = 3,
             }
             });
 

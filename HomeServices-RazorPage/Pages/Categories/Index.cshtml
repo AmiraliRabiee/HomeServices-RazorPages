@@ -1,0 +1,132 @@
+﻿@page
+@model HomeServices_RazorPage.Pages.Categories.IndexModel
+@{
+}
+<section class="space min gray">
+	<div class="container">
+
+		<div class="row justify-content-center">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+				<div class="sec_title position-relative text-center mb-5">
+					<h4 class="ft-bold">انتخاب دسته بندی </h4>
+				</div>
+			</div>
+		</div>
+
+		<!-- row -->
+		<div class="row align-items-center">
+
+			<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+				<div class="cats-wrap text-center">
+					<a href="listing-search-v1.html" class="Goodup-catg-wrap">
+						<div class="Goodup-catg-city">07 شهر</div>
+						<div class="Goodup-catg-icon"><i class="fas fa-stethoscope"></i></div>
+						<div class="Goodup-catg-caption">
+							<h4 class="fs-md mb-0 ft-medium m-catrio">سلامت</h4>
+							<span class="text-muted">607 آگهی</span>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+				<div class="cats-wrap text-center">
+					<a href="listing-search-v1.html" class="Goodup-catg-wrap">
+						<div class="Goodup-catg-city">17 شهر</div>
+						<div class="Goodup-catg-icon"><i class="fas fa-building"></i></div>
+						<div class="Goodup-catg-caption">
+							<h4 class="fs-md mb-0 ft-medium m-catrio">نظافت</h4>
+							<span class="text-muted">76 آگهی</span>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+				<div class="cats-wrap text-center">
+					<a href="listing-search-v1.html" class="Goodup-catg-wrap">
+						<div class="Goodup-catg-city">32 شهر</div>
+						<div class="Goodup-catg-icon"><i class="fas fa-screwdriver"></i></div>
+						<div class="Goodup-catg-caption">
+							<h4 class="fs-md mb-0 ft-medium m-catrio">تعمیرات</h4>
+							<span class="text-muted">322 آگهی</span>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+				<div class="cats-wrap text-center">
+					<a href="listing-search-v1.html" class="Goodup-catg-wrap">
+						<div class="Goodup-catg-city">27 شهر</div>
+						<div class="Goodup-catg-icon"><i class="fas fa-basketball-ball"></i></div>
+						<div class="Goodup-catg-caption">
+							<h4 class="fs-md mb-0 ft-medium m-catrio">زیبایی</h4>
+							<span class="text-muted">161 آگهی</span>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+				<div class="cats-wrap text-center">
+					<a href="listing-search-v1.html" class="Goodup-catg-wrap">
+						<div class="Goodup-catg-city">24 شهر</div>
+						<div class="Goodup-catg-icon"><i class="fas fa-house-damage"></i></div>
+						<div class="Goodup-catg-caption">
+							<h4 class="fs-md mb-0 ft-medium m-catrio">تاسیسات</h4>
+							<span class="text-muted">210 آگهی</span>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+				<div class="cats-wrap text-center">
+					<a href="listing-search-v1.html" class="Goodup-catg-wrap">
+						<div class="Goodup-catg-city">06 شهر</div>
+						<div class="Goodup-catg-icon"><i class="fas fa-car-alt"></i></div>
+						<div class="Goodup-catg-caption">
+							<h4 class="fs-md mb-0 ft-medium m-catrio">خودرو و حمل بار</h4>
+							<span class="text-muted">52 آگهی</span>
+						</div>
+					</a>
+				</div>
+			</div>
+
+		</div>
+		<!-- row -->
+
+	</div>
+</section>
+<br />
+
+
+@if(!User.Identity.IsAuthenticated){
+	<section class="space bg-cover" style="background:#f41b3b url(assets/img/landing-bg.png) no-repeat;">
+		<div class="container py-5">
+			<div class="row justify-content-center">
+				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+					<div class="sec_title position-relative text-center mb-5">
+						<h6 class="text-light">عضویت</h6>
+						<h3 class="ft-bold text-light ">برای شروع ثبت نام کنید</h3>
+					</div>
+				</div>
+			</div>
+
+			<div class="row align-items-center justify-content-center">
+				<div class="col-xl-7 col-lg-10 col-md-12 col-sm-12 col-12">
+					<form class="bg-white rounded p-1">
+
+						<div class="form-group mb-0 position-relative">
+							<button class="btn full-width btn-height bg-dark text-white fs-md" type="button">عضویت</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</section>
+}
+

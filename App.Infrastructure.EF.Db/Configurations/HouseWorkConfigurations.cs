@@ -42,24 +42,24 @@ namespace App.Infrastructure.EFCore.Configurations
                 new HouseWork { Id = 14 , Title = "نصب و تعویض فیوز" ,ImagePath = "\\Images\\HomeServices\\14h.jpg", BasePrice  = 3500 , Description = "" , CategoryId = 8 },
                 new HouseWork { Id = 15 , Title = "نصب و تعمیر دوربین مداربسته" ,ImagePath = "\\Images\\HomeServices\\15h.jpg", BasePrice  = 2000 , Description = "" , CategoryId = 8 },
 
-                //تعمیرات ساختمان
-                new HouseWork { Id = 16 , Title = "نقاشی ساختمان" ,ImagePath = "\\Images\\HomeServices\\16h.png", BasePrice  = 1000 , Description = "به صورت تخصصی" , CategoryId = 11 },
-                new HouseWork { Id = 17 , Title = "نصب کاغذ دیواری" ,ImagePath = "\\Images\\HomeServices\\17h.jpg", BasePrice  = 3500 , Description = "" , CategoryId = 11 },
-                new HouseWork { Id = 18 , Title = "ساخت و نصب توری" ,ImagePath = "\\Images\\HomeServices\\18h.jpg", BasePrice  = 2000 , Description = "" , CategoryId = 11 },
-                new HouseWork { Id = 19 , Title = "بنایی" ,ImagePath = "\\Images\\HomeServices\\19h.jpg", BasePrice  = 1000 , Description = "" , CategoryId = 11 },
-                new HouseWork { Id = 20 , Title = "کفسابی" ,ImagePath = "\\Images\\HomeServices\\20h.jpg", BasePrice  = 3500 , Description = "به صورت تخصصی" , CategoryId = 11 },
+                ////تعمیرات ساختمان
+                //new HouseWork { Id = 16 , Title = "نقاشی ساختمان" ,ImagePath = "\\Images\\HomeServices\\16h.png", BasePrice  = 1000 , Description = "به صورت تخصصی" , CategoryId = 11 },
+                //new HouseWork { Id = 17 , Title = "نصب کاغذ دیواری" ,ImagePath = "\\Images\\HomeServices\\17h.jpg", BasePrice  = 3500 , Description = "" , CategoryId = 11 },
+                //new HouseWork { Id = 18 , Title = "ساخت و نصب توری" ,ImagePath = "\\Images\\HomeServices\\18h.jpg", BasePrice  = 2000 , Description = "" , CategoryId = 11 },
+                //new HouseWork { Id = 19 , Title = "بنایی" ,ImagePath = "\\Images\\HomeServices\\19h.jpg", BasePrice  = 1000 , Description = "" , CategoryId = 11 },
+                //new HouseWork { Id = 20 , Title = "کفسابی" ,ImagePath = "\\Images\\HomeServices\\20h.jpg", BasePrice  = 3500 , Description = "به صورت تخصصی" , CategoryId = 11 },
 
-                //شیشه کاری
-                new HouseWork { Id = 21 , Title = "ساخت و نصب درب و پنجره" ,ImagePath = "\\Images\\HomeServices\\21h.jpg", BasePrice  = 1000 , Description = "" , CategoryId = 12 },
-                new HouseWork { Id = 22 , Title = "شیشه بری و آینه کاری" ,ImagePath = "\\Images\\HomeServices\\22h.jpg", BasePrice  = 3500 , Description = "" , CategoryId = 12 },
-                new HouseWork { Id = 23 , Title = "هندریل شیشه ای" , ImagePath = "\\Images\\HomeServices\\23h.jpg", BasePrice  = 2000 , Description = "جدید" , CategoryId = 12 },
-                new HouseWork { Id = 24 , Title = "پارتیشن شیشه ای" ,ImagePath = "\\Images\\HomeServices\\24h.jpg", BasePrice  = 1000 , Description = "" , CategoryId = 12 },
-                new HouseWork { Id = 25 , Title = "نصب و تعمیر درب اتوماتیک" ,ImagePath = "\\Images\\HomeServices\\25h.jpg", BasePrice  = 3500 , Description = "" , CategoryId = 12 },
+                ////شیشه کاری
+                //new HouseWork { Id = 21 , Title = "ساخت و نصب درب و پنجره" ,ImagePath = "\\Images\\HomeServices\\21h.jpg", BasePrice  = 1000 , Description = "" , CategoryId = 12 },
+                //new HouseWork { Id = 22 , Title = "شیشه بری و آینه کاری" ,ImagePath = "\\Images\\HomeServices\\22h.jpg", BasePrice  = 3500 , Description = "" , CategoryId = 12 },
+                //new HouseWork { Id = 23 , Title = "هندریل شیشه ای" , ImagePath = "\\Images\\HomeServices\\23h.jpg", BasePrice  = 2000 , Description = "جدید" , CategoryId = 12 },
+                //new HouseWork { Id = 24 , Title = "پارتیشن شیشه ای" ,ImagePath = "\\Images\\HomeServices\\24h.jpg", BasePrice  = 1000 , Description = "" , CategoryId = 12 },
+                //new HouseWork { Id = 25 , Title = "نصب و تعمیر درب اتوماتیک" ,ImagePath = "\\Images\\HomeServices\\25h.jpg", BasePrice  = 3500 , Description = "" , CategoryId = 12 },
 
-                //باغبانی
-                new HouseWork { Id = 26 , Title = " مشاوره گل و گیاه" , ImagePath = "\\Images\\HomeServices\\26h.png",BasePrice  = 1000 , Description = "به صورت تخصصی" , CategoryId = 13 },
-                new HouseWork { Id = 27 , Title = "تشخیص و کنترل آفت" ,ImagePath = "\\Images\\HomeServices\\27h.jpg", BasePrice  = 3500 , Description = "" , CategoryId = 13 },
-                new HouseWork { Id = 28 , Title = "رسیگی به فضای سبز" ,ImagePath = "\\Images\\HomeServices\\28h.jpg", BasePrice  = 2000 , Description = "" , CategoryId = 13 },
+                ////باغبانی
+                //new HouseWork { Id = 26 , Title = " مشاوره گل و گیاه" , ImagePath = "\\Images\\HomeServices\\26h.png",BasePrice  = 1000 , Description = "به صورت تخصصی" , CategoryId = 13 },
+                //new HouseWork { Id = 27 , Title = "تشخیص و کنترل آفت" ,ImagePath = "\\Images\\HomeServices\\27h.jpg", BasePrice  = 3500 , Description = "" , CategoryId = 13 },
+                //new HouseWork { Id = 28 , Title = "رسیگی به فضای سبز" ,ImagePath = "\\Images\\HomeServices\\28h.jpg", BasePrice  = 2000 , Description = "" , CategoryId = 13 },
 
                 //نظافت و پذیرایی
                 new HouseWork { Id = 29 , Title = "سرویس عادی نظافت" ,ImagePath = "\\Images\\HomeServices\\29h.jpg", BasePrice  = 1000 , Description = "" , CategoryId = 14 },

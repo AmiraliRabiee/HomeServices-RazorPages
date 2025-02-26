@@ -8,17 +8,23 @@ namespace App.Domain.Services.HomeService
     public class OrderService(IOrderRepository _orderRepository) : IOrderService
     {
 
-        public Task ChangeToExpertSelection(Order model, CancellationToken cancellationToken)
-            => _orderRepository.ChangeToExpertSelection(model, cancellationToken);
+        public Task ChangeToExpertSelection(int id, CancellationToken cancellationToken)
+            => _orderRepository.ChangeToExpertSelection(id, cancellationToken);
 
-        Task IOrderService.ChangeToDone(Order model, CancellationToken cancellationToken)
-            => _orderRepository.ChangeToDone(model, cancellationToken);
+        public Task<Result> CheckIsConfrim(int id, CancellationToken cancellationToken)
+            => _orderRepository.CheckIsConfrim(id, cancellationToken);
 
-        Task IOrderService.ChangeToNewlyRegistered(Order model, CancellationToken cancellationToken)
-            => _orderRepository.ChangeToNewlyRegistered(model, cancellationToken);
+        public Task<Result> CheckIsFinish(int id, CancellationToken cancellationToken)
+            => _orderRepository.CheckIsFinish(id, cancellationToken);
 
-        Task IOrderService.ChangeToWaitingForService(Order model, CancellationToken cancellationToken)
-            => _orderRepository.ChangeToWaitingForService(model, cancellationToken);
+        Task IOrderService.ChangeToDone(int id, CancellationToken cancellationToken)
+            => _orderRepository.ChangeToDone(id, cancellationToken);
+
+        Task IOrderService.ChangeToNewlyRegistered(int id, CancellationToken cancellationToken)
+            => _orderRepository.ChangeToNewlyRegistered(id, cancellationToken);
+
+        Task IOrderService.ChangeToWaitingForService(int id, CancellationToken cancellationToken)
+            => _orderRepository.ChangeToWaitingForService(id, cancellationToken);
 
         Task<Result> IOrderService.Create(Order order, CancellationToken cancellationToken)
             => _orderRepository.CreateOrder(order, cancellationToken);

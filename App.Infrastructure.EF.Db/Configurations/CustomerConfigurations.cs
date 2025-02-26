@@ -25,9 +25,15 @@ namespace App.Infrastructure.EFCore.Configurations
                 .HasForeignKey(c => c.CityId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+
+            builder.HasOne(c => c.User)
+                .WithOne(u => u.Customer)
+                .HasForeignKey<Customer>(c => c.Id)
+                .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasData(new List<Customer>
             {
-                new Customer{Id = 1 , Address = "اینجا" , CityId = 1 , IsDeleted = false , AppUserId = 2}
+                new Customer{Id = 1 , Address = "اینجا" , CityId = 1 , IsDeleted = false }
             });
         }
     }

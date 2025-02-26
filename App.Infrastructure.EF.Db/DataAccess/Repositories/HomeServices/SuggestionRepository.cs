@@ -2,7 +2,7 @@
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites;
 using App.Domain.Core.Entites.OutputResult;
-using App.Infrastructure.DataBase.EFCore;
+using App.Infrastructure.EFCore.DataBase.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
@@ -159,6 +159,11 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
                 throw new Exception(".لیست سفارش ها خالی میباشد");
 
             return suggestions;
+        }
+
+        public int GetCount(int id)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

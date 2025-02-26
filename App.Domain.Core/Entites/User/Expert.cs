@@ -14,7 +14,7 @@ namespace App.Domain.Core.Entites.User
         public string? Biographi { get; set; }
         public bool IsDeleted { get; set; } = false;
         public int CityId { get; set; }
-        public int AppUserId { get; set; }
+        //public int AppUserId { get; set; }
 
         public List<ExpertHouseWork>? ExpertWorksSkills { get; set; } = new();
         public AppUser? User { get; set; }

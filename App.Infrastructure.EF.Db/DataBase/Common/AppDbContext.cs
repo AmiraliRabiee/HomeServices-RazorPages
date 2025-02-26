@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace App.Infrastructure.DataBase.EFCore
+namespace App.Infrastructure.EFCore.DataBase.Common
 {
     public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     {

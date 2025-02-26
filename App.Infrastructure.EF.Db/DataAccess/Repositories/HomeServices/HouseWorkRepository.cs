@@ -4,10 +4,10 @@ using App.Domain.Core.Dto.Dashboard;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
-using App.Infrastructure.DataBase.EFCore;
+using App.Infrastructure.EFCore.DataBase.Common;
 using Microsoft.EntityFrameworkCore;
 
-namespace App.Infrastructure.EFCore.DataAccess.Repositories
+namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
 {
     public class HouseWorkRepository(AppDbContext _appDbContext) : IHouseWorkRepository
     {

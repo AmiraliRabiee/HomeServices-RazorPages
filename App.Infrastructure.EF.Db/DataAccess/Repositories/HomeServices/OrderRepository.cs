@@ -2,7 +2,7 @@
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Enum;
-using App.Infrastructure.DataBase.EFCore;
+using App.Infrastructure.EFCore.DataBase.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
@@ -137,35 +137,54 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices
             return orders;
         }
 
-        public async Task ChangeToDone(Order model,CancellationToken cancellationToken)
+        public async Task ChangeToDone(int id,CancellationToken cancellationToken)
         {
             //4
-            var order = await _appDbContext.Orders.FindAsync(model.Id);
+            var order = await _appDbContext.Orders.FindAsync(id);
             order.StausService = StausServiceEnum.Done;
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task ChangeToExpertSelection(Order model, CancellationToken cancellationToken)
+        public async Task ChangeToExpertSelection(int id, CancellationToken cancellationToken)
         {
             //2
-            var order = await _appDbContext.Orders.FindAsync(model.Id);
+            var order = await _appDbContext.Orders.FindAsync(id);
             order.StausService = StausServiceEnum.ExpertSelectionQueue;
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
-        public async Task ChangeToWaitingForService(Order model, CancellationToken cancellationToken)
+        public async Task ChangeToWaitingForService(int id, CancellationToken cancellationToken)
         {
             //3
-            var order = await _appDbContext.Orders.FindAsync(model.Id);
+            var order = await _appDbContext.Orders.FindAsync(id);
             order.StausService = StausServiceEnum.WaitingForService;
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task ChangeToNewlyRegistered(Order model, CancellationToken cancellationToken)
+        public async Task ChangeToNewlyRegistered(int id, CancellationToken cancellationToken)
         {
             //1
-            var order = await _appDbContext.Orders.FindAsync(model.Id);
+            var order = await _appDbContext.Orders.FindAsync(id);
             order.StausService = StausServiceEnum.NewlyRegistered;
             await _appDbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<Result> CheckIsConfrim(int id, CancellationToken cancellationToken)
+        {
+            var result = await _appDbContext.Orders
+                .Where(o => o.Id == id)
+                .AnyAsync(o => o.IsConfrim == true);
+            if(result is true)
+                return new Result { IsSuccess = true};
+            return new Result { IsSuccess = false };
+        }
+        public async Task<Result> CheckIsFinish(int id, CancellationToken cancellationToken)
+        {
+            var result = await _appDbContext.Orders
+                .Where(o => o.Id == id)
+                .AnyAsync(o => o.IsFinish == true);
+            if (result is true)
+                return new Result { IsSuccess = true };
+            return new Result { IsSuccess = false };
         }
 
         //public async Task<List<Order>> GetOrdersForExpert(Order model , CancellationToken cancellationToken)

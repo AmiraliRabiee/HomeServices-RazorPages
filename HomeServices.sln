@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Fram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeServices-RazorPage", "HomeServices-RazorPage\HomeServices-RazorPage.csproj", "{9B3BFF11-048F-4FC9-AA96-1E5217714163}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.InfraAccess.EFCore", "App.InfraAccess.EFCore\App.InfraAccess.EFCore.csproj", "{E8FBCDE5-2EFF-4617-8C98-CC6D444D2941}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{9B3BFF11-048F-4FC9-AA96-1E5217714163}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B3BFF11-048F-4FC9-AA96-1E5217714163}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B3BFF11-048F-4FC9-AA96-1E5217714163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8FBCDE5-2EFF-4617-8C98-CC6D444D2941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8FBCDE5-2EFF-4617-8C98-CC6D444D2941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8FBCDE5-2EFF-4617-8C98-CC6D444D2941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8FBCDE5-2EFF-4617-8C98-CC6D444D2941}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,5 +82,6 @@ Global
 		{DF7AC969-10C9-473A-8AA1-EB281DD95146} = {A593AAAD-BAFC-4626-97A3-0380460993EF}
 		{C9EDB105-7B64-45E9-BF4E-478C97E988CC} = {DF7AC969-10C9-473A-8AA1-EB281DD95146}
 		{9B3BFF11-048F-4FC9-AA96-1E5217714163} = {9A50934E-4030-4632-81ED-621812C26455}
+		{E8FBCDE5-2EFF-4617-8C98-CC6D444D2941} = {813030AA-730C-4F2B-B2AA-DBD1B0115F3A}
 	EndGlobalSection
 EndGlobal

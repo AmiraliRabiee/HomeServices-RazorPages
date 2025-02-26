@@ -11,9 +11,11 @@ namespace App.Domain.Core.Contracts.Repository.HomeServices
         Task<Result> UpdateOrder(Order order, CancellationToken cancellationToken);
         Task<Order> GetOrderById(int id, CancellationToken cancellationToken);
         Task<List<SummOrderDto>> GetOrders();
-        Task ChangeToNewlyRegistered(Order model, CancellationToken cancellationToken);
-        Task ChangeToExpertSelection(Order model, CancellationToken cancellationToken);
-        Task ChangeToWaitingForService(Order model, CancellationToken cancellationToken);
-        Task ChangeToDone(Order model, CancellationToken cancellationToken);
+        Task ChangeToNewlyRegistered(int id, CancellationToken cancellationToken);
+        Task ChangeToExpertSelection(int id, CancellationToken cancellationToken);
+        Task ChangeToWaitingForService(int id, CancellationToken cancellationToken);
+        Task ChangeToDone(int id, CancellationToken cancellationToken);
+        Task<Result> CheckIsConfrim(int id, CancellationToken cancellationToken);
+        Task<Result> CheckIsFinish(int id, CancellationToken cancellationToken);
     }
 }

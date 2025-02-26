@@ -14,6 +14,7 @@ public class Order
     // ساعت اجرا
     public TimeOnly RunningTime { get; set; }
     public DateTime? CreateAt { get; set; }
+    public string? PhoneNumber { get; set; }
     public StausServiceEnum StausService { get; set; }
     public bool IsDeleted { get; set; } = false;
     public bool? IsConfrim { get; set; }

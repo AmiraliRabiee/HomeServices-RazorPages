@@ -13,5 +13,6 @@ namespace App.Domain.Core.Contracts.Service.HomeServices
         Task<SummSuggestionDto> GetSuggestionDto(int id, CancellationToken cancellationToken);
         Task<List<SummSuggestionDto>> GetAllDto(CancellationToken cancellationToken);
         Task<List<SummSuggestionDto>> GetSuggestionDetails(int id, CancellationToken cancellationToken);
+        int GetCount(int id);
     }
 }

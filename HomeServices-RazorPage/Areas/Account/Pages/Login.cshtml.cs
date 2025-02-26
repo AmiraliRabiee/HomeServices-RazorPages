@@ -16,7 +16,7 @@ namespace HomeServices_RazorPage.Areas.Account.Pages
     {
 
         [BindProperty]
-        public LoginViewModel PageModel { get; set; }
+        public LoginViewModel PageUserModel { get; set; }
 
         public IActionResult OnGet()
         {
@@ -25,7 +25,7 @@ namespace HomeServices_RazorPage.Areas.Account.Pages
 
         public async Task<IActionResult> OnPost()
         {
-            var result = await userAppService.Login(PageModel.Username, PageModel.Password);
+            var result = await userAppService.Login(PageUserModel.Username, PageUserModel.Password);
             if (result.Succeeded)
                 return RedirectToPage("Index");
             return Page();

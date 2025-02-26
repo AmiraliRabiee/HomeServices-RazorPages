@@ -16,6 +16,9 @@ namespace App.Domain.Services.HomeService
         public async Task<List<SummSuggestionDto>> GetAllDto(CancellationToken cancellationToken)
             => await _suggestionRepository.GetAllDto(cancellationToken);
 
+        public int GetCount(int id)
+             => _suggestionRepository.GetCount(id);
+
         public async Task<Suggestion> GetnById(int id, CancellationToken cancellationToken)
             => await  _suggestionRepository.GetSuggestionById(id, cancellationToken);
 

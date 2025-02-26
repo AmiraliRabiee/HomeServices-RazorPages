@@ -14,11 +14,10 @@ using App.Domain.Core.Entites.User;
 using App.Domain.Services.Base;
 using App.Domain.Services.HomeService;
 using App.Domain.Services.User;
-using App.Infrastructure.DataBase.EFCore;
-using App.Infrastructure.EFCore.DataAccess.Repositories;
 using App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities;
 using App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices;
 using App.Infrastructure.EFCore.DataAccess.Repositories.User;
+using App.Infrastructure.EFCore.DataBase.Common;
 using Framework;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +26,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages()
+    .AddRazorRuntimeCompilation();
 
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -115,6 +115,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+//app.MapStaticAssests();
 
 app.MapRazorPages();
 

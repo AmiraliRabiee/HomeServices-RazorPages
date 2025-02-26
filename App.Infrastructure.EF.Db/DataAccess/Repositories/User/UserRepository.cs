@@ -2,12 +2,12 @@
 using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
-using App.Infrastructure.DataBase.EFCore;
+using App.Infrastructure.EFCore.DataBase.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 
-namespace App.Infrastructure.EFCore.DataAccess.Repositories
+namespace App.Infrastructure.EFCore.DataAccess.Repositories.User
 {
     public class UserRepository(AppDbContext _appDbContext) : IUserRepository
     {
@@ -50,7 +50,7 @@ namespace App.Infrastructure.EFCore.DataAccess.Repositories
                     return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
 
                 _appDbContext.Users.Remove(currentUser);
-                 await _appDbContext.SaveChangesAsync(cancellationToken);
+                await _appDbContext.SaveChangesAsync(cancellationToken);
                 return new Result { IsSuccess = true, Message = "با موفقیت حذف شد" };
             }
             catch (Exception ex)

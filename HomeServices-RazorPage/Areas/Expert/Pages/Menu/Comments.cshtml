@@ -1,0 +1,102 @@
+﻿@page
+@model HomeServices_RazorPage.Areas.Expert.Pages.Menu.CommentsModel
+
+@{
+}
+
+<div class="goodup-dashboard-wrap gray px-4 py-5">
+    <a class="mobNavigation" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="MobNav">
+        <i class="fas fa-bars ms-2"></i>منو
+    </a>
+    <div class="collapse" id="MobNav">
+        <div class="goodup-dashboard-nav sticky-top">
+            <div class="goodup-dashboard-inner">
+                <ul data-submenu-title="منو">
+                    <li><a asp-page="ExpertDashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                    <li><a asp-page="orders"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
+                    <li><a asp-page="createSuggestion"><i class="lni lni-add-files ms-2"></i>ثبت پیشنهاد</a></li>
+                    <li><a asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نطرات کاربران</a></li>
+                </ul>
+                <ul data-submenu-title="حساب کاربری">
+                    <li><a asp-page="Profile"><i class="lni lni-user ms-2"></i> تنظیمات </a></li>
+                    <li><a asp-page="/logout" asp-area=""><i class="lni lni-power-switch ms-2"></i>خروج</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-9 col-md-8">
+            <div class="bg-white rounded mb-4">
+                <div class="jbd-01 px-4 py-4">
+                    <div class="jbd-details mb-4">
+                        <h5 class="ft-bold fs-lg">امتیاز و نظر کاربران</h5>
+                        <div class="reviews-comments-wrap">
+
+                            <!-- Review Comment Item -->
+                            <div class="reviews-comments-item mb-4">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <div class="review-comments-avatar">
+                                            <img src="assets/img/t-1.png" class="img-fluid rounded-circle" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="reviews-comments-item-text">
+                                            <h4>امید حسن زاده<span class="reviews-comments-item-date d-flex align-items-center"><i class="ti-calendar theme-cl ms-1"></i>27 آبان 1400</span></h4>
+                                            <p>" سلام. من و دوستانم بيش از 5 بار است كه از بوفه صبحانه استفاده كرديم. به عنوان صبحانه خيلي خوب است رفتار ميزبان‌ها بسيار محترمانه است. نظر برخي از كاربران مبني بر كم بودن تنوع جاي سوال دارد. "</p>
+                                            <div class="pull-left reviews-reaction">
+                                                <a href="#" class="comment-love active"><i class="ti-heart"></i> 07</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Review Comment Item End -->
+                            <!-- Repeat Review Comment Items as Needed -->
+                            <div class="reviews-comments-item mb-4">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <div class="review-comments-avatar">
+                                            <img src="assets/img/t-1.png" class="img-fluid rounded-circle" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="reviews-comments-item-text">
+                                            <h4>امید حسن زاده<span class="reviews-comments-item-date d-flex align-items-center"><i class="ti-calendar theme-cl ms-1"></i>27 آبان 1400</span></h4>
+                                            <p>" سلام. من و دوستانم بيش از 5 بار است كه از بوفه صبحانه استفاده كرديم. به عنوان صبحانه خيلي خوب است رفتار ميزبان‌ها بسيار محترمانه است. نظر برخي از كاربران مبني بر كم بودن تنوع جاي سوال دارد. "</p>
+                                            <div class="pull-left reviews-reaction">
+                                                <a href="#" class="comment-love active"><i class="ti-heart"></i> 07</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pagination -->
+                            <div class="clearfix"></div>
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span class="fas fa-arrow-circle-right"></span>
+                                        <span class="sr-only">قبل</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span class="fas fa-arrow-circle-left"></span>
+                                        <span class="sr-only">بعد</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

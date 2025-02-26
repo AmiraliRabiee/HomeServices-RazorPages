@@ -8,7 +8,7 @@ namespace HomeServices_RazorPage.Pages
     public class RegisterModel(IUserAppService _userAppService) : PageModel
     {
         [BindProperty]
-        public CreateUserDto User { get; set; }
+        public CreateUserDto User { get; set; } = new CreateUserDto();
 
 
         public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken)
@@ -17,7 +17,8 @@ namespace HomeServices_RazorPage.Pages
 
             if (result.Succeeded)
             {
-                return RedirectToPage("/Login", new { area = "Account" });
+                //return RedirectToPage("/Login", new { area = "Account" });
+                return RedirectToPage("/login");
             }
 
             foreach (var error in result.Errors)

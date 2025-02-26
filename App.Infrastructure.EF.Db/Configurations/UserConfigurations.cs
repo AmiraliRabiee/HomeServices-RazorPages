@@ -11,20 +11,20 @@ namespace App.Infrastructure.EFCore.Configurations
         {
             builder.HasKey(u => u.Id);
 
-            builder.HasOne(u => u.Expert)
-                .WithOne()
-                .HasForeignKey<Expert>(e => e.Id)
-                .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasOne(u => u.Expert)
+            //    .WithOne()
+            //    .HasForeignKey<Expert>(e => e.Id)
+            //    .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(u => u.Customer)
-                .WithOne()
-                .HasForeignKey<Customer>(c => c.Id)
-                .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasOne(u => u.Customer)
+            //    .WithOne()
+            //    .HasForeignKey<Customer>(c => c.Id)
+            //    .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(a => a.Admin)
-                .WithOne()
-                .HasForeignKey<Admin>(a => a.Id)
-                .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasOne(a => a.Admin)
+            //    .WithOne()
+            //    .HasForeignKey<Admin>(a => a.Id)
+            //    .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(u => u.Balance).IsRequired().HasDefaultValue(1000);
         }
@@ -81,7 +81,6 @@ namespace App.Infrastructure.EFCore.Configurations
                 Balance = 1000,
                 RoleId = 3,
                 RegisterAt = DateTime.Now,
-
             }
         };
 

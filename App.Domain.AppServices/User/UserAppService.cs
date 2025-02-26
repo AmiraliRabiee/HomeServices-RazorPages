@@ -80,7 +80,6 @@ namespace App.Domain.AppServices.User
                 {
                     Address = model.Address,
                     CityId = model.CityId,
-                    Id = user.Id
                 };
             }
             else if (model.RoleId == 3)
@@ -88,7 +87,6 @@ namespace App.Domain.AppServices.User
                 user.Expert = new Expert()
                 {
                     CityId = model.CityId,
-                     Id = user.Id
                 };
             }
             user.RegisterAt = DateTime.Now;

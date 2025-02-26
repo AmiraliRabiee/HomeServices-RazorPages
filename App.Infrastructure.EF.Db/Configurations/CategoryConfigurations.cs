@@ -20,7 +20,7 @@ namespace App.Infrastructure.EFCore.Configurations
             builder.HasData(new List<Category>
             {
                 new Category { Id = 1,Title = "تاسیسات" , ImagePath = "\\Images\\Categories\\tasisat1.jpg", ParentId = null},
-                new Category { Id = 2, Title = "خانه"  , ImagePath = "\\Images\\Categories\\Home.jpg", ParentId = null },
+                //new Category { Id = 2, Title = "خانه"  , ImagePath = "\\Images\\Categories\\Home.jpg", ParentId = null },
                 new Category { Id = 3,Title = "نظافت"  , ImagePath = "\\Images\\Categories\\3 فعلی.jpg", ParentId = null},
                 new Category { Id = 4,Title = "زیبایی"  , ImagePath = "\\Images\\Categories\\zibaii.jpg", ParentId = null},
                 new Category { Id = 5,Title = "تعمیرات اشیا" , ImagePath = "\\Images\\Categories\\tamirat.jpg" , ParentId = null},
@@ -32,9 +32,9 @@ namespace App.Infrastructure.EFCore.Configurations
                 new Category { Id = 9,Title = "لوله کشی" , ParentId = 1 , ImagePath = "\\Images\\Categories\\9 فعلی.png"},
                 new Category { Id = 10,Title = "سرمایش و گرمایش" , ParentId = 1 , ImagePath = "\\Images\\Categories\\10 فعلی.png"},
 
-                new Category { Id = 11, Title = "تعمیرات ساختمان" , ParentId = 2 , ImagePath = "\\Images\\Categories\\11 فعلی.png" },
-                new Category { Id = 12,Title = "شیشه کاری" , ParentId = 2 , ImagePath = "\\Images\\Categories\\12 فعلی.jpg"},
-                new Category { Id = 13,Title = "باغبانی" , ParentId = 2 , ImagePath = "\\Images\\Categories\\13 فعلی.png"},
+                //new Category { Id = 11, Title = "تعمیرات ساختمان" , ParentId = 2 , ImagePath = "\\Images\\Categories\\11 فعلی.png" },
+                //new Category { Id = 12,Title = "شیشه کاری" , ParentId = 2 , ImagePath = "\\Images\\Categories\\12 فعلی.jpg"},
+                //new Category { Id = 13,Title = "باغبانی" , ParentId = 2 , ImagePath = "\\Images\\Categories\\13 فعلی.png"},
 
                 new Category { Id = 14,Title = "نظافت و پذیرایی" , ParentId = 3 , ImagePath = "\\Images\\Categories\\916efcce-9fdb-45ac-9d9b-8b821748a1f5-category_image (2).png"},
                 new Category { Id = 15, Title = "شستشو" , ParentId = 3 , ImagePath = "\\Images\\Categories\\15فعلی.png" },

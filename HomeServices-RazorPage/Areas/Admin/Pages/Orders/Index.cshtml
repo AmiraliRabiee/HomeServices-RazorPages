@@ -48,17 +48,7 @@
                                     <td>@order.StausService.GetDisplayName()</td>
                                     <td>
                                         <a asp-page="UpdateOrder" asp-route-Id="@order.Id" class="btn btn-info">ویرایش</a>
-                                        
                                         <a asp-page="/suggestions/index" asp-route-Id="@order.Id" class="btn btn-primary">پیشنهاد ها</a>
-
-@*                                         <a asp-page="Updateorder" asp-route-Id="@order.Id" class="btn btn-info">ویرایش</a>
-
-                                        <a onclick="return confirm('آیا از حذف این دسته بندی اطمینان دارید؟')"
-                                           asp-page-handler="Delete"
-                                           asp-route-id="@order.Id"
-                                           class="btn btn-danger">
-                                            حذف
-                                        </a> *@
                                     </td>
                                 </tr>
                             }

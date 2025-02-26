@@ -1,7 +1,7 @@
 ﻿using App.Domain.Core.Contracts.Repository.User;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
-using App.Infrastructure.DataBase.EFCore;
+using App.Infrastructure.EFCore.DataBase.Common;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
