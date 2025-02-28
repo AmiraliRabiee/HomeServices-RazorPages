@@ -11,15 +11,6 @@ namespace App.Infrastructure.EFCore.Configurations
 
             builder.Property(c => c.Name).IsRequired().HasMaxLength(100);
 
-            builder.HasMany(x => x.Orders)
-                .WithOne(x => x.City)
-                .HasForeignKey(x => x.CityId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder.HasMany(x => x.Suggestions)
-                .WithOne(x => x.City)
-                .HasForeignKey(x => x.CityId)
-                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasData(new List<City>()
             {

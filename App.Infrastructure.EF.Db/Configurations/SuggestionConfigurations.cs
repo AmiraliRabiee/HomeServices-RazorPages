@@ -10,13 +10,7 @@ namespace App.Infrastructure.EFCore.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Description).HasMaxLength(2000).IsRequired();
-            builder.Property(x => x.SuggestPrice).IsRequired();
             builder.Property(x => x.DeliverDate).IsRequired();
-
-            builder.HasOne(x => x.HouseWork)
-                .WithMany(x => x.Suggestions)
-                .HasForeignKey(x => x.HouseWorkId)
-                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Expert)
                 .WithMany(x => x.Suggestions)
@@ -27,6 +21,11 @@ namespace App.Infrastructure.EFCore.Configurations
                 .WithMany(x => x.Suggestions)
                 .HasForeignKey(x => x.OrderId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasData(new List<Suggestion>
+            {
+                new Suggestion { Id = 1, Description = "آمادگی برای انجام کار با قیمت پایین تر" , DeliverDate = new DateTime(2025,2 ,25), OrderId = 1, ExpertId = 1 }
+            });
         }
     }
 }

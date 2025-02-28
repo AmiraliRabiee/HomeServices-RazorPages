@@ -1,6 +1,6 @@
 ﻿using App.Domain.Core.Entites.User;
 using System.ComponentModel.DataAnnotations;
-namespace App.Domain.Core.Entites
+namespace App.Domain.Core.Entites.Service
 {
     public class HouseWork
     {
@@ -15,23 +15,20 @@ namespace App.Domain.Core.Entites
 
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = "ViewCount must be a positive number.")]
-        public int ViewCount { get; set; }
+        public int? ViewCount { get; set; }
 
         [Required(ErrorMessage = "Base price is required.")]
         [Range(0.01, 5000000, ErrorMessage = "Base price must be between 0.01 and 5,000,000.")]
-        public decimal BasePrice { get; set; }
+        public decimal? BasePrice { get; set; }
         public string? ImagePath { get; set; }
         public bool IsDeleted { get; set; } = false;
 
 
-        public int CategoryId { get; set; }
-        public int? CustomerId { get; set; }
+        public int? CategoryId { get; set; }
 
-        public List<Expert>? Expert { get; set; }
-        public Customer? Customer { get; set; }
+        public List<ExpertHouseWork>? ExpertHouseWorks { get; set; } = new();
         public Category Category { get; set; }
         public List<Order> Orders { get; set; }
-        public List<Suggestion>? Suggestions { get; set; }
         public Image Image { get; set; }
     }
 }

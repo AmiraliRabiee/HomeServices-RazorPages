@@ -1,0 +1,108 @@
+﻿@page
+@using App.Domain.Core.Contracts.AppService
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using HomeServices_RazorPage.Areas.Admin.Pages.Users
+@model UpdateModel
+@{
+    ViewData["Title"] = "هوم سرویس > مدیریت کاربران > ویرایش کاربر";
+
+}
+@inject IBaseDataAppService BaseDataAppService;
+
+<div class="col-lg-12">
+    <div class="portlet box shadow">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                <h3 class="title">
+                    کاربران
+                </h3>
+            </div><!-- /.portlet-title -->
+        </div><!-- /.portlet-heading -->
+        <div class="portlet-body">
+            <div class="top-buttons-box mb-2">
+            </div>
+            <div class="row">
+                @if (!string.IsNullOrEmpty(Model.Message))
+                {
+                    <div class="alert alert-info">@Model.Message</div>
+                }
+                <form enctype="multipart/form-data" id="simple-form" role="form" method="post">
+                    <img style="border-radius : 50%" src="" width="80" height="80" />
+                    <hr />
+
+                    <input type="hidden" asp-for="NewUser.Id" />
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label>نام کاربری</label>
+                            <div class="input-group">
+                                <input asp-for="NewUser.UserName" class="form-control" type="text" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>نام</label>
+                            <div class="input-group">
+                                <input asp-for="NewUser.FirstName" class="form-control" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>نام خانوادگی</label>
+                            <div class="input-group">
+                                <input asp-for="NewUser.LastName" class="form-control" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>ایمیل</label>
+                            <div class="input-group">
+                                <input asp-for="NewUser.Email" class="form-control" type="email" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <select asp-for="NewUser.RoleId" class="form-control" id="roleSelect" required>
+                                <option value="">انتخاب نقش</option>
+                                <option value="1">ادمین</option>
+                                <option value="2">مشتری</option>
+                                <option value="3">متخصص</option>
+                            </select>
+                            <span asp-validation-for="@Model.NewUser.RoleId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group relative">
+                            <input asp-for="NewUser.ProfileImgFile" type="file" class="form-control">
+                            <label>آپلود عکس</label>
+                            <div class="input-group round">
+                                <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success">
+                                        <i class="icon-picture"></i>
+                                        آپلود عکس
+                                        <div class="paper-ripple">
+                                            <div class="paper-ripple__background"></div>
+                                            <div class="paper-ripple__waves"></div>
+                                        </div>
+                                    </button>
+                                </span>
+                            </div><!-- /.input-group -->
+                            <div class="help-block"></div>
+                        </div> 
+
+                    </div>
+                    <hr>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">
+                            <i class="icon-check"></i>
+                            ذخیره
+                        </button>
+                        <a asp-page="Index" class="btn btn-warning">
+                            بازگشت
+                        </a>
+                    </div>
+                 </form>
+             </div>
+        </div><!-- /.portlet-body -->
+    </div><!-- /.portlet -->
+</div><!-- /.col-lg-12 -->

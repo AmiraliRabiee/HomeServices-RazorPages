@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Entites;
+using App.Domain.Core.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
@@ -13,7 +14,7 @@ namespace App.Infrastructure.EFCore.Configurations
 
             builder.Property(x => x.Description).HasMaxLength(2000).IsRequired();
             builder.Property(x => x.CompletionDate).IsRequired();
-            builder.Property(x => x.RunningTime).IsRequired(); 
+            builder.Property(x => x.RunningTime).IsRequired();
 
 
             builder.HasOne(h => h.HouseWork)
@@ -23,13 +24,47 @@ namespace App.Infrastructure.EFCore.Configurations
 
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.Orders)
-                .HasForeignKey(x => x.CustomerId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(x => x.CustomerId);
 
-            builder.HasOne(o => o.Expert)
-                .WithMany(o => o.AcceptedOrders)
-                .HasForeignKey(o => o.ExpertId)
-                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasData(new List<Order>
+            {
+                new Order {
+                Id = 1,
+                Description = "فوری",
+                HouseWorkId = 5,
+                CompletionDate = new DateTime(2025, 2, 21),
+                RunningTime = new TimeOnly(11),
+                CreateAt = DateTime.Now,
+                IsDeleted = false,
+                StausService = StausServiceEnum.NewlyRegistered,
+                CustomerId = 1
+                },
+
+                new Order {
+                Id = 2,
+                Description = "",
+                HouseWorkId = 6,
+                CompletionDate = new DateTime(2025, 2, 21),
+                RunningTime = new TimeOnly(10,30),
+                CreateAt = DateTime.Now,
+                IsDeleted = false,
+                StausService = StausServiceEnum.NewlyRegistered,
+                CustomerId = 1
+                },
+
+                new Order {
+                Id = 3,
+                Description = "فوری",
+                HouseWorkId = 30,
+                CompletionDate = new DateTime(2025, 2, 21),
+                RunningTime = new TimeOnly(4,30),
+                CreateAt = DateTime.Now,
+                IsDeleted = false,
+                StausService = StausServiceEnum.NewlyRegistered,
+                CustomerId = 1
+                }
+            });
         }
     }
 }

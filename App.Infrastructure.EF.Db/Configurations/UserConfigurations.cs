@@ -1,6 +1,4 @@
-﻿using App.Domain.Core.Entites;
-using App.Domain.Core.Entites.User;
-using App.Domain.Core.Enums;
+﻿using App.Domain.Core.Entites.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -12,17 +10,6 @@ namespace App.Infrastructure.EFCore.Configurations
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.HasKey(u => u.Id);
-
-            builder.HasOne(u => u.Expert)
-            .WithOne()
-            .HasForeignKey<Expert>(e => e.Id)
-            .OnDelete(DeleteBehavior.NoAction);
-
-            builder.HasOne(u => u.Customer)
-            .WithOne()
-            .HasForeignKey<Customer>(c => c.Id)
-            .OnDelete(DeleteBehavior.NoAction);
-
             builder.Property(u => u.Balance).IsRequired().HasDefaultValue(1000);
         }
 
@@ -38,11 +25,11 @@ namespace App.Infrastructure.EFCore.Configurations
             new AppUser()
             {
                 Id = 1,
-
                 UserName = "Admin@gmail.com",
+                NormalizedEmail = "ADMIN@GMAIL.COM",
                 LockoutEnabled = false,
-                Password = "123456",
-                RePassword = "123456",
+                Email = "Admin@gmail.com",
+                NormalizedUserName = "ADMIN@GMAIL.COM",
                 Balance = 1000,
                 FirstName = "Admin",
                 LastName = "Admin",
@@ -55,9 +42,10 @@ namespace App.Infrastructure.EFCore.Configurations
             {
                  Id = 2,
                 UserName = "Customer@gmail.com",
+                NormalizedUserName = "CUSTOMER@GMAIL.COM",
                 LockoutEnabled = false,
-                Password = "456789",
-                RePassword = "456789",
+                Email = "Customer@gmail.com",
+                NormalizedEmail ="CUSTOMER@GMAIL.COM",
                 FirstName = "Amir",
                 LastName = "Amiri",
                 SecurityStamp = Guid.NewGuid().ToString(),
@@ -70,16 +58,16 @@ namespace App.Infrastructure.EFCore.Configurations
             {
                  Id = 3,
                 UserName = "Expert@gmail.com",
+                NormalizedUserName = "EXPERT@GMAIL.COM",
                 LockoutEnabled = false,
-                Password = "258852",
-                RePassword = "258852",
+                Email = "Expert@gmail.com",
+                NormalizedEmail = "EXPERT@GMAIL.COM",
                 FirstName = "Amir",
                 LastName = "Amiri",
                 SecurityStamp = Guid.NewGuid().ToString(),
                 Balance = 1000,
                 RoleId = 3,
                 RegisterAt = DateTime.Now,
-
             }
         };
 

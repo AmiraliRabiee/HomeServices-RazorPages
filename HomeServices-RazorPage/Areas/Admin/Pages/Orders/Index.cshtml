@@ -1,0 +1,77 @@
+﻿@page
+@using App.Domain.Core.Contracts.AppService
+@using App.Domain.Core.Enum
+@using App.Domain.Core.Helpers
+@model HomeServices_RazorPage.Areas.Admin.Pages.Orders.IndexModel
+@{
+}
+@inject IOrderAppService _orderAppService
+
+<div class="col-lg-12">
+    <div class="portlet box shadow">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                <h3 class="title">سفارشات</h3>
+            </div>
+        </div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped" id="data-table">
+                        <thead>
+                            <tr>
+                                <th class="p-low"><input type="checkbox" id="btn-check-all-toggle"></th>
+                                <th>عنوان خدمات</th>
+                                <th>توضیحات</th>
+                                <th>تاریخ اجرا</th>
+                                <th>زمان اجرا</th>
+                                <th>شناسه مشتری</th>
+                                <th>وضعیت سفارش</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.Orders)
+                            {
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>@order.HouseWork</td>
+                                    <td>@order.Description</td>
+                                    <td>@order.CompletionDate.ToShortDateString()</td>
+                                    <td>@order.RunningTime</td>
+                                    <td>@order.CustomerId</td>
+                                    <td>
+                                        <form method="post" asp-page-handler="ChangeStatus" asp-route-Id="@order.Id">
+                                            <input type="hidden" name="orderId" value="@order.Id" />
+                                            <div class="input-group">
+                                                <select class="form-control" name="status" required>
+                                                    <option value="">انتخاب وضعیت</option>
+                                                    @foreach (var status in Enum.GetValues(typeof(StausServiceEnum)))
+                                                    {
+                                                        var statusEnum = (StausServiceEnum)status;
+                                                        <option value="@statusEnum" selected="@(statusEnum == order.StausService ? "selected" : null)">
+                                                            @statusEnum.GetStatusEnumItems()
+                                                        </option>
+                                                    }
+                                                </select>
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-success">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a asp-page="/suggestions/index" asp-route-Id="@order.Id" class="btn btn-info">پیشنهادها</a>
+@*                                         <a asp-page-handler="ChangeStatus" asp-route-Id="@order.Id" class="btn btn-danger">تغییر وضعیت</a>
+ *@                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

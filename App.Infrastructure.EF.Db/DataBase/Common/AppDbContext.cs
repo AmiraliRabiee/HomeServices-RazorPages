@@ -1,11 +1,11 @@
-﻿using App.Domain.Core.Entites;
+﻿using App.Domain.Core.Entites.Service;
 using App.Domain.Core.Entites.User;
 using App.Infrastructure.EFCore.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace App.Infrastructure.DataBase.EFCore
+namespace App.Infrastructure.EFCore.DataBase.Common
 {
     public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     {
@@ -23,7 +23,7 @@ namespace App.Infrastructure.DataBase.EFCore
             modelBuilder.ApplyConfiguration(new CustomerConfigurations());
             modelBuilder.ApplyConfiguration(new ExpertConfigurations());
             modelBuilder.ApplyConfiguration(new UserConfigurations());
-
+            modelBuilder.ApplyConfiguration(new ExpertHouseWorkConfigurations());
 
             UserConfigurations.SeedUsers(modelBuilder);
 
@@ -41,5 +41,6 @@ namespace App.Infrastructure.DataBase.EFCore
         public DbSet<Expert> Experts { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<ExpertHouseWork> ExpertHouseWorks { get; set; }
     }
 }

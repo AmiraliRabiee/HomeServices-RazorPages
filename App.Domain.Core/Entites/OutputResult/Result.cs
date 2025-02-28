@@ -1,4 +1,4 @@
-﻿namespace App.Domain.Core.Entites.Result
+﻿namespace App.Domain.Core.Entites.OutputResult
 {
     public class Result
     {
