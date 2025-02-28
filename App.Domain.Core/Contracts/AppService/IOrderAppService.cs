@@ -16,6 +16,7 @@ namespace App.Domain.Core.Contracts.AppService
         //Task<Result> Update(Order order, CancellationToken cancellationToken);
         //Task<Order> GetOrderById(int id, CancellationToken cancellationToken);
         Task<List<SummOrderDto>> GetAll();
+        Task<Result> ChangeStatus(int id, CancellationToken cancellationToken);
         //Task ChangeToNewlyRegistered(Order model, CancellationToken cancellationToken);
         //Task ChangeToExpertSelection(Order model, CancellationToken cancellationToken);
         //Task ChangeToWaitingForService(Order model, CancellationToken cancellationToken);

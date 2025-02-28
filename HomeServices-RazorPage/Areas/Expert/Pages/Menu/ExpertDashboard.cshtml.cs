@@ -1,10 +1,12 @@
 using App.Domain.Core.Contracts.AppService;
 using App.Domain.Core.Dto.HomeService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
 {
+    [Authorize(Roles = "Expert")]
     public class ExpertDashboardModel(IHouseWorkAppService _houseWorkAppService) : PageModel
     {
         [BindProperty]

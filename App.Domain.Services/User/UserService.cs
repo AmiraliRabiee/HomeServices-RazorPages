@@ -43,5 +43,8 @@ namespace App.Domain.Services.User
 
         public Task<Result> UpdateUser(UserDto user, CancellationToken cancellationToken)
             => _userRepository.UpdateUser(user, cancellationToken);
+
+        public Task<Result> UpdateUserDto(int id, CancellationToken cancellationToken)
+            => _userRepository.UpdateUserDto(id, cancellationToken);
     }
 }

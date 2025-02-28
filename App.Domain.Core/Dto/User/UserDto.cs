@@ -7,7 +7,7 @@ namespace App.Domain.Core.Dto.User
     public class UserDto
     {
         public int? Id { get; set; }
-        public Customer Customer { get; set; }
+        public CustomerDto Customer { get; set; }
         public Expert Expert { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

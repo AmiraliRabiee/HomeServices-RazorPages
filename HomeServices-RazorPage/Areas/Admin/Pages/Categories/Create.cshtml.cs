@@ -1,13 +1,13 @@
-using App.Domain.AppServices.HomeService;
 using App.Domain.Core.Contracts.AppService;
 using App.Domain.Core.Dto.Dashboard;
 using App.Domain.Core.Entites.Service;
-using Azure.Messaging;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HomeServices_RazorPage.Areas.Admin.Pages.Categories
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel(ICategoryAppService _categoryAppService) : PageModel
     {
         [BindProperty]
@@ -16,6 +16,8 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Categories
         public CategoryDto Category { get; set; }
         [BindProperty]
         public string Message { get; set; }
+        [BindProperty]
+        public bool IsSuccess { get; set; }
 
         public void OnGet()
         {

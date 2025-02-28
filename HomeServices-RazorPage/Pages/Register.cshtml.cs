@@ -13,19 +13,20 @@ namespace HomeServices_RazorPage.Pages
 
         public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken)
         {
-            var result = await _userAppService.Register(User, cancellationToken);
-
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                //return RedirectToPage("/Login", new { area = "Account" });
-                return RedirectToPage("/login");
-            }
+                var result = await _userAppService.Register(User, cancellationToken);
 
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
+                if (result.Succeeded)
+                {
+                    return RedirectToPage("index");
+                }
 
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
             return Page();
         }
     }

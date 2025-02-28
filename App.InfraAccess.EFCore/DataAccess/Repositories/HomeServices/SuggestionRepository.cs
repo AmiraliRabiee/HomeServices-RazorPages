@@ -108,10 +108,11 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
 
         public async Task<List<SummSuggestionDto>> GetSuggestionDetails(int id, CancellationToken cancellationToken)
         {
-            var suggestions = await _appDbContext
-                .Suggestions.Where(s => s.OrderId == id)
+            var suggestions = await _appDbContext.Suggestions
+                .Where(s => s.OrderId == id)
             .Select(s => new SummSuggestionDto
             {
+                ExpertId = s.Expert.Id,
                 HouseWork = s.Order.HouseWork.Title,
                 Description = s.Description,
                 DeliverDate = s.DeliverDate.ToString("yyyy-MM-dd"),

@@ -15,5 +15,7 @@ namespace App.Domain.Core.Contracts.AppService
         List<AppUser> GetAll();
         AppUser GetById(int id);
         UserDto GetDtoById(int id);
+        Task<Result> UpdateCustomer(CustomerDto model, CancellationToken cancellationToken);
+        Task<Result> UpdateUserDto(int id, CancellationToken cancellationToken);
     }
 }

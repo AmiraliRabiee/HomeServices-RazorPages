@@ -1,12 +1,13 @@
 using App.Domain.Core.Contracts.AppService;
 using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HomeServices_RazorPage.Areas.Admin.Pages.Users
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class IndexModel(IUserAppService _userAppService) : PageModel
     {
         [BindProperty]
@@ -38,12 +39,6 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Users
                 Message = result.Message;
             }
             Message = result.Message;
-        }
-
-        public IActionResult OnPostUpdate(CancellationToken cancellationToken)
-        {
-            _userAppService.UpdateInformation(UserDto, cancellationToken);
-            return Page();
         }
 
     }

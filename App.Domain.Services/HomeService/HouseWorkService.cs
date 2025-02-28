@@ -23,6 +23,12 @@ namespace App.Domain.Services.HomeService
         public UpdateHouseWork GetServiceDto(int id)
             => _houseWorkRepository.GetServiceDto(id);
 
+        public List<SummHouseWorkDto> GetServicesById(int id)
+            => _houseWorkRepository.GetServicesById(id);
+
+        public List<SummHouseWorkDto> GetServicesById()
+            => _houseWorkRepository.GetServicesById();
+
         public Task<Result> SoftDeleteHomeService(HouseWork service, CancellationToken cancellationToken)
             => _houseWorkRepository.SoftDeleteHomeService(service, cancellationToken);
 

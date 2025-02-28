@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.Contracts.Repository.User;
 using App.Domain.Core.Contracts.Service.User;
+using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
 
@@ -16,7 +17,7 @@ namespace App.Domain.Services.User
         public Task<Result> SoftDeleteCustomer(int customerId, CancellationToken cancellationToken)
             => _customerRepository.SoftDeleteCustomer(customerId, cancellationToken);
 
-        public Task<Result> UpdateCustomer(Customer model, CancellationToken cancellationToken)
+        public Task<Result> UpdateCustomer(CustomerDto model, CancellationToken cancellationToken)
             => _customerRepository.UpdateCustomer(model, cancellationToken);
     }
 }

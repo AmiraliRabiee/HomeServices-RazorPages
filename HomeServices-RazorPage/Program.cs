@@ -14,13 +14,14 @@ using App.Domain.Core.Entites.User;
 using App.Domain.Services.Base;
 using App.Domain.Services.HomeService;
 using App.Domain.Services.User;
-using App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities;
-using App.Infrastructure.EFCore.DataAccess.Repositories.HomeServices;
-using App.Infrastructure.EFCore.DataAccess.Repositories.User;
+using App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities;
+using App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices;
+using App.InfraAccess.EFCore.DataAccess.Repositories.User;
 using App.Infrastructure.EFCore.DataBase.Common;
 using Framework;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 #endregion
 
 var builder = WebApplication.CreateBuilder(args);
@@ -81,6 +82,8 @@ builder.Services.AddScoped<ICityRepository, CityRepository>();
 
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<ICommentAppService, CommentAppService>();
+
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -96,8 +99,17 @@ builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
     options.Password.RequireLowercase = false;
 })
     .AddRoles<IdentityRole<int>>()
-    .AddErrorDescriber<PersianIdentityErrorDescriber>()
-    .AddEntityFrameworkStores<AppDbContext>(); ;
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddErrorDescriber<PersianIdentityErrorDescriber>();
+
+
+builder.Host.ConfigureLogging(o => {
+    o.ClearProviders();
+    o.AddSerilog();
+}).UseSerilog((context, config) =>
+{
+    config.WriteTo.Seq("http://localhost:5341", apiKey: "sM0Fu2RccNjXB7Z8fSCB");
+});
 
 var app = builder.Build();
 
@@ -109,6 +121,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -117,6 +130,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 //app.MapStaticAssests();
+
+app.UseSerilogRequestLogging();
 
 app.MapRazorPages();
 

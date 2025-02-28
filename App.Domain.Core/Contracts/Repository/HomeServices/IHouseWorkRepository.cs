@@ -13,5 +13,7 @@ namespace App.Domain.Core.Contracts.Repository.HomeServices
         HouseWork GetHomeServiceById(int id);
         Task<List<SummHouseWorkDto>> GetHomeServices(CancellationToken cancellationToken);
         UpdateHouseWork GetServiceDto(int id);
+        List<SummHouseWorkDto> GetServicesById(int id);
+        List<SummHouseWorkDto> GetServicesById();
     }
 }

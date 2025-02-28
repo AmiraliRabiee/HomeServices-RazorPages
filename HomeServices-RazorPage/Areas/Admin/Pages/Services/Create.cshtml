@@ -19,6 +19,10 @@
             <div class="top-buttons-box mb-2">
             </div>
             <div class="row">
+                @if (!string.IsNullOrEmpty(Model.Message))
+                {
+                    <div class="alert alert-info">@Model.Message</div>
+                }
                 <form enctype="multipart/form-data" id="simple-form" role="form" method="post">
                     <div class="form-body">
                         <div class="form-group">

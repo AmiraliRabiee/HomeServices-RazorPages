@@ -21,9 +21,9 @@ namespace App.Infrastructure.EFCore.Configurations
             
             builder.HasData(new List<Comment>
                   {
-                      new Comment {Id = 1 , CreateAt = DateTime.Now ,Opinion = "بسیار تمیز و بادقت",Points = 9 ,IsPlayable = true , ExpertId = 1 },
-                      new Comment {Id = 2 , CreateAt = DateTime.Now ,Opinion = "تحویل به موقع",Points = 9, IsPlayable = true, ExpertId = 1 },
-                      new Comment {Id = 3 , CreateAt = DateTime.Now ,Opinion = "پاسخگویی بد", Points = 6, IsPlayable = true, ExpertId = 1 },
+                      new Comment {Id = 1 , CreateAt = DateTime.Now ,Opinion = "بسیار تمیز و بادقت",Points = 9 , ExpertId = 1 },
+                      new Comment {Id = 2 , CreateAt = DateTime.Now ,Opinion = "تحویل به موقع",Points = 9, ExpertId = 1 },
+                      new Comment {Id = 3 , CreateAt = DateTime.Now ,Opinion = "پاسخگویی بد", Points = 6, ExpertId = 1 },
                 });
         }
 

@@ -6,6 +6,7 @@
     ViewData["Title"] = "ایجاد دسته‌بندی جدید";
 }
 
+
 <div class="col-lg-12">
     <div class="portlet box shadow">
         <div class="portlet-heading">
@@ -18,7 +19,6 @@
         <div class="portlet-body">
             <div class="top-buttons-box mb-2"></div>
 
-            <!-- Display success/error messages -->
             @if (!string.IsNullOrEmpty(Model.Message))
             {
                 <div class="alert alert-info">@Model.Message</div>
@@ -60,16 +60,15 @@
                             </span>
                         </div>
                     </div>
-
-                <hr>
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-success">
-                        <i class="icon-check"></i>
-                        ذخیره دسته‌بندی
-                    </button>
-                    <a asp-page="Index" class="btn btn-warning">
-                        بازگشت
-                    </a>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">
+                            <i class="icon-check"></i>
+                            ذخیره دسته‌بندی
+                        </button>
+                        <a asp-page="Index" class="btn btn-warning">
+                            بازگشت
+                        </a>
+                    </div>
                 </div>
             </form>
         </div>

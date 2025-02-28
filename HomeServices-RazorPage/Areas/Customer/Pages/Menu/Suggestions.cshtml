@@ -1,0 +1,85 @@
+﻿@page
+@using HomeServices_RazorPage.Areas.Customer.Pages.Menu
+@model SuggestionsModel
+@{
+}
+
+<!-- ======================= dashboard Detail ======================== -->
+<div class="goodup-dashboard-wrap gray px-4 py-5">
+    <a class="mobNavigation" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="MobNav">
+        <i class="fas fa-bars ms-2"></i>منو
+    </a>
+    <div class="collapse" id="MobNav">
+        <div class="goodup-dashboard-nav sticky-top">
+            <div class="goodup-dashboard-inner">
+                <ul data-submenu-title="منو">
+                    <li><a asp-page="Dashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                    <li><a asp-page="myorders"><i class="lni lni-files ms-2"></i>سفارش های من</a></li>
+                    <li><a asp-page="create"><i class="lni lni-add-files ms-2"></i>ثبت سفارش</a></li>
+                    <li><a asp-page="myfavorits"><i class="lni lni-bookmark ms-2"></i> علاقه مندی ها</a></li>
+                </ul>
+                <ul data-submenu-title="حساب کاربری">
+                    <li><a asp-page="Profile"><i class="lni lni-user ms-2"></i> تنظیمات </a></li>
+                    <li><a asp-page="/logout" asp-area=""><i class="lni lni-power-switch ms-2"></i>خروج</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="goodup-dashboard-content">
+        <div class="dashboard-tlbar d-block mb-5">
+            <div class="row">
+                <div class="colxl-12 col-lg-12 col-md-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item text-muted"><a href="#">خانه</a></li>
+                            <li class="breadcrumb-item"><a href="#">داشبورد</a></li>
+                            <li class="breadcrumb-item"><a href="#" class="theme-cl">پیشنهادها</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="portlet box shadow">
+                <div class="portlet-heading">
+                </div><!-- /.portlet-heading -->
+                <div class="portlet-body">
+                    <div class="top-buttons-box mb-2">
+                    </div>
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="data-table">
+                                <thead>
+                                    <tr>
+                                        <th class="p-low"><input type="checkbox" id="btn-check-all-toggle"></th>
+                                        <th>عنوان خدمات</th>
+                                        <th>توضیحات</th>
+                                        <th>تاریخ اجرا</th>
+                                        <th>عملیات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var order in Model.Orders)
+                                    {
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>@order.HouseWork</td>
+                                            <td>@order.Description</td>
+                                            <td>@order.CompletionDate</td>
+                                            <td>
+                                                <div class="d-flex justify-content-center align-items-center dsd-single-book-footer">
+                                                    <a href="javascript:void(0);" class="btn btn-aprd mr-1"><i class="fas fa-check-circle ms-1"></i>تایید</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- /.portlet-body -->
+            </div><!-- /.portlet -->
+        </div><!-- /.col-lg-12 -->
+    </div>
+</div>

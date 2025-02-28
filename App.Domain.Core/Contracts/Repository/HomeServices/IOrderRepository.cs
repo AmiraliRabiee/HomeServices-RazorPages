@@ -17,5 +17,6 @@ namespace App.Domain.Core.Contracts.Repository.HomeServices
         Task ChangeToDone(int id, CancellationToken cancellationToken);
         Task<Result> CheckIsConfrim(int id, CancellationToken cancellationToken);
         Task<Result> CheckIsFinish(int id, CancellationToken cancellationToken);
+        Task<Result> IsExistSuggestion(int id);
     }
 }

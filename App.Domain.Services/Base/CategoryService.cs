@@ -23,6 +23,26 @@ namespace App.Domain.Services.Base
         public CategoryDto GetCategoryDto(int id)
             => _categoryRepository.GetCategoryDto(id);
 
+        public List<CategoryDto> GetCatyegor1()
+            => _categoryRepository.GetCatyegor1();
+
+        public List<CategoryDto> GetCatyegor2()
+            => _categoryRepository.GetCatyegor2();
+
+        public List<CategoryDto> GetCatyegor3()
+            => _categoryRepository.GetCatyegor3();
+
+        public List<CategoryDto> GetCatyegor4()
+            => _categoryRepository.GetCatyegor4();
+
+        public List<CategoryDto> GetCatyegor5()
+            => _categoryRepository.GetCatyegor5();
+
+        public List<CategoryDto> GetCatyegor6()
+            => _categoryRepository.GetCatyegor6();
+
+        public List<CategoryDto> GetCatyegoryByParent(int id)
+            => _categoryRepository.GetCatyegoryByParent((int)id);
         public List<Category> GetChildCategories()
             => _categoryRepository.GetChildCategories();
 

@@ -1,25 +1,19 @@
 ﻿@page
+@using App.Domain.Core.Contracts.AppService
+@using App.Domain.Core.Enum
 @using App.Domain.Core.Helpers
 @model HomeServices_RazorPage.Areas.Admin.Pages.Orders.IndexModel
 @{
 }
+@inject IOrderAppService _orderAppService
+
 <div class="col-lg-12">
     <div class="portlet box shadow">
         <div class="portlet-heading">
             <div class="portlet-title">
-                <h3 class="title">
-                    سفارشات
-                </h3>
-            </div><!-- /.portlet-title -->
-        </div><!-- /.portlet-heading -->
-        <div class="portlet-body">
-            <div class="top-buttons-box mb-2">
-                <a class="btn btn-success" href="#">
-                    <i class="icon-plus"></i>
-                    افزودن
-                    <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
-                </a>
+                <h3 class="title">سفارشات</h3>
             </div>
+        </div>
             <div class="row">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped" id="data-table">
@@ -42,25 +36,42 @@
                                     <td><input type="checkbox"></td>
                                     <td>@order.HouseWork</td>
                                     <td>@order.Description</td>
-                                    <td>@order.CompletionDate</td>
+                                    <td>@order.CompletionDate.ToShortDateString()</td>
                                     <td>@order.RunningTime</td>
                                     <td>@order.CustomerId</td>
-                                    <td>@order.StausService.GetDisplayName()</td>
                                     <td>
-                                        <a asp-page="UpdateOrder" asp-route-Id="@order.Id" class="btn btn-info">ویرایش</a>
-                                        <a asp-page="/suggestions/index" asp-route-Id="@order.Id" class="btn btn-primary">پیشنهاد ها</a>
+                                        <form method="post" asp-page-handler="ChangeStatus" asp-route-Id="@order.Id">
+                                            <input type="hidden" name="orderId" value="@order.Id" />
+                                            <div class="input-group">
+                                                <select class="form-control" name="status" required>
+                                                    <option value="">انتخاب وضعیت</option>
+                                                    @foreach (var status in Enum.GetValues(typeof(StausServiceEnum)))
+                                                    {
+                                                        var statusEnum = (StausServiceEnum)status;
+                                                        <option value="@statusEnum" selected="@(statusEnum == order.StausService ? "selected" : null)">
+                                                            @statusEnum.GetStatusEnumItems()
+                                                        </option>
+                                                    }
+                                                </select>
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-success">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </td>
+                                    <td>
+                                        <a asp-page="/suggestions/index" asp-route-Id="@order.Id" class="btn btn-info">پیشنهادها</a>
+@*                                         <a asp-page-handler="ChangeStatus" asp-route-Id="@order.Id" class="btn btn-danger">تغییر وضعیت</a>
+ *@                                    </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div><!-- /.portlet-body -->
-    </div><!-- /.portlet -->
-</div><!-- /.col-lg-12 -->
-@section Scripts
-{
-    <script src="~/AdminTemplate/plugins/data-table/js/jquery.dataTables.min.js"></script>
-    <script src="~/AdminTemplate/js/pages/datatable.js"></script>
-}
+        </div>
+    </div>
+</div>
+

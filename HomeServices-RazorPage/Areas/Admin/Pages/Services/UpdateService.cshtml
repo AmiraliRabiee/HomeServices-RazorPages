@@ -16,6 +16,10 @@
             <div class="top-buttons-box mb-2">
             </div>
             <div class="row">
+                @if (!string.IsNullOrEmpty(Model.Message))
+                {
+                    <div class="alert alert-info">@Model.Message</div>
+                }
                 <form enctype="multipart/form-data" id="simple-form" role="form" method="post" asp-page-handler="UpdateCategory">
                     <img style="border-radius : 50%" src="@Model.Work.ImagePath" width="80" height="80" />
                     <hr />

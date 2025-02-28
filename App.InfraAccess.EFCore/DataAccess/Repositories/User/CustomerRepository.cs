@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Contracts.Repository.User;
+using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
@@ -56,7 +57,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
             }
         }
 
-        public async Task<Result> UpdateCustomer(Customer model, CancellationToken cancellationToken)
+        public async Task<Result> UpdateCustomer(CustomerDto model, CancellationToken cancellationToken)
         {
             try
             {
@@ -65,8 +66,13 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                 if (customer is null)
                     return new Result { IsSuccess = false, Message = "کارشناس یافت نشد" };
 
+                customer.User.FirstName = model.FirstName;
+                customer.User.LastName = model.LastName;
+                customer.User.RoleId = model.RoleId;
+                customer.User.Email = model.Email;
                 customer.Address = model.Address;
-                customer.CityId = model.City.Id;
+                customer.CityId = model.CityId;
+
 
                 _appDbContext.Customers.Update(customer);
                 await _appDbContext.SaveChangesAsync(cancellationToken);

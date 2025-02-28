@@ -1,5 +1,8 @@
 ﻿@page
-@model             IndexModel
+@model IndexModel
+@using App.Domain.Core.Entites.User
+@using Microsoft.AspNetCore.Identity
+   @inject SignInManager<AppUser> SignInManager
 @{
 }
 <!-- ============================ Search Tag & Filter Start ================================== -->
@@ -232,21 +235,37 @@
 											</div>
 
 											<div class="vrt-list-sts">
-												<p class="vrt-qgunke"><span class="ft-bold d14ixhs">باز </span>تا 8:00 شب</p>
+												<p class="vrt-qgunke">
+													<span class="ft-bold d14ixhs">باز </span>تا 8:00 شب
+												</p>
 											</div>
 
 											<div class="vrt-list-desc">
-												<p class="vrt-qgunke">کتابها در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را...<span><a href="javascript:void(0);" class="d14ixh"> بیشتر</a></span></p>
+												<p class="vrt-qgunke">
+													کتابها در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را...
+													<span>
+														<a href="javascript:void(0);" class="d14ixh"> بیشتر</a>
+													</span>
+												</p>
 											</div>
 											<br />
 
-											<div class="form-group">
-
-												<div class="order-btn-container position-absolute start-0 bottom-0 p-3">
-													<button type="button" class="btn btn-sm btn-primary rounded">ثبت سفارش</button>
+											@if (User.IsInRole("Expert")) // Check if the user is an expert
+											{
+												<div class="form-group">
+													<div class="order-btn-container position-absolute start-0 bottom-0 p-3">
+														<button type="button" class="btn btn-sm btn-primary rounded">امکان پذیر نیست</button>
+													</div>
 												</div>
-											</div>
-										</div>
+											}
+											else
+											{
+												<div class="form-group">
+													<div class="order-btn-container position-absolute start-0 bottom-0 p-3">
+														<button type="button" class="btn btn-sm btn-primary rounded">ثبت سفارش</button>
+													</div>
+												</div>
+											}
 									</div>
 								</div>
 							</div>

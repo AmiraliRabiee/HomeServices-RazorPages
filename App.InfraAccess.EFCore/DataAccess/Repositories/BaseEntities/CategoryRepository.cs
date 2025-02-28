@@ -4,7 +4,6 @@ using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
 using App.Infrastructure.EFCore.DataBase.Common;
 using Microsoft.EntityFrameworkCore;
-using System.Threading;
 
 namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
 {
@@ -141,5 +140,102 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
             return category;
         }
 
+        public List<CategoryDto> GetCatyegoryByParent(int id)
+        {
+            var categories = _appDbContext.Categories
+                .Where(x => x.ParentId == id)
+                .Select(x => new CategoryDto
+                {
+                    Title = x.Title,
+                    ImagePath = x.ImagePath
+                }).ToList();
+            if (categories is null)
+                throw new Exception("با این شناسه کتگوری ای وجود ندارد");
+            return categories;
+        }
+
+        public List<CategoryDto> GetCatyegor1()
+        {
+            var categories = _appDbContext.Categories
+                .Where(x => x.ParentId == 1)
+                .Select(x => new CategoryDto
+                {
+                    Title = x.Title,
+                    ImagePath = x.ImagePath
+                }).ToList();
+            if (categories is null)
+                throw new Exception("با این شناسه کتگوری ای وجود ندارد");
+            return categories;
+        }
+
+        public List<CategoryDto> GetCatyegor2()
+        {
+            var categories = _appDbContext.Categories
+                .Where(x => x.ParentId == 2)
+                .Select(x => new CategoryDto
+                {
+                    Title = x.Title,
+                    ImagePath = x.ImagePath
+                }).ToList();
+            if (categories is null)
+                throw new Exception("با این شناسه کتگوری ای وجود ندارد");
+            return categories;
+        }
+
+        public List<CategoryDto> GetCatyegor3()
+        {
+            var categories = _appDbContext.Categories
+                .Where(x => x.ParentId == 3)
+                .Select(x => new CategoryDto
+                {
+                    Title = x.Title,
+                    ImagePath = x.ImagePath
+                }).ToList();
+            if (categories is null)
+                throw new Exception("با این شناسه کتگوری ای وجود ندارد");
+            return categories;
+        }
+
+        public List<CategoryDto> GetCatyegor4()
+        {
+            var categories = _appDbContext.Categories
+                .Where(x => x.ParentId == 4)
+                .Select(x => new CategoryDto
+                {
+                    Title = x.Title,
+                    ImagePath = x.ImagePath
+                }).ToList();
+            if (categories is null)
+                throw new Exception("با این شناسه کتگوری ای وجود ندارد");
+            return categories;
+        }
+
+        public List<CategoryDto> GetCatyegor5()
+        {
+            var categories = _appDbContext.Categories
+                .Where(x => x.ParentId == 5)
+                .Select(x => new CategoryDto
+                {
+                    Title = x.Title,
+                    ImagePath = x.ImagePath
+                }).ToList();
+            if (categories is null)
+                throw new Exception("با این شناسه کتگوری ای وجود ندارد");
+            return categories;
+        }
+
+        public List<CategoryDto> GetCatyegor6()
+        {
+            var categories = _appDbContext.Categories
+                .Where(x => x.ParentId == 6)
+                .Select(x => new CategoryDto
+                {
+                    Title = x.Title,
+                    ImagePath = x.ImagePath
+                }).ToList();
+            if (categories is null)
+                throw new Exception("با این شناسه کتگوری ای وجود ندارد");
+            return categories;
+        }
     }
 }

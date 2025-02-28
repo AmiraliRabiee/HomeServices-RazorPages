@@ -66,5 +66,11 @@ namespace App.Domain.AppServices.HomeService
 
         public UpdateHouseWork GetServiceDto(int id)
             => _houseWorkService.GetServiceDto(id);
+
+        public List<SummHouseWorkDto> GetServicesById(int id)
+            => _houseWorkService.GetServicesById(id);
+
+        public List<SummHouseWorkDto> GetServicesById()
+            => _houseWorkService.GetServicesById();
     }
 }

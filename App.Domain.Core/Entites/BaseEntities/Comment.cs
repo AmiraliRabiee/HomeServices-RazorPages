@@ -11,7 +11,6 @@ public class Comment
     [Range(1, 10, ErrorMessage = ".امتیاز باید بین 1 تا 10 باشد")]
     public int? Points { get; set; }
     public StausServiceEnum? stausService { get; set; }
-    public ExpertRatingEnum? ExpertRating { get; set; }
     public bool IsDeleted { get; set; } = false;
     public bool IsPlayable { get; set; } = false;
 

@@ -141,6 +141,8 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
         {
             //4
             var order = await _appDbContext.Orders.FindAsync(id);
+            order.IsFinish = true;
+            order.IsConfrim = true;
             order.StausService = StausServiceEnum.Done;
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
@@ -149,6 +151,8 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
         {
             //2
             var order = await _appDbContext.Orders.FindAsync(id);
+            order.IsConfrim = false;
+            order.IsFinish = false;
             order.StausService = StausServiceEnum.ExpertSelectionQueue;
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
@@ -156,6 +160,8 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
         {
             //3
             var order = await _appDbContext.Orders.FindAsync(id);
+            order.IsConfrim = true;
+            order.IsFinish = false;
             order.StausService = StausServiceEnum.WaitingForService;
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
@@ -164,25 +170,17 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
         {
             //1
             var order = await _appDbContext.Orders.FindAsync(id);
+            order.IsFinish = false;
+            order.IsConfrim = false;
             order.StausService = StausServiceEnum.NewlyRegistered;
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
-
-        //public async Task<List<Order>> GetOrdersForExpert(Order model , CancellationToken cancellationToken)
-        //{
-        //    var orders = await _appDbContext.Orders
-        //        .Where( o => o.CityId == model.Expert.CityId && o.HouseWork == model.Expert.Skills)
-        //        .ToListAsync(cancellationToken);
-        //    if (orders == null)
-        //        throw new Exception(".لیست سفارش ها خالی میباشد");
-        //    return orders;
-        //}
 
         public async Task<Result> CheckIsConfrim(int id, CancellationToken cancellationToken)
         {
             var result = await _appDbContext.Orders.
                 Where(o => o.Id == id)
-                .AnyAsync(o => o.IsConfrim == true , cancellationToken);
+                .AnyAsync(o => o.IsConfrim == true, cancellationToken);
             if (result is true)
                 return new Result { IsSuccess = true, Message = ".این سفارش پذدیرفته شده" };
             return new Result { IsSuccess = false, Message = "این سفارش در انتظار پذیرش توسط کارشناس میباشد." };
@@ -192,10 +190,21 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
         {
             var result = await _appDbContext.Orders
                  .Where(o => o.Id == id)
-                .AnyAsync(o => o.IsFinish == true , cancellationToken);
+                .AnyAsync(o => o.IsFinish == true, cancellationToken);
             if (result is true)
                 return new Result { IsSuccess = true, Message = ".این سفارش تمام شده" };
             return new Result { IsSuccess = false, Message = "این سفارش در انتظار تحویل میباشد." };
+        }
+
+        public async Task<Result> IsExistSuggestion(int id)
+        {
+            var IsExist = await _appDbContext.Orders
+                .Where(o => o.Id == id)
+                .AnyAsync(o => o.Suggestions != null);
+            if (IsExist is true)
+                return new Result { IsSuccess = true, Message = " پیشنهاد وجود دارد" };
+            return new Result { IsSuccess = false, Message = "پیشنهاد خالی میباشد" };
+
         }
         #endregion
     }

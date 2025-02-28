@@ -15,5 +15,12 @@ namespace App.Domain.Core.Contracts.AppService
         List<Category> GetParentCategories();
         List<Category> GetChildCategories();
         CategoryDto GetCategoryDto(int id);
+        List<CategoryDto> GetCatyegoryByParent(int id);
+        List<CategoryDto> GetCatyegor1();
+        List<CategoryDto> GetCatyegor2();
+        List<CategoryDto> GetCatyegor3();
+        List<CategoryDto> GetCatyegor4();
+        List<CategoryDto> GetCatyegor5();
+        List<CategoryDto> GetCatyegor6();
     }
 }

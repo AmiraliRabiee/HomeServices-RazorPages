@@ -23,25 +23,19 @@
                     <div class="form-body">
                         <div class="form-group">
                             <div class="input-group">
-                                <input asp-for="@Model.User.UserName" class="form-control" type="text" placeholder="نام کاربری" />
+                                <input asp-for="@Model.User.UserName" class="form-control" type="text" placeholder="نام کاربری" required/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="input-group">
-                                <input asp-for="@Model.User.Password" class="form-control" type="password" placeholder="کلمه عبور" />
+                                <input asp-for="@Model.User.Password" class="form-control" type="password" placeholder="کلمه عبور" required />
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="input-group">
-                                <input asp-for="@Model.User.RePassword" class="form-control" type="password" placeholder="تکرار کلمه عبور" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="input-group">
-                                <select asp-for="@Model.User.CityId" class="form-select">
+                                <select asp-for="@Model.User.CityId" class="form-select" required>
                                     @*cityid*@
                                     @foreach (var city in Model.Cities)
                                     {
@@ -53,7 +47,7 @@
 
                         <div class="form-group">
                             <div class="input-group">
-                                <select asp-for="@Model.User.RoleId" class="form-select">
+                                <select asp-for="@Model.User.RoleId" class="form-select" required>
                                     <option value="1">ادمین</option>
                                     <option value="2">مشتری</option>
                                     <option value="3">کارشناس</option>
@@ -65,7 +59,7 @@
                             <input asp-for="@Model.User.ProfileImgFile" type="file" class="form-control">
                             <label>آپلود عکس</label>
                             <div class="input-group round">
-                                <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                                <lable type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-success">
                                         <i class="icon-picture"></i>
@@ -93,3 +87,6 @@
         </div><!-- /.portlet-body -->
     </div><!-- /.portlet -->
 </div><!-- /.col-lg-12 -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

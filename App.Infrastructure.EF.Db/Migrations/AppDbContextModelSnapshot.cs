@@ -1170,10 +1170,6 @@ namespace App.Infrastructure.EFCore.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
@@ -1220,18 +1216,20 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "ae948b8b-6807-4c5d-a42b-92d4a147e808",
+                            ConcurrencyStamp = "f6077f88-d443-4268-98f1-bd95a2b30d51",
+                            Email = "Admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
                             IsDeleted = false,
                             LastName = "Admin",
                             LockoutEnabled = false,
-                            Password = "123456",
-                            PasswordHash = "AQAAAAIAAYagAAAAEC6Z7Ykd5EU9fF1U1uQpQcIoh61Ii+FtDl0nm1CCsJr3MwM4AZFgnvZLEcgY3g6eKg==",
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBlw7ez3QgIxUSZFKrk/9ceMOinTgJtNJusFOhDDC0HusltFBRCB+bms7yegNrky+A==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 25, 9, 56, 13, 814, DateTimeKind.Local).AddTicks(4691),
+                            RegisterAt = new DateTime(2025, 2, 28, 11, 58, 0, 248, DateTimeKind.Local).AddTicks(2836),
                             RoleId = 1,
-                            SecurityStamp = "6df3cc69-2b99-43de-acef-9f77faa58c5e",
+                            SecurityStamp = "cca77bdf-8470-4f9d-b9fe-1efdb0340718",
                             TwoFactorEnabled = false,
                             UserName = "Admin@gmail.com"
                         },
@@ -1241,18 +1239,20 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "11c11ca2-09f6-4f15-b8fd-9fcf741c0b73",
+                            ConcurrencyStamp = "f91662f8-9ae1-4b74-9086-efe4a2c834df",
+                            Email = "Customer@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Amir",
                             IsDeleted = false,
                             LastName = "Amiri",
                             LockoutEnabled = false,
-                            Password = "456789",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ7iH17nEfvlxrRzd1qHlDfljvu1oDg8Sr7xmRl1ckxrLwbreOazbH9gRBTxMfnGhQ==",
+                            NormalizedEmail = "CUSTOMER@GMAIL.COM",
+                            NormalizedUserName = "CUSTOMER@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK9YeX9RWbmEV7zG+26bN/6QpDYLkL+s5AXjG14tLLcLJRitFT/RKDqPWpmAbBljNA==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 25, 9, 56, 13, 814, DateTimeKind.Local).AddTicks(4759),
+                            RegisterAt = new DateTime(2025, 2, 28, 11, 58, 0, 248, DateTimeKind.Local).AddTicks(2887),
                             RoleId = 2,
-                            SecurityStamp = "9f791466-0db3-422b-b9f0-3cb365e28e87",
+                            SecurityStamp = "93016312-df36-47f6-bb9c-1371fccad257",
                             TwoFactorEnabled = false,
                             UserName = "Customer@gmail.com"
                         },
@@ -1262,18 +1262,20 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "8dd7cbc8-3f89-4865-9875-101e9c6a2855",
+                            ConcurrencyStamp = "eaf8df62-ad88-4996-9ad7-a3633d81e0f9",
+                            Email = "Expert@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Amir",
                             IsDeleted = false,
                             LastName = "Amiri",
                             LockoutEnabled = false,
-                            Password = "258852",
-                            PasswordHash = "AQAAAAIAAYagAAAAEICPdGBx7yS+fvKsuTFBRspMIegk0bcs8wUI7pCT6IsMZ0aYz8LXCaa5oqsfA6DiSQ==",
+                            NormalizedEmail = "EXPERT@GMAIL.COM",
+                            NormalizedUserName = "EXPERT@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAECNxwpZ/BGmU+ZmmwSlkj7xWNouzDIgBFw9JrKqPBR4lnPQwikWc1VnpKzR8lBe1jg==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 25, 9, 56, 13, 814, DateTimeKind.Local).AddTicks(4771),
+                            RegisterAt = new DateTime(2025, 2, 28, 11, 58, 0, 248, DateTimeKind.Local).AddTicks(2902),
                             RoleId = 3,
-                            SecurityStamp = "41fe0230-e263-4848-9441-0a7c262fe5bf",
+                            SecurityStamp = "81b1b3c8-3397-45c7-81ac-cd78cd075873",
                             TwoFactorEnabled = false,
                             UserName = "Expert@gmail.com"
                         });
@@ -1343,6 +1345,14 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 1,
+                            Address = "اینجا",
+                            Biographi = "بیوگرافی",
+                            CityId = 1,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 2,
                             Address = "اینجا",
                             Biographi = "بیوگرافی",
                             CityId = 1,
@@ -1509,9 +1519,6 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<int>("ExpertId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ExpertRating")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -1538,30 +1545,30 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2025, 2, 25, 9, 56, 13, 812, DateTimeKind.Local).AddTicks(8928),
+                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 246, DateTimeKind.Local).AddTicks(1117),
                             ExpertId = 1,
                             IsDeleted = false,
-                            IsPlayable = true,
+                            IsPlayable = false,
                             Opinion = "بسیار تمیز و بادقت",
                             Points = 9
                         },
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2025, 2, 25, 9, 56, 13, 812, DateTimeKind.Local).AddTicks(8939),
+                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 246, DateTimeKind.Local).AddTicks(1124),
                             ExpertId = 1,
                             IsDeleted = false,
-                            IsPlayable = true,
+                            IsPlayable = false,
                             Opinion = "تحویل به موقع",
                             Points = 9
                         },
                         new
                         {
                             Id = 3,
-                            CreateAt = new DateTime(2025, 2, 25, 9, 56, 13, 812, DateTimeKind.Local).AddTicks(8942),
+                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 246, DateTimeKind.Local).AddTicks(1126),
                             ExpertId = 1,
                             IsDeleted = false,
-                            IsPlayable = true,
+                            IsPlayable = false,
                             Opinion = "پاسخگویی بد",
                             Points = 6
                         });
@@ -1798,6 +1805,9 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<bool?>("IsFinish")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<TimeOnly>("RunningTime")
                         .HasColumnType("time");
 
@@ -1819,7 +1829,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 1,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 2, 25, 9, 56, 13, 812, DateTimeKind.Local).AddTicks(3573),
+                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 245, DateTimeKind.Local).AddTicks(7669),
                             CustomerId = 1,
                             Description = "فوری",
                             HouseWorkId = 5,
@@ -1831,7 +1841,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 2,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 2, 25, 9, 56, 13, 812, DateTimeKind.Local).AddTicks(3599),
+                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 245, DateTimeKind.Local).AddTicks(7688),
                             CustomerId = 1,
                             Description = "",
                             HouseWorkId = 6,
@@ -1843,7 +1853,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 3,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 2, 25, 9, 56, 13, 812, DateTimeKind.Local).AddTicks(3605),
+                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 245, DateTimeKind.Local).AddTicks(7691),
                             CustomerId = 1,
                             Description = "فوری",
                             HouseWorkId = 30,

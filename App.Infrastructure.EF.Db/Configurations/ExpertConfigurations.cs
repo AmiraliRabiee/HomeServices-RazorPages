@@ -30,13 +30,26 @@ namespace App.Infrastructure.EFCore.Configurations
             builder.HasData(new List<Expert>
             {
                 new Expert
-                { 
+                {
                     Id = 1,
                   Address = "اینجا",
                   Biographi = "بیوگرافی" ,
                   IsDeleted = false,
                   CityId = 1 ,
-            }
+                },
+                new Expert
+                {
+                    Id = 2,
+                  Address = "اینجا",
+                  Biographi = "بیوگرافی" ,
+                  IsDeleted = false,
+                  CityId = 1 ,
+                  //ExpertWorksSkills = new List<ExpertHouseWork>
+                  //{
+                  //    new ExpertHouseWork{HouseWorkId = 1 , ExpertId = 2},
+                  //    new ExpertHouseWork{HouseWorkId= 2 , ExpertId = 2},
+                  //}
+                }
             });
 
 

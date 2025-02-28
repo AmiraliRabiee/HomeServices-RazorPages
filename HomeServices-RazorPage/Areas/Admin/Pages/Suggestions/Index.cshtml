@@ -14,13 +14,6 @@
             </div><!-- /.portlet-title -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <div class="top-buttons-box mb-2">
-                <a class="btn btn-success" href="#">
-                    <i class="icon-plus"></i>
-                    افزودن
-                    <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
-                </a>
-            </div>
             <div class="row">
                 <div class="table-responsive">
                     <table class="table table-bsuggestioned table-hover table-striped" id="data-table">
@@ -44,22 +37,8 @@
                                     <td>@suggestion.City</td>
                                     <td>@suggestion.DeliverDate</td>
                                     <td>@suggestion.RunungTimeOrder</td>
-                                    <td>@suggestion.ExpertName</td>
+                                    <td><a @* asp-route-Id="@suggestion.ExpertId" *@ href="/expert/menu/content">@suggestion.ExpertName</a></td>
                                     <td>@suggestion.StausService.GetDisplayName()</td>
-                                    <td>
-@*                                         <a asp-page="Updatesuggestion" asp-route-Id="@suggestion.Id" class="btn btn-info">ویرایش</a>
-                                        
-                                        <a asp-page="Details" asp-route-Id="@suggestion.Id" class="btn btn-primary">جزئیات</a> *@
-
-@*                                         <a asp-page="Updatesuggestion" asp-route-Id="@order.Id" class="btn btn-info">ویرایش</a>
-
-                                        <a onclick="return confirm('آیا از حذف این دسته بندی اطمینان دارید؟')"
-                                           asp-page-handler="Delete"
-                                           asp-route-id="@order.Id"
-                                           class="btn btn-danger">
-                                            حذف
-                                        </a> *@
-                                    </td>
                                 </tr>
                             }
                         </tbody>

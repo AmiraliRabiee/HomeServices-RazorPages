@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HomeServices_RazorPage.Areas.Admin.Pages.Categories
 {
-    //[Authorize(Roles = "َAdmin")]
+    [Authorize(Roles = "Admin")]
     public class IndexModel(ICategoryAppService _categoryAppService) : PageModel
     {
         [BindProperty]

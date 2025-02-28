@@ -18,5 +18,6 @@ namespace App.Domain.Core.Contracts.Service.User
         AppUser GetById(int id);
         UserDto GetUserDto(int id);
         int GetCount();
+        Task<Result> UpdateUserDto(int id, CancellationToken cancellationToken);
     }
 }

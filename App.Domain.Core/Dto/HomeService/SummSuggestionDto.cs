@@ -4,6 +4,7 @@ namespace App.Domain.Core.Dto.HomeService
 {
     public class SummSuggestionDto
     {
+        public int ExpertId { get; set; }
         public string Description { get; set; }
         public string DeliverDate { get; set; }
         public StausServiceEnum StausService { get; set; }

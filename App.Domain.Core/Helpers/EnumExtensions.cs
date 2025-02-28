@@ -17,5 +17,21 @@ namespace App.Domain.Core.Helpers
 
             return displayAttribute?.Name ?? enumValue.ToString();
         }
+        public static string GetStatusEnumItems(this StausServiceEnum enumValue)
+        {
+            switch (enumValue)
+            {
+                case StausServiceEnum.NewlyRegistered:
+                    return "ثبت شده"; // "Newly Registered"
+                case StausServiceEnum.ExpertSelectionQueue:
+                    return "در صف انتخاب متخصص"; // "Expert Selection Queue"
+                case StausServiceEnum.WaitingForService:
+                    return "در انتظار سرویس"; // "Waiting for Service"
+                case StausServiceEnum.Done:
+                    return "انجام شده"; // "Done"
+                default:
+                    return "نامشخص"; // "Unknown"
+            }
+        }
     }
 }

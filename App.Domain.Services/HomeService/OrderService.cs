@@ -17,6 +17,9 @@ namespace App.Domain.Services.HomeService
         public Task<Result> CheckIsFinish(int id, CancellationToken cancellationToken)
             => _orderRepository.CheckIsFinish(id, cancellationToken);
 
+        public Task<Result> IsExistSuggestion(int id)
+            => _orderRepository.IsExistSuggestion(id);
+
         Task IOrderService.ChangeToDone(int id, CancellationToken cancellationToken)
             => _orderRepository.ChangeToDone(id, cancellationToken);
 

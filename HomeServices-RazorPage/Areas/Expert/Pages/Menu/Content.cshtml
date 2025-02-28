@@ -1,0 +1,109 @@
+﻿@page
+@model HomeServices_RazorPage.Areas.Expert.Pages.Menu.ContentModel
+@{
+}
+<section class="gray">
+    <div class="container">
+        <div class="row">
+            <!-- Profile Box (Left Side) -->
+            <div class="col-xl-4 col-lg-4 col-md-12">
+                <div class="author-wrap-ngh">
+                    <div class="author-wrap-head-ngh">
+                        <div class="author-wrap-ngh-thumb">
+                            <img src="~/assets/img/t-1.png" class="img-fluid circle" alt="">
+                        </div>
+                        <div class="author-wrap-ngh-info">
+                            <h5>مسعود هاشمی</h5>
+                        </div>
+                    </div>
+
+                    <div class="author-wrap-caption-ngh">
+                        <div class="author-wrap-jhyu-ngh">
+                            <ul>
+                                <li>
+                                    <div class="gdup-kvty">
+                                        <div class="gdup-kvty-icon bg-light-sky text-sky"><i class="fas fa-file"></i></div>
+                                        <div class="gdup-kvty-ctr"><h6 class="count">310</h6></div>
+                                        <div class="gdup-kvty-text">خدمات انجام شده</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="gdup-kvty">
+                                        <div class="gdup-kvty-icon bg-light-warning text-warning"><i class="fas fa-thumbs-up"></i></div>
+                                        <div class="gdup-kvty-ctr"><h6 class="count">9</h6><span></span></div>
+                                        <div class="gdup-kvty-text">میانگین امتیاز</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="gdup-kvty">
+                                        <div class="gdup-kvty-icon bg-light-danger text-danger"><i class="fas fa-heart"></i></div>
+                                        <div class="gdup-kvty-ctr"><h6 class="count">206</h6></div>
+                                        <div class="gdup-kvty-text">تعداد نظرات</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="author-wrap-yuio-ngh mt-5">
+                            <div class="row g-4">
+                                <div class="col-6">
+                                    <a href="javascript:void(0);" class="adv-btn full-width">خواندن نظرات</a>
+                                </div>
+                                <div class="col-6">
+                                    <a asp-page="/addcomment/index" asp-area="" class="adv-btn full-width">ثبت نظر</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Information Form (Right Side) -->
+            <div class="col-xl-8 col-lg-8 col-md-12">
+                <form class="submit-form">
+                    <div class="dashboard-list-wraps bg-white rounded mb-4">
+                        <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
+                            <div class="dashboard-list-wraps-flx">
+                                <h4 class="mb-0 ft-medium fs-md"><i class="fa fa-user-check ms-2 theme-cl fs-sm"></i>مشخصات </h4>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-list-wraps-body py-3 px-3">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="mb-1">نام</label>
+                                        <input type="text" class="form-control rounded" value="نازنین" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="mb-1">نام خانوادگی</label>
+                                        <input type="text" class="form-control rounded" value="حقیقت نژاد" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="mb-1">شهر</label>
+                                        <input type="text" class="form-control rounded" value="تهران" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="mb-1">مهارت ها</label>
+                                        <input type="text" class="form-control rounded" value="باغبانی - پیرایش آقایان" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="mb-1">بیوگرافی</label>
+                                        <textarea class="form-control rounded ht-150" placeholder="درباره من..." disabled>من یک متخصص باغبانی با ۱۰ سال سابقه کار هستم.</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,198 @@
+﻿@page
+@using App.Domain.Core.Entites.User
+@using HomeServices_RazorPage.Pages.SubCategories
+@using Microsoft.AspNetCore.Identity
+@model IndexModel
+@{
+}
+
+   @inject SignInManager<AppUser> SignInManager
+<!-- ============================ Search Tag & Filter Start ================================== -->
+<section class="cats-filters py-3">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+                <div class="Goodup-all-drp">
+                    <div class="Goodup-single-drp small">
+                        <div class="btn-group d-flex flex-wrap gap-2">
+                            <a asp-page="Tasisat" class="btn btn-secondary">سلامت</a>
+                            <a asp-page="" class="btn btn-secondary">نظافت</a>
+                            <a asp-page="" class="btn btn-secondary active">تعمیرات</a>
+                            <a asp-page="" class="btn btn-secondary">تاسیسات</a>
+                            <a asp-page="" class="btn btn-secondary">خودرو</a>
+                            <a asp-page="" class="btn btn-secondary">زیبایی</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<div class="clearfix"></div>
+<!-- ============================ Search Tag & Filter End ================================== -->
+<!-- ============================ Main Section Start ================================== -->
+<section class="gray py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                <div class="bg-white rounded mb-4">
+                    <div class="sidebar_header d-flex align-items-center justify-content-between px-4 py-3 br-bottom">
+                        <h4 class="ft-medium fs-6 mb-0">فیلتر جستجو</h4>
+                    </div>
+
+                    <!-- Find New Property -->
+                    <div class="sidebar-widgets collapse miz_show" id="search_open" data-bs-parent="#search_open">
+                        <div class="search-inner">
+                            <div class="side-filter-box">
+                                <div class="side-filter-box-body">
+                                    <!-- Suggested -->
+                                    <div class="inner_widget_link">
+                                        <h6 class="ft-medium">دسته بندی ها</h6>
+                                        <ul class="no-ul-list filter-list">
+                                            @foreach (var category in Model.CategoriesDto)
+                                            {
+                                                <li>
+                                                    <input id="@(category.Id)" class="checkbox-custom" name="SelectedCategories" type="checkbox" value="@category.Id">
+                                                    <label for="@(category.Id)" class="checkbox-custom-label">@category.Title</label>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+
+                                    <div class="form-group filter_button">
+                                        <button type="submit" class="btn theme-bg text-light rounded full-width">22 نتیجه یافت شد</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar End -->
+            </div>
+
+            <!-- Item Wrap Start -->
+            <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12">
+                <!-- Breadcrumb -->
+                <div class="row justify-content-center g-2">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                                <li class="breadcrumb-item"><a href="#">دسته بندی خدمات</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">تعیمرات</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <!-- Business Listings -->
+                    <!-- Business Listings -->
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+                        <div class="d-block grouping-listings">
+                            @foreach (var item in Model.Works)
+                            {
+                                <div class="grouping-listings-single">
+                                    <div class="vrt-list-wrap">
+                                        <div class="row align-items-center">
+                                            <!-- Business Thumbnail -->
+                                            <div class="col-md-4">
+                                                <div class="vrt-list-thumb" style="width: 200px; height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: #fff; border: 1px solid #ddd; padding: 10px;">
+                                                    <div class="vrt-list-thumb-figure">
+                                                        <img src="@item.ImagePath" class="img-fluid" alt="@item.Tiltle" style="max-width: 100%; max-height: 100%; object-fit: cover;" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Business Content -->
+                                            <div class="col-md-8">
+                                                <div class="vrt-list-content" style="padding-top: 0; margin-top: 0;">
+                                                    <!-- Removed top padding and margin -->
+                                                    <!-- Business Name -->
+                                                    <h4 class="mb-0 ft-medium" style="margin-top: 0; margin-bottom: 0.5rem;">
+                                                        <!-- Reset margin -->
+                                                        <a href="listing-search-v1.html" class="text-dark fs-md">
+                                                            @item.Tiltle
+                                                            <span class="verified-badge"><i class="fas fa-check-circle"></i></span>
+                                                        </a>
+                                                    </h4>
+                                                    <!-- Read More -->
+                                                    <div class="vrt-list-desc" style="margin-top: 0; margin-bottom: 0.5rem;">
+                                                        <!-- Reset margin -->
+                                                        <p class="vrt-qgunke" style="margin: 0;">@item.Description</p> <!-- Reset margin -->
+                                                    </div>
+
+                                                    <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i>سراسر کشور</div>
+                                                    <!-- Base Price -->
+                                                    <div class="Goodup-ft-first" style="margin-top: 0; margin-bottom: 0.5rem;">
+                                                        <!-- Reset margin -->
+                                                        <span class="active">@item.BasePrice <i class="fas fa-dollar-sign"></i></span>
+                                                    </div>
+                                                    <br />
+
+                                                    <!-- Working Hours -->
+                                                    <div class="vrt-list-sts" style="margin-top: 0;">
+                                                        <!-- Reset margin -->
+                                                    </div>
+
+                                                    <div class="Goodup-cates multi">
+                                                        <p class="vrt-qgunke" style="margin: 0;"><span class="ft-bold d14ixhs"> شبانه روزی</span></p> <!-- Reset margin -->
+                                                        <a href="half-map-search-1.html" class="cats-1">@item.Tiltle</a>
+                                                    </div>
+                                                    <!-- Order Button -->
+                                                    <div class="form-group">
+                                                        <div class="order-btn-container position-absolute start-0 bottom-0 p-3">
+                                                            @if (SignInManager.IsSignedIn(User)){
+                                                                @if (User.IsInRole("Expert")) // Check if the user is an expert
+                                                                {
+                                                                    <button type="button" class="btn btn-sm btn-primary rounded">امکان پذیر نیست</button>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <button type="button" class="btn btn-sm btn-primary rounded">ثبت سفارش</button>
+                                                                }
+                                                            }
+                                                            else{
+                                                            <a asp-page="/login" asp-area="" class="btn btn-sm btn-primary rounded">ابتدا وارد شوید</a>
+                                                            }
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Pagination -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span class="fas fa-arrow-circle-right"></span>
+                                <span class="sr-only">قبل</span>
+                            </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#">6</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span class="fas fa-arrow-circle-left"></span>
+                                <span class="sr-only">بعد</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- row -->
+        </div>
+    </div>
+</section>

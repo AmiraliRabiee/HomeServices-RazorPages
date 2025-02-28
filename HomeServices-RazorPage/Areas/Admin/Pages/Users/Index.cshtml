@@ -31,7 +31,6 @@
                                 <th>نام</th>
                                 <th>نام خانوادگی</th>
                                 <th>نام کاربری</th>
-                                <th>موبایل</th>
                                 <th>ایمیل</th>
                                 <th>عملیات</th>
                             </tr>
@@ -50,13 +49,10 @@
                                     <td>@user.FirstName</td>
                                     <td>@user.LastName</td>
                                     <td>@user.UserName</td>
-
-                                    <!-- Show blank if mobile/email is empty -->
-                                    <td>@(!string.IsNullOrWhiteSpace(user.PhoneNumber) ? user.PhoneNumber : "-----")</td>
                                     <td>@(!string.IsNullOrWhiteSpace(user.Email) ? user.Email : "-----")</td>
 
                                     <td>
-                                        <a method="post" asp-page="Update" asp-route-Id="@user.Id" class="btn btn-info">ویرایش</a>
+                                        <a asp-page="Update" asp-route-Id="@user.Id" class="btn btn-info">ویرایش</a>
 
                                         <a asp-page-handler="Delete"
                                         asp-route-Id="@user.Id" 

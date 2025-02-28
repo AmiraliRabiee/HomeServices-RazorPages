@@ -16,6 +16,7 @@ namespace App.Domain.Core.Contracts.Repository.User
         Task<List<Customer>> GetAllCustomers();
         Task<List<Expert>> GetAllExperts();
         List<AppUser> GetAll();
+        Task<Result> UpdateUserDto(int id, CancellationToken cancellationToken);
         AppUser GetById(int id);
         UserDto GetDtoById(int id);
         int GetCount();

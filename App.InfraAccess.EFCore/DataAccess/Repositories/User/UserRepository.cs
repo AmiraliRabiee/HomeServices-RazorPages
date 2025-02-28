@@ -19,8 +19,8 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
 
                 user.UserName = model.UserName;
                 user.Email = model.Email;
-                user.Password = model.Password;
-                user.RePassword = model.RePassword;
+                //user.Password = model.Password;
+                //user.RePassword = model.RePassword;
                 user.Balance = model.Balance;
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
@@ -89,17 +89,40 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                 if (currentUser is null)
                     return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
 
-                var newUser = new UserDto()
+                currentUser.FirstName = user.FirstName;
+                currentUser.LastName = user.LastName;
+                currentUser.Email = user.Email;
+                currentUser.UserName = user.UserName;
+                currentUser.RoleId = user.RoleId;
+                currentUser.ImagePath = user.ImagePath;
+
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+                return new Result { IsSuccess = true, Message = ".به روزرسانی انجام شد" };
+            }
+            catch (Exception ex)
+            {
+                return new Result { IsSuccess = false, Message = $"{ex.Message}" };
+            }
+        }
+
+
+        public async Task<Result> UpdateUserDto(int id, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var currentUser = await _appDbContext.Users
+                    .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
+
+                if (currentUser is null)
+                    return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
+                var newUser = new AppUser()
                 {
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    ProfileImgFile = user.ProfileImgFile,
-                    UserName = user.UserName,
-                    Password = user.Password,
-                    Address = user.Address,
-                    CityId = user.City.Id,
-                    RoleId = user.RoleId,
+                    FirstName = currentUser.FirstName,
+                    LastName = currentUser.LastName,
+                    Email = currentUser.Email,
+                    UserName = currentUser.UserName,
+                    RoleId = currentUser.RoleId,
+                    ImagePath = currentUser.ImagePath,
                 };
 
                 await _appDbContext.SaveChangesAsync(cancellationToken);
@@ -233,14 +256,14 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
         {
             var res = _appDbContext.Users.Select(u => new UserDto
             {
+                Id = u.Id,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
                 Email = u.Email,
                 UserName = u.UserName,
                 Address = u.Customer.Address,
                 Balance = u.Balance,
-                Password = u.Password,
-            }).First();
+            }).FirstOrDefault(u => u.Id == id);
             return res;
         }
 

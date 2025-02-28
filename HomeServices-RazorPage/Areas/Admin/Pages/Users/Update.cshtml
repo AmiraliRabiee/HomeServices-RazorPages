@@ -22,71 +22,57 @@
             <div class="top-buttons-box mb-2">
             </div>
             <div class="row">
+                @if (!string.IsNullOrEmpty(Model.Message))
+                {
+                    <div class="alert alert-info">@Model.Message</div>
+                }
                 <form enctype="multipart/form-data" id="simple-form" role="form" method="post">
-                    <img style="border-radius : 50%" src="@Model.User.ImagePath" width="80" height="80" />
+                    <img style="border-radius : 50%" src="" width="80" height="80" />
                     <hr />
+
+                    <input type="hidden" asp-for="NewUser.Id" />
 
                     <div class="form-body">
                         <div class="form-group">
+                            <label>نام کاربری</label>
                             <div class="input-group">
-                                <input asp-for="@Model.User.UserName" class="form-control" type="text" placeholder="@Model.User.UserName">
+                                <input asp-for="NewUser.UserName" class="form-control" type="text" placeholder="">
                             </div>
                         </div>
 
                         <div class="form-group">
+                            <label>نام</label>
                             <div class="input-group">
-                                <input asp-for="@Model.User.FirstName" class="form-control" type="text" placeholder="@Model.User.FirstName ">
+                                <input asp-for="NewUser.FirstName" class="form-control" type="text">
                             </div>
                         </div>
 
                         <div class="form-group">
+                            <label>نام خانوادگی</label>
                             <div class="input-group">
-                                <input asp-for="@Model.User.LastName" class="form-control" type="text" placeholder="@Model.User.LastName">
+                                <input asp-for="NewUser.LastName" class="form-control" type="text">
                             </div>
                         </div>
 
                         <div class="form-group">
+                            <label>ایمیل</label>
                             <div class="input-group">
-                                <input asp-for="@Model.User.Email" class="form-control" type="email" placeholder="@Model.User.Email" required />
+                                <input asp-for="NewUser.Email" class="form-control" type="email" />
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <select asp-for="@Model.User.RoleId" class="form-control" id="roleSelect" required>
+                            <select asp-for="NewUser.RoleId" class="form-control" id="roleSelect" required>
                                 <option value="">انتخاب نقش</option>
                                 <option value="1">ادمین</option>
                                 <option value="2">مشتری</option>
                                 <option value="3">متخصص</option>
                             </select>
-                            <span asp-validation-for="@Model.User.RoleId" class="text-danger"></span>
+                            <span asp-validation-for="@Model.NewUser.RoleId" class="text-danger"></span>
                         </div>
-
-                        <div id="customerFields" class="form-group d-none">
-                            <input asp-for="@Model.User.Address" type="text" class="form-control" placeholder="آدرس">
-                            <span asp-validation-for="@Model.User.Address" class="text-danger"></span>
-                            <select asp-for="@Model.User.City.Id" class="form-control" id="citySelect">
-                                <option value="">انتخاب شهر</option>
-                                @foreach (var city in Model.Cities)
-                                {
-                                    <option value="@city.Id">@city.Name</option>
-                                }
-                            </select>
-                            <span asp-validation-for="@Model.User.City.Id" class="text-danger"></span>
-                        </div>
-
-                        <div id="expertFields" class="form-group d-none">
-                            <select asp-for="@Model.User.City.Id" class="form-control" id="citySelect">
-                                <option value="">انتخاب شهر</option>
-                                @foreach (var city in Model.Cities)
-                                {
-                                    <option value="@city.Id">@city.Name</option>
-                                }
-                            </select>
-                            <span asp-validation-for="@Model.User.City.Id" class="text-danger"></span>
-                        </div> 
 
                         <div class="form-group relative">
-                            <input asp-for="@Model.User.ProfileImgFile" type="file" class="form-control">
+                            <input asp-for="NewUser.ProfileImgFile" type="file" class="form-control">
                             <label>آپلود عکس</label>
                             <div class="input-group round">
                                 <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
@@ -107,7 +93,10 @@
                     </div>
                     <hr>
                     <div class="form-actions">
-                        <button  type="submit" asp-page-handler="Update" class="btn btn-primary">به روزرسانی</button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="icon-check"></i>
+                            ذخیره
+                        </button>
                         <a asp-page="Index" class="btn btn-warning">
                             بازگشت
                         </a>

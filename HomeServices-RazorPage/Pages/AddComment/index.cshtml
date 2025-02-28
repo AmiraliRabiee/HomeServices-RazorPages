@@ -1,0 +1,61 @@
+﻿@page
+@model HomeServices_RazorPage.Pages.AddComment.Index1Model
+@{
+}
+
+<div class="bg-white rounded mb-4">
+    <div class="jbd-01 px-4 py-4">
+        <div class="jbd-details mb-4">
+            <h5 class="ft-bold fs-lg">ثبت امتیاز و نظر</h5>
+            <div class="review-form-box form-submit mt-3">
+                <!-- Use asp-page-handler to specify the OnPostAsync method -->
+                <form method="post" asp-page-handler="AddComment">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group mb-3">
+                                <label class="ft-medium small mb-1">امتیازدهی</label>
+                                <!-- Bind the select field to NewComment.Points -->
+                                <select class="form-control rounded" asp-for="@Model.NewComment.Points">
+                                    <option value="">انتخاب امتیاز</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                <!-- Add validation message for Points -->
+                                <span asp-validation-for="@Model.NewComment.Points" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group mb-3">
+                                <label class="ft-medium small mb-1">ثبت نظر</label>
+                                <!-- Bind the textarea field to NewComment.Opinion -->
+                                <textarea class="form-control rounded ht-140" asp-for="@Model.NewComment.Opinion" placeholder="نظر خود را بنویسید"></textarea>
+                                <!-- Add validation message for Opinion -->
+                                <span asp-validation-for="@Model.NewComment.Opinion" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="btn theme-bg text-light rounded">ثبت نظر</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add client-side validation scripts -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

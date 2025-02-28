@@ -18,6 +18,10 @@
             <div class="top-buttons-box mb-2">
             </div>
             <div class="row">
+                @if (!string.IsNullOrEmpty(Model.Message))
+                {
+                    <div class="alert alert-info">@Model.Message</div>
+                }
                 <form enctype="multipart/form-data" id="simple-form" role="form" method="post" asp-page-handler="Update">
                     <img style="border-radius : 50%" src="@Model.Category.ImagePath" width="80" height="80" />
                     <hr />
@@ -74,3 +78,6 @@
         </div><!-- /.portlet-body -->
     </div><!-- /.portlet -->
 </div><!-- /.col-lg-12 -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

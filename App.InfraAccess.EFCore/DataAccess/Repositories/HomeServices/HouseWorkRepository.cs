@@ -157,7 +157,41 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return work;
         }
 
+        public List<SummHouseWorkDto> GetServicesById(int id)
+        {
+            var service = _appDbContext.HouseWorks
+            .Where(h => h.Id == id)
+            .Select(h => new SummHouseWorkDto
+            {
+                ImagePath = h.ImagePath,
+                Description = h.Description,
+                Tiltle = h.Title,
+                BasePrice = h.BasePrice,
+            }).ToList();
 
+            if (service is null)
+                throw new Exception(".سفارشی با این شناسه یافت نشد");
+
+            return service;
+        }
+
+        public List<SummHouseWorkDto> GetServicesById()
+        {
+            var service = _appDbContext.HouseWorks
+            .Where(h => h.CategoryId == 9)
+            .Select(h => new SummHouseWorkDto
+            {
+                ImagePath = h.ImagePath,
+                Description = h.Description,
+                Tiltle = h.Title,
+                BasePrice = h.BasePrice,
+            }).ToList();
+
+            if (service is null)
+                throw new Exception(".سفارشی با این شناسه یافت نشد");
+
+            return service;
+        }
         #endregion
     }
 }
