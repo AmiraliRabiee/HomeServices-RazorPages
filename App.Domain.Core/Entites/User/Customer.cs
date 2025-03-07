@@ -10,11 +10,10 @@ namespace App.Domain.Core.Entites.User
         public bool IsDeleted { get; set; } = false;
         public string? Address { get; set; }
         public int CityId { get; set; }
-        //public int AppUserId { get; set; }
 
         public AppUser? User { get; set; }
         public City? City { get; set; }
         public List<Order> Orders { get; set; }
-
+        public List<Comment>? Comments { get; set; }
     }
 }

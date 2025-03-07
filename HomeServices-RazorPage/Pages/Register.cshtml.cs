@@ -1,5 +1,6 @@
 using App.Domain.Core.Contracts.AppService;
 using App.Domain.Core.Dto.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

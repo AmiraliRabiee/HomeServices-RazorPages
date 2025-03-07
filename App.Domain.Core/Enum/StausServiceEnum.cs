@@ -11,6 +11,8 @@ namespace App.Domain.Core.Enum
         [Display(Name = "تایید برای حضور در محل")]
         WaitingForService,
         [Display(Name = "انجام شده")]
-        Done
+        Done,
+        [Display(Name = "پرداخت شده")]
+        Payment
     }
 }

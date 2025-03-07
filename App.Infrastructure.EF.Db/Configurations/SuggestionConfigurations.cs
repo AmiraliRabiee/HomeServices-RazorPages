@@ -10,7 +10,7 @@ namespace App.Infrastructure.EFCore.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Description).HasMaxLength(2000).IsRequired();
-            builder.Property(x => x.DeliverDate).IsRequired();
+            builder.Property(x => x.SuggestPrice).IsRequired();
 
             builder.HasOne(x => x.Expert)
                 .WithMany(x => x.Suggestions)
@@ -24,7 +24,7 @@ namespace App.Infrastructure.EFCore.Configurations
 
             builder.HasData(new List<Suggestion>
             {
-                new Suggestion { Id = 1, Description = "آمادگی برای انجام کار با قیمت پایین تر" , DeliverDate = new DateTime(2025,2 ,25), OrderId = 1, ExpertId = 1 }
+                new Suggestion { Id = 1, Description = "آمادگی برای انجام کار با قیمت پایین تر" , SuggestPrice = 1000, OrderId = 1, ExpertId = 1 }
             });
         }
     }

@@ -1,20 +1,18 @@
+using App.Domain.Core.Contracts.AppService;
+using App.Domain.Core.Entites.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HomeServices_RazorPage.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel(ILogger<IndexModel> _logger , ICategoryAppService _categoryAppService) : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        [BindProperty]
+        public List<Category> Cats { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public async void OnGet(int id)
         {
-            _logger = logger;
-        }
-
-        public void OnGet()
-        {
-
+            Cats = _categoryAppService.GetParentCategories();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@page
+@using App.Domain.Core.Enum
 @using HomeServices_RazorPage.Areas.Customer.Pages.Menu
 @model SuggestionsModel
 @{
@@ -15,8 +16,6 @@
                 <ul data-submenu-title="منو">
                     <li><a asp-page="Dashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
                     <li><a asp-page="myorders"><i class="lni lni-files ms-2"></i>سفارش های من</a></li>
-                    <li><a asp-page="create"><i class="lni lni-add-files ms-2"></i>ثبت سفارش</a></li>
-                    <li><a asp-page="myfavorits"><i class="lni lni-bookmark ms-2"></i> علاقه مندی ها</a></li>
                 </ul>
                 <ul data-submenu-title="حساب کاربری">
                     <li><a asp-page="Profile"><i class="lni lni-user ms-2"></i> تنظیمات </a></li>
@@ -26,6 +25,7 @@
         </div>
     </div>
 
+    <!-- Main Content -->
     <div class="goodup-dashboard-content">
         <div class="dashboard-tlbar d-block mb-5">
             <div class="row">
@@ -40,36 +40,70 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-12">
             <div class="portlet box shadow">
-                <div class="portlet-heading">
-                </div><!-- /.portlet-heading -->
+                <div class="portlet-heading"></div>
                 <div class="portlet-body">
-                    <div class="top-buttons-box mb-2">
-                    </div>
+                    <input type="hidden" asp-for="OnlineUser.Id" />
+                    <div class="top-buttons-box mb-2"></div>
                     <div class="row">
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped" id="data-table">
                                 <thead>
                                     <tr>
-                                        <th class="p-low"><input type="checkbox" id="btn-check-all-toggle"></th>
-                                        <th>عنوان خدمات</th>
+                                        <th>کارشناس</th>
                                         <th>توضیحات</th>
                                         <th>تاریخ اجرا</th>
-                                        <th>عملیات</th>
+                                        <th>ساعت اجرا</th>
+                                        <th>قیمت پیشنهادی</th>
+                                        <th>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <i class="fas fa-check-circle ms-1"></i>
+                                            </div>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var order in Model.Orders)
+                                    @if (Model.SuggestionDtos != null && Model.SuggestionDtos.Any())
+                                    {
+                                        foreach (var suggestion in Model.SuggestionDtos)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <div class="ground ground-list-single">
+                                                        <a asp-page="/expert/content" asp-route-id="@suggestion.ExpertId">
+                                                            <img class="ground-avatar" src="/assets/img/t-1.png" alt="...">
+                                                            <span class="profile-status bg-online pull-right"></span>
+                                                            @suggestion.ExpertName
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>@suggestion.Description</td>
+                                                <td>@suggestion.CompletionDate</td>
+                                                <td>@suggestion.RunungTimeOrder</td>
+                                                <td>@suggestion.SuggestPrice</td>
+                                                @if (suggestion.StausService == StausServiceEnum.NewlyRegistered)
+                                                {
+                                                    <td>
+                                                        <div class="d-flex justify-content-center align-items-center">
+                                                            <a onclick="return confirm('از تایید کارشناس اطمینان دارید؟')"
+                                                               asp-page-handler="Accept" asp-route-Id="@suggestion.Id" asp-route-orderNumber="@suggestion.OrderId" class="btn btn-success btn-sm">
+                                                                <i class="fas fa-check-circle ms-1"></i> تایید
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                }
+
+                                            </tr>
+                                        }
+                                    }
+                                    else
                                     {
                                         <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>@order.HouseWork</td>
-                                            <td>@order.Description</td>
-                                            <td>@order.CompletionDate</td>
-                                            <td>
-                                                <div class="d-flex justify-content-center align-items-center dsd-single-book-footer">
-                                                    <a href="javascript:void(0);" class="btn btn-aprd mr-1"><i class="fas fa-check-circle ms-1"></i>تایید</a>
+                                            <td colspan="6" class="text-center">
+                                                <div class="alert alert-warning">
+                                                    پیشنهادی وجود ندارد
                                                 </div>
                                             </td>
                                         </tr>
@@ -78,8 +112,10 @@
                             </table>
                         </div>
                     </div>
-                </div><!-- /.portlet-body -->
-            </div><!-- /.portlet -->
-        </div><!-- /.col-lg-12 -->
-    </div>
-</div>
+                </div>
+            </div>
+        </div><!-- /.portlet-body -->
+    </div><!-- /.portlet -->
+</div><!-- /.col-lg-12 -->
+    </div><!-- /.goodup-dashboard-content -->
+</div><!-- /.goodup-dashboard-wrap -->

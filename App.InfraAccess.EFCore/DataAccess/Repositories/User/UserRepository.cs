@@ -217,6 +217,14 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
         }
 
 
+        public async Task<float> GetBalance(AppUser user, CancellationToken cancellationToken)
+        {
+            var balance = await _appDbContext.Users
+                .Where(u => u.Id == user.Id)
+                .Select(u => u.Balance)
+                .FirstOrDefaultAsync();
+            return balance;    
+        }
 
         public async Task<List<Customer>> GetAllCustomers()
         {
@@ -254,7 +262,8 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
 
         public UserDto GetDtoById(int id)
         {
-            var res = _appDbContext.Users.Select(u => new UserDto
+            var res = _appDbContext.Users
+                .Select(u => new UserDto
             {
                 Id = u.Id,
                 FirstName = u.FirstName,
@@ -263,11 +272,75 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                 UserName = u.UserName,
                 Address = u.Customer.Address,
                 Balance = u.Balance,
+                CityId = u.Customer.CityId,
+                CityName = u.Customer.City.Name,
+                PhoneNumber = u.PhoneNumber,
+                RoleId = u.RoleId,
+                Customer = u.Customer,
+                ImagePath = u.ImagePath
             }).FirstOrDefault(u => u.Id == id);
             return res;
         }
 
         public int GetCount()
             => _appDbContext.Users.Count();
+
+        public async Task<Result> UpdateCustomer(UserDto model, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var customer = await _appDbContext.Users
+                    .FirstOrDefaultAsync(e => e.Id == model.Id, cancellationToken);
+                if (customer is null)
+                    return new Result { IsSuccess = false, Message = "مشتری یافت نشد" };
+
+                customer.Balance = model.Balance;
+                customer.PhoneNumber = string.IsNullOrEmpty(model.PhoneNumber) ? customer.PhoneNumber : model.PhoneNumber;
+                customer.FirstName = string.IsNullOrEmpty(model.FirstName) ? customer.FirstName : model.FirstName;
+                customer.LastName = string.IsNullOrEmpty(model.LastName) ? customer.LastName : model.LastName;
+                customer.RoleId = model.RoleId;
+                customer.Email = string.IsNullOrEmpty(model.Email) ? customer.Email : model.Email;
+
+
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+
+                return new Result { IsSuccess = true, Message = "مشتری به‌روزرسانی شد" };
+            }
+            catch (Exception ex)
+            {
+                return new Result { IsSuccess = false, Message = $"{ex.Message}" };
+            }
+        }
+
+        public async Task<Result> UpdateCustomer2(UserDto model, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var customer = await _appDbContext.Users
+                    .FirstOrDefaultAsync(e => e.Id == model.Id, cancellationToken);
+                if (customer is null)
+                    return new Result { IsSuccess = false, Message = "مشتری یافت نشد" };
+
+                customer.ImagePath = model.ImagePath;
+
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+
+                return new Result { IsSuccess = true, Message = "مشتری به‌روزرسانی شد" };
+            }
+            catch (Exception ex)
+            {
+                return new Result { IsSuccess = false, Message = $"{ex.Message}" };
+            }
+        }
+
+        public async Task<float> GetCustomerBalance(int id,CancellationToken cancellationToken)
+        {
+            var balance = await _appDbContext.Users
+                .Where(e => e.Id == id)
+                .Select(e => e.Balance)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            return balance;
+        }
     }
 }

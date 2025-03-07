@@ -13,8 +13,13 @@ namespace App.Domain.Core.Contracts.AppService
         HouseWork GetByIdAsync(int id);
         Task<List<SummHouseWorkDto>> GetAllAsync(CancellationToken cancellationToken);
         UpdateHouseWork GetServiceDto(int id);
-        List<SummHouseWorkDto> GetServicesById(int id);
-        List<SummHouseWorkDto> GetServicesById();
+        Task<List<SummHouseWorkDto>> GetServicesById(int id, CancellationToken cancellationToken);
+        List<SummHouseWorkDto> GetServices();
+        Task<int> GetServiceCount(int categoryId);
+        Task<List<SummHouseWorkDto>> GetServicesByChildId(int id, CancellationToken cancellationToken);
+        Task<SummHouseWorkDto> GetServiceByChildId(int id, CancellationToken cancellationToken);
+        Task<SummHouseWorkDto> GetHouseWorkDto(int id, CancellationToken cancellationToken);
+        Task<SummHouseWorkDto> GetServiceById(int id, CancellationToken cancellationToken);
 
     }
 }

@@ -17,10 +17,10 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Categories
         [BindProperty]
         public string Message { get; set; }
 
-        public void OnGet(int id)
+        public async Task OnGet(int id)
         {
             ExistCategory = _categoryAppService.GetCategory(id);
-            Category = _categoryAppService.GetCategoryDto(id);
+            Category = await _categoryAppService.GetCategoryDto(id);
         }
 
         public async Task<IActionResult> OnPostUpdate(CancellationToken cancellationToken)

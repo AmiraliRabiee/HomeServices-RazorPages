@@ -6,19 +6,23 @@ public class ExpertHouseWorkConfigurations : IEntityTypeConfiguration<ExpertHous
 {
     public void Configure(EntityTypeBuilder<ExpertHouseWork> builder)
     {
-        // Set composite key
         builder.HasKey(eh => new { eh.ExpertId, eh.HouseWorkId });
 
-        // Relationship with Expert
         builder.HasOne(eh => eh.Expert)
-            .WithMany(e => e.ExpertWorksSkills) // Ensure Expert has this navigation property
+            .WithMany(e => e.ExpertWorksSkills) 
             .HasForeignKey(eh => eh.ExpertId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Relationship with HouseWork
         builder.HasOne(eh => eh.HouseWork)
-            .WithMany(h => h.ExpertHouseWorks) // Ensure HouseWork has this navigation property
+            .WithMany(h => h.ExpertHouseWorks) 
             .HasForeignKey(eh => eh.HouseWorkId)
             .OnDelete(DeleteBehavior.Cascade);
+
+
+        builder.HasData(new List<ExpertHouseWork>
+                  {
+                      new ExpertHouseWork{HouseWorkId = 1 , ExpertId = 2},
+                      new ExpertHouseWork{HouseWorkId= 2 , ExpertId = 2},
+                  });
     }
 }

@@ -11,5 +11,6 @@ namespace App.Domain.Core.Contracts.Repository.BaseEntities
         Task<Result> DeleteComment(int id, CancellationToken cancellationToken);
         Task<Result> AcceptComment(int id, CancellationToken cancellationToken);
         List<CommentDto> GetComments();
+        Task<int> GetRegisterCommentCount(int id,CancellationToken cancellationToken);
     }
 }

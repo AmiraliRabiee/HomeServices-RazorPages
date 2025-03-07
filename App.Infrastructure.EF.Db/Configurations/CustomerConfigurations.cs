@@ -31,6 +31,12 @@ namespace App.Infrastructure.EFCore.Configurations
                 .HasForeignKey<Customer>(c => c.Id)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.HasMany(c => c.Comments)
+                .WithOne(c => c.RegisteredCustomer)
+                .HasForeignKey(c => c.CustomerId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
             builder.HasData(new List<Customer>
             {
                 new Customer{Id = 1 , Address = "اینجا" , CityId = 1 , IsDeleted = false }

@@ -326,11 +326,17 @@ namespace App.Infrastructure.EFCore.Migrations
                     stausService = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     IsPlayable = table.Column<bool>(type: "bit", nullable: false),
-                    ExpertId = table.Column<int>(type: "int", nullable: false)
+                    ExpertId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Comments_Expert_ExpertId",
                         column: x => x.ExpertId,
@@ -372,7 +378,6 @@ namespace App.Infrastructure.EFCore.Migrations
                     CompletionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RunningTime = table.Column<TimeOnly>(type: "time", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StausService = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     IsConfrim = table.Column<bool>(type: "bit", nullable: true),
@@ -408,7 +413,7 @@ namespace App.Infrastructure.EFCore.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
-                    DeliverDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SuggestPrice = table.Column<float>(type: "real", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     ExpertId = table.Column<int>(type: "int", nullable: false)
@@ -443,9 +448,9 @@ namespace App.Infrastructure.EFCore.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ActivationUser", "AdminId", "Balance", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "ImagePath", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RegisterAt", "RoleId", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, 3, null, 1000f, "f6077f88-d443-4268-98f1-bd95a2b30d51", "Admin@gmail.com", false, "Admin", null, false, "Admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEBlw7ez3QgIxUSZFKrk/9ceMOinTgJtNJusFOhDDC0HusltFBRCB+bms7yegNrky+A==", null, false, new DateTime(2025, 2, 28, 11, 58, 0, 248, DateTimeKind.Local).AddTicks(2836), 1, "cca77bdf-8470-4f9d-b9fe-1efdb0340718", false, "Admin@gmail.com" },
-                    { 2, 0, 3, null, 1000f, "f91662f8-9ae1-4b74-9086-efe4a2c834df", "Customer@gmail.com", false, "Amir", null, false, "Amiri", false, null, "CUSTOMER@GMAIL.COM", "CUSTOMER@GMAIL.COM", "AQAAAAIAAYagAAAAEK9YeX9RWbmEV7zG+26bN/6QpDYLkL+s5AXjG14tLLcLJRitFT/RKDqPWpmAbBljNA==", null, false, new DateTime(2025, 2, 28, 11, 58, 0, 248, DateTimeKind.Local).AddTicks(2887), 2, "93016312-df36-47f6-bb9c-1371fccad257", false, "Customer@gmail.com" },
-                    { 3, 0, 3, null, 1000f, "eaf8df62-ad88-4996-9ad7-a3633d81e0f9", "Expert@gmail.com", false, "Amir", null, false, "Amiri", false, null, "EXPERT@GMAIL.COM", "EXPERT@GMAIL.COM", "AQAAAAIAAYagAAAAECNxwpZ/BGmU+ZmmwSlkj7xWNouzDIgBFw9JrKqPBR4lnPQwikWc1VnpKzR8lBe1jg==", null, false, new DateTime(2025, 2, 28, 11, 58, 0, 248, DateTimeKind.Local).AddTicks(2902), 3, "81b1b3c8-3397-45c7-81ac-cd78cd075873", false, "Expert@gmail.com" }
+                    { 1, 0, 3, null, 1000f, "a48a1cca-8905-478f-be05-34d85810f6d7", "Admin@gmail.com", false, "Admin", null, false, "Admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEHcmKdUvop4wXHcq1Jy3vD7my+edJ3Wkjp0XZW12zbYCRbbaz2tBA6AHL/9uG1aljA==", null, false, new DateTime(2025, 3, 5, 16, 39, 0, 196, DateTimeKind.Local).AddTicks(2833), 1, "a9f0af26-a4ef-498e-b320-2c487d8c2e2b", false, "Admin@gmail.com" },
+                    { 2, 0, 3, null, 1000f, "bad1d0d9-65cb-4d09-bfc7-6255025e0515", "Customer@gmail.com", false, "Amir", null, false, "Amiri", false, null, "CUSTOMER@GMAIL.COM", "CUSTOMER@GMAIL.COM", "AQAAAAIAAYagAAAAECBjHgKNmpUDAO/Gdv0RPW/x/wciK2yWtLohgWmajexQZSZmSY72vBXALw2BL7aAVw==", null, false, new DateTime(2025, 3, 5, 16, 39, 0, 196, DateTimeKind.Local).AddTicks(2866), 2, "ea54b7d0-05c7-48fe-815e-dda8c88e9640", false, "Customer@gmail.com" },
+                    { 3, 0, 3, null, 1000f, "d83dc7aa-c5e0-4362-bff6-8fe3defb31aa", "Expert@gmail.com", false, "Amir", null, false, "Amiri", false, null, "EXPERT@GMAIL.COM", "EXPERT@GMAIL.COM", "AQAAAAIAAYagAAAAEMlFaGSs8EnkOoxDEG7J55ImqodavL3JkTmxFw7jxYvcTaxy3Zgd/9qZ8cuCScy8yw==", null, false, new DateTime(2025, 3, 5, 16, 39, 0, 196, DateTimeKind.Local).AddTicks(2884), 3, "6fb43307-1060-4bc9-adcf-c829b90c8e57", false, "Expert@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -457,7 +462,7 @@ namespace App.Infrastructure.EFCore.Migrations
                     { 3, "\\Images\\Categories\\3 فعلی.jpg", false, null, "نظافت" },
                     { 4, "\\Images\\Categories\\zibaii.jpg", false, null, "زیبایی" },
                     { 5, "\\Images\\Categories\\tamirat.jpg", false, null, "تعمیرات اشیا" },
-                    { 6, "\\Images\\Categories\\6 فعلی (2).jpg", false, null, " خودرو و حمل بار" },
+                    { 6, "\\Images\\Categories\\6 فعلی (2).jpg", false, null, "خودرو" },
                     { 7, "\\Images\\Categories\\7 فعلی.jpg", false, null, "سلامت" }
                 });
 
@@ -538,16 +543,6 @@ namespace App.Infrastructure.EFCore.Migrations
                 {
                     { 1, "اینجا", "بیوگرافی", 1, false, null },
                     { 2, "اینجا", "بیوگرافی", 1, false, null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Comments",
-                columns: new[] { "Id", "CreateAt", "ExpertId", "IsDeleted", "IsPlayable", "Opinion", "Points", "stausService" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2025, 2, 28, 11, 58, 0, 246, DateTimeKind.Local).AddTicks(1117), 1, false, false, "بسیار تمیز و بادقت", 9, null },
-                    { 2, new DateTime(2025, 2, 28, 11, 58, 0, 246, DateTimeKind.Local).AddTicks(1124), 1, false, false, "تحویل به موقع", 9, null },
-                    { 3, new DateTime(2025, 2, 28, 11, 58, 0, 246, DateTimeKind.Local).AddTicks(1126), 1, false, false, "پاسخگویی بد", 6, null }
                 });
 
             migrationBuilder.InsertData(
@@ -645,19 +640,28 @@ namespace App.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Orders",
-                columns: new[] { "Id", "CompletionDate", "CreateAt", "CustomerId", "Description", "ExpertId", "HouseWorkId", "IsConfrim", "IsDeleted", "IsFinish", "PhoneNumber", "RunningTime", "StausService" },
+                table: "ExpertHouseWorks",
+                columns: new[] { "ExpertId", "HouseWorkId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 2, 28, 11, 58, 0, 245, DateTimeKind.Local).AddTicks(7669), 1, "فوری", null, 5, null, false, null, null, new TimeOnly(0, 0, 0).Add(TimeSpan.FromTicks(11)), 1 },
-                    { 2, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 2, 28, 11, 58, 0, 245, DateTimeKind.Local).AddTicks(7688), 1, "", null, 6, null, false, null, null, new TimeOnly(10, 30, 0), 1 },
-                    { 3, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 2, 28, 11, 58, 0, 245, DateTimeKind.Local).AddTicks(7691), 1, "فوری", null, 30, null, false, null, null, new TimeOnly(4, 30, 0), 1 }
+                    { 2, 1 },
+                    { 2, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "CompletionDate", "CreateAt", "CustomerId", "Description", "ExpertId", "HouseWorkId", "IsConfrim", "IsDeleted", "IsFinish", "RunningTime", "StausService" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 5, 16, 39, 0, 193, DateTimeKind.Local).AddTicks(4565), 1, "فوری", null, 5, false, false, false, new TimeOnly(0, 0, 0).Add(TimeSpan.FromTicks(11)), 1 },
+                    { 2, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 5, 16, 39, 0, 193, DateTimeKind.Local).AddTicks(4596), 1, "", null, 6, false, false, false, new TimeOnly(10, 30, 0), 1 },
+                    { 3, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 5, 16, 39, 0, 193, DateTimeKind.Local).AddTicks(4601), 1, "فوری", null, 30, false, false, false, new TimeOnly(4, 30, 0), 1 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Suggestions",
-                columns: new[] { "Id", "DeliverDate", "Description", "ExpertId", "IsDeleted", "OrderId" },
-                values: new object[] { 1, new DateTime(2025, 2, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "آمادگی برای انجام کار با قیمت پایین تر", 1, false, 1 });
+                columns: new[] { "Id", "Description", "ExpertId", "IsDeleted", "OrderId", "SuggestPrice" },
+                values: new object[] { 1, "آمادگی برای انجام کار با قیمت پایین تر", 1, false, 1, 1000f });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -707,6 +711,11 @@ namespace App.Infrastructure.EFCore.Migrations
                 name: "IX_Categories_ParentId",
                 table: "Categories",
                 column: "ParentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_CustomerId",
+                table: "Comments",
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_ExpertId",

@@ -24,7 +24,7 @@ namespace App.Infrastructure.EFCore.Configurations
                 new Category { Id = 3,Title = "نظافت"  , ImagePath = "\\Images\\Categories\\3 فعلی.jpg", ParentId = null},
                 new Category { Id = 4,Title = "زیبایی"  , ImagePath = "\\Images\\Categories\\zibaii.jpg", ParentId = null},
                 new Category { Id = 5,Title = "تعمیرات اشیا" , ImagePath = "\\Images\\Categories\\tamirat.jpg" , ParentId = null},
-                new Category { Id = 6,Title = " خودرو و حمل بار"  , ImagePath = "\\Images\\Categories\\6 فعلی (2).jpg", ParentId = null},
+                new Category { Id = 6,Title = "خودرو"  , ImagePath = "\\Images\\Categories\\6 فعلی (2).jpg", ParentId = null},
                 new Category { Id = 7,Title = "سلامت"  , ImagePath = "\\Images\\Categories\\7 فعلی.jpg", ParentId = null},
                 //new Category { Id = 8,Title = "آموزش" , ParentId = null , ImagePath = ""},
 

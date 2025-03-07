@@ -1,6 +1,8 @@
 ﻿using App.Domain.AppServices.Base;
+using App.Domain.AppServices.HomeService;
 using App.Domain.Core.Contracts.AppService;
 using App.Domain.Core.Contracts.Service.BaseEntities;
+using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Contracts.Service.User;
 using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.OutputResult;
@@ -17,7 +19,10 @@ namespace App.Domain.AppServices.User
         , IBaseDataService _baseDataService
         , IUserService _userService
         , IExpertService _expertService
-        , ICustomerService _customerService) : IUserAppService
+        , ICustomerService _customerService
+        , ISuggestionService _suggestionService
+        , IOrderService _orderService
+        , IAdminService _adminService) : IUserAppService
     {
         public async Task<IdentityResult> Login(string username, string password)
         {
@@ -53,9 +58,12 @@ namespace App.Domain.AppServices.User
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                RoleId = model.RoleId
-
+                RoleId = model.RoleId,
+                PhoneNumber = model.PhoneNumber,
             };
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.ImagePath = model.ImagePath;
 
             string role = model.RoleId switch
             {
@@ -102,10 +110,6 @@ namespace App.Domain.AppServices.User
                 }
 
                 var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, true, false);
-                if (!signInResult.Succeeded)
-                {
-                    // Handle sign-in failure
-                }
             }
 
             return result;
@@ -133,33 +137,18 @@ namespace App.Domain.AppServices.User
             }
         }
 
-        public async Task<Result> UpdateCustomer(CustomerDto model, CancellationToken cancellationToken)
-        {
-            if (model.ProfileImgFile is not null)
-            {
-                model.ImagePath = await _baseDataService.UploadImage(model.ProfileImgFile!, "Profiles", cancellationToken);
-            }
-            var update1 = await _customerService.UpdateCustomer(model, cancellationToken);
-            if (update1.IsSuccess)
-            {
-                return new Result { IsSuccess = true, Message = ".کاربر به روزرسانی شد" };
-            }
-            return new Result { IsSuccess = false, Message = ".حذف کاربر با خطا مواجه شد" };
-        }
+        public async Task<CustomerDto> GetCustomerById(int id, CancellationToken cancellationToken)
+            => await _customerService.GetCustomerDto(id, cancellationToken);
 
 
         public async Task<Result> UpdateInformation(UserDto model, CancellationToken cancellationToken)
         {
             try
             {
-                if (model.ProfileImgFile is not null)
-                {
-                    model.ImagePath = await _baseDataService.UploadImage(model.ProfileImgFile!, "Profiles", cancellationToken);
-                }
                 var result = await _userService.UpdateUser(model, cancellationToken);
                 if (result.IsSuccess)
                     return new Result { IsSuccess = true, Message = ".کاربر به روزرسانی شد" };
-                return new Result { IsSuccess = false, Message = ".حذف کاربر با خطا مواجه شد" };
+                return new Result { IsSuccess = false, Message = ".به روزرسانی کاربر با خطا مواجه شد" };
 
             }
             catch (Exception ex)
@@ -168,41 +157,44 @@ namespace App.Domain.AppServices.User
             }
         }
 
-        //try
-        //{
-        //    if (model.RoleId == 2)
-        //    {
-        //        if (model.ProfileImgFile is not null)
-        //        {
-        //            model.ImagePath = await _baseDataService.UploadImage(model.ProfileImgFile!, "Profiles", cancellationToken);
-        //        }
-        //        model.Customer = new CustomerDto();
-        //        var update1 = await _customerService.UpdateCustomer(model.Customer, cancellationToken);
-        //        if (update1.IsSuccess)
-        //        {
-        //            return new Result {IsSuccess = true, Message = ".کاربر به روزرسانی شد" };
-        //        }
-        //        return new Result {IsSuccess = false , Message = ".حذف کاربر با خطا مواجه شد" };
-        //    }
-        //    if (model.RoleId == 3)
-        //    {
-        //        if (model.ProfileImgFile is not null)
-        //        {
-        //            model.ImagePath = await _baseDataService.UploadImage(model.ProfileImgFile!, "Profiles", cancellationToken);
-        //        }
-        //        var update2 = await _expertService.UpdateExpert(model.Expert, cancellationToken);
-        //        if (update2.IsSuccess)
-        //        {
-        //            return new Result {IsSuccess = true, Message = ".کاربر به روزرسانی شد" };
-        //        }
-        //        return new Result {IsSuccess = false, Message = ".حذف کاربر با خطا مواجه شد" };
-        //    }
-        //    return new Result { IsSuccess = false };
-        //}
-        //catch (Exception ex)
-        //{
-        //    return new Result { IsSuccess = false, Message = ex.Message };
-        //}
+        public async Task<Result> UpdateCustomerInformation(UserDto model, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var result = await _userService.UpdateCustomer(model, cancellationToken);
+                if (result.IsSuccess)
+                    return new Result { IsSuccess = true, Message = ".کاربر به روزرسانی شد" };
+                return new Result { IsSuccess = false, Message = ".به روزرسانی کاربر با خطا مواجه شد" };
+
+            }
+            catch (Exception ex)
+            {
+                return new Result { IsSuccess = false, Message = ex.Message };
+            }
+        }
+
+        public async Task<Result> CustomerUplpadingImage(UpdateUser model, UserDto user, CancellationToken cancellationToken)
+        {
+            if (model.ProfileImage is not null)
+            {
+                model.ImagePath = await _baseDataService.UploadImage(model.ProfileImage!, "Profiles", cancellationToken);
+                if (model.ImagePath is not null)
+                    user.ImagePath = model.ImagePath;
+                _userService.UpdateCustomer2(user, cancellationToken);
+                return new Result { IsSuccess = true, Message = "با موفقیت آپلود شد" };
+            }
+            return new Result { IsSuccess = false, Message = "آپلود عکس با مشکل مواجه شد" };
+        }
+
+        public async Task<Result> UpdateCustomer(CustomerDto model, CancellationToken cancellationToken)
+        {
+            var result = await _customerService.UpdateCustomer(model, cancellationToken);
+            if (result.IsSuccess)
+            {
+                return new Result { IsSuccess = true, Message = ".کاربر به روزرسانی شد" };
+            }
+            return new Result { IsSuccess = false, Message = ".حذف کاربر با خطا مواجه شد" };
+        }
 
         public List<AppUser> GetAll()
             => _userService.GetAll();
@@ -213,9 +205,39 @@ namespace App.Domain.AppServices.User
         public UserDto GetDtoById(int id)
             => _userService.GetUserDto(id);
 
-        public Task<Result> UpdateUserDto(int id, CancellationToken cancellationToken)
+        public async Task<Result> Payment(AppUser user, int orderId, float price, CancellationToken cancellationToken)
         {
-            return null;
+            var balance = await _userService.GetBalance(user, cancellationToken);
+
+            if (balance == 0)
+                return new Result { IsSuccess = false, Message = "موجودی حساب شما خالی میباشد" };
+            if (balance < price)
+                return new Result { IsSuccess = false, Message = "مبلغ سفارش بیشتر از مبلغ موجودی شما میباشد . لطفا افزایش موجودی انجام دهید" };
+            if (balance >= price)
+            {
+                user.Balance = balance - price;
+                var result = await _userService.UpdateBalance(user, cancellationToken);
+                if (result.IsSuccess)
+                {
+                    await _orderService.ChangeToPayment(orderId, cancellationToken);
+                    return new Result { IsSuccess = true, Message = "پرداخت با موفقیت انجام شد" };
+
+                }
+                return new Result { IsSuccess = false, Message = "در برداشت از حساب مشکلی پیش آمده است" };
+            }
+            return new Result { IsSuccess = false, Message = "با خطا مواجه شد" };
+        }
+
+        public async Task<Result> Receive(float price, CancellationToken cancellationToken)
+        {
+            var adminBalance = await _adminService.GetAdminBalance(cancellationToken);
+            var profit = await _adminService.GetProfit(cancellationToken);
+
+            adminBalance += price * profit;
+            var result = await _adminService.UpdateBalance(adminBalance, cancellationToken);
+            if (result.IsSuccess)
+                return new Result { IsSuccess = true, Message = result.Message };
+            return new Result { IsSuccess = false,Message= result.Message};
         }
     }
 }

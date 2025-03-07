@@ -2,34 +2,25 @@
 using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Entites.User;
 using App.Domain.Core.Enum;
+using Microsoft.AspNetCore.Identity;
 
 namespace App.Domain.AppServices.HomeService
 {
-    public class OrderAppService(IOrderService _orderService, ISuggestionService _suggestionService) : IOrderAppService
+    public class OrderAppService(IOrderService _orderService, ISuggestionService _suggestionService, IUserAppService userAppService) : IOrderAppService
     {
 
         public async Task<List<SummOrderDto>> GetAll()
             => await _orderService.GetAll();
 
-        //public async Task<Result> ChangeStatus(int id, CancellationToken cancellationToken)
-        //{
-        //    var finished = await _orderService.CheckIsFinish(id, cancellationToken);
-        //    if (!finished.IsSuccess)
-        //        await _orderService.ChangeToDone(id, cancellationToken);
-
-        //    var confirmed = await _orderService.CheckIsConfrim(id, cancellationToken);
-        //    if (!confirmed.IsSuccess)
-        //        await _orderService.ChangeToWaitingForService(id, cancellationToken);
-
-        //    var existSuggestion = await _orderService.IsExistSuggestion(id);
-        //    if (existSuggestion.IsSuccess)
-        //        await _orderService.ChangeToExpertSelection(id, cancellationToken);
-
-
-        //    return new Result { IsSuccess = false, Message = "با خطا مواجه شد" };
-        //}
-
+        public async Task<Result> CreateOrder(AppUser user, SummOrderDto order, CancellationToken cancellationToken)
+        {
+            var result = await _orderService.Create(order, cancellationToken);
+            if (result.IsSuccess)
+                return new Result { IsSuccess = true, Message = result.Message };
+            return result;
+        }
 
         public async Task<Result> ChangeStatus(int id, CancellationToken cancellationToken)
         {
@@ -70,6 +61,29 @@ namespace App.Domain.AppServices.HomeService
                 default:
                     return new Result { IsSuccess = false, Message = "وضعیت سفارش نامعتبر است" };
             }
+        }
+
+        public Task<List<SummOrderDto>> GetOrdersById(int id, CancellationToken cancellationToken)
+            => _orderService.GetOrdersById(id, cancellationToken);
+
+        public async Task<SummOrderDto> GetOrderById(int id, CancellationToken cancellationToken)
+            => await _orderService.GetOrderById(id, cancellationToken);
+
+        public Task<int> GetActiveServicesCount(int id, CancellationToken cancellationToken)
+            => _orderService.GetActiveServicesCount(id, cancellationToken);
+
+        public Task<int> GetDoneServicesCount(int id, CancellationToken cancellationToken)
+            => _orderService.GetDoneServicesCount(id, cancellationToken);
+
+        public async Task<List<SummOrderDto>> GetCustomerOrders(int customerId, CancellationToken cancellationToken)
+            => await _orderService.GetCustomerOrders(customerId, cancellationToken);
+
+        public Task<Result> Delete(int id, CancellationToken cancellationToken)
+            => _orderService.Delete(id, cancellationToken);
+
+        public Task ChangeToPayment(int id, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

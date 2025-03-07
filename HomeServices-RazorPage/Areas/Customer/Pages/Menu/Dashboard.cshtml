@@ -1,5 +1,6 @@
 ﻿@page
 @using HomeServices_RazorPage.Areas.Customer.Pages.Menu
+@using App.Domain.Core.Helpers
 @model DashboardModel
 @{
 }
@@ -38,42 +39,32 @@
                 </div>
             </div>
         </div>
-
-        @* 		<div class="dashboard-widg-bar d-block">
-			<div class="row">
-				<div class="col-xl-12 col-lg-12 col-md-12 mb-3">
-					<div class="alert bg-inverse text-light d-flex align-items-center" role="alert">
-						<p class="p-0 m-0 ft-medium full-width">آگهی <a href="#" class="text-success">هتل لاله پارک تبریز</a> تایید شد!</p>
-						<button type="button" class="btn-close text-light" data-bs-dismiss="alert" aria-label="Close"></button>
-					</div>
-				</div>
-			</div> *@
         <div class="row">
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                 <div class="dsd-boxed-widget py-5 px-4 bg-danger rounded">
-                    <h2 class="ft-medium mb-1 fs-xl text-light count">46</h2>
+                    <h2 class="ft-medium mb-1 fs-xl text-light count">@Model.Data.ActiveCount</h2>
                     <p class="p-0 m-0 text-light fs-md">آگهی های فعال</p>
                     <i class="lni lni-empty-file"></i>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                 <div class="dsd-boxed-widget py-5 px-4 bg-success rounded">
-                    <h2 class="ft-medium mb-1 fs-xl text-light count">2615</h2>
-                    <p class="p-0 m-0 text-light fs-md">تعداد بازدیدها</p>
+                    <h2 class="ft-medium mb-1 fs-xl text-light count">@Model.Data.DoneCount</h2>
+                    <p class="p-0 m-0 text-light fs-md">سفارش پایان یافته</p>
                     <i class="lni lni-eye"></i>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                 <div class="dsd-boxed-widget py-5 px-4 bg-warning rounded">
-                    <h2 class="ft-medium mb-1 fs-xl text-light count">312</h2>
-                    <p class="p-0 m-0 text-light fs-md">تعداد نظرات</p>
+                    <h2 class="ft-medium mb-1 fs-xl text-light count">@Model.Data.CommentCount</h2>
+                    <p class="p-0 m-0 text-light fs-md">نظرات ثبت کرده</p>
                     <i class="lni lni-comments"></i>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                 <div class="dsd-boxed-widget py-5 px-4 bg-purple rounded">
-                    <h2 class="ft-medium mb-1 fs-xl text-light count">410</h2>
-                    <p class="p-0 m-0 text-light fs-md">تعداد رزروها</p>
+                    <h2 class="ft-medium mb-1 fs-xl text-light count">@Model.Data.Balance</h2>
+                    <p class="p-0 m-0 text-light fs-md">موجودی</p>
                     <i class="lni lni-wallet"></i>
                 </div>
             </div>
@@ -86,42 +77,49 @@
                         <div class="top-buttons-box mb-2">
                         </div>
                         <div class="row">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-striped" id="data-table" style="font-size: 14px;">
-                                    <thead>
-                                        <tr>
-                                            <th class="p-low" style="padding: 8px;"><input type="checkbox" id="btn-check-all-toggle"></th>
-                                            <th style="padding: 8px;">#</th>
-                                            <th style="padding: 8px;">عکس</th>
-                                            <th style="padding: 8px;">نام</th>
-                                            <th style="padding: 8px;">توضیحات</th>
-                                            <th style="padding: 8px;">عملیات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var service in Model.HouseWorks)
-                                        {
+                            @if (Model.CustomerOrders is not null)
+                            {
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped" id="data-table" style="font-size: 14px;">
+                                        <thead>
                                             <tr>
-                                                <td style="padding: 8px;"><input type="checkbox"></td>
-                                                <td style="padding: 8px;">@service.Id</td>
-                                                <td style="padding: 8px;">
-                                                    <img style="border-radius: 50%; width: 50px; height: 50px;" src="@service.ImagePath" alt="Service Image" />
-                                                </td>
-                                                <td style="padding: 8px;">@service.Tiltle</td>
-                                                <td style="padding: 8px;">@service.Description</td>
-                                                <td style="padding: 8px;">
-                                                    <a asp-page="UpdateService" asp-route-Id="@service.Id" class="btn btn-danger" style="padding: 5px 10px; font-size: 12px;">نمایش</a>
-                                                </td>
+                                                <th class="p-low" style="padding: 8px;"><input type="checkbox" id="btn-check-all-toggle"></th>
+                                                <th style="padding: 8px;">تصویر</th>
+                                                <th style="padding: 8px;">عنوان</th>
+                                                <th style="padding: 8px;">زمان ثبت</th>
+                                                <th style="padding: 8px;">قیمت پایه</th>
+                                                <th style="padding: 8px;">تاریخ تحویل</th>
+                                                <th style="padding: 8px;">وضعیت</th>
+
                                             </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var order in Model.CustomerOrders)
+                                            {
+                                                <tr>
+                                                    <td style="padding: 8px;"><input type="checkbox"></td>
+                                                    <td style="padding: 8px;">
+                                                        <img style="border-radius: 50%; width: 50px; height: 50px;" src="@order.ImagePath" alt="Service Image" />
+                                                    </td>
+                                                    <td style="padding: 8px;">@order.HouseWork</td>
+                                                    <td style="padding: 8px;">@order.CreationDate</td>
+                                                    <td style="padding: 8px;">@order.BasePrice</td>
+                                                    <td style="padding: 8px;">@order.CompletionDate</td>
+                                                    <td class="px-2 py-1 medium bg-light-primary rounded text-info" style=" padding: 8px;">@order.StausService.GetDisplayName()</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
                         </div>
-                    </div><!-- /.portlet-body -->
-                </div><!-- /.portlet -->
-            </div><!-- /.col-lg-12 -->
+                    </div>
+
+                    <!-- /.portlet-body -->
+                </div>
+                <!-- /.portlet -->
+            </div>
+            <!-- /.col-lg-12 -->
         </div>
     </div>
 </div>
-

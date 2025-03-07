@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250228082800_init")]
+    [Migration("20250305130900_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -89,7 +89,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             Id = 6,
                             ImagePath = "\\Images\\Categories\\6 فعلی (2).jpg",
                             IsDeleted = false,
-                            Title = " خودرو و حمل بار"
+                            Title = "خودرو"
                         },
                         new
                         {
@@ -241,6 +241,18 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.HasIndex("HouseWorkId");
 
                     b.ToTable("ExpertHouseWorks");
+
+                    b.HasData(
+                        new
+                        {
+                            ExpertId = 2,
+                            HouseWorkId = 1
+                        },
+                        new
+                        {
+                            ExpertId = 2,
+                            HouseWorkId = 2
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entites.Service.HouseWork", b =>
@@ -1219,7 +1231,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "f6077f88-d443-4268-98f1-bd95a2b30d51",
+                            ConcurrencyStamp = "a48a1cca-8905-478f-be05-34d85810f6d7",
                             Email = "Admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -1228,11 +1240,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBlw7ez3QgIxUSZFKrk/9ceMOinTgJtNJusFOhDDC0HusltFBRCB+bms7yegNrky+A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHcmKdUvop4wXHcq1Jy3vD7my+edJ3Wkjp0XZW12zbYCRbbaz2tBA6AHL/9uG1aljA==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 28, 11, 58, 0, 248, DateTimeKind.Local).AddTicks(2836),
+                            RegisterAt = new DateTime(2025, 3, 5, 16, 39, 0, 196, DateTimeKind.Local).AddTicks(2833),
                             RoleId = 1,
-                            SecurityStamp = "cca77bdf-8470-4f9d-b9fe-1efdb0340718",
+                            SecurityStamp = "a9f0af26-a4ef-498e-b320-2c487d8c2e2b",
                             TwoFactorEnabled = false,
                             UserName = "Admin@gmail.com"
                         },
@@ -1242,7 +1254,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "f91662f8-9ae1-4b74-9086-efe4a2c834df",
+                            ConcurrencyStamp = "bad1d0d9-65cb-4d09-bfc7-6255025e0515",
                             Email = "Customer@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Amir",
@@ -1251,11 +1263,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER@GMAIL.COM",
                             NormalizedUserName = "CUSTOMER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEK9YeX9RWbmEV7zG+26bN/6QpDYLkL+s5AXjG14tLLcLJRitFT/RKDqPWpmAbBljNA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECBjHgKNmpUDAO/Gdv0RPW/x/wciK2yWtLohgWmajexQZSZmSY72vBXALw2BL7aAVw==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 28, 11, 58, 0, 248, DateTimeKind.Local).AddTicks(2887),
+                            RegisterAt = new DateTime(2025, 3, 5, 16, 39, 0, 196, DateTimeKind.Local).AddTicks(2866),
                             RoleId = 2,
-                            SecurityStamp = "93016312-df36-47f6-bb9c-1371fccad257",
+                            SecurityStamp = "ea54b7d0-05c7-48fe-815e-dda8c88e9640",
                             TwoFactorEnabled = false,
                             UserName = "Customer@gmail.com"
                         },
@@ -1265,7 +1277,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "eaf8df62-ad88-4996-9ad7-a3633d81e0f9",
+                            ConcurrencyStamp = "d83dc7aa-c5e0-4362-bff6-8fe3defb31aa",
                             Email = "Expert@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Amir",
@@ -1274,11 +1286,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "EXPERT@GMAIL.COM",
                             NormalizedUserName = "EXPERT@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECNxwpZ/BGmU+ZmmwSlkj7xWNouzDIgBFw9JrKqPBR4lnPQwikWc1VnpKzR8lBe1jg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMlFaGSs8EnkOoxDEG7J55ImqodavL3JkTmxFw7jxYvcTaxy3Zgd/9qZ8cuCScy8yw==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 28, 11, 58, 0, 248, DateTimeKind.Local).AddTicks(2902),
+                            RegisterAt = new DateTime(2025, 3, 5, 16, 39, 0, 196, DateTimeKind.Local).AddTicks(2884),
                             RoleId = 3,
-                            SecurityStamp = "81b1b3c8-3397-45c7-81ac-cd78cd075873",
+                            SecurityStamp = "6fb43307-1060-4bc9-adcf-c829b90c8e57",
                             TwoFactorEnabled = false,
                             UserName = "Expert@gmail.com"
                         });
@@ -1519,6 +1531,9 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ExpertId")
                         .HasColumnType("int");
 
@@ -1540,41 +1555,11 @@ namespace App.Infrastructure.EFCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.HasIndex("ExpertId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 246, DateTimeKind.Local).AddTicks(1117),
-                            ExpertId = 1,
-                            IsDeleted = false,
-                            IsPlayable = false,
-                            Opinion = "بسیار تمیز و بادقت",
-                            Points = 9
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 246, DateTimeKind.Local).AddTicks(1124),
-                            ExpertId = 1,
-                            IsDeleted = false,
-                            IsPlayable = false,
-                            Opinion = "تحویل به موقع",
-                            Points = 9
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 246, DateTimeKind.Local).AddTicks(1126),
-                            ExpertId = 1,
-                            IsDeleted = false,
-                            IsPlayable = false,
-                            Opinion = "پاسخگویی بد",
-                            Points = 6
-                        });
                 });
 
             modelBuilder.Entity("Image", b =>
@@ -1808,9 +1793,6 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<bool?>("IsFinish")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<TimeOnly>("RunningTime")
                         .HasColumnType("time");
 
@@ -1832,11 +1814,13 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 1,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 245, DateTimeKind.Local).AddTicks(7669),
+                            CreateAt = new DateTime(2025, 3, 5, 16, 39, 0, 193, DateTimeKind.Local).AddTicks(4565),
                             CustomerId = 1,
                             Description = "فوری",
                             HouseWorkId = 5,
+                            IsConfrim = false,
                             IsDeleted = false,
+                            IsFinish = false,
                             RunningTime = new TimeOnly(0, 0, 0).Add(TimeSpan.FromTicks(11)),
                             StausService = 1
                         },
@@ -1844,11 +1828,13 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 2,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 245, DateTimeKind.Local).AddTicks(7688),
+                            CreateAt = new DateTime(2025, 3, 5, 16, 39, 0, 193, DateTimeKind.Local).AddTicks(4596),
                             CustomerId = 1,
                             Description = "",
                             HouseWorkId = 6,
+                            IsConfrim = false,
                             IsDeleted = false,
+                            IsFinish = false,
                             RunningTime = new TimeOnly(10, 30, 0),
                             StausService = 1
                         },
@@ -1856,11 +1842,13 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 3,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 245, DateTimeKind.Local).AddTicks(7691),
+                            CreateAt = new DateTime(2025, 3, 5, 16, 39, 0, 193, DateTimeKind.Local).AddTicks(4601),
                             CustomerId = 1,
                             Description = "فوری",
                             HouseWorkId = 30,
+                            IsConfrim = false,
                             IsDeleted = false,
+                            IsFinish = false,
                             RunningTime = new TimeOnly(4, 30, 0),
                             StausService = 1
                         });
@@ -1873,9 +1861,6 @@ namespace App.Infrastructure.EFCore.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DeliverDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -1891,6 +1876,9 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<float>("SuggestPrice")
+                        .HasColumnType("real");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ExpertId");
@@ -1903,11 +1891,11 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 1,
-                            DeliverDate = new DateTime(2025, 2, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "آمادگی برای انجام کار با قیمت پایین تر",
                             ExpertId = 1,
                             IsDeleted = false,
-                            OrderId = 1
+                            OrderId = 1,
+                            SuggestPrice = 1000f
                         });
                 });
 
@@ -1999,6 +1987,12 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Comment", b =>
                 {
+                    b.HasOne("App.Domain.Core.Entites.User.Customer", "RegisteredCustomer")
+                        .WithMany("Comments")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("App.Domain.Core.Entites.User.Expert", "Expert")
                         .WithMany()
                         .HasForeignKey("ExpertId")
@@ -2006,6 +2000,8 @@ namespace App.Infrastructure.EFCore.Migrations
                         .IsRequired();
 
                     b.Navigation("Expert");
+
+                    b.Navigation("RegisteredCustomer");
                 });
 
             modelBuilder.Entity("Image", b =>
@@ -2138,6 +2134,8 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("App.Domain.Core.Entites.User.Customer", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Orders");
                 });
 

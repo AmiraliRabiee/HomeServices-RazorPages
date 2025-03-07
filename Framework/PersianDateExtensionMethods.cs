@@ -52,10 +52,3 @@ namespace Framework
     }
 
 }
-
-//var date1 = DateTime.Now.ToPeString("yyyy/MM/dd");
-//var date2 = DateTime.Now.ToPeString("dddd, dd MMMM,yyyy");
-
-////Output:
-////1391/12/13
-////یکشنبه, 13 اسفند,1391

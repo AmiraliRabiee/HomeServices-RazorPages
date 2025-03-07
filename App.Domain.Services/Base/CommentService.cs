@@ -19,6 +19,9 @@ namespace App.Domain.Services.Base
         public List<CommentDto> GetComments()
             => _commentRepository.GetComments();
 
+        public async Task<int> GetRegisterCommentCount(int id,CancellationToken cancellationToken)
+            => await _commentRepository.GetRegisterCommentCount(id,cancellationToken);
+
         public Task<Result> SoftDeleteComment(Comment comment, CancellationToken cancellationToken)
             => _commentRepository.SoftDeleteComment(comment, cancellationToken);
 

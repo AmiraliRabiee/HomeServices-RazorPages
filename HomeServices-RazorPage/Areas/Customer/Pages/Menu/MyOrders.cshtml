@@ -1,8 +1,9 @@
 ﻿@page
+@using App.Domain.Core.Enum
 @using HomeServices_RazorPage.Areas.Customer.Pages.Menu
-@model Areas_Customer_Pages_Menu_MyOrders
+@using App.Domain.Core.Helpers
+@model MyOrdersModel
 @{
-
 }
 
 <!-- ======================= dashboard Detail ======================== -->
@@ -47,173 +48,148 @@
                     <div class="dashboard-list-wraps bg-white rounded mb-4">
                         <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                             <div class="dashboard-list-wraps-flx">
-                                <h4 class="mb-0 ft-medium fs-md"><i class="fa fa-file-alt ms-2 theme-cl fs-sm"></i>آگهی های من</h4>
+                                <h4 class="mb-0 ft-medium fs-md">
+                                    <i class="fa fa-file-alt ms-2 theme-cl fs-sm"></i>سفارش های من
+                                </h4>
                             </div>
                         </div>
-
+                        @if (!string.IsNullOrEmpty(Model.Message))
+                        {
+                            <div class="alert alert-info">@Model.Message</div>
+                        }
                         <div class="dashboard-list-wraps-body py-3 px-3">
                             <div class="dashboard-listing-wraps">
+                                @if (Model.OrderDtos.Count > 0)
+                                {
+                                    @foreach (var order in Model.OrderDtos)
+                                    {
+                                        <!-- Single Listing Item -->
+                                        <div class="dsd-single-listing-wraps d-flex align-items-start justify-content-between">
+                                            <!-- Content Section (Left Side) -->
+                                            <div class="d-flex flex-grow-1">
+                                                <div class="dsd-single-lst-thumb">
+                                                    <img src="@order.ImagePath" class="img-fluid" alt="@order.HouseWork" />
+                                                </div>
+                                                <div class="dsd-single-lst-caption">
+                                                    <div class="ico-content">
+                                                        <ul>
+                                                            @if (order.StausService == StausServiceEnum.NewlyRegistered)
+                                                            {
+                                                                <li>
+                                                                    <div class="px-2 py-1 medium bg-light-danger rounded text-danger">@order.StausService.GetDisplayName()</div>
+                                                                </li>
+                                                            }
+                                                            @if (order.StausService == StausServiceEnum.ExpertSelectionQueue)
+                                                            {
+                                                                <li>
+                                                                    <div class="px-2 py-1 medium bg-light-info rounded text-info">@order.StausService.GetDisplayName()</div>
+                                                                </li>
+                                                            }
+                                                            @if (order.StausService == StausServiceEnum.WaitingForService)
+                                                            {
+                                                                <li>
+                                                                    <div class="px-2 py-1 medium bg-secondary rounded text-white">@order.StausService.GetDisplayName()</div>
+                                                                </li>
+                                                            }
+                                                            @if (order.StausService == StausServiceEnum.Done)
+                                                            {
+                                                                <li>
+                                                                    <div class="px-2 py-1 medium bg-light-warning rounded text-warning">@order.StausService.GetDisplayName()</div>
+                                                                </li>
+                                                            }
+                                                            @if (order.StausService == StausServiceEnum.Payment)
+                                                            {
+                                                                <li>
+                                                                    <div class="px-2 py-1 medium bg-light-success rounded text-success">@order.StausService.GetDisplayName()</div>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                    <div class="dsd-single-lst-title">
+                                                        <h5>@order.HouseWork</h5>
+                                                    </div>
+                                                    <span class="agd-location">
+                                                        <i class="lni lni-map-marker ms-1"></i>@order.CityName
+                                                    </span>
+                                                    <div class="ico-content">
+                                                        <div class="Goodup-ft-first">
+                                                            <span class="active">
+                                                                قیمت پایه <i class="fas fa-dollar-sign"></i>@order.BasePrice
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Goodup-middle-caption mt-3">
+                                                        <p>توضیحات : @order.Description</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-column gap-1 ms-4" style="width: 140px;">
 
-                                <!-- Single Listing Item -->
-                                <div class="dsd-single-listing-wraps">
-                                    <div class="dsd-single-lst-thumb"><img src="assets/img/listing/l-2.png" class="img-fluid" alt="" /></div>
-                                    <div class="dsd-single-lst-caption">
-                                        <div class="ico-content">
-                                            <ul>
-                                                <li><div class="px-2 py-1 medium bg-light-success rounded text-success">پرداخت شده</div></li>
-                                                <li><div class="px-2 py-1 medium bg-light-danger rounded text-danger">در انتظار</div></li>
-                                                <li><div class="px-2 py-1 medium bg-light-info rounded text-info">تایید شده</div></li>
-                                            </ul>
-                                        </div>
-                                        <div class="dsd-single-lst-title"><h5>سالن ورزشی زعفرانیه</h5></div>
-                                        <span class="agd-location"><i class="lni lni-map-marker ms-1"></i>اوماها، انگلستان</span>
-                                        <div class="ico-content">
-                                            <div class="Goodup-ft-first">
-                                                <span class="active">قیمت پایه <i class="fas fa-dollar-sign">2500</i></span>
-                                                <div class="Goodup-rating">
-                                                </div>
-                                            </div>
-                                            <div class="Goodup-middle-caption mt-3">
-                                                <p>شرایط فعلی تکنولوژی مورد نیاز</p>
-                                            </div>
-                                        </div>
-                                        <div class="dsd-single-lst-footer">
-                                            <a href="javascript:void(0);" class="btn btn-edit mr-1"><i class="fas fa-edit ms-1"></i>ویرایش</a>
-                                            <a href="javascript:void(0);" class="btn btn-view mr-1"><i class="fas fa-eye ms-1"></i>نمایش</a>
-                                            <a href="javascript:void(0);" class="btn btn-delete"><i class="fas fa-trash ms-1"></i>حذف</a>
-                                        </div>
-                                    </div>
-                                </div>
- 
-                                                                <!-- Single Listing Item -->
-                                <div class="dsd-single-listing-wraps">
-                                    <div class="dsd-single-lst-thumb"><img src="assets/img/listing/l-2.png" class="img-fluid" alt="" /></div>
-                                    <div class="dsd-single-lst-caption">
-                                        <div class="ico-content">
-                                            <ul>
-                                                <li><div class="px-2 py-1 medium bg-light-success rounded text-success">پرداخت شده</div></li>
-                                                <li><div class="px-2 py-1 medium bg-light-danger rounded text-danger">در انتظار</div></li>
-                                                <li><div class="px-2 py-1 medium bg-light-info rounded text-info">تایید شده</div></li>
-                                            </ul>
-                                        </div>
-                                        <div class="dsd-single-lst-title"><h5>سالن ورزشی زعفرانیه</h5></div>
-                                        <span class="agd-location"><i class="lni lni-map-marker ms-1"></i>اوماها، انگلستان</span>
-                                        <div class="ico-content">
-                                            <div class="Goodup-ft-first">
-                                                <span class="active">قیمت پایه <i class="fas fa-dollar-sign">2500</i></span>
-                                                <div class="Goodup-rating">
-                                                </div>
-                                            </div>
-                                            <div class="Goodup-middle-caption mt-3">
-                                                <p>شرایط فعلی تکنولوژی مورد نیاز</p>
-                                            </div>
-                                        </div>
-                                        <div class="dsd-single-lst-footer">
-                                            <a href="javascript:void(0);" class="btn btn-edit mr-1"><i class="fas fa-edit ms-1"></i>ویرایش</a>
-                                            <a href="javascript:void(0);" class="btn btn-view mr-1"><i class="fas fa-eye ms-1"></i>نمایش</a>
-                                            <a href="javascript:void(0);" class="btn btn-delete"><i class="fas fa-trash ms-1"></i>حذف</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                                <a asp-page="suggestions" asp-route-oId="@order.Id" class="btn btn-primary px-4 py-2 w-100 text-center custom-btn">
+                                                    <i class="fas fa-eye ms-1"></i>پیشنهاد
+                                                </a>
 
-                                <!-- Single Listing Item -->
-                                <div class="dsd-single-listing-wraps">
-                                    <div class="dsd-single-lst-thumb"><img src="assets/img/listing/l-2.png" class="img-fluid" alt="" /></div>
-                                    <div class="dsd-single-lst-caption">
-                                        <div class="ico-content">
-                                            <ul>
-                                                <li><div class="px-2 py-1 medium bg-light-success rounded text-success">پرداخت شده</div></li>
-                                                <li><div class="px-2 py-1 medium bg-light-danger rounded text-danger">در انتظار</div></li>
-                                                <li><div class="px-2 py-1 medium bg-light-info rounded text-info">تایید شده</div></li>
-                                            </ul>
-                                        </div>
-                                        <div class="dsd-single-lst-title"><h5>سالن ورزشی زعفرانیه</h5></div>
-                                        <span class="agd-location"><i class="lni lni-map-marker ms-1"></i>اوماها، انگلستان</span>
-                                        <div class="ico-content">
-                                            <div class="Goodup-ft-first">
-                                                <span class="active">قیمت پایه <i class="fas fa-dollar-sign">2500</i></span>
-                                                <div class="Goodup-rating">
-                                                </div>
+                                                @if (order.StausService == StausServiceEnum.NewlyRegistered)
+                                                {
+                                                    <a class="btn btn-gray px-4 py-2 w-100 text-center custom-btn">
+                                                        <i class="fas fa-credit-card ms-1"></i>پرداخت
+                                                    </a>
+                                                }
+                                                else if (order.StausService == StausServiceEnum.ExpertSelectionQueue)
+                                                {
+                                                    <a class="btn btn-gray px-4 py-2 w-100 text-center custom-btn">
+                                                        <i class="fas fa-credit-card ms-1"></i>پرداخت
+                                                    </a>
+                                                }
+                                                else if (order.StausService == StausServiceEnum.WaitingForService)
+                                                {
+                                                    <a class="btn btn-gray px-4 py-2 w-100 text-center custom-btn">
+                                                        <i class="fas fa-credit-card ms-1"></i>پرداخت
+                                                    </a>
+                                                }
+                                                else if (order.StausService == StausServiceEnum.Done)
+                                                {
+                                                    <a asp-page="finally" asp-route-Id="@order.Id" class="btn btn-success px-4 py-2 w-100 text-center custom-btn">
+                                                        <i class="fas fa-credit-card ms-1"></i>پرداخت
+                                                    </a>
+                                                }
                                             </div>
-                                            <div class="Goodup-middle-caption mt-3">
-                                                <p>شرایط فعلی تکنولوژی مورد نیاز</p>
-                                            </div>
-                                        </div>
-                                        <div class="dsd-single-lst-footer">
-                                            <a href="javascript:void(0);" class="btn btn-edit mr-1"><i class="fas fa-edit ms-1"></i>ویرایش</a>
-                                            <a href="javascript:void(0);" class="btn btn-view mr-1"><i class="fas fa-eye ms-1"></i>نمایش</a>
-                                            <a href="javascript:void(0);" class="btn btn-delete"><i class="fas fa-trash ms-1"></i>حذف</a>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- Single Listing Item -->
-                                <div class="dsd-single-listing-wraps">
-                                    <div class="dsd-single-lst-thumb"><img src="assets/img/listing/l-2.png" class="img-fluid" alt="" /></div>
-                                    <div class="dsd-single-lst-caption">
-                                        <div class="ico-content">
-                                            <ul>
-                                                <li><div class="px-2 py-1 medium bg-light-success rounded text-success">پرداخت شده</div></li>
-                                                <li><div class="px-2 py-1 medium bg-light-danger rounded text-danger">در انتظار</div></li>
-                                                <li><div class="px-2 py-1 medium bg-light-info rounded text-info">تایید شده</div></li>
-                                            </ul>
-                                        </div>
-                                        <div class="dsd-single-lst-title"><h5>سالن ورزشی زعفرانیه</h5></div>
-                                        <span class="agd-location"><i class="lni lni-map-marker ms-1"></i>اوماها، انگلستان</span>
-                                        <div class="ico-content">
-                                            <div class="Goodup-ft-first">
-                                                <span class="active">قیمت پایه <i class="fas fa-dollar-sign">2500</i></span>
-                                                <div class="Goodup-rating">
-                                                </div>
-                                            </div>
-                                            <div class="Goodup-middle-caption mt-3">
-                                                <p>شرایط فعلی تکنولوژی مورد نیاز</p>
-                                            </div>
-                                        </div>
-                                        <div class="dsd-single-lst-footer">
-                                            <a href="javascript:void(0);" class="btn btn-edit mr-1"><i class="fas fa-edit ms-1"></i>ویرایش</a>
-                                            <a href="javascript:void(0);" class="btn btn-view mr-1"><i class="fas fa-eye ms-1"></i>نمایش</a>
-                                            <a href="javascript:void(0);" class="btn btn-delete"><i class="fas fa-trash ms-1"></i>حذف</a>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- Single Listing Item -->
-                                <div class="dsd-single-listing-wraps">
-                                    <div class="dsd-single-lst-thumb"><img src="assets/img/listing/l-2.png" class="img-fluid" alt="" /></div>
-                                    <div class="dsd-single-lst-caption">
-                                        <div class="ico-content">
-                                            <ul>
-                                                <li><div class="px-2 py-1 medium bg-light-success rounded text-success">پرداخت شده</div></li>
-                                                <li><div class="px-2 py-1 medium bg-light-danger rounded text-danger">در انتظار</div></li>
-                                                <li><div class="px-2 py-1 medium bg-light-info rounded text-info">تایید شده</div></li>
-                                            </ul>
+                                            <style>
+                                                .custom-btn {
+                                                    border-radius: 8px; /* Rounded edges */
+                                                    font-weight: 600; /* Slightly bold */
+                                                    transition: all 0.3s ease-in-out;
+                                                    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+                                                }
+
+                                                    .custom-btn:hover {
+                                                        transform: translateY(-2px); /* Lift effect */
+                                                        box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+                                                    }
+
+                                                    .custom-btn:active {
+                                                        transform: translateY(1px); /* Press-down effect */
+                                                        box-shadow: none; /* Remove shadow */
+                                                    }
+                                            </style>
+
                                         </div>
-                                        <div class="dsd-single-lst-title"><h5>سالن ورزشی زعفرانیه</h5></div>
-                                        <span class="agd-location"><i class="lni lni-map-marker ms-1"></i>اوماها، انگلستان</span>
-                                        <div class="ico-content">
-                                            <div class="Goodup-ft-first">
-                                                <span class="active">قیمت پایه <i class="fas fa-dollar-sign">2500</i></span>
-                                                <div class="Goodup-rating">
-                                                </div>
-                                            </div>
-                                            <div class="Goodup-middle-caption mt-3">
-                                                <p>شرایط فعلی تکنولوژی مورد نیاز</p>
-                                            </div>
-                                        </div>
-                                        <div class="dsd-single-lst-footer">
-                                            <a href="javascript:void(0);" class="btn btn-edit mr-1"><i class="fas fa-edit ms-1"></i>ویرایش</a>
-                                            <a href="javascript:void(0);" class="btn btn-view mr-1"><i class="fas fa-eye ms-1"></i>نمایش</a>
-                                            <a href="javascript:void(0);" class="btn btn-delete"><i class="fas fa-trash ms-1"></i>حذف</a>
-                                        </div>
+
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="alert alert-warning text-center">
+                                        هیچ سفارشی ثبت نشده است.
                                     </div>
-                                </div>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

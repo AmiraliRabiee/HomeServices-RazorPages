@@ -7,7 +7,7 @@ using App.Domain.Core.Entites.Service;
 
 namespace App.Domain.AppServices.HomeService
 {
-    public class HouseWorkAppService(IHouseWorkService _houseWorkService, IBaseDataService _baseDataService) : IHouseWorkAppService
+    public class HouseWorkAppService(IHouseWorkService _houseWorkService, IBaseDataService _baseDataService , ICategoryService _categoryService) : IHouseWorkAppService
     {
         public async Task<Result> AddServiceAsync(SummHouseWorkDto model, CancellationToken cancellationToken)
         {
@@ -64,13 +64,37 @@ namespace App.Domain.AppServices.HomeService
             return result;
         }
 
+        public async Task<SummHouseWorkDto> GetHouseWorkDto(int id , CancellationToken cancellationToken)
+        {
+            var work = await _houseWorkService.GetServiceByChildId(id, cancellationToken);
+            if(work is not null)
+            {
+                var category = await _categoryService.GetCategoryDto(work.CategoryId);
+                work.SubCategory = category.Title;
+                return work;
+            }
+            return work;
+
+        }
         public UpdateHouseWork GetServiceDto(int id)
             => _houseWorkService.GetServiceDto(id);
 
-        public List<SummHouseWorkDto> GetServicesById(int id)
-            => _houseWorkService.GetServicesById(id);
+        public async Task<List<SummHouseWorkDto>> GetServicesById(int id , CancellationToken cancellationToken)
+            => await _houseWorkService.GetServicesById(id , cancellationToken);
 
-        public List<SummHouseWorkDto> GetServicesById()
+        public List<SummHouseWorkDto> GetServices()
             => _houseWorkService.GetServicesById();
+
+        public async Task<int> GetServiceCount(int categoryId)
+            => await _houseWorkService.GetServiceCount(categoryId);
+
+        public Task<List<SummHouseWorkDto>> GetServicesByChildId(int id, CancellationToken cancellationToken)
+            => _houseWorkService.GetServicesByChildId(id, cancellationToken);
+
+        public async Task<SummHouseWorkDto> GetServiceByChildId(int id, CancellationToken cancellationToken)
+            => await _houseWorkService.GetServiceByChildId(id, cancellationToken);
+
+        public Task<SummHouseWorkDto> GetServiceById(int id, CancellationToken cancellationToken)
+            => _houseWorkService.GetServiceById(id, cancellationToken);
     }
 }

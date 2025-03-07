@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Dto.HomeService;
+using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.OutputResult;
 
 namespace App.Domain.Core.Contracts.Service.HomeServices
@@ -14,5 +15,12 @@ namespace App.Domain.Core.Contracts.Service.HomeServices
         Task<List<SummSuggestionDto>> GetAllDto(CancellationToken cancellationToken);
         Task<List<SummSuggestionDto>> GetSuggestionDetails(int id, CancellationToken cancellationToken);
         int GetCount(int id);
+        Task<List<SummSuggestionDto>> GetSuggestionSkills(CustomerDto customer, CancellationToken cancellationToken);
+        Task<List<SummSuggestionDto>> GetSuggestionSkills2(CancellationToken cancellationToken);
+        Task<float> GetSuggestPrice(int id, CancellationToken cancellationToken);
+        Task<Result> AcceptSuggestion(int id, CancellationToken cancellationToken);
+        Task<SummSuggestionDto> GetExpertBySuggestion(int id, CancellationToken cancellationToken);
+        Task<SummSuggestionDto> GetSuggestionAccepted(int id, CancellationToken cancellationToken);
+
     }
 }

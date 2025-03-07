@@ -66,15 +66,9 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                 if (customer is null)
                     return new Result { IsSuccess = false, Message = "کارشناس یافت نشد" };
 
-                customer.User.FirstName = model.FirstName;
-                customer.User.LastName = model.LastName;
-                customer.User.RoleId = model.RoleId;
-                customer.User.Email = model.Email;
-                customer.Address = model.Address;
+                customer.Address = string.IsNullOrEmpty(model.Address)? model.Address : model.Address;
                 customer.CityId = model.CityId;
 
-
-                _appDbContext.Customers.Update(customer);
                 await _appDbContext.SaveChangesAsync(cancellationToken);
 
                 return new Result { IsSuccess = true, Message = "کارشناس به‌روزرسانی شد" };
@@ -84,6 +78,23 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                 return new Result { IsSuccess = false, Message = $"{ex.Message}" };
             }
         }
+
+        public async Task<CustomerDto> GetCustomerDto(int id ,CancellationToken cancellationToken)
+        {
+            var customer = await _appDbContext.Customers
+                .Where(e => e.Id == id)
+                .Select(e => new CustomerDto
+                {
+                    Id = e.Id,
+                    CityId = e.CityId,
+                    Address = e.Address,
+                }).FirstAsync(cancellationToken);
+            if (customer is null)
+                throw new Exception(".مشتری با این شناسه وجود ندارد");
+            return customer;
+        }
+
+        
     }
 
 }
