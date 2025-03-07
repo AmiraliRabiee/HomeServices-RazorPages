@@ -14,18 +14,16 @@ public class Order
     // ساعت اجرا
     public TimeOnly RunningTime { get; set; }
     public DateTime? CreateAt { get; set; }
-    public string? PhoneNumber { get; set; }
     public StausServiceEnum StausService { get; set; }
     public bool IsDeleted { get; set; } = false;
-    public bool? IsConfrim { get; set; }
-    public bool? IsFinish { get; set; }
+    public bool? IsConfrim { get; set; } = false;
+    public bool? IsFinish { get; set; } = false;
+    public bool? IsPayment { get; set; } = false;
 
     public int HouseWorkId { get; set; }
     public int CustomerId { get; set; }
-    public int? ExpertId { get; set; }
 
     public HouseWork HouseWork { get; set; }
     public Customer Customer { get; set; }
-    public Expert? Expert { get; set; }
     public List<Suggestion>? Suggestions { get; set; }
 }

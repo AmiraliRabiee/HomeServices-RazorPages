@@ -10,6 +10,4 @@ public class City
     [Required]
     public string? Name { get; set; }
 
-    //public List<Customer>? Customers { get; set; }
-    //public List<Expert>? Experts { get; set; }
 }

@@ -16,11 +16,13 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
             {
                 var newComment = new Comment
                 {
+                    Id = comment.Id,
                     CreateAt = DateTime.Now,
                     stausService = StausServiceEnum.Done,
                     ExpertId = comment.ExpertId,
                     Points = comment.Points,
-                    Opinion = comment.Opinion
+                    Opinion = comment.Opinion,
+                    CustomerId = comment.CustomerId,
                 };
 
                 await _appDbContext.Comments.AddAsync(newComment, cancellationToken);
@@ -115,6 +117,14 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
             if (comments is null)
                 throw new Exception("کامنتی وجود ندارد");
             return comments;
+        }
+
+        public async Task<int> GetRegisterCommentCount(int id, CancellationToken cancellationToken)
+        {
+            var count = await _appDbContext.Comments
+                .Where(c => c.CustomerId == id /*&& c.IsPlayable*/)
+                .CountAsync(cancellationToken);
+            return count;
         }
     }
 }

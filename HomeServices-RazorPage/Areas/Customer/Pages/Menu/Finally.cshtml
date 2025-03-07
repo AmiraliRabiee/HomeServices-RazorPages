@@ -1,0 +1,243 @@
+﻿@page
+@model HomeServices_RazorPage.Areas.Customer.Pages.Menu.FinallyModel
+@{
+}
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">تأیید</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                انجام شدن کار را تایید میکنید؟
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="showPage()">بله</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="showMessage()">خیر</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Message Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel">پیام</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                لطفاً منتظر تماس تیم پشتیبانی باشید.
+            </div>
+            <div class="modal-footer">
+                <a asp-page="myorders" type="button" class="btn btn-primary" data-bs-dismiss="modal">بازگشت</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (TempData["Successfull"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Successfull"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<!-- Main Content (hidden initially) -->
+<section class="gray py-5 position-relative d-none" id="mainContent">
+    <div class="container">
+
+        <section class="gray py-5 position-relative">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                        <div class="goodup-dashboard-nav sticky-top">
+                            <div class="goodup-dashboard-inner">
+                                <ul data-submenu-title="منو">
+                                    <li><a asp-page="Dashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                                    <li><a asp-page="myorders"><i class="lni lni-files ms-2"></i>سفارش های من</a></li>
+                                </ul>
+                                <ul data-submenu-title="حساب کاربری">
+                                    <li><a asp-page="Profile"><i class="lni lni-user ms-2"></i> تنظیمات </a></li>
+                                    <li><a asp-page="/logout" asp-area=""><i class="lni lni-power-switch ms-2"></i>خروج</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
+                        <!-- Adjusted column width -->
+                        <div class="jb-apply-form bg-white rounded py-3 px-3 border mb-3">
+
+                            <!-- Reduced padding -->
+                            <div class="Goodup-agent-blocks">
+                                <div class="Goodup-agent-thumb"><img src="/assets/img/t-1.png" width="90" class="img-fluid circle" alt=""></div>
+                                <div class="Goodup-agent-caption">
+                                    <span class="agd-location"><i class="lni lni-map-marker ms-1"></i>خیابان سپهبد قرنی</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="agent-cnt-info">
+                                <div class="row g-3">
+                                    <div class="col-6">
+                                        <a class="adv-btn full-width">نظرات کارشناس</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a asp-area="" asp-page="/addcomment/index" asp-route-Id="@Model.SuggestionDto.Id" class="adv-btn full-width">ارسال نظر</a>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <!-- Reduced margin -->
+                                    <div class="col-12">
+                                        <a href="javascript:void(0);" class="adv-btn full-width theme-bg text-light">مشاهده پروفایل</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="jb-apply-form bg-white rounded py-3 px-3 border mb-3">
+                            <h4 class="ft-bold mb-1 fs-5">سفارش</h4>
+                            <div class="Goodup-boo-space mt-2">
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
+                                        <div class="_adv_features">
+                                            <ul>
+                                                <li>مجموع<span>@Model.Amounts.SuggestPrice تومان</span></li>
+                                                <li>سهم<span>@Model.Amounts.Profit تومان</span></li>
+                                                <li>مالیات<span>رایگان</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
+                                        <!-- Reduced margin -->
+                                        <div class="Goodup-boo-space-foot mb-2">
+                                            <!-- Reduced margin -->
+                                            <span class="Goodup-boo-space-left">قابل پرداخت</span>
+                                            <h5 class="ft-bold theme-cl">@Model.Amounts.TotalSum تومان</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <a asp-page-handler="withdraw" asp-route-price="@Model.Amounts.SuggestPrice" class="btn text-light rounded full-width theme-bg ft-medium">پرداخت</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+        <div class="d-block mb-2">
+            <div class="jbd-01 py-2">
+                <div class="jbd-details">
+                    <h5 class="ft-bold fs-lg">سوالات متداول</h5>
+
+                    <div class="d-block mt-3">
+                        <div id="accordion2" class="accordion">
+                            <div class="card">
+                                <div class="card-header" id="h7">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#ord7" aria-expanded="true" aria-controls="ord7">
+                                            آیا میتوانم سفارش را لغو کنم؟
+                                        </button>
+                                    </h5>
+                                </div>
+
+                                <div id="ord7" class="collapse show" aria-labelledby="h7" data-parent="#accordion2">
+                                    <div class="card-body">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="h8">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#ord8" aria-expanded="false" aria-controls="ord8">
+                                            برای اطمینان از کارشناس و انجام به موقع مراحل چه تضمینی وجود دارد؟
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="ord8" class="collapse" aria-labelledby="h8" data-parent="#accordion2">
+                                    <div class="card-body">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="h9">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#ord9" aria-expanded="false" aria-controls="ord9">
+                                            آیا سایت در قبال پیش آمدن مشکل مسئولیتی دارد؟
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="ord9" class="collapse" aria-labelledby="h9" data-parent="#accordion2">
+                                    <div class="card-body">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="h4">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#ord4" aria-expanded="false" aria-controls="ord4">
+                                            مراحل دریافت خدمات پس از ثبت سفارش به چه صورت است؟
+                                        </button>
+                                    </h5>
+                                </div>
+
+                                <div id="ord4" class="collapse" aria-labelledby="h4" data-parent="#accordion2">
+                                    <div class="card-body">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="d-block mb-2 d-none" id="faqSection">
+    <!-- Your existing content -->
+</div>
+
+<script>
+    function showPage() {
+        // Show the main content
+        document.getElementById("mainContent").classList.remove("d-none");
+        document.getElementById("faqSection").classList.remove("d-none");
+    }
+
+    function showMessage() {
+        // Show the message modal
+        const messageModal = new bootstrap.Modal(document.getElementById('messageModal'));
+        messageModal.show();
+    }
+
+    // Automatically show the confirmation modal when the page loads
+    window.onload = function () {
+        const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+        confirmationModal.show();
+    };
+</script>

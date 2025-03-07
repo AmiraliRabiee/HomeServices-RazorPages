@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Goodup - قالب ثبت آگهی و دایرکتوری HTML</title>
+    <title>Goodup -  HTML</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -47,12 +47,12 @@
                         <div class="mobile_nav">
                             <ul>
                                 <li>
-                                    <a asp-page="login" data-bs-toggle="modal" data-bs-target="#login" class="theme-cl fs-lg">
+                                    <a asp-page="/login" data-bs-toggle="modal" data-bs-target="#login" class="theme-cl fs-lg">
                                         <i class="lni lni-user"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-page="categories/index" class="crs_yuo12 w-auto text-white theme-bg">
+                                    <a asp-page="/categories/index" class="crs_yuo12 w-auto text-white theme-bg">
                                         <span class="embos_45"><i class="fas fa-plus ms-2"></i>افزودن آگهی</span>
                                     </a>
                                 </li>
@@ -63,11 +63,11 @@
                         <ul class="nav-menu">
 
                             <li>
-                                <a asp-page="index">صفحه اصلی</a>
+                                <a asp-page="/index">صفحه اصلی</a>
                             </li>
 
                             <li>
-                                <a asp-page="categories/index">دسته بندی خدمات</a>
+                                <a asp-page="/categories/index">دسته بندی خدمات</a>
                             </li>
                             @if(SignInManager.IsSignedIn(User)){
                                 @if (User.IsInRole("Customer"))
@@ -101,10 +101,10 @@
                                 <li>
                                     <a>پنل کاربری</a>
                                     <ul class="nav-dropdown nav-submenu">
-                                        <li><a asp-page="login"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
-                                        <li><a asp-page="login"><i class="lni lni-files ms-2"></i>سفارش های من</a></li>
-                                        <li><a asp-page="login"><i class="lni lni-add-files ms-2"></i>ثبت سفارش</a></li>
-                                        <li><a asp-page="login"><i class="lni lni-bookmark ms-2"></i>علاقه مندی ها</a></li>
+                                        <li><a asp-page="/login"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                                        <li><a asp-page="/login"><i class="lni lni-files ms-2"></i>سفارش های من</a></li>
+                                        <li><a asp-page="/login"><i class="lni lni-add-files ms-2"></i>ثبت سفارش</a></li>
+                                        <li><a asp-page="/login"><i class="lni lni-bookmark ms-2"></i>علاقه مندی ها</a></li>
                                     </ul>
                                 </li>
                             }
@@ -113,10 +113,10 @@
                             <li>
                                 <a>صفحات</a>
                                 <ul class="nav-dropdown nav-submenu">
-                                    <li><a asp-page="register">ثبت نام</a></li>
-                                    <li><a asp-page="login">ورود</a></li>
-                                    <li><a asp-page="Rules">شرایط و قوانین</a></li>
-                                    <li><a asp-page="soalat">سوالات متداول</a></li>
+                                    <li><a asp-page="/register">ثبت نام</a></li>
+                                    <li><a asp-page="/login">ورود</a></li>
+                                    <li><a asp-page="/Rules">شرایط و قوانین</a></li>
+                                    <li><a asp-page="/soalat">سوالات متداول</a></li>
                                 </ul>
                             </li>
 
@@ -126,11 +126,11 @@
                             @if (SignInManager.IsSignedIn(User))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="Account" asp-page="/Profile" title="پروفایل">Welcome @User.Identity?.Name</a>
+                                    <a class="nav-link text-dark" asp-area="Account" asp-page="/Profile" title="پروفایل">خوش آمدید  @User.Identity?.Name</a>
                                 </li>
                                 <li class="nav-item">
                                     <form class="form-inline">
-                                        <button asp-page="logout" asp-area="" class="nav-link btn btn-link text-dark">خروج</button>
+                                        <button asp-page="/logout" asp-area="" class="nav-link btn btn-link text-dark">خروج</button>
                                         @if (User.IsInRole("Admin"))
                                         {
                                             <button asp-area="Admin" asp-page="Index" class="nav-link btn btn-link text-dark">پنل ادمین</button>

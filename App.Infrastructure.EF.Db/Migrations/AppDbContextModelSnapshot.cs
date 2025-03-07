@@ -86,7 +86,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             Id = 6,
                             ImagePath = "\\Images\\Categories\\6 فعلی (2).jpg",
                             IsDeleted = false,
-                            Title = " خودرو و حمل بار"
+                            Title = "خودرو"
                         },
                         new
                         {
@@ -238,6 +238,18 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.HasIndex("HouseWorkId");
 
                     b.ToTable("ExpertHouseWorks");
+
+                    b.HasData(
+                        new
+                        {
+                            ExpertId = 2,
+                            HouseWorkId = 1
+                        },
+                        new
+                        {
+                            ExpertId = 2,
+                            HouseWorkId = 2
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entites.Service.HouseWork", b =>
@@ -488,7 +500,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 15,
                             Description = "(فرش ، موکت ، مبل)",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\34h.jpg",
                             IsDeleted = false,
                             Title = "شستشو در منزل"
                         },
@@ -498,7 +510,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 15,
                             Description = "",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\35h.jpg",
                             IsDeleted = false,
                             Title = "قالیشویی"
                         },
@@ -508,7 +520,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 15,
                             Description = "",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\36h.jpg",
                             IsDeleted = false,
                             Title = "خشکشویی"
                         },
@@ -518,7 +530,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 15,
                             Description = "",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\37h.jpg",
                             IsDeleted = false,
                             Title = "پرده شویی"
                         },
@@ -528,7 +540,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 16,
                             Description = "(آب ، نانو)",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\38h.jpg",
                             IsDeleted = false,
                             Title = "کارواش"
                         },
@@ -538,7 +550,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 16,
                             Description = "",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\39h.jpg",
                             IsDeleted = false,
                             Title = "صفرشویی خودرو"
                         },
@@ -548,7 +560,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 16,
                             Description = "جدید",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\40h.jpg",
                             IsDeleted = false,
                             Title = "سرامیک حودرو"
                         },
@@ -558,7 +570,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 16,
                             Description = "",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\41h.jpg",
                             IsDeleted = false,
                             Title = "واکس و پولیش"
                         },
@@ -568,7 +580,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 16,
                             Description = "به صورت تخصصی",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\42h.jpg",
                             IsDeleted = false,
                             Title = "صافکاری و نقاشی"
                         },
@@ -578,6 +590,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 17,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\43h.jpg",
                             IsDeleted = false,
                             Title = "خدمات ناخن"
                         },
@@ -587,6 +600,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 17,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\44h.jpg",
                             IsDeleted = false,
                             Title = " رنگ مو در منزل"
                         },
@@ -596,6 +610,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 17,
                             Description = "جدید",
+                            ImagePath = "\\Images\\HomeServices\\45h.jpg",
                             IsDeleted = false,
                             Title = "پاکسازی و لایه برداری پوست"
                         },
@@ -605,6 +620,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 17,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\46h.jpg",
                             IsDeleted = false,
                             Title = "آرایش صورت در منزل"
                         },
@@ -614,6 +630,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 17,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\47h.jpg",
                             IsDeleted = false,
                             Title = "لیفت و لیمنت مژه"
                         },
@@ -623,6 +640,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 18,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\48h.jpg",
                             IsDeleted = false,
                             Title = "کوتاهی مو و اصلاح صورت"
                         },
@@ -632,6 +650,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 18,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\49h.jpg",
                             IsDeleted = false,
                             Title = "مراقب و زیبایی آقایان"
                         },
@@ -641,6 +660,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 18,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\50h.jpg",
                             IsDeleted = false,
                             Title = "گریم داماد"
                         },
@@ -650,6 +670,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 19,
                             Description = "به صورت تخصصی",
+                            ImagePath = "\\Images\\HomeServices\\51h.jpg",
                             IsDeleted = false,
                             Title = "برنامه ورزشی و تغذیه"
                         },
@@ -659,6 +680,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 19,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\52h.jpg",
                             IsDeleted = false,
                             Title = "کلاس یوگا در خانه"
                         },
@@ -668,6 +690,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 19,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\53h.jpg",
                             IsDeleted = false,
                             Title = "کلاس پیلاتس در خانه"
                         },
@@ -677,6 +700,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 19,
                             Description = "جدید",
+                            ImagePath = "\\Images\\HomeServices\\54h.jpg",
                             IsDeleted = false,
                             Title = "کلاس سی ایکس در خانه"
                         },
@@ -686,6 +710,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 19,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\55h.jpg",
                             IsDeleted = false,
                             Title = "حرکات اصلاحی"
                         },
@@ -695,6 +720,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\56h.jpg",
                             IsDeleted = false,
                             Title = "نصب و تعمیر یخچال فریزر"
                         },
@@ -704,6 +730,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\57h.jpg",
                             IsDeleted = false,
                             Title = " نصب و تعمیر ماشین ظرفشویی"
                         },
@@ -713,6 +740,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\58h.jpg",
                             IsDeleted = false,
                             Title = "نصب و تعمیر ماشین لباسشویی"
                         },
@@ -722,6 +750,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\59h (2).jpg",
                             IsDeleted = false,
                             Title = "نصب و تعمیر فر"
                         },
@@ -731,6 +760,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\60h.jpg",
                             IsDeleted = false,
                             Title = "نصب و تعمیر هود آشپرخانه"
                         },
@@ -740,6 +770,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\61h.jpg",
                             IsDeleted = false,
                             Title = "نصب و تعمیر اجاق گاز"
                         },
@@ -749,6 +780,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 20,
                             Description = "به صورت تخصصی",
+                            ImagePath = "\\Images\\HomeServices\\62h.jpg",
                             IsDeleted = false,
                             Title = " تعمیرات تلویزیون"
                         },
@@ -758,6 +790,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 20,
                             Description = "جدید",
+                            ImagePath = "\\Images\\HomeServices\\63h.jpg",
                             IsDeleted = false,
                             Title = "تعمیر چای ساز و قهوه ساز"
                         },
@@ -767,6 +800,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\64h.jpg",
                             IsDeleted = false,
                             Title = "تعمیر جاروبرقی"
                         },
@@ -776,6 +810,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\65h.jpg",
                             IsDeleted = false,
                             Title = "نصب و تعویض فیلتر آب"
                         },
@@ -785,6 +820,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 21,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "تعمیر کامپیوتر و لپتاپ"
                         },
@@ -794,6 +830,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 21,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = " تعمیر ماشین های اداری"
                         },
@@ -803,6 +840,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 21,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "پشتیبانی شبکه وسرور"
                         },
@@ -812,6 +850,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 21,
                             Description = "به صورت تخصصی",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "طراحی سایت و لوگو"
                         },
@@ -821,6 +860,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 21,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "مودم و اینترنت"
                         },
@@ -830,6 +870,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 22,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "خدمات تاچ و ال سی دی"
                         },
@@ -839,6 +880,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 22,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = " خدمات باتری"
                         },
@@ -848,6 +890,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 22,
                             Description = "جدید",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "خدمات نرم افزاری"
                         },
@@ -857,6 +900,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 22,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "خدمات اسپیکر"
                         },
@@ -866,6 +910,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 22,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "خدمات دوربین"
                         },
@@ -875,6 +920,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 23,
                             Description = "زیر قیمت کارخانه",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "تعویض باتری خودرو"
                         },
@@ -884,6 +930,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = " برق و باتری خودرو"
                         },
@@ -893,6 +940,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "مکانیکی خودرو"
                         },
@@ -902,6 +950,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "امداد خودرو"
                         },
@@ -911,6 +960,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "پنچرگیری"
                         },
@@ -920,6 +970,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "کارشناسی خودرو"
                         },
@@ -929,6 +980,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "تعویض لاستیک"
                         },
@@ -938,6 +990,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "تعویض لنت خودرو"
                         },
@@ -947,6 +1000,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "سوخت رسانی"
                         },
@@ -956,6 +1010,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "تعمیر موتور سیکلت"
                         },
@@ -965,6 +1020,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 24,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "اسباب کشی با خاور و کامیون"
                         },
@@ -974,6 +1030,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 24,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = " اسباب کشی با وانت و نیسان"
                         },
@@ -983,6 +1040,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 24,
                             Description = "نیاز به توضیح",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "اسباب کشی و حمل بین شهری"
                         },
@@ -992,6 +1050,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 24,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "کارگر جابجایی"
                         },
@@ -1001,6 +1060,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 24,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "حمل نخاله و ضایعات ساختمانی"
                         },
@@ -1010,6 +1070,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 25,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "مراقبت و نگهداری"
                         },
@@ -1019,6 +1080,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 25,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = " پرستاری و تزریقات"
                         },
@@ -1028,6 +1090,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 25,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "معاینه پزشکی"
                         },
@@ -1037,6 +1100,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 25,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "پیراپزشکی"
                         },
@@ -1046,6 +1110,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 25,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "آزمایش و نمونه گیری"
                         },
@@ -1055,6 +1120,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 26,
                             Description = "جدید",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "هتل های حیوانات خانگی"
                         },
@@ -1064,6 +1130,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 26,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = " خدماتدامپزشکی در محل"
                         },
@@ -1073,6 +1140,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 2000m,
                             CategoryId = 26,
                             Description = "به صورت تخصصی",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "خدمات تربیتی حیوانات خانگی"
                         },
@@ -1082,6 +1150,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 1000m,
                             CategoryId = 26,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "خدمات شستشو و آرایشی"
                         },
@@ -1091,6 +1160,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             BasePrice = 3500m,
                             CategoryId = 26,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "پت شاپ"
                         });
@@ -1103,6 +1173,9 @@ namespace App.Infrastructure.EFCore.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<float>("ProfitPercentage")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -1216,7 +1289,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "f6077f88-d443-4268-98f1-bd95a2b30d51",
+                            ConcurrencyStamp = "b8657b7d-45e4-42c2-8e85-1b00c2a4c377",
                             Email = "Admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -1225,11 +1298,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBlw7ez3QgIxUSZFKrk/9ceMOinTgJtNJusFOhDDC0HusltFBRCB+bms7yegNrky+A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBl/dHIDXRYI5L7x0ubDyW7Mx/DoPwTEQ85oRlf7TzNRZoEEYL6WW3hlVEcit/k4qg==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 28, 11, 58, 0, 248, DateTimeKind.Local).AddTicks(2836),
+                            RegisterAt = new DateTime(2025, 3, 7, 9, 57, 21, 282, DateTimeKind.Local).AddTicks(6999),
                             RoleId = 1,
-                            SecurityStamp = "cca77bdf-8470-4f9d-b9fe-1efdb0340718",
+                            SecurityStamp = "a1edc64e-c3a0-4c57-adab-7f55a5f5b633",
                             TwoFactorEnabled = false,
                             UserName = "Admin@gmail.com"
                         },
@@ -1239,7 +1312,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "f91662f8-9ae1-4b74-9086-efe4a2c834df",
+                            ConcurrencyStamp = "15717500-5b5b-4e3e-af34-fb6c0de5d3c0",
                             Email = "Customer@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Amir",
@@ -1248,11 +1321,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER@GMAIL.COM",
                             NormalizedUserName = "CUSTOMER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEK9YeX9RWbmEV7zG+26bN/6QpDYLkL+s5AXjG14tLLcLJRitFT/RKDqPWpmAbBljNA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHr9MplrSS91ih0YKM2a7hp7II8ZhOGMLhKR9rkmoaBBJlcBaXRYGElJxiUgQ407hQ==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 28, 11, 58, 0, 248, DateTimeKind.Local).AddTicks(2887),
+                            RegisterAt = new DateTime(2025, 3, 7, 9, 57, 21, 282, DateTimeKind.Local).AddTicks(7040),
                             RoleId = 2,
-                            SecurityStamp = "93016312-df36-47f6-bb9c-1371fccad257",
+                            SecurityStamp = "56163b22-50ad-4f5d-a7de-056137f36e40",
                             TwoFactorEnabled = false,
                             UserName = "Customer@gmail.com"
                         },
@@ -1262,7 +1335,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "eaf8df62-ad88-4996-9ad7-a3633d81e0f9",
+                            ConcurrencyStamp = "a3284c38-76c1-48f3-87c4-fe862294b89a",
                             Email = "Expert@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Amir",
@@ -1271,11 +1344,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "EXPERT@GMAIL.COM",
                             NormalizedUserName = "EXPERT@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECNxwpZ/BGmU+ZmmwSlkj7xWNouzDIgBFw9JrKqPBR4lnPQwikWc1VnpKzR8lBe1jg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAmktvUstR/akgxRKAwN2MinzZvVXsauUnkfflP8nh/wdYr7VcCykC/J5utnVpaHXA==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 2, 28, 11, 58, 0, 248, DateTimeKind.Local).AddTicks(2902),
+                            RegisterAt = new DateTime(2025, 3, 7, 9, 57, 21, 282, DateTimeKind.Local).AddTicks(7101),
                             RoleId = 3,
-                            SecurityStamp = "81b1b3c8-3397-45c7-81ac-cd78cd075873",
+                            SecurityStamp = "8efe2d65-3e09-47ad-9a38-ad474aeaaf4f",
                             TwoFactorEnabled = false,
                             UserName = "Expert@gmail.com"
                         });
@@ -1516,6 +1589,9 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ExpertId")
                         .HasColumnType("int");
 
@@ -1537,6 +1613,8 @@ namespace App.Infrastructure.EFCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.HasIndex("ExpertId");
 
                     b.ToTable("Comments");
@@ -1545,7 +1623,8 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 246, DateTimeKind.Local).AddTicks(1117),
+                            CreateAt = new DateTime(2025, 3, 7, 9, 57, 21, 279, DateTimeKind.Local).AddTicks(8796),
+                            CustomerId = 4,
                             ExpertId = 1,
                             IsDeleted = false,
                             IsPlayable = false,
@@ -1555,7 +1634,8 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 246, DateTimeKind.Local).AddTicks(1124),
+                            CreateAt = new DateTime(2025, 3, 7, 9, 57, 21, 279, DateTimeKind.Local).AddTicks(8808),
+                            CustomerId = 4,
                             ExpertId = 1,
                             IsDeleted = false,
                             IsPlayable = false,
@@ -1565,7 +1645,8 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 3,
-                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 246, DateTimeKind.Local).AddTicks(1126),
+                            CreateAt = new DateTime(2025, 3, 7, 9, 57, 21, 279, DateTimeKind.Local).AddTicks(8811),
+                            CustomerId = 4,
                             ExpertId = 1,
                             IsDeleted = false,
                             IsPlayable = false,
@@ -1790,9 +1871,6 @@ namespace App.Infrastructure.EFCore.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
-                    b.Property<int?>("ExpertId")
-                        .HasColumnType("int");
-
                     b.Property<int>("HouseWorkId")
                         .HasColumnType("int");
 
@@ -1805,8 +1883,8 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<bool?>("IsFinish")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool?>("IsPayment")
+                        .HasColumnType("bit");
 
                     b.Property<TimeOnly>("RunningTime")
                         .HasColumnType("time");
@@ -1818,8 +1896,6 @@ namespace App.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("ExpertId");
-
                     b.HasIndex("HouseWorkId");
 
                     b.ToTable("Orders");
@@ -1829,11 +1905,14 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 1,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 245, DateTimeKind.Local).AddTicks(7669),
+                            CreateAt = new DateTime(2025, 3, 7, 9, 57, 21, 279, DateTimeKind.Local).AddTicks(4296),
                             CustomerId = 1,
                             Description = "فوری",
                             HouseWorkId = 5,
+                            IsConfrim = false,
                             IsDeleted = false,
+                            IsFinish = false,
+                            IsPayment = false,
                             RunningTime = new TimeOnly(0, 0, 0).Add(TimeSpan.FromTicks(11)),
                             StausService = 1
                         },
@@ -1841,11 +1920,14 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 2,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 245, DateTimeKind.Local).AddTicks(7688),
+                            CreateAt = new DateTime(2025, 3, 7, 9, 57, 21, 279, DateTimeKind.Local).AddTicks(4318),
                             CustomerId = 1,
                             Description = "",
                             HouseWorkId = 6,
+                            IsConfrim = false,
                             IsDeleted = false,
+                            IsFinish = false,
+                            IsPayment = false,
                             RunningTime = new TimeOnly(10, 30, 0),
                             StausService = 1
                         },
@@ -1853,11 +1935,14 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 3,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 2, 28, 11, 58, 0, 245, DateTimeKind.Local).AddTicks(7691),
+                            CreateAt = new DateTime(2025, 3, 7, 9, 57, 21, 279, DateTimeKind.Local).AddTicks(4322),
                             CustomerId = 1,
                             Description = "فوری",
                             HouseWorkId = 30,
+                            IsConfrim = false,
                             IsDeleted = false,
+                            IsFinish = false,
+                            IsPayment = false,
                             RunningTime = new TimeOnly(4, 30, 0),
                             StausService = 1
                         });
@@ -1871,9 +1956,6 @@ namespace App.Infrastructure.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DeliverDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(2000)
@@ -1882,11 +1964,17 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<int>("ExpertId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsAccept")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
+
+                    b.Property<float>("SuggestPrice")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -1900,11 +1988,12 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 1,
-                            DeliverDate = new DateTime(2025, 2, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "آمادگی برای انجام کار با قیمت پایین تر",
                             ExpertId = 1,
+                            IsAccept = false,
                             IsDeleted = false,
-                            OrderId = 1
+                            OrderId = 1,
+                            SuggestPrice = 1000f
                         });
                 });
 
@@ -1996,6 +2085,12 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Comment", b =>
                 {
+                    b.HasOne("App.Domain.Core.Entites.User.Customer", "RegisteredCustomer")
+                        .WithMany("Comments")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("App.Domain.Core.Entites.User.Expert", "Expert")
                         .WithMany()
                         .HasForeignKey("ExpertId")
@@ -2003,6 +2098,8 @@ namespace App.Infrastructure.EFCore.Migrations
                         .IsRequired();
 
                     b.Navigation("Expert");
+
+                    b.Navigation("RegisteredCustomer");
                 });
 
             modelBuilder.Entity("Image", b =>
@@ -2075,10 +2172,6 @@ namespace App.Infrastructure.EFCore.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("App.Domain.Core.Entites.User.Expert", "Expert")
-                        .WithMany()
-                        .HasForeignKey("ExpertId");
-
                     b.HasOne("App.Domain.Core.Entites.Service.HouseWork", "HouseWork")
                         .WithMany("Orders")
                         .HasForeignKey("HouseWorkId")
@@ -2086,8 +2179,6 @@ namespace App.Infrastructure.EFCore.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
-
-                    b.Navigation("Expert");
 
                     b.Navigation("HouseWork");
                 });
@@ -2135,6 +2226,8 @@ namespace App.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("App.Domain.Core.Entites.User.Customer", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Orders");
                 });
 

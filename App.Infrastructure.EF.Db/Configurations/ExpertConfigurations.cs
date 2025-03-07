@@ -44,11 +44,6 @@ namespace App.Infrastructure.EFCore.Configurations
                   Biographi = "بیوگرافی" ,
                   IsDeleted = false,
                   CityId = 1 ,
-                  //ExpertWorksSkills = new List<ExpertHouseWork>
-                  //{
-                  //    new ExpertHouseWork{HouseWorkId = 1 , ExpertId = 2},
-                  //    new ExpertHouseWork{HouseWorkId= 2 , ExpertId = 2},
-                  //}
                 }
             });
 

@@ -22,8 +22,9 @@
                                 <th class="p-low"><input type="checkbox" id="btn-check-all-toggle"></th>
                                 <th>توضیحات</th>
                                 <th>شهر</th>
-                                <th>تاریخ اجرا</th>
-                                <th>زمان اجرا</th>
+                                <th>قیمت پیشنهادی</th>
+@*                                 <th>تاریخ اجرا</th>
+ *@                                <th>زمان اجرا</th>
                                 <th>نام کارشناس</th>
                                 <th>وضعیت سفارش</th>
                             </tr>
@@ -35,7 +36,7 @@
                                     <td><input type="checkbox"></td>
                                     <td>@suggestion.Description</td>
                                     <td>@suggestion.City</td>
-                                    <td>@suggestion.DeliverDate</td>
+                                    <td>@suggestion.SuggestPrice</td>
                                     <td>@suggestion.RunungTimeOrder</td>
                                     <td><a @* asp-route-Id="@suggestion.ExpertId" *@ href="/expert/menu/content">@suggestion.ExpertName</a></td>
                                     <td>@suggestion.StausService.GetDisplayName()</td>

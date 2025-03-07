@@ -20,32 +20,19 @@ namespace App.Domain.Services.Base
         public Category GetCategory(int id)
             => _categoryRepository.GetCategory(id);
 
-        public CategoryDto GetCategoryDto(int id)
-            => _categoryRepository.GetCategoryDto(id);
-
-        public List<CategoryDto> GetCatyegor1()
-            => _categoryRepository.GetCatyegor1();
-
-        public List<CategoryDto> GetCatyegor2()
-            => _categoryRepository.GetCatyegor2();
-
-        public List<CategoryDto> GetCatyegor3()
-            => _categoryRepository.GetCatyegor3();
-
-        public List<CategoryDto> GetCatyegor4()
-            => _categoryRepository.GetCatyegor4();
-
-        public List<CategoryDto> GetCatyegor5()
-            => _categoryRepository.GetCatyegor5();
-
-        public List<CategoryDto> GetCatyegor6()
-            => _categoryRepository.GetCatyegor6();
+        public async Task<CategoryDto> GetCategoryDto(int? id)
+            => await _categoryRepository.GetCategoryDto(id);
 
         public List<CategoryDto> GetCatyegoryByParent(int id)
             => _categoryRepository.GetCatyegoryByParent((int)id);
         public List<Category> GetChildCategories()
             => _categoryRepository.GetChildCategories();
 
+        public List<Category> GetChildCategoriesById(int id)
+            => _categoryRepository.GetChildCategoriesById(id);
+
+        public async Task<int> GetChildCount(int categoryId)
+            =>await _categoryRepository.GetChildCount(categoryId);
         public List<Category> GetParentCategories()
             => _categoryRepository.GetParentCategories();
 

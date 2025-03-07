@@ -6,5 +6,6 @@ namespace App.Domain.Core.Entites.User
     {
         [Key]
         public int Id { get; set; }
+        public float ProfitPercentage { get; set; } = 0.06f;
     }
 }

@@ -8,31 +8,42 @@ namespace App.Domain.Services.HomeService
 {
     public class HouseWorkService(IHouseWorkRepository _houseWorkRepository) : IHouseWorkService
     {
-        public Task<Result> CreateService(SummHouseWorkDto service, CancellationToken cancellationToken)
-            => _houseWorkRepository.CreateService(service, cancellationToken);
+        public async Task<Result> CreateService(SummHouseWorkDto service, CancellationToken cancellationToken)
+            => await _houseWorkRepository.CreateService(service, cancellationToken);
 
-        public Task<Result> DeleteHomeService(int id, CancellationToken cancellationToken)
-            => _houseWorkRepository.DeleteHomeService(id, cancellationToken);
+        public async Task<Result> DeleteHomeService(int id, CancellationToken cancellationToken)
+            => await _houseWorkRepository.DeleteHomeService(id, cancellationToken);
 
-        public Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken)
-            => _houseWorkRepository.GetHomeServices(cancellationToken);
+        public async Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken)
+            => await _houseWorkRepository.GetHomeServices(cancellationToken);
 
         public HouseWork GetById(int id)
             => _houseWorkRepository.GetHomeServiceById(id);
 
+        public async Task<SummHouseWorkDto> GetServiceByChildId(int id, CancellationToken cancellationToken)
+            => await _houseWorkRepository.GetServiceByChildId(id, cancellationToken);
+
+        public async Task<SummHouseWorkDto> GetServiceById(int id, CancellationToken cancellationToken)
+            =>await _houseWorkRepository.GetServiceById(id, cancellationToken);
+        public async Task<int> GetServiceCount(int categoryId)
+            => await _houseWorkRepository.GetServiceCount(categoryId);
+
         public UpdateHouseWork GetServiceDto(int id)
             => _houseWorkRepository.GetServiceDto(id);
 
-        public List<SummHouseWorkDto> GetServicesById(int id)
-            => _houseWorkRepository.GetServicesById(id);
+        public async Task<List<SummHouseWorkDto>> GetServicesByChildId(int id, CancellationToken cancellationToken)
+            => await _houseWorkRepository.GetServicesByChildId(id, cancellationToken);
+
+        public async Task<List<SummHouseWorkDto>> GetServicesById(int id ,CancellationToken cancellationToken)
+            => await _houseWorkRepository.GetServicesById(id , cancellationToken);
 
         public List<SummHouseWorkDto> GetServicesById()
             => _houseWorkRepository.GetServicesById();
 
-        public Task<Result> SoftDeleteHomeService(HouseWork service, CancellationToken cancellationToken)
-            => _houseWorkRepository.SoftDeleteHomeService(service, cancellationToken);
+        public async Task<Result> SoftDeleteHomeService(HouseWork service, CancellationToken cancellationToken)
+            => await _houseWorkRepository.SoftDeleteHomeService(service, cancellationToken);
 
-        public Task<Result> UpdateHomeService(UpdateHouseWork service, CancellationToken cancellationToken)
-            => _houseWorkRepository.UpdateHomeService(service, cancellationToken);
+        public async Task<Result> UpdateHomeService(UpdateHouseWork service, CancellationToken cancellationToken)
+            => await _houseWorkRepository.UpdateHomeService(service, cancellationToken);
     }
 }

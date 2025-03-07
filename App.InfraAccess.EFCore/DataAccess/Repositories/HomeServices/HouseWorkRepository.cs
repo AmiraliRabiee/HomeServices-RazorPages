@@ -22,7 +22,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 newService.BasePrice = service.BasePrice;
                 newService.ImagePath = service.ImagePath;
                 newService.CategoryId = service.SubCategoryId;
-                newService.ImagePath = service.ImagePath;
 
                 await _appDbContext.HouseWorks.AddAsync(newService, cancellationToken);
                 await _appDbContext.SaveChangesAsync(cancellationToken);
@@ -103,6 +102,15 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             }
         }
 
+        public async Task<int> GetServiceCount(int categoryId)
+        {
+            var count = await _appDbContext.HouseWorks
+                .Include(h => h.Category)
+                .Where(h => h.Category.ParentId == categoryId)
+                .CountAsync();
+            return count;
+        }
+
         public HouseWork GetHomeServiceById(int id)
         {
             var service = _appDbContext.HouseWorks
@@ -157,17 +165,83 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return work;
         }
 
-        public List<SummHouseWorkDto> GetServicesById(int id)
+        public async Task<List<SummHouseWorkDto>> GetServicesById(int id, CancellationToken cancellationToken)
         {
-            var service = _appDbContext.HouseWorks
-            .Where(h => h.Id == id)
+            var service = await _appDbContext.HouseWorks
+            .Include(h => h.Category)
+            .Where(h => h.Category.ParentId == id)
             .Select(h => new SummHouseWorkDto
             {
+                Id = h.Id,
                 ImagePath = h.ImagePath,
                 Description = h.Description,
                 Tiltle = h.Title,
                 BasePrice = h.BasePrice,
-            }).ToList();
+                SubCategoryId = h.Category.Id,
+                CategoryName = h.Category.Title,
+            }).ToListAsync(cancellationToken);
+
+            if (service is null)
+                throw new Exception(".سفارشی با این شناسه یافت نشد");
+
+            return service;
+        }
+
+
+        public async Task<List<SummHouseWorkDto>> GetServicesByChildId(int id, CancellationToken cancellationToken)
+        {
+            var service = await _appDbContext.HouseWorks
+            .Include(h => h.Category)
+            .Where(h => h.CategoryId == id)
+            .Select(h => new SummHouseWorkDto
+            {
+                Id = h.Id,
+                ImagePath = h.ImagePath,
+                Description = h.Description,
+                Tiltle = h.Title,
+                BasePrice = h.BasePrice,
+                SubCategoryId = h.CategoryId
+            }).ToListAsync(cancellationToken);
+
+            if (service is null)
+                throw new Exception(".سفارشی با این شناسه یافت نشد");
+
+            return service;
+        }
+
+        public async Task<SummHouseWorkDto> GetServiceById(int id, CancellationToken cancellationToken)
+        {
+            var service = await _appDbContext.HouseWorks
+            .Select(h => new SummHouseWorkDto
+            {
+                Id = h.Id,
+                ImagePath = h.ImagePath,
+                Description = h.Description,
+                Tiltle = h.Title,
+                BasePrice = h.BasePrice,
+                CategoryName = h.Category.ParentCategory.Title,
+                CategoryId = h.Category.Id
+            }).FirstOrDefaultAsync(h=> h.Id == id,cancellationToken);
+
+            if (service is null)
+                throw new Exception(".سفارشی با این شناسه یافت نشد");
+
+            return service;
+        }
+
+
+        public async Task<CategoryDto> GetCategoryByServiceId(int id, CancellationToken cancellationToken)
+        {
+            var service = await _appDbContext.HouseWorks
+                .Where(h => h.Id == id)
+            .Select(h => new CategoryDto
+            {
+                Id = h.Id,
+                ImagePath = h.ImagePath,
+                Title = h.Category.Title,
+                ParentId = h.Category.ParentId,
+                HouseWorkName = h.Title
+            }).FirstOrDefaultAsync( cancellationToken);
 
             if (service is null)
                 throw new Exception(".سفارشی با این شناسه یافت نشد");
@@ -189,6 +263,27 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
 
             if (service is null)
                 throw new Exception(".سفارشی با این شناسه یافت نشد");
+
+            return service;
+        }
+
+        public async Task<SummHouseWorkDto> GetServiceByChildId(int id, CancellationToken cancellationToken)
+        {
+            var service = await _appDbContext.HouseWorks
+            .Where(h => h.Id == id)
+            .Select(h => new SummHouseWorkDto
+            {
+                Id = h.Id,
+                ImagePath = h.ImagePath,
+                Description = h.Description,
+                Tiltle = h.Title,
+                BasePrice = h.BasePrice,
+                CategoryName = h.Category.ParentCategory.Title,
+                CategoryId = h.Category.Id
+            }).FirstOrDefaultAsync(cancellationToken);
+
+            if (service is null)
+                throw new Exception(" با این شناسه یافت نشد");
 
             return service;
         }

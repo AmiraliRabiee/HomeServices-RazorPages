@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Dto.HomeService;
+﻿using App.Domain.Core.Dto.Dashboard;
+using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
 
@@ -13,7 +14,12 @@ namespace App.Domain.Core.Contracts.Repository.HomeServices
         HouseWork GetHomeServiceById(int id);
         Task<List<SummHouseWorkDto>> GetHomeServices(CancellationToken cancellationToken);
         UpdateHouseWork GetServiceDto(int id);
-        List<SummHouseWorkDto> GetServicesById(int id);
+        Task<List<SummHouseWorkDto>> GetServicesById(int id, CancellationToken cancellationToken);
         List<SummHouseWorkDto> GetServicesById();
+        Task<int> GetServiceCount(int categoryId);
+        Task<List<SummHouseWorkDto>> GetServicesByChildId(int id, CancellationToken cancellationToken);
+        Task<SummHouseWorkDto> GetServiceByChildId(int id, CancellationToken cancellationToken);
+        Task<CategoryDto> GetCategoryByServiceId(int id, CancellationToken cancellationToken);
+        Task<SummHouseWorkDto> GetServiceById(int id, CancellationToken cancellationToken);
     }
 }

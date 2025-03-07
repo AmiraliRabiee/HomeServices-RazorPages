@@ -10,5 +10,6 @@ namespace App.Domain.Core.Contracts.Repository.User
         Task<Result> DeleteCustomer(int customerId, CancellationToken cancellationToken);
         Task<Result> SoftDeleteCustomer(int customerId, CancellationToken cancellationToken);
         Task<Result> UpdateCustomer(CustomerDto model, CancellationToken cancellationToken);
+        Task<CustomerDto> GetCustomerDto(int id, CancellationToken cancellationToken);
     }
 }

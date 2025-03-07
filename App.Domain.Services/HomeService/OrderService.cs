@@ -17,34 +17,49 @@ namespace App.Domain.Services.HomeService
         public Task<Result> CheckIsFinish(int id, CancellationToken cancellationToken)
             => _orderRepository.CheckIsFinish(id, cancellationToken);
 
+        public async Task<List<SummOrderDto>> GetOrdersById(int id, CancellationToken cancellationToken)
+            => await _orderRepository.GetOrdersById(id, cancellationToken);
+
         public Task<Result> IsExistSuggestion(int id)
             => _orderRepository.IsExistSuggestion(id);
 
-        Task IOrderService.ChangeToDone(int id, CancellationToken cancellationToken)
-            => _orderRepository.ChangeToDone(id, cancellationToken);
+        public async Task ChangeToDone(int id, CancellationToken cancellationToken)
+            => await _orderRepository.ChangeToDone(id, cancellationToken);
 
-        Task IOrderService.ChangeToNewlyRegistered(int id, CancellationToken cancellationToken)
-            => _orderRepository.ChangeToNewlyRegistered(id, cancellationToken);
+        public async Task ChangeToNewlyRegistered(int id, CancellationToken cancellationToken)
+            =>await _orderRepository.ChangeToNewlyRegistered(id, cancellationToken);
 
-        Task IOrderService.ChangeToWaitingForService(int id, CancellationToken cancellationToken)
-            => _orderRepository.ChangeToWaitingForService(id, cancellationToken);
+        public async Task ChangeToWaitingForService(int id, CancellationToken cancellationToken)
+            => await _orderRepository.ChangeToWaitingForService(id, cancellationToken);
 
-        Task<Result> IOrderService.Create(Order order, CancellationToken cancellationToken)
-            => _orderRepository.CreateOrder(order, cancellationToken);
+        public async Task<Result> Create(SummOrderDto order, CancellationToken cancellationToken)
+            => await _orderRepository.CreateOrder(order, cancellationToken);
 
-        Task<Result> IOrderService.Delete(Order order, CancellationToken cancellationToken)
-            => _orderRepository.DeleteOrder(order, cancellationToken);
+        public async Task<Result> Delete(int id, CancellationToken cancellationToken)
+            => await _orderRepository.DeleteOrder(id, cancellationToken);
 
-        Task<List<SummOrderDto>> IOrderService.GetAll()
-            => _orderRepository.GetOrders();
+        public async Task<List<SummOrderDto>> GetAll()
+            => await _orderRepository.GetOrders();
 
-        Task<Order> IOrderService.GetOrderById(int id, CancellationToken cancellationToken)
-            => _orderRepository.GetOrderById(id, cancellationToken);
+        public async Task<SummOrderDto> GetOrderById(int id, CancellationToken cancellationToken)
+            => await _orderRepository.GetOrderById(id, cancellationToken);
 
-        Task<Result> IOrderService.SoftDelete(Order order, CancellationToken cancellationToken)
-            => _orderRepository.SoftDeleteOrder(order, cancellationToken);
+        public async Task<Result> SoftDelete(Order order, CancellationToken cancellationToken)
+            => await _orderRepository.SoftDeleteOrder(order, cancellationToken);
 
-        Task<Result> IOrderService.Update(Order order, CancellationToken cancellationToken)
-            => _orderRepository.UpdateOrder(order, cancellationToken);
+        public async Task<Result> Update(Order order, CancellationToken cancellationToken)
+            => await _orderRepository.UpdateOrder(order, cancellationToken);
+
+        public async Task<int> GetActiveServicesCount(int id, CancellationToken cancellationToken)
+            => await _orderRepository.GetActiveServicesCount(id, cancellationToken);
+
+        public async Task<int> GetDoneServicesCount(int id, CancellationToken cancellationToken)
+            => await _orderRepository.GetDoneServicesCount(id, cancellationToken);
+
+        public async Task<List<SummOrderDto>> GetCustomerOrders(int customerId, CancellationToken cancellationToken)
+            => await _orderRepository.GetCustomerOrders(customerId, cancellationToken);
+
+        public async Task ChangeToPayment(int id, CancellationToken cancellationToken)
+            => await _orderRepository.ChangeToPayment(id, cancellationToken);
     }
 }

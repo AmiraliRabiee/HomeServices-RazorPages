@@ -11,10 +11,9 @@ public class Suggestion
     public string Description { get; set; }
     [Required]
     [Range(0, double.MaxValue, ErrorMessage = "Suggested price must be a non-negative number.")]
-    public DateTime DeliverDate { get; set; }
+    public float SuggestPrice { get; set; }
+    public bool IsAccept { get; set; }
     public bool IsDeleted { get; set; } = false;
-
-
 
     public int OrderId { get; set; }
     public int ExpertId { get; set; }

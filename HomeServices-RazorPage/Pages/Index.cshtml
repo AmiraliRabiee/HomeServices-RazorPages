@@ -1,38 +1,67 @@
 ﻿@page
+@using App.Domain.Core.Contracts.AppService
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
+
+@inject IHouseWorkAppService workAppService
 <div class="home-banner margin-bottom-0" style="background:#f41b3b url() no-repeat;" data-overlay="5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12">
-
-                @*gif text*@
-@*                 <div class="title_heading text-right">
-                    <h4 class="heading font-weight-bold mb-3">طراحی شده برای <span class="element text-primary" data-elements="انواع مشاغل آگهی و دایرکتوری">انواع مشاغل آگهی و دای</span><span class="typed-cursor">|</span></h4>
-                    <p class="para-desc text-muted">قالب <span class="text-primary font-weight-bold">GoodUP</span> می تواند تمام آن چیزی که برای ایجاد یک وب سایت با کیفیت بالا نیاز دارید را فراهم کند.</p>
-                </div> *@
                 <div class="banner_caption text-center mb-5">
-                    <h1 class="banner_title ft-bold mb-1">مکان عالی را در مناطق خود پیدا کنید</h1>
-                    <p class="fs-md ft-medium">مکان فوق العاده ای برای اقامت، سالن، خرید، ماساژ یا بازدید از مناطق محلی را جستجو کنید.</p>
+                    <h1 class="banner_title ft-bold mb-1">دریافت خدمات و ثبت سفارش آنلاین</h1>
+                    <p class="fs-md ft-medium">با یک تیم حرفه ای</p>
                 </div>
                 <div class="Goodup-top-cates">
-                    <ul>
-                        <li><a href="half-map-search-2.html" class="Goodup-top-cat-box"><div class="Goodup-tp-ico"><i class="fas fa-stethoscope"></i></div><div class="Goodup-tp-title"><h5>سلامت</h5></div></a></li>
-                        <li><a href="half-map-search-2.html" class="Goodup-top-cat-box"><div class="Goodup-tp-ico"><i class="fas fa-building"></i></div><div class="Goodup-tp-title"><h5>نظافت</h5></div></a></li>
-                        <li><a asp-page="/subcategories/index" class="Goodup-top-cat-box"><div class="Goodup-tp-ico"><i class="fas fa-screwdriver"></i></div><div class="Goodup-tp-title"><h5>تعمیرات</h5></div></a></li>
-                        <li><a href="half-map-search-2.html" class="Goodup-top-cat-box"><div class="Goodup-tp-ico"><i class="fas fa-house-damage"></i></div><div class="Goodup-tp-title"><h5>تاسیسات</h5></div></a></li>
-                        <li><a href="half-map-search-2.html" class="Goodup-top-cat-box"><div class="Goodup-tp-ico"><i class="fas fa-car-alt"></i></div><div class="Goodup-tp-title"><h5>خودرو</h5></div></a></li>
-                        <li><a href="half-map-search-2.html" class="Goodup-top-cat-box"><div class="Goodup-tp-ico"><i class="fas fa-basketball-ball"></i></div><div class="Goodup-tp-title"><h5>زیبایی</h5></div></a></li>
-
+                    <ul class="row align-items-center">
+                        @foreach (var category in Model.Cats)
+                        {
+                            var countSerivce = await workAppService.GetServiceCount(category.Id);
+                            <li class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                                <a asp-page="/Subcategories/index" asp-area="" asp-route-id="@category.Id" class="Goodup-catg-wrap">
+                                    <div class="Goodup-tp-ico">
+                                        @if (category.Title == "تاسیسات")
+                                        {
+                                            <i class="fas fa-house-damage"></i>
+                                        }
+                                        else if (category.Title == "نظافت")
+                                        {
+                                            <i class="fas fa-building"></i>
+                                        }
+                                        else if (category.Title == "زیبایی")
+                                        {
+                                            <i class="fas fa-basketball-ball"></i>
+                                        }
+                                        else if (category.Title == "تعمیرات اشیا")
+                                        {
+                                            <i class="fas fa-screwdriver"></i>
+                                        }
+                                        else if (category.Title == "خودرو")
+                                        {
+                                            <i class="fas fa-car-alt"></i>
+                                        }
+                                        else if (category.Title == "سلامت")
+                                        {
+                                            <i class="fas fa-stethoscope"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fas fa-question-circle"></i>
+                                        }
+                                    </div>
+                                    <div class="Goodup-tp-title"><h5>@category.Title</h5></div>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
-
             </div>
         </div>
     </div>
-</div>    <!-- ======================= Home Search ======================== -->
+</div>
+<!-- ======================= Home Search ======================== -->
 <section class="p-0">
     <div class="container">
         <div class="row justify-content-center">
@@ -77,18 +106,6 @@
                                 <div class="main-search-item">
                                     <span class="search-tag"><i class="lni lni-map-marker"></i></span>
                                     <input type="text" class="form-control" placeholder="قیمت">
-                                </div>
-                                <div class="main-search-item">
-                                    <span class="search-tag"><i class="lni lni-briefcase"></i></span>
-                                    <select class="form-control">
-                                        <option value="">انتخاب برند</option>
-                                        <option value="1">Tata Nexon</option>
-                                        <option value="2">BMW</option>
-                                        <option value="3">Suzuki</option>
-                                        <option value="4">Hundai</option>
-                                        <option value="5">Kia</option>
-                                        <option value="6">Mahindra</option>
-                                    </select>
                                 </div>
                                 <div class="main-search-button">
                                     <button class="btn full-width theme-bg text-white" type="button">جستجو</button>
@@ -500,8 +517,8 @@
                     </div>
                 </div>
             </div>
-        <!-- /row -->
-
+            <!-- /row -->
+        </div>
     </div>
 </section>
 <!-- =========================== Featured Listing End ===================== -->
@@ -523,7 +540,7 @@
                     <div class="icoBox"><i class="fa-solid fa-magnifying-glass"></i><span class="num">01</span></div>
                     <div class="capText">
                         <h4 class="title">جستجو و انتخاب سرویس</h4>
-                     </div>
+                    </div>
                 </div>
             </div>
 
@@ -546,7 +563,6 @@
             </div>
         </div>
     </div>
-
 </section>
 <!--------------------------------------->
 
@@ -578,108 +594,3 @@
     </div>
 </section>
 
-
-
-
-
-@* @section scripts
-{ *@
-@* <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/jquery.easing.min.js"></script>
-    <script src="assets/js/scrollspy.min.js"></script>
-
-    <script src="assets/js/feather.min.js"></script>
-    <script src="assets/js/unicons.js"></script>
-
-    <script src="assets/js/typed.js"></script>
-    <script src="assets/js/typed.init.js"></script>
-
-    <script src="assets/js/app.js"></script> *@
-@* } *@
-
-<!------------------------------->
-@* <!-- =========================== FAQ Start ======================= -->
-<section>
-    <div class="container">
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-            <div class="sec_title position-relative text-center mb-5">
-                <h6 class="text-muted mb-0">چـرا تیم ما</h6>
-                <h4 class="ft-bold">ویژگی های برتر  <span class="theme-cl">GoodUp</span></h4>
-            </div>
-        </div>
-    </div>
-
-    <div class="row justify-content-center">
-        <div class="col-xl-10 col-lg-11 col-md-12 col-12">
-            <div id="accordion2" class="accordion">
-                <div class="card">
-                    <div class="card-header" id="h7">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#ord7" aria-expanded="true" aria-controls="ord7">
-                                آیا می توانم لیست GoodUP را به صورت رایگان دریافت کنم؟
-                            </button>
-                        </h5>
-                    </div>
-
-                    <div id="ord7" class="collapse show" aria-labelledby="h7" data-parent="#accordion2">
-                        <div class="card-body">
-                            کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="h8">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#ord8" aria-expanded="false" aria-controls="ord8">
-                                چگونه فایل ها را برای همیشه از ویندوز پاک کنیم؟
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="ord8" class="collapse" aria-labelledby="h8" data-parent="#accordion2">
-                        <div class="card-body">
-                            کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="h9">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#ord9" aria-expanded="false" aria-controls="ord9">
-                                آیا می توانم لیست GoodUP را به صورت رایگان دریافت کنم؟
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="ord9" class="collapse" aria-labelledby="h9" data-parent="#accordion2">
-                        <div class="card-body">
-                            کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="h4">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#ord4" aria-expanded="false" aria-controls="ord4">
-                                برای GoodUp کدام مجوز برای اهداف تجاری بهتر است؟
-                            </button>
-                        </h5>
-                    </div>
-
-                    <div id="ord4" class="collapse" aria-labelledby="h4" data-parent="#accordion2">
-                        <div class="card-body">
-                            کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</section>
-<!-- =========================== FAQ End ===================== -->
- *@
-
-
-                            

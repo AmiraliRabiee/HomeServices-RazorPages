@@ -16,6 +16,8 @@ public class Comment
 
 
     public int ExpertId { get; set; }
+    public int CustomerId { get; set; }
 
     public Expert Expert { get; set; }
+    public Customer RegisteredCustomer { get; set; }
 }
