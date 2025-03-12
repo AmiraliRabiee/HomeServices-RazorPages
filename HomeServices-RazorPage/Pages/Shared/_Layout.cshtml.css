@@ -46,3 +46,22 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    overflow-x: hidden; /* Prevents horizontal scroll */
+}
+
+.container, .content-wrapper {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0; /* Ensures no auto margins */
+}
+
+.header, .footer, .goodup-dashboard-wrap {
+    width: 100%;
+}

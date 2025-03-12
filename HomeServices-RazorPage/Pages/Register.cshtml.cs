@@ -6,11 +6,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HomeServices_RazorPage.Pages
 {
-    public class RegisterModel(IUserAppService _userAppService) : PageModel
+    public class RegisterModel(IUserAppService _userAppService , IBaseDataAppService _baseDataAppService) : PageModel
     {
         [BindProperty]
         public CreateUserDto User { get; set; } = new CreateUserDto();
+        [BindProperty]
+        public List<City> Cities { get; set; }
 
+        public async Task OnGet(CancellationToken cancellationToken)
+        {
+            Cities = await _baseDataAppService.GetCitiesAsync(cancellationToken);
+        }
 
         public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken)
         {

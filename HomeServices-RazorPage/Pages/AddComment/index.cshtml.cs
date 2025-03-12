@@ -1,4 +1,4 @@
-using App.Domain.AppServices.HomeService;
+﻿using App.Domain.AppServices.HomeService;
 using App.Domain.Core.Contracts.AppService;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.User;
@@ -33,10 +33,10 @@ namespace HomeServices_RazorPage.Pages.AddComment
                 NewComment.CustomerId = customerId;
                 NewComment.ExpertId = expertId;
                 var result = await _commentAppService.Add(NewComment, cancellationToken);
-
                 if (result.IsSuccess)
                 {
                     Message = result.Message;
+                    TempData["success"] = "نظر در انتظار تایید میباشد";
                     return RedirectToPage("/menu/dashboard", new {area = "customer"});
                 }
                 Message = result.Message;

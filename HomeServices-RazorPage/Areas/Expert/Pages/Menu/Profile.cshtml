@@ -1,8 +1,13 @@
 ﻿@page
 @using HomeServices_RazorPage.Areas.Expert.Pages.Menu
-@model Areas_Expert_Pages_Menu_Profile
+@model ProfileModel
 @{
 }
+@section Styles {
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+}
+
+
 <div class="goodup-dashboard-wrap gray px-4 py-5">
     <a class="mobNavigation" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="MobNav">
         <i class="fas fa-bars ms-2"></i>منو
@@ -13,7 +18,7 @@
                 <ul data-submenu-title="منو">
                     <li><a asp-page="ExpertDashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
                     <li><a asp-page="orders"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
-@*                     <li><a asp-page="createSuggestion"><i class="lni lni-add-files ms-2"></i>ثبت پیشنهاد</a></li>
+                    @*                     <li><a asp-page="createSuggestion"><i class="lni lni-add-files ms-2"></i>ثبت پیشنهاد</a></li>
  *@                    <li><a asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
                 </ul>
                 <ul data-submenu-title="حساب کاربری">
@@ -39,92 +44,139 @@
             </div>
         </div>
 
-        <div class="dashboard-widg-bar d-block">
-            <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 order-xl-last order-lg-last order-md-last">
-                    <div class="d-flex bg-white rounded px-3 py-3 mb-3">
-                        <div class="dash-figure">
-                            <div class="dash-figure-thumb"><img src="~/assets/img/t-7.png" class="img-fluid rounded" alt="" /></div>
-                            <div class="upload-photo-btn">
-                                <div class="Uploadphoto" style="background:#03343b">
-                                    <span><i class="fas fa-upload"></i> آپلود تصویر</span>
-                                    <input type="file" class="upload">
+        <form class="submit-form" method="post" enctype="multipart/form-data">
+            <div class="dashboard-widg-bar d-block">
+                <div class="row">
+                    <!-- ✅ Profile Image Upload Section Inside the Form -->
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 order-xl-last order-lg-last order-md-last">
+                        <div class="d-flex bg-white rounded px-3 py-3 mb-3">
+                            <div class="dash-figure">
+                                <div class="dash-figure-thumb">
+                                    <img src="@Model.OnlineExpert.ImagePath" class="img-fluid rounded" alt="" />
+                                </div>
+                                <div class="upload-photo-btn">
+                                    <div class="Uploadphoto" style="background:#03343b">
+                                        <span><i class="fas fa-upload"></i> آپلود تصویر</span>
+                                        <input asp-for="@Model.OnlineExpert.ExpertImage" type="file" class="upload">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12">
-                    <form class="submit-form">
-                        <div class="dashboard-list-wraps bg-white rounded mb-4">
-                            <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
-                                <div class="dashboard-list-wraps-flx">
-                                    <h4 class="mb-0 ft-medium fs-md"><i class="fa fa-user-check ms-2 theme-cl fs-sm"></i>مشخصات شخصی</h4>
-                                </div>
-                            </div>
+                    
+                    <input type="hidden" asp-for="OnlineExpert.ImagePath" id="oldImagePath" />
 
+                    <!-- ✅ Other Profile Fields -->
+                    <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12">
+                        <div class="dashboard-list-wraps bg-white rounded mb-4">
                             <div class="dashboard-list-wraps-body py-3 px-3">
                                 <div class="row">
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <input type="hidden" asp-for="OnlineExpert.Id" />
+                                    <input type="hidden" asp-for="UpdateUser.Id" />
+
+                                    <div class="col-xl-6 col-lg-6 col-md-12">
                                         <div class="form-group">
                                             <label class="mb-1">نام</label>
-                                            <input type="text" class="form-control rounded" placeholder="نازنین" />
+                                            <input asp-for="OnlineExpert.FirstName" type="text" class="form-control rounded" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+
+                                    <div class="col-xl-6 col-lg-6 col-md-12">
                                         <div class="form-group">
                                             <label class="mb-1">نام خانوادگی</label>
-                                            <input type="text" class="form-control rounded" placeholder="حقیقت نژاد" />
+                                            <input asp-for="OnlineExpert.LastName" type="text" class="form-control rounded" />
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="mb-1">شماره تماس</label>
-                                            <input type="text" class="form-control rounded" placeholder="09320000000" />
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+
+                                    <div class="col-xl-6 col-lg-6 col-md-12">
                                         <div class="form-group">
                                             <label class="mb-1">شهر</label>
-                                            <select class="form-control">
-                                                <option>تهران</option>
-                                                <option>کرج</option>
-                                                <option>پردیس</option>
-                                                <option>پرند</option>
-                                                <option>دماوند</option>
-                                                <option>بومهن</option>
-                                                <option>شهریار</option>
+                                            <select asp-for="OnlineExpert.CityId" class="form-select" required>
+                                                @foreach (var city in Model.Cities)
+                                                {
+                                                    <option value="@city.Id">@city.Name</option>
+                                                }
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="mb-1">بیوگرافی</label>
-                                            <input type="text" class="form-control rounded" placeholder="متخصص مهارت های مختلف">
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+
+                                    <div class="col-xl-6 col-lg-6 col-md-12">
                                         <div class="form-group">
                                             <label class="mb-1">موجودی(تومان)</label>
-                                            <input type="text" class="form-control rounded" placeholder="15000">
+                                            <input asp-for="OnlineExpert.Balance" type="text" class="form-control rounded" />
                                         </div>
                                     </div>
-                                    <div class="row align-items-center justify-content-center">
-                                        <div class="col-xl-7 col-lg-10 col-md-12 col-sm-12 col-12">
-                                            <div class="bg-white rounded p-1">
 
+                                    <div class="col-xl-12 col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label class="mb-1">مهارت‌ها</label>
+                                            <select class="js-example-basic-multiple form-control" name="houseWorkIds" multiple="multiple">
+                                                @foreach (var houseWork in Model.HousWorks)
+                                                {
+                                                    <option value="@houseWork.Id" selected="@(Model.OnlineExpert.SelectedHouseWorkIds.Contains(houseWork.Id) ? "selected" : null)">
+                                                        @houseWork.Title
+                                                    </option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="mb-1">توضیحات</label>
+                                            <textarea class="form-control rounded ht-150" asp-for="OnlineExpert.Biographi"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- ✅ Save Changes Button -->
+                                    <div class="row align-items-center justify-content-center">
+                                        <div class="col-xl-7 col-lg-10 col-md-12">
+                                            <div class="bg-white rounded p-1">
                                                 <div class="form-group mb-0 position-relative">
-                                                    <button class="btn full-width btn-height text-white fs-md" type="button" style="background:#03343b">ذخیره تغییرات</button>
+                                                    <button asp-page-handler="update"  class="btn full-width btn-height text-white fs-md" type="submit" style="background:#03343b">ذخیره تغییرات</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
-                    </form>
+
+                        <!-- ✅ Hidden input to ensure selected skills are submitted -->
+                        <input type="hidden" asp-for="OnlineExpert.SelectedHouseWorkIds" />
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/lib/select2/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            let $select = $('.js-example-basic-multiple');
+
+            // Initialize Select2
+            $select.select2({
+                placeholder: "مهارت‌های خود را انتخاب کنید",
+                allowClear: true,
+                width: '100%'
+            });
+
+            // Ensure selected values are correctly sent with the form
+            $('form').submit(function () {
+                let selectedValues = $select.val();
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'houseWorkIds',
+                    value: selectedValues
+                }).appendTo('form');
+            });
+        });
+    </script>
+}

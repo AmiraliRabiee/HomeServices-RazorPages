@@ -1,85 +1,154 @@
 ﻿@page
+@using Framework
 @model HomeServices_RazorPage.Areas.Expert.Pages.Menu.CommentsModel
 @{
 }
-
-<div class="goodup-dashboard-wrap gray px-4 py-5">
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-lg-3 col-md-4">
-                <a class="mobNavigation" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="MobNav">
-                    <i class="fas fa-bars ms-2"></i>منو
-                </a>
-                <div class="collapse" id="MobNav">
-                    <div class="goodup-dashboard-nav sticky-top">
-                        <div class="goodup-dashboard-inner">
-                            <ul data-submenu-title="منو">
-                                <li><a asp-page="ExpertDashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
-                                <li><a asp-page="orders"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
-                                <li><a asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
-                            </ul>
-                            <ul data-submenu-title="حساب کاربری">
-                                <li><a asp-page="Profile"><i class="lni lni-user ms-2"></i> تنظیمات </a></li>
-                                <li><a asp-page="/logout" asp-area=""><i class="lni lni-power-switch ms-2"></i>خروج</a></li>
-                            </ul>
+<section class="gray">
+    <div class="goodup-dashboard-wrap gray px-4 py-5">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar (for Experts) -->
+                @if (User.IsInRole("Expert"))
+                {
+                    <div class="col-lg-3 col-md-4">
+                        <div class="goodup-dashboard-nav sticky-top">
+                            <div class="goodup-dashboard-inner">
+                                <ul data-submenu-title="منو">
+                                    <li><a asp-page="ExpertDashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                                    <li><a asp-page="orders"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
+                                    <li><a asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
+                                </ul>
+                                <ul data-submenu-title="حساب کاربری">
+                                    <li><a asp-page="Profile"><i class="lni lni-user ms-2"></i> تنظیمات </a></li>
+                                    <li><a asp-page="/logout" asp-area=""><i class="lni lni-power-switch ms-2"></i>خروج</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                }
 
-            <!-- Main Content -->
-            <div class="col-lg-9 col-md-8">
-                <div class="bg-white rounded mb-4">
-                    <div class="jbd-01 px-4 py-4">
-                        <div class="jbd-details mb-4">
-                            <h5 class="ft-bold fs-lg">امتیاز و نظر کاربران</h5>
-                            <div class="reviews-comments-wrap">
-
-                                <!-- Review Comment Item -->
-                                <div class="reviews-comments-item mb-4">
-                                    <div class="row">
-                                        <div class="col-auto">
-                                            <div class="review-comments-avatar">
-                                                <img src="assets/img/t-1.png" class="img-fluid rounded-circle" alt="">
-                                            </div>
+                <!-- Main Content (Comments & Sidebar Together for Non-Experts) -->
+                <div class="@(User.IsInRole("Expert") ? "col-lg-9 col-md-8" : "col-lg-12")">
+                    <div class="d-flex flex-column flex-lg-row gap-4">
+                        @if (!User.IsInRole("Expert"))
+                        {
+                            <!-- Profile Box (Left Side for Non-Experts) -->
+                            <div class="col-lg-4">
+                                <div class="author-wrap-ngh">
+                                    <div class="author-wrap-head-ngh">
+                                        <div class="author-wrap-ngh-thumb">
+                                            <img src="" class="img-fluid circle" alt="">
                                         </div>
-                                        <div class="col">
-                                            <div class="reviews-comments-item-text">
-                                                <h4>امید حسن زاده<span class="reviews-comments-item-date d-flex align-items-center"><i class="ti-calendar theme-cl ms-1"></i>27 آبان 1400</span></h4>
-                                                <p>" سلام. من و دوستانم بيش از 5 بار است كه از بوفه صبحانه استفاده كرديم. به عنوان صبحانه خيلي خوب است رفتار ميزبان‌ها بسيار محترمانه است. نظر برخي از كاربران مبني بر كم بودن تنوع جاي سوال دارد. "</p>
-                                                <div class="pull-left reviews-reaction">
-                                                    <a href="#" class="comment-love active"><i class="ti-heart"></i> 07</a>
-                                                </div>
-                                            </div>
+                                        <div class="author-wrap-ngh-info">
+                                            <h5></h5>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Review Comment Item End -->
-                                <!-- Repeat Review Comment Items as Needed -->
-                                <div class="reviews-comments-item mb-4">
-                                    <div class="row">
-                                        <div class="col-auto">
-                                            <div class="review-comments-avatar">
-                                                <img src="assets/img/t-1.png" class="img-fluid rounded-circle" alt="">
-                                            </div>
+
+                                    <div class="author-wrap-caption-ngh">
+                                        <div class="author-wrap-jhyu-ngh">
+                                            <ul>
+                                                <li>
+                                                    <div class="gdup-kvty">
+                                                        <div class="gdup-kvty-icon bg-light-sky text-sky"><i class="fas fa-file"></i></div>
+                                                        <div class="gdup-kvty-ctr"><h6 class="count">@Model.DoneSuggestions</h6></div>
+                                                        <div class="gdup-kvty-text">خدمات انجام شده</div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="gdup-kvty">
+                                                        <div class="gdup-kvty-icon bg-light-warning text-warning"><i class="fas fa-thumbs-up"></i></div>
+                                                        <div class="gdup-kvty-ctr"><h6 class="count">@Model.AverageScore</h6></div>
+                                                        <div class="gdup-kvty-text">میانگین امتیاز</div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="gdup-kvty">
+                                                        <div class="gdup-kvty-icon bg-light-danger text-danger"><i class="fas fa-heart"></i></div>
+                                                        <div class="gdup-kvty-ctr"><h6 class="count">@Model.CommentCount</h6></div>
+                                                        <div class="gdup-kvty-text">تعداد نظرات</div>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <div class="col">
-                                            <div class="reviews-comments-item-text">
-                                                <h4>امید حسن زاده<span class="reviews-comments-item-date d-flex align-items-center"><i class="ti-calendar theme-cl ms-1"></i>27 آبان 1400</span></h4>
-                                                <p>" سلام. من و دوستانم بيش از 5 بار است كه از بوفه صبحانه استفاده كرديم. به عنوان صبحانه خيلي خوب است رفتار ميزبان‌ها بسيار محترمانه است. نظر برخي از كاربران مبني بر كم بودن تنوع جاي سوال دارد. "</p>
-                                                <div class="pull-left reviews-reaction">
-                                                    <a href="#" class="comment-love active"><i class="ti-heart"></i> 07</a>
+                                        <div class="author-wrap-yuio-ngh mt-5">
+                                            <div class="row g-4">
+                                                <div class="col-6">
+                                                    <a asp-page="/menu/comments" asp-area="expert" class="adv-btn full-width">خواندن نظرات</a>
+                                                </div>
+                                                <div class="col-6">
+                                                    <a asp-page="/addcomment/index" asp-area="" class="adv-btn full-width">ثبت نظر</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+
+                        <!-- Comments Section -->
+                        <div class="col">
+                            <div class="goodup-dashboard-content">
+                                <div class="dashboard-tlbar d-block mb-5">
+                                    <h1 class="ft-medium fs-lg">نظرات کاربران</h1>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12">
+                                    <div class="_dashboard_content bg-white rounded mb-4">
+                                        <div class="_dashboard_content_body">
+                                            <div class="reviews-comments-wrap">
+                                                @foreach (var comment in Model.Comments)
+                                                {
+                                                    <div class="reviews-comments-item border p-3 mb-3 rounded">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="reviews-comments-item-text">
+                                                                    <h4>
+                                                                        @comment.CustomerName
+                                                                        <span class="reviews-comments-item-date d-flex align-items-center ms-2">
+                                                                            <i class="ti-calendar theme-cl ms-1"></i>@comment.RegissterDate.ToPersianString()
+                                                                        </span>
+                                                                    </h4>
+                                                                    <div class="rating-stars">
+                                                                        @for (int i = 1; i <= 5; i++)
+                                                                        {
+                                                                            <span class="star @(i <= comment.Points ? "filled" : "")">&#9733;</span>
+                                                                        }
+                                                                    </div>
+                                                                    <p>@comment.Opinion</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End Comments Section -->
                     </div>
-                </div>
+                </div> <!-- End Main Content -->
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<style>
+    .rating-stars {
+        display: flex;
+        gap: 5px;
+    }
+
+    .star {
+        font-size: 24px;
+        color: #ddd;
+    }
+
+        .star.filled {
+            color: gold;
+        }
+
+    .reviews-comments-item {
+        background: #f9f9f9;
+        border-left: 4px solid #007bff;
+    }
+</style>

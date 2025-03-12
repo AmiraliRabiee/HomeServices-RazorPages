@@ -1,8 +1,10 @@
 ﻿@page
+@using App.Domain.Core.Contracts.Service.HomeServices
 @using App.Domain.Core.Enum
 @using HomeServices_RazorPage.Areas.Customer.Pages.Menu
 @using App.Domain.Core.Helpers
 @model MyOrdersModel
+@inject IOrderService orderService
 @{
 }
 
@@ -61,8 +63,18 @@
                             <div class="dashboard-listing-wraps">
                                 @if (Model.OrderDtos.Count > 0)
                                 {
+
                                     @foreach (var order in Model.OrderDtos)
                                     {
+                                        @if (order.StausService == StausServiceEnum.NewlyRegistered)
+                                        {
+                                            var c = await orderService.IsExistSuggestion(@order.Id);
+                                            if (c.IsSuccess)
+                                            {
+                                                await orderService.ChangeToExpertSelection(@order.Id);
+                                            }
+                                        }
+
                                         <!-- Single Listing Item -->
                                         <div class="dsd-single-listing-wraps d-flex align-items-start justify-content-between">
                                             <!-- Content Section (Left Side) -->
@@ -73,6 +85,7 @@
                                                 <div class="dsd-single-lst-caption">
                                                     <div class="ico-content">
                                                         <ul>
+
                                                             @if (order.StausService == StausServiceEnum.NewlyRegistered)
                                                             {
                                                                 <li>

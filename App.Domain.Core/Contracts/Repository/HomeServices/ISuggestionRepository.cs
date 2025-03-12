@@ -15,13 +15,14 @@ namespace App.Domain.Core.Contracts.Repository.HomeServices
         Task<SummSuggestionDto> GetSuggestionDto(int id, CancellationToken cancellationToken);
         Task<List<SummSuggestionDto>> GetAllDto(CancellationToken cancellationToken);
         int GetCount(int id);
-        Task<List<SummSuggestionDto>> GetSuggestionSkills(CustomerDto customer, CancellationToken cancellationToken);
-        Task<List<SummSuggestionDto>> GetSuggestionSkills2(CancellationToken cancellationToken);
         Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken);
         Task<float> GetSuggestPrice(int id, CancellationToken cancellationToken);
         Task<Result> AcceptSuggestion(int id, CancellationToken cancellationToken);
-        Task<ExpertDto> GetExpertName(int id, CancellationToken cancellationToken);
         Task<SummSuggestionDto> GetExpertBySuggestion(int id, CancellationToken cancellationToken);
         Task<SummSuggestionDto> GetSuggestionAccepted(int id, CancellationToken cancellationToken);
+        Task<int> ActiveSuggestionsCount(int expertId, CancellationToken cancellationToken);
+        Task<int> DoneSuggestionsCount(int expertId, CancellationToken cancellationToken);
+        Task<List<SummSuggestionDto>> DoneSuggestions(int expertId, CancellationToken cancellationToken);
+        Task<List<SummSuggestionDto>> ActiveSuggestions(int expertId, CancellationToken cancellationToken);
     }
 }

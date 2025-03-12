@@ -1,4 +1,5 @@
 ﻿@page
+@using App.Domain.Core.Contracts.Service.HomeServices
 @using App.Domain.Core.Enum
 @using HomeServices_RazorPage.Areas.Customer.Pages.Menu
 @model SuggestionsModel
@@ -72,7 +73,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="ground ground-list-single">
-                                                        <a asp-page="/expert/content" asp-route-id="@suggestion.ExpertId">
+                                                        <a asp-page="/menu/content" asp-area="expert" asp-route-id="@suggestion.ExpertId">
                                                             <img class="ground-avatar" src="/assets/img/t-1.png" alt="...">
                                                             <span class="profile-status bg-online pull-right"></span>
                                                             @suggestion.ExpertName
@@ -80,10 +81,18 @@
                                                     </div>
                                                 </td>
                                                 <td>@suggestion.Description</td>
-                                                <td>@suggestion.CompletionDate</td>
-                                                <td>@suggestion.RunungTimeOrder</td>
+                                                @if (suggestion.StausService == StausServiceEnum.ExpertSelectionQueue){
+                                                    <td>@suggestion.CompletionDate.Year/@suggestion.CompletionDate.Month/@suggestion.CompletionDate.Day</td>
+                                                    <td>@suggestion.RunungTimeOrder</td>
+                                                }else{
+                                                    <td>زمان تعیین شده</td>
+                                                    <td>ساعت  تعیین شده</td>
+
+                                                }
+
+
                                                 <td>@suggestion.SuggestPrice</td>
-                                                @if (suggestion.StausService == StausServiceEnum.NewlyRegistered)
+                                                @if (suggestion.StausService == StausServiceEnum.ExpertSelectionQueue)
                                                 {
                                                     <td>
                                                         <div class="d-flex justify-content-center align-items-center">

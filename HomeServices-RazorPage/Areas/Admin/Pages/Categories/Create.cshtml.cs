@@ -11,7 +11,7 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Categories
     public class CreateModel(ICategoryAppService _categoryAppService) : PageModel
     {
         [BindProperty]
-        public List<Category> ExistCategories { get; set; }
+        public List<CategoryDto> ExistCategories { get; set; }
         [BindProperty]
         public CategoryDto Category { get; set; }
         [BindProperty]
@@ -19,9 +19,9 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Categories
         [BindProperty]
         public bool IsSuccess { get; set; }
 
-        public void OnGet()
+        public async Task OnGet(CancellationToken cancellationToken)
         {
-            ExistCategories = _categoryAppService.GetParentCategories();
+            ExistCategories =await _categoryAppService.GetParentCategories(cancellationToken);
         }
 
         public async Task<IActionResult> OnPost(CancellationToken cancellationToken)

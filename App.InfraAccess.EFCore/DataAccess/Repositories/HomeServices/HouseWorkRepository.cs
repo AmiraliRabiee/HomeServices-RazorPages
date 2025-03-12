@@ -17,7 +17,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             try
             {
                 var newService = new HouseWork();
-                newService.Title = service.Tiltle;
+                newService.Title = service.Title;
                 newService.Description = service.Description;
                 newService.BasePrice = service.BasePrice;
                 newService.ImagePath = service.ImagePath;
@@ -87,7 +87,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 if (current is null)
                     return new Result { IsSuccess = false, Message = ".سفارشی با این شناسه یافت نشد" };
 
-                current.Title = service.Tiltle;
+                current.Title = service.Title;
                 current.Description = service.Description;
                 current.BasePrice = service.BasePrice;
                 current.CategoryId = service.SubCategoryId;
@@ -123,14 +123,14 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return service;
         }
 
-        public async Task<List<SummHouseWorkDto>> GetHomeServices(CancellationToken cancellationToken)
+        public async Task<List<SummHouseWorkDto>> GetHomeServices(CancellationToken cancellationToken)////////////////////////////
         {
             var services = await _appDbContext.HouseWorks
              .Include(h => h.Image)
             .Select(h => new SummHouseWorkDto
             {
                 Id = h.Id,
-                Tiltle = h.Title,
+                Title = h.Title,
                 Description = h.Description,
                 BasePrice = h.BasePrice,
                 SubCategory = h.Category.Title,
@@ -152,7 +152,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                     Id = c.Id,
                     BasePrice = c.BasePrice,
                     Description = c.Description,
-                    Tiltle = c.Title,
+                    Title = c.Title,
                     ImagePath = c.ImagePath,
                     SubCategoryId = c.CategoryId
 
@@ -175,7 +175,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 Id = h.Id,
                 ImagePath = h.ImagePath,
                 Description = h.Description,
-                Tiltle = h.Title,
+                Title = h.Title,
                 BasePrice = h.BasePrice,
                 SubCategoryId = h.Category.Id,
                 CategoryName = h.Category.Title,
@@ -198,7 +198,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 Id = h.Id,
                 ImagePath = h.ImagePath,
                 Description = h.Description,
-                Tiltle = h.Title,
+                Title = h.Title,
                 BasePrice = h.BasePrice,
                 SubCategoryId = h.CategoryId
             }).ToListAsync(cancellationToken);
@@ -217,7 +217,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 Id = h.Id,
                 ImagePath = h.ImagePath,
                 Description = h.Description,
-                Tiltle = h.Title,
+                Title = h.Title,
                 BasePrice = h.BasePrice,
                 CategoryName = h.Category.ParentCategory.Title,
                 CategoryId = h.Category.Id
@@ -257,7 +257,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             {
                 ImagePath = h.ImagePath,
                 Description = h.Description,
-                Tiltle = h.Title,
+                Title = h.Title,
                 BasePrice = h.BasePrice,
             }).ToList();
 
@@ -276,7 +276,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 Id = h.Id,
                 ImagePath = h.ImagePath,
                 Description = h.Description,
-                Tiltle = h.Title,
+                Title = h.Title,
                 BasePrice = h.BasePrice,
                 CategoryName = h.Category.ParentCategory.Title,
                 CategoryId = h.Category.Id

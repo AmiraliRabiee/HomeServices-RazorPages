@@ -59,7 +59,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
                     return new Result { IsSuccess = false, Message = ".نظری با این شناسه یافت نشد" };
 
                 var newComment = new Comment();
-                newComment.Points = comment.Points; 
+                newComment.Points = comment.Points;
                 newComment.CreateAt = DateTime.Now;
 
                 await _appDbContext.SaveChangesAsync(cancellationToken);
@@ -122,9 +122,51 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
         public async Task<int> GetRegisterCommentCount(int id, CancellationToken cancellationToken)
         {
             var count = await _appDbContext.Comments
-                .Where(c => c.CustomerId == id /*&& c.IsPlayable*/)
+                .Where(c => c.CustomerId == id)
                 .CountAsync(cancellationToken);
             return count;
+        }
+
+
+        public async Task<int> GetAcceptCommentCount(int id, CancellationToken cancellationToken)
+        {
+            var count = await _appDbContext.Comments
+                .Where(c => c.ExpertId == id && c.IsPlayable == true)
+                .CountAsync(cancellationToken);
+            return count;
+        }
+
+        public async Task<List<CommentDto>> GetCommentsById(int expertId, CancellationToken cancellationToken)
+        {
+            var comments = await _appDbContext.Comments
+                .Where(c => c.ExpertId == expertId && c.IsPlayable)
+                .Select(c => new CommentDto
+                {
+                    Id = c.Id,
+                    Points = c.Points,
+                    Opinion = c.Opinion,
+                    RegissterDate = c.CreateAt,
+                    CustomerName = c.RegisteredCustomer.User.FirstName + " " + c.RegisteredCustomer.User.LastName
+                })
+                .ToListAsync(cancellationToken);
+            if (comments is null)
+                throw new Exception("برای کارشناس مورد نظر کامنتی وجود ندارد");
+
+            return comments;
+        }
+
+        public async Task<double?> GetAvg(int id, CancellationToken cancellationToken)
+        {
+            return await _appDbContext.Comments
+               .Where(c => c.ExpertId == id && c.IsPlayable == true)
+               .AverageAsync(c => c.Points, cancellationToken);
+        }
+
+        public async Task<int> GetCount(int id, CancellationToken cancellationToken)
+        {
+            return await _appDbContext.Comments
+               .Where(c => c.ExpertId == id && c.IsPlayable == true)
+               .CountAsync(cancellationToken);
         }
     }
 }

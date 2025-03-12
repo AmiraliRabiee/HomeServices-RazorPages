@@ -82,12 +82,17 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
         public async Task<CustomerDto> GetCustomerDto(int id ,CancellationToken cancellationToken)
         {
             var customer = await _appDbContext.Customers
-                .Where(e => e.Id == id)
-                .Select(e => new CustomerDto
+                .Where(c => c.Id == id)
+                .Select(c => new CustomerDto
                 {
-                    Id = e.Id,
-                    CityId = e.CityId,
-                    Address = e.Address,
+                    Id = c.Id,
+                    CityId = c.CityId,
+                    Address = c.Address,
+                   CityName = c.City.Name,
+                   FirstName = c.User.FirstName,
+                   LastName = c.User.LastName,
+                   PhoneNumber = c.User.PhoneNumber,
+                   ImagePath  =c.User.ImagePath
                 }).FirstAsync(cancellationToken);
             if (customer is null)
                 throw new Exception(".مشتری با این شناسه وجود ندارد");

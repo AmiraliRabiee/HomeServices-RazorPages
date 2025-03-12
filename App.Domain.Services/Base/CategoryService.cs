@@ -3,10 +3,11 @@ using App.Domain.Core.Contracts.Service.BaseEntities;
 using App.Domain.Core.Dto.Dashboard;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
+using App.Infrastructure.Dapper;
 
 namespace App.Domain.Services.Base
 {
-    public class CategoryService(ICategoryRepository _categoryRepository) : ICategoryService
+    public class CategoryService(ICategoryRepository _categoryRepository,ICategoryDapperRepository _categoryDapperRepository) : ICategoryService
     {
         public Task<Result> CreateCategpry(CategoryDto category, CancellationToken cancellationToken)
             => _categoryRepository.CreateCategpry(category, cancellationToken);
@@ -25,16 +26,16 @@ namespace App.Domain.Services.Base
 
         public List<CategoryDto> GetCatyegoryByParent(int id)
             => _categoryRepository.GetCatyegoryByParent((int)id);
-        public List<Category> GetChildCategories()
-            => _categoryRepository.GetChildCategories();
+        public async Task<List<CategoryDto>> GetChildCategories(CancellationToken cancellationToken)
+            => await _categoryDapperRepository.GetChildCategoriesAsync(cancellationToken);
 
         public List<Category> GetChildCategoriesById(int id)
             => _categoryRepository.GetChildCategoriesById(id);
 
         public async Task<int> GetChildCount(int categoryId)
             =>await _categoryRepository.GetChildCount(categoryId);
-        public List<Category> GetParentCategories()
-            => _categoryRepository.GetParentCategories();
+        public async Task<List<CategoryDto>> GetParentCategories(CancellationToken cancellationToken)
+            => await _categoryDapperRepository.GetCategoriesAsync(cancellationToken);
 
         public Task<Result> SoftDeleteComment(Category category, CancellationToken cancellationToken)
             => _categoryRepository.SoftDeleteCategory(category, cancellationToken);

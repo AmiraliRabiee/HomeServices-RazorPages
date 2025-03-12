@@ -12,5 +12,10 @@ namespace App.Domain.Core.Contracts.Service.BaseEntities
         Task<Result> AcceptComment(int id, CancellationToken cancellationToken);
         List<CommentDto> GetComments();
         Task<int> GetRegisterCommentCount(int id, CancellationToken cancellationToken);
+        Task<int> GetAcceptCommentCount(int id, CancellationToken cancellationToken);
+        Task<List<CommentDto>> GetCommentsById(int expertId, CancellationToken cancellationToken);
+        Task<double?> GetAvg(int id, CancellationToken cancellationToken);
+        Task<int> GetCount(int id, CancellationToken cancellationToken);
+        
     }
 }

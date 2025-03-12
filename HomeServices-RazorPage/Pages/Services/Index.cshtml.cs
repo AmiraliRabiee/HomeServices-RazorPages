@@ -9,7 +9,7 @@ namespace HomeServices_RazorPage.Pages.Services
         public List<SummHouseWorkDto> Works { get; set; }
         public async Task OnGet(CancellationToken cancellationToken)
         {
-            Works = await _houseWorkAppService.GetAllAsync(cancellationToken);
+            Works = await _houseWorkAppService.GetAll(cancellationToken);
         }
     }
 }

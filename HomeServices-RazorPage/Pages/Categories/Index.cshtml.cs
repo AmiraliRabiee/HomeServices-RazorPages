@@ -12,10 +12,10 @@ namespace HomeServices_RazorPage.Pages.Categories
         [BindProperty]
         public List<CategoryDto> CatDtos { get; set; }
         [BindProperty]
-        public List<Category> Cats { get; set; }
-        public async void OnGet(int id)
+        public List<CategoryDto> Cats { get; set; }
+        public async Task OnGet(int id,CancellationToken cancellationToken)
         {
-            Cats = _categoryAppService.GetParentCategories();
+            Cats = await _categoryAppService.GetParentCategories(cancellationToken);
             CatDtos = _categoryAppService.GetCatyegoryByParent(id);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.Contracts.Repository.BaseEntities;
 using App.Domain.Core.Contracts.Service.BaseEntities;
+using App.Infrastructure.Dapper;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Services.Base
 {
-    public class DataUserService(ICityRepository _cityRepository) : IBaseDataService
+    public class DataUserService(ICityRepository _cityRepository,ICityDapperRepository _cityDapperRepository) : IBaseDataService
     {
-        public List<City> GetCities()
-            => _cityRepository.GetCities();
+        public async Task<List<City>> GetCitiesAsync(CancellationToken cancellationToken)
+            => await _cityDapperRepository.GetCitiesAsync(cancellationToken);
 
         public async Task<string> UploadImage(IFormFile FormFile, string folderName, CancellationToken cancellationToken)
         {

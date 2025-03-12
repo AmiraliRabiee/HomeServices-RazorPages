@@ -18,5 +18,12 @@ namespace App.Domain.Core.Helpers
         {
             return int.Parse(claims.FirstOrDefault(c => c.Type == "CustomerId").Value);
         }
+
+        public static int GetExpertId(IEnumerable<Claim> claims)
+        {
+            return int.Parse(claims.FirstOrDefault(c => c.Type == "ExpertId").Value);
+        }
+
+
     }
 }

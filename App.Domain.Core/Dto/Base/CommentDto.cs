@@ -8,5 +8,6 @@
         public string? ExpertName { get; set; }
         public string Opinion { get; set; }
         public int? Points { get; set; }
+        public string CustomerName { get; set; }
     }
 }

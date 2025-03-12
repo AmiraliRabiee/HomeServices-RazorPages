@@ -16,6 +16,9 @@ namespace App.Domain.Services.HomeService
         public async Task<Result> Delete(Suggestion suggestion, CancellationToken cancellationToken)
             => await _suggestionRepository.DeleteSuggestion(suggestion, cancellationToken);
 
+        public async Task<int> DoneSuggestionsCount(int expertId, CancellationToken cancellationToken)
+            => await _suggestionRepository.DoneSuggestionsCount(expertId, cancellationToken);
+
         public async Task<List<SummSuggestionDto>> GetAllDto(CancellationToken cancellationToken)
             => await _suggestionRepository.GetAllDto(cancellationToken);
 
@@ -31,17 +34,11 @@ namespace App.Domain.Services.HomeService
         public async Task<SummSuggestionDto> GetSuggestionAccepted(int id, CancellationToken cancellationToken)
             => await _suggestionRepository.GetSuggestionAccepted(id, cancellationToken);
 
-        public Task<List<SummSuggestionDto>> GetSuggestionDetails(int id, CancellationToken cancellationToken)
-            => _suggestionRepository.GetSuggestionDetails(id,cancellationToken);
+        public async Task<List<SummSuggestionDto>> GetSuggestionDetails(int id, CancellationToken cancellationToken)
+            => await _suggestionRepository.GetSuggestionDetails(id,cancellationToken);
 
         public async Task<SummSuggestionDto> GetSuggestionDto(int id, CancellationToken cancellationToken)
             => await _suggestionRepository.GetSuggestionDto(id, cancellationToken);
-
-        public async Task<List<SummSuggestionDto>> GetSuggestionSkills(CustomerDto customer, CancellationToken cancellationToken)
-            => await _suggestionRepository.GetSuggestionSkills(customer, cancellationToken);
-
-        public async Task<List<SummSuggestionDto>> GetSuggestionSkills2(CancellationToken cancellationToken)
-            => await _suggestionRepository.GetSuggestionSkills2(cancellationToken);
 
         public async Task<float> GetSuggestPrice(int id, CancellationToken cancellationToken)
             => await _suggestionRepository.GetSuggestPrice(id , cancellationToken);
@@ -49,7 +46,16 @@ namespace App.Domain.Services.HomeService
         public async Task<Result> SoftDelete(Suggestion suggestion, CancellationToken cancellationToken)
             => await _suggestionRepository.SoftDeleteSuggestion(suggestion, cancellationToken);
 
+        public async Task<int> ActiveSuggestionsCount(int expertId, CancellationToken cancellationToken)
+            => await _suggestionRepository.ActiveSuggestionsCount(expertId, cancellationToken);
+
         public async Task<Result> Update(Suggestion suggestion, CancellationToken cancellationToken)
             => await _suggestionRepository.UpdateSuggestion(suggestion, cancellationToken);
+
+        public async Task<List<SummSuggestionDto>> DoneSuggestions(int expertId, CancellationToken cancellationToken)
+            => await _suggestionRepository.DoneSuggestions(expertId , cancellationToken);
+
+        public async Task<List<SummSuggestionDto>> ActiveSuggestions(int expertId, CancellationToken cancellationToken)
+            => await _suggestionRepository.ActiveSuggestions(expertId , cancellationToken);
     }
 }

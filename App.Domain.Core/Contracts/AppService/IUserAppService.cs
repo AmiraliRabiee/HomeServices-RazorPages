@@ -18,8 +18,13 @@ namespace App.Domain.Core.Contracts.AppService
         Task<CustomerDto> GetCustomerById(int id, CancellationToken cancellationToken);
         Task<Result> UpdateCustomer(CustomerDto model, CancellationToken cancellationToken);
         Task<Result> UpdateCustomerInformation(UserDto model, CancellationToken cancellationToken);
-        Task<Result> CustomerUplpadingImage(UpdateUser model, UserDto user, CancellationToken cancellationToken);
+        Task<Result> UplpadingImage(UpdateUser model, AppUser user, CancellationToken cancellationToken);
         Task<Result> Payment(AppUser user, int orderId, float price, CancellationToken cancellationToken);
-        Task<Result> Receive(float price, CancellationToken cancellationToken);
+        Task<Result> AdminReceive(float price, CancellationToken cancellationToken);
+        Task<Result> UpdateExpert(ExpertDto model, CancellationToken cancellationToken);
+        Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken);
+        Task UpdateExpertSkills(int expertId, List<int> houseWorkIds, CancellationToken cancellationToken);
+        Task<Result> ExpertReceive(int id, float price, CancellationToken cancellationToken);
+        Task<List<int>> GetExpertSkills(int expertId, CancellationToken cancellationToken);
     }
 }

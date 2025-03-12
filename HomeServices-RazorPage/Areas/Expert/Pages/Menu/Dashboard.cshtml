@@ -1,0 +1,184 @@
+﻿@page
+@using App.Domain.Core.Helpers
+@using HomeServices_RazorPage.Areas.Expert.Pages.Menu
+@using Framework
+@model DashboardModel
+@{
+}
+
+<!-- ======================= dashboard Detail ======================== -->
+<div class="goodup-dashboard-wrap gray px-4 py-5">
+    <a class="mobNavigation" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="MobNav">
+        <i class="fas fa-bars ms-2"></i>منو
+    </a>
+    <div class="collapse" id="MobNav">
+        <div class="goodup-dashboard-nav sticky-top">
+            <div class="goodup-dashboard-inner">
+                <ul data-submenu-title="منو">
+                    <li><a asp-page="ExpertDashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                    <li><a asp-page="orders"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
+                    @*                     <li><a asp-page="createSuggestion"><i class="lni lni-add-files ms-2"></i>ثبت پیشنهاد</a></li>
+ *@                    <li><a asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
+                </ul>
+                <ul data-submenu-title="حساب کاربری">
+                    <li><a asp-page="Profile"><i class="lni lni-user ms-2"></i> تنظیمات </a></li>
+                    <li><a asp-page="/logout" asp-area=""><i class="lni lni-power-switch ms-2"></i>خروج</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="goodup-dashboard-content">
+        <div class="dashboard-tlbar d-block mb-5">
+            <div class="row">
+                <div class="colxl-12 col-lg-12 col-md-12">
+                    <h1 class="ft-medium fs-4">
+                        سلام @User.Identity.Name
+                    </h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item text-muted"><a href="#">خانه</a></li>
+                            <li class="breadcrumb-item"><a href="#" class="theme-cl">داشبورد</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <div class="dsd-boxed-widget py-5 px-4 bg-danger rounded">
+                    <h2 class="ft-medium mb-1 fs-xl text-light count">@Model.statisticsExpert.ActiveCount</h2>
+                    <p class="p-0 m-0 text-light fs-md">پیشنهاد های فعال</p>
+                    <i class="lni lni-empty-file"></i>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <div class="dsd-boxed-widget py-5 px-4 bg-success rounded">
+                    <h2 class="ft-medium mb-1 fs-xl text-light count">@Model.statisticsExpert.DoneSuggestions</h2>
+                    <p class="p-0 m-0 text-light fs-md"> خدمات انجام شده</p>
+                    <i class="lni lni-eye"></i>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <div class="dsd-boxed-widget py-5 px-4 bg-warning rounded">
+                    <h2 class="ft-medium mb-1 fs-xl text-light count">@Model.statisticsExpert.CommentsCount</h2>
+                    <p class="p-0 m-0 text-light fs-md">تعداد نظرات</p>
+                    <i class="lni lni-comments"></i>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <div class="dsd-boxed-widget py-5 px-4 bg-purple rounded">
+                    <h2 class="ft-medium mb-1 fs-xl text-light count">@Model.statisticsExpert.Balance</h2>
+                    <p class="p-0 m-0 text-light fs-md">موجودی</p>
+                    <i class="lni lni-wallet"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="portlet box shadow">
+                <div class="portlet-heading">
+                </div><!-- /.portlet-heading -->
+                <div class="portlet-body">
+                    <div class="top-buttons-box mb-2">
+                    </div>
+                    <h5></h5>
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="data-table" style="font-size: 14px; color:darkred;">
+                                <thead>
+                                    <tr>
+                                        <th class="p-low" style="padding: 8px;"><input type="checkbox" id="btn-check-all-toggle"></th>
+                                        <th style="padding: 8px;">سفارش دهنده</th>
+                                        <th style="padding: 8px;">عنوان خدمت</th>
+                                        <th style="padding: 8px;">توضیحات</th>
+                                        <th style="padding: 8px;">مبلغ پیشنهادی</th>
+                                        <th style="padding: 8px;">تاریخ اجرا</th>
+                                        <th style="padding: 8px;">وضعیت</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var suggestion in Model.ActiveSuggestions)
+                                    {
+                                        <tr>
+                                            <td style="padding: 8px;"><input type="checkbox"></td>
+                                            <td>
+                                                <div class="ground ground-list-single">
+                                                    <a asp-page="/menu/content" asp-area="customer" asp-route-customerId="@suggestion.CusomerId">
+                                                        <img class="ground-avatar" src="/assets/img/t-1.png" alt="...">
+                                                        <span class="profile-status bg-offline pull-right"></span>                                                        @suggestion.CustomerName
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td style="padding: 8px;">@suggestion.HouseWork</td>
+                                            <td style="padding: 8px;">@suggestion.Description</td>
+                                            <td style="padding: 8px;">@suggestion.SuggestPrice</td>
+                                            <td>@suggestion.CompletionDate.ToPersianString()</td>
+                                            <td style="padding: 8px;">@suggestion.StausService.GetDisplayName()</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- /.portlet-body -->
+            </div><!-- /.portlet -->
+        </div><!-- /.col-lg-12 -->
+
+
+        <br />
+        <br />
+
+        <div class="col-lg-12">
+            <div class="portlet box shadow">
+                <div class="portlet-heading">
+                </div><!-- /.portlet-heading -->
+                <div class="portlet-body">
+                    <div class="top-buttons-box mb-2">
+                    </div>
+                    @* <h5> پایان یافته‌ها</h5> *@
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped" id="data-table" style="font-size: 14px; color: darkgreen;">
+                                <thead>
+                                    <tr>
+                                        <th class="p-low" style="padding: 8px;"><input type="checkbox" id="btn-check-all-toggle"></th>
+                                        <th style="padding: 8px;">سفارش دهنده</th>
+                                        <th style="padding: 8px;">عنوان خدمت</th>
+                                        <th style="padding: 8px;">توضیحات</th>
+                                        <th style="padding: 8px;">مبلغ پیشنهادی</th>
+                                        <th style="padding: 8px;">تاریخ اجرا</th>
+                                        <th style="padding: 8px;">وضعیت</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var suggestion in Model.DoneSuggestions)
+                                    {
+                                        <tr>
+                                            <td style="padding: 8px;"><input type="checkbox"></td>
+                                            <td>
+                                                <div class="ground ground-list-single">
+                                                    <a asp-page="/menu/content" asp-area="customer" asp-route-customerId="@suggestion.CusomerId">
+                                                        <img class="ground-avatar" src="/assets/img/t-1.png" alt="...">
+                                                        <span class="profile-status bg-online pull-right"></span>
+                                                        @suggestion.CustomerName
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td style="padding: 8px;">@suggestion.HouseWork</td>
+                                            <td style="padding: 8px;">@suggestion.Description</td>
+                                            <td style="padding: 8px;">@suggestion.SuggestPrice</td>
+                                            <td>@suggestion.CompletionDate.ToPersianString()</td>
+                                            <td style="padding: 8px;">@suggestion.StausService.GetDisplayName()</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- /.portlet-body -->
+            </div><!-- /.portlet -->
+        </div><!-- /.col-lg-12 -->
+    </div>
+</div>

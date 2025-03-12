@@ -10,8 +10,6 @@ namespace App.Domain.AppServices.HomeService
     {
         public async Task<Result> AcceptSuggestion(int id,int orderId , CancellationToken cancellationToken)
         {
-            if(id == 0)
-                return new Result { IsSuccess  = false , Message = "شناسه پیشنهاد یافت نشد"};
             var result = await _suggestionService.AcceptSuggestion(id, cancellationToken);
             await _orderService.ChangeToWaitingForService(orderId, cancellationToken);
 
@@ -46,7 +44,8 @@ namespace App.Domain.AppServices.HomeService
         public async Task<List<SummSuggestionDto>> CheckSuggestions(int id, CancellationToken cancellationToken)
         {
             var suggestions = await  _suggestionService.GetSuggestionDetails(id, cancellationToken);
-            foreach(var item in suggestions)
+
+            foreach (var item in suggestions)
             {
                 if(item.IsAccepted == true)
                 {
@@ -68,12 +67,16 @@ namespace App.Domain.AppServices.HomeService
         public Task<SummSuggestionDto> GetSuggestionDto(int id, CancellationToken cancellationToken)
             => _suggestionService.GetSuggestionDto(id, cancellationToken);
 
-        public async Task<List<SummSuggestionDto>> GetSuggestionSkills(CustomerDto customer, CancellationToken cancellationToken)
-            => await _suggestionService.GetSuggestionSkills(customer, cancellationToken);
+        public Task<int> ActiveSuggestionsCount(int expertId, CancellationToken cancellationToken)
+            => _orderService.GetActiveServicesCount(expertId, cancellationToken);
 
-        public async Task<List<SummSuggestionDto>> GetSuggestionSkills2(CancellationToken cancellationToken)
-            => await _suggestionService.GetSuggestionSkills2(cancellationToken);
+        public async Task<List<SummSuggestionDto>>  DoneSuggestions(int expertId, CancellationToken cancellationToken)
+            => await _suggestionService.DoneSuggestions(expertId, cancellationToken);
 
+        public Task<List<SummSuggestionDto>> ActiveSuggestions(int expertId, CancellationToken cancellationToken)
+            => _suggestionService.ActiveSuggestions(expertId, cancellationToken);
 
+        public async  Task<int> DoneSuggestionsCount(int expertId, CancellationToken cancellationToken)
+            => await _suggestionService.DoneSuggestionsCount(expertId, cancellationToken);
     }
 }

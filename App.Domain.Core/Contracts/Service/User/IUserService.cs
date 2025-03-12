@@ -21,8 +21,8 @@ namespace App.Domain.Core.Contracts.Service.User
         int GetCount();
         Task<Result> UpdateUserDto(int id, CancellationToken cancellationToken);
         Task<Result> UpdateCustomer(UserDto model, CancellationToken cancellationToken);
-        Task<float> GetCustomerBalance(int id, CancellationToken cancellationToken);
+        Task<float> GetBalance(int id, CancellationToken cancellationToken);
         Task<float> GetBalance(AppUser user, CancellationToken cancellationToken);
-        Task<Result> UpdateCustomer2(UserDto model, CancellationToken cancellationToken);
+        Task<Result> UpdateImage(AppUser model, CancellationToken cancellationToken);
     }
 }

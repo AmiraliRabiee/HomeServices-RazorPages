@@ -4,10 +4,14 @@ using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
+using App.Infrastructure.Dapper;
 
 namespace App.Domain.AppServices.HomeService
 {
-    public class HouseWorkAppService(IHouseWorkService _houseWorkService, IBaseDataService _baseDataService , ICategoryService _categoryService) : IHouseWorkAppService
+    public class HouseWorkAppService(IHouseWorkService _houseWorkService,
+        IBaseDataService _baseDataService 
+        , ICategoryService _categoryService
+        ,IHouseWorkDapperRepository _houseWorkDapperRepository) : IHouseWorkAppService
     {
         public async Task<Result> AddServiceAsync(SummHouseWorkDto model, CancellationToken cancellationToken)
         {
@@ -58,11 +62,8 @@ namespace App.Domain.AppServices.HomeService
 
         }
 
-        public async Task<List<SummHouseWorkDto>> GetAllAsync(CancellationToken cancellationToken)
-        {
-            var result = await _houseWorkService.GetAll(cancellationToken);
-            return result;
-        }
+        public async Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken)//////////////////////
+            => await _houseWorkDapperRepository.GetAllAsync(cancellationToken);
 
         public async Task<SummHouseWorkDto> GetHouseWorkDto(int id , CancellationToken cancellationToken)
         {

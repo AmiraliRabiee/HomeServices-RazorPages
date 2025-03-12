@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace App.Domain.AppServices.HomeService
 {
-    public class OrderAppService(IOrderService _orderService, ISuggestionService _suggestionService, IUserAppService userAppService) : IOrderAppService
+    public class OrderAppService(IOrderService _orderService
+        , ISuggestionService _suggestionService
+        , IUserAppService userAppService) : IOrderAppService
     {
 
         public async Task<List<SummOrderDto>> GetAll()
@@ -37,7 +39,7 @@ namespace App.Domain.AppServices.HomeService
                         await _orderService.ChangeToNewlyRegistered(id, cancellationToken);
                         return new Result { IsSuccess = true, Message = "وضعیت سفارش در 'ثبت شده' باقی ماند" };
                     }
-                    await _orderService.ChangeToExpertSelection(id, cancellationToken);
+                    await _orderService.ChangeToExpertSelection(id);
                     return new Result { IsSuccess = true, Message = "وضعیت سفارش به 'انتخاب متخصص' تغییر یافت" };
 
                 case StausServiceEnum.ExpertSelectionQueue:
@@ -63,8 +65,8 @@ namespace App.Domain.AppServices.HomeService
             }
         }
 
-        public Task<List<SummOrderDto>> GetOrdersById(int id, CancellationToken cancellationToken)
-            => _orderService.GetOrdersById(id, cancellationToken);
+        public async Task<List<SummOrderDto>> GetOrdersById(int id, CancellationToken cancellationToken)
+            => await _orderService.GetOrdersById(id, cancellationToken);
 
         public async Task<SummOrderDto> GetOrderById(int id, CancellationToken cancellationToken)
             => await _orderService.GetOrderById(id, cancellationToken);
@@ -85,5 +87,8 @@ namespace App.Domain.AppServices.HomeService
         {
             throw new NotImplementedException();
         }
+
+        public Task<List<SummOrderDto>> GetReserveOrders(AppUser user, CancellationToken cancellationToken)
+            => _orderService.GetReserveOrders(user, cancellationToken);
     }
 }

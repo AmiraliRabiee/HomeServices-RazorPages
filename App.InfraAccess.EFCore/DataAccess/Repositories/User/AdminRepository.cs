@@ -30,8 +30,8 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
 
         public async Task<Result> UpdateBalance(float balance, CancellationToken cancellationToken)
         {
-            var a = await _appDbContext.Users.FirstOrDefaultAsync(a => a.Id == 1 , cancellationToken);
-            a.Balance = balance;
+            var user = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == 1 , cancellationToken);
+            user.Balance = balance;
             await _appDbContext.SaveChangesAsync(cancellationToken);
 
             return new Result { IsSuccess = true };

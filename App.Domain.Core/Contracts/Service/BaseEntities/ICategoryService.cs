@@ -12,8 +12,8 @@ namespace App.Domain.Core.Contracts.Service.BaseEntities
         Task<Result> SoftDeleteComment(Category category, CancellationToken cancellationToken);
         Category GetCategory(int id);
         List<Category> GetAllCategories();
-        List<Category> GetParentCategories();
-        List<Category> GetChildCategories();
+        Task<List<CategoryDto>> GetParentCategories(CancellationToken cancellationToken);
+        Task<List<CategoryDto>> GetChildCategories(CancellationToken cancellationToken);
         Task<CategoryDto> GetCategoryDto(int? id);
         List<CategoryDto> GetCatyegoryByParent(int id);
         Task<int> GetChildCount(int categoryId);

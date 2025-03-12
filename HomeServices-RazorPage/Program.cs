@@ -17,8 +17,10 @@ using App.Domain.Services.User;
 using App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities;
 using App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices;
 using App.InfraAccess.EFCore.DataAccess.Repositories.User;
+using App.Infrastructure.Dapper;
 using App.Infrastructure.EFCore.DataBase.Common;
 using Framework;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -30,6 +32,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages()
     .AddRazorRuntimeCompilation();
 
+builder.Services.AddMemoryCache();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -67,6 +70,8 @@ builder.Services.AddScoped<ISuggestionAppService, SuggestionAppService>();
 builder.Services.AddScoped<IHouseWorkRepository, HouseWorkRepository>();
 builder.Services.AddScoped<IHouseWorkService, HouseWorkService>();
 builder.Services.AddScoped<IHouseWorkAppService, HouseWorkAppService>();
+
+builder.Services.AddScoped<IExpertHouseWorkRepository, ExpertHouseWorkRepository>();
 #endregion
 
 #region BaseEntities Injects
@@ -92,6 +97,13 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryAppService, CategoryAppService>();
 #endregion
+
+#region Dapper Injects
+builder.Services.AddScoped<ICategoryDapperRepository, CategoryDapperRepository>();
+builder.Services.AddScoped<ICityDapperRepository, CityDapperRepository>();
+builder.Services.AddScoped<IHouseWorkDapperRepository, HouseWorkDapperRepository>();
+#endregion
+
 
 builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
 {

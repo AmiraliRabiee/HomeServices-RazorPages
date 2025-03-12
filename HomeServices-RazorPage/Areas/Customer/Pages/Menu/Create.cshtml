@@ -75,7 +75,7 @@
                                         <label class="ft-medium small mb-1">انتخاب تاریخ</label>
                                         <div class="cld-box">
                                             <i class="ti-calendar"></i>
-                                            <input type="text" data-jdp class="form-control" id="deliveryDate" name="deliveryDate" placeholder="تاریخ رزرو را انتخاب نمایید" value="">
+                                            <input data-jdp-only-date data-jdp class="form-control" type="text" asp-for="NewOrder.CompletionDate" placeholder="تاریخ رزرو را انتخاب نمایید" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -144,24 +144,12 @@
     jalaliDatepicker.startWatch({
     minDate: "today",
     maxDate: "attr",
-    minTime: "attr",
-    maxTime: "attr",
-    hideAfterChange: true,
-    autoHide: true,
-    showTodayBtn: true,
-    showEmptyBtn: true,
-    topSpace: 10,
-    bottomSpace: 30,
-    dayRendering(opt, input) {
-    return {
-    isHollyDay: opt.day == 1
-    }
-    }
+    time: true
     });
 </script>
 
 
-<!-- Initialize Persian Datepicker -->
+@* <!-- Initialize Persian Datepicker -->
 <script>
     document.querySelector('form').addEventListener('submit', function (event) {
         // Prevent the form from submitting immediately
@@ -187,7 +175,7 @@
         // Submit the form
         this.submit();
     });
-</script>
+</script> *@
 
 @* 
 

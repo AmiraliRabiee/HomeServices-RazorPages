@@ -33,8 +33,8 @@ namespace App.Domain.Services.User
         public int GetCount()
             => _userRepository.GetCount();
 
-        public async Task<float> GetCustomerBalance(int id, CancellationToken cancellationToken)
-            => await _userRepository.GetCustomerBalance(id, cancellationToken);
+        public async Task<float> GetBalance(int id, CancellationToken cancellationToken)
+            => await _userRepository.GetBalance(id, cancellationToken);
 
         public Task<UserDto> GetUserDetails(int id, CancellationToken cancellationToken)
             => _userRepository.GetUserDetails(id, cancellationToken);
@@ -51,8 +51,8 @@ namespace App.Domain.Services.User
         public Task<Result> UpdateCustomer(UserDto model, CancellationToken cancellationToken)
             => _userRepository.UpdateCustomer(model, cancellationToken);
 
-        public async Task<Result> UpdateCustomer2(UserDto model, CancellationToken cancellationToken)
-            => await _userRepository.UpdateCustomer2(model, cancellationToken);
+        public async Task<Result> UpdateImage(AppUser model, CancellationToken cancellationToken)
+            => await _userRepository.UpdateImage(model, cancellationToken);
 
         public Task<Result> UpdateUser(UserDto user, CancellationToken cancellationToken)
             => _userRepository.UpdateUser(user, cancellationToken);

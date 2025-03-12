@@ -1,9 +1,12 @@
 ﻿using App.Domain.Core.Contracts.Repository.HomeServices;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Entites.Service;
+using App.Domain.Core.Entites.User;
 using App.Domain.Core.Enum;
 using App.Infrastructure.EFCore.DataBase.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
 {
@@ -90,7 +93,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
         public async Task<int> GetDoneServicesCount(int id, CancellationToken cancellationToken)
         {
             var count = await _appDbContext.Orders
-                .Where(h => h.CustomerId == id)
+                .Where(h => h.Customer.User.Id == id)
                 .Where(h => h.IsPayment == true)
                 .CountAsync(cancellationToken);
             return count;
@@ -141,7 +144,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return order;
         }
 
-        public async Task<List<SummOrderDto>> GetOrders()
+        public async Task<List<SummOrderDto>> GetAll()
         {
             var orders = await _appDbContext.Orders
             .Select(o => new SummOrderDto
@@ -174,6 +177,8 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 BasePrice = o.HouseWork.BasePrice,
                 CityName = o.Customer.City.Name,
                 StausService = o.StausService,
+                CompletionDate = o.CompletionDate,
+                RunningTime = o.RunningTime,
             }).ToListAsync();
 
             if (orders is null)
@@ -203,15 +208,16 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task ChangeToExpertSelection(int id, CancellationToken cancellationToken)
+        public async Task ChangeToExpertSelection(int id)
         {
             //2
             var order = await _appDbContext.Orders.FindAsync(id);
             order.IsConfrim = false;
             order.IsFinish = false;
             order.StausService = StausServiceEnum.ExpertSelectionQueue;
-            await _appDbContext.SaveChangesAsync(cancellationToken);
+            await _appDbContext.SaveChangesAsync();
         }
+
         public async Task ChangeToWaitingForService(int id, CancellationToken cancellationToken)
         {
             //3
@@ -232,26 +238,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<Result> CheckIsConfrim(int id, CancellationToken cancellationToken)
-        {
-            var result = await _appDbContext.Orders.
-                Where(o => o.Id == id)
-                .AnyAsync(o => o.IsConfrim == true, cancellationToken);
-            if (result is true)
-                return new Result { IsSuccess = true, Message = ".این سفارش پذدیرفته شده" };
-            return new Result { IsSuccess = false, Message = "این سفارش در انتظار پذیرش توسط کارشناس میباشد." };
-        }
-
-        public async Task<Result> CheckIsFinish(int id, CancellationToken cancellationToken)
-        {
-            var result = await _appDbContext.Orders
-                 .Where(o => o.Id == id)
-                .AnyAsync(o => o.IsFinish == true, cancellationToken);
-            if (result is true)
-                return new Result { IsSuccess = true, Message = ".این سفارش تمام شده" };
-            return new Result { IsSuccess = false, Message = "این سفارش در انتظار تحویل میباشد." };
-        }
-
         public async Task<Result> IsExistSuggestion(int id)
         {
             var IsExist = await _appDbContext.Orders
@@ -263,22 +249,12 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
 
         }
 
-        //public async Task<List<SummSuggestionDto>> GetSuggestionsByCustomerId(int id)
-        //{
-        //    _appDbContext.Orders
-        //        .Where(c => c.CustomerId == id && c.IsConfrim == true)
-        //        .Select(c => new SummSuggestionDto
-        //        {
-        //            ExpertId = c.Suggestions.FirstOrDefault().Id
-        //        });
-                
-        //}
-
         public async Task<List<SummOrderDto>> GetCustomerOrders(int customerId, CancellationToken cancellationToken)
         {
 
             var orders = await _appDbContext.Orders
             .Where(o => o.CustomerId == customerId)
+            .Where(o => o.IsPayment == true)
             .Select(o => new SummOrderDto
             {
                 ImagePath = o.HouseWork.ImagePath,
@@ -292,10 +268,61 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
 
             if (orders is null)
                 throw new Exception("هنوز سفارشی ثبت نشده است");
-
             return orders;
-
         }
+
+
+        //public async Task<List<Order>> GetReserveOrders(AppUser user, CancellationToken cancellationToken)
+        //{
+        //    var expert = await GetExpertWithSkills(user.Id, cancellationToken);
+
+        //    return await GetOrdersMatchingSkills(expert.ExpertWorksSkills, cancellationToken);
+        //}
+        public async Task<List<SummOrderDto>> GetReserveOrders(AppUser user, CancellationToken cancellationToken)
+        {
+            var expert = await GetExpertWithSkillsAndCity(user.Id, cancellationToken);
+            return await GetOrdersMatchingExpert(expert, cancellationToken);
+        }
+
+        private async Task<Expert?> GetExpertWithSkillsAndCity(int userId, CancellationToken cancellationToken)
+        {
+            return await _appDbContext.Experts
+                .Where(e => e.User!.Id == userId)
+                .Select(e => new Expert
+                {
+                    Id = e.Id,
+                    CityId = e.CityId,
+                    ExpertWorksSkills = e.ExpertWorksSkills.Select(eh => new ExpertHouseWork
+                    {
+                        HouseWorkId = eh.HouseWorkId
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync(cancellationToken);
+        }
+
+        private async Task<List<SummOrderDto>> GetOrdersMatchingExpert(Expert expert, CancellationToken cancellationToken)
+        {
+            var houseWorkIds = expert.ExpertWorksSkills.Select(eh => eh.HouseWorkId).ToList();
+
+            return await _appDbContext.Orders
+                .Where(o => houseWorkIds.Contains(o.HouseWorkId) && o.Customer.CityId == expert.CityId)
+                .Select(o => new SummOrderDto
+                {
+                    Id = o.Id,
+                    CustomerId = o.CustomerId,
+                    HouseWork = o.HouseWork.Title,
+                    ImagePath = o.Customer.User.ImagePath,
+                    StausService = o.StausService,
+                    CompletionDate = o.CompletionDate,
+                    RunningTime = o.RunningTime,
+                    Description = o.Description,
+                    CustomerName = o.Customer.User.FirstName + " " + o.Customer.User.LastName,
+                    BasePrice = o.HouseWork.BasePrice,
+                    CreationDate = o.CreateAt
+                })
+                .ToListAsync(cancellationToken);
+        }
+
         #endregion
     }
 }

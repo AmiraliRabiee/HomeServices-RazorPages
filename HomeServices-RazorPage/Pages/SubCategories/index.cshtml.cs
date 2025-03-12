@@ -15,7 +15,7 @@ namespace HomeServices_RazorPage.Pages.SubCategories
         [BindProperty]
         public List<Category> ChildCategory { get; set; }
         [BindProperty]
-        public List<Category> ParentCategories { get; set; }
+        public List<CategoryDto> ParentCategories { get; set; }
         [BindProperty]
         public List<SummHouseWorkDto> Works { get; set; }
         [BindProperty]
@@ -31,7 +31,7 @@ namespace HomeServices_RazorPage.Pages.SubCategories
 
         public async Task OnGet(int id, CancellationToken cancellationToken)
         {
-            ParentCategories = _categoryAppService.GetParentCategories();
+            ParentCategories = await _categoryAppService.GetParentCategories(cancellationToken);
             CategoryDto = await _categoryAppService.GetCategoryDto(id);
             ChildCategory = _categoryAppService.GetChildCategoriesById(id);
             Categories = _categoryAppService.GetAllCategories();

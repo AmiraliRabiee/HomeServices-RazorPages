@@ -41,21 +41,6 @@
 </div>
 
 
-@if (TempData["Successfull"] != null)
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @TempData["Successfull"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
-
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        @TempData["Error"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
 <!-- Main Content (hidden initially) -->
 <section class="gray py-5 position-relative d-none" id="mainContent">
     <div class="container">
@@ -63,7 +48,21 @@
         <section class="gray py-5 position-relative">
             <div class="container">
                 <div class="row">
+                    @if (TempData["Successfull"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["Successfull"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
 
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            @TempData["Error"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
                         <div class="goodup-dashboard-nav sticky-top">
                             <div class="goodup-dashboard-inner">
@@ -95,7 +94,7 @@
                             <div class="agent-cnt-info">
                                 <div class="row g-3">
                                     <div class="col-6">
-                                        <a class="adv-btn full-width">نظرات کارشناس</a>
+                                        <a asp-page="Comments" asp-area="expert" asp-route-expertId="@Model.SuggestionDto.ExpertId" class="adv-btn full-width">نظرات کارشناس</a>
                                     </div>
                                     <div class="col-6">
                                         <a asp-area="" asp-page="/addcomment/index" asp-route-Id="@Model.SuggestionDto.Id" class="adv-btn full-width">ارسال نظر</a>

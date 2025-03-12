@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace App.Domain.Core.Entites.User
 {
@@ -24,5 +25,10 @@ namespace App.Domain.Core.Entites.User
         public Customer? Customer { get; set; }
         public Expert? Expert { get; set; }
         public Admin? Admin { get; set; }
+
+        public static implicit operator AppUser(ClaimsPrincipal v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

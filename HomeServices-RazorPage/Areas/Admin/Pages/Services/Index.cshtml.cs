@@ -16,12 +16,12 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Services
 
         public async Task OnGet(CancellationToken cancellationToken)
         {
-            HouseWorks = await _houseWorkAppService.GetAllAsync(cancellationToken);
+            HouseWorks = await _houseWorkAppService.GetAll(cancellationToken);
         }
 
         public async Task OnGetDelete(int id, CancellationToken cancellationToken)
         {
-            HouseWorks = await _houseWorkAppService.GetAllAsync(cancellationToken);
+            HouseWorks = await _houseWorkAppService.GetAll(cancellationToken);
             var result = await _houseWorkAppService.DeLeteServiceAsync(id, cancellationToken);
             if (result.IsSuccess)
             {

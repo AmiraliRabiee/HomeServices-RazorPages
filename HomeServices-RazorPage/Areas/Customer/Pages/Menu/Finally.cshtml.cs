@@ -23,6 +23,7 @@ namespace HomeServices_RazorPage.Areas.Customer.Pages.Menu
         {
             TempData["OrderId"] = id;
             SuggestionDto = await _suggestionAppService.GetSuggestionDto(id, cancellationToken);
+            TempData["ExpertId"] = SuggestionDto.ExpertId;
             Amounts = await _baseDataAppService.GetAmountsData(SuggestionDto.Id, cancellationToken);
             OnlineUser = await _userManager.GetUserAsync(User);
             if (id == 0)
@@ -33,9 +34,11 @@ namespace HomeServices_RazorPage.Areas.Customer.Pages.Menu
         {
             if (TempData["OrderId"] is int orderId)
             {
+                var expertId = (int)TempData["ExpertId"];
                 OnlineUser = await _userManager.GetUserAsync(User);
                 var payment = await _userAppService.Payment(OnlineUser, orderId, price, cancellationToken);
-                var result = await _userAppService.Receive(price, cancellationToken);
+                var recive = await _userAppService.ExpertReceive(expertId, price, cancellationToken);
+                var result = await _userAppService.AdminReceive(price, cancellationToken);
                 if (result.IsSuccess)
                 {
 

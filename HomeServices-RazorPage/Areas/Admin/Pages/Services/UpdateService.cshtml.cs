@@ -1,4 +1,5 @@
 using App.Domain.Core.Contracts.AppService;
+using App.Domain.Core.Dto.Dashboard;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -15,21 +16,21 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Services
         [BindProperty]
         public UpdateHouseWork Work { get; set; } = new UpdateHouseWork();
         [BindProperty]
-        public List<Category> ChildCategories { get; set; }
+        public List<CategoryDto> ChildCategories { get; set; }
         [BindProperty]
         public HouseWork ExistWork { get; set; }
 
 
-        public async Task OnGet(int id)
+        public async Task OnGet(int id,CancellationToken cancellationToken)
         {
-            ChildCategories = _categoryAppService.GetChildCategories();
+            ChildCategories =await _categoryAppService.GetChildCategories(cancellationToken);
             ExistWork = _workAppService.GetByIdAsync(id);
             Work = _workAppService.GetServiceDto(id); 
         }
 
         public async Task<IActionResult> OnPost(CancellationToken cancellationToken)
         {
-            ChildCategories = _categoryAppService.GetChildCategories();
+            ChildCategories =await _categoryAppService.GetChildCategories(cancellationToken);
 
             var result = await _workAppService.UpdateServiceAsync(Work, cancellationToken);
             if (result.IsSuccess)

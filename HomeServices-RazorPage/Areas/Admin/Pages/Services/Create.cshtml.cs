@@ -1,4 +1,5 @@
 using App.Domain.Core.Contracts.AppService;
+using App.Domain.Core.Dto.Dashboard;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -15,10 +16,10 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Services
         [BindProperty]
         public string Message { get; set; }
         [BindProperty]
-        public List<Category> ChildCategories { get; set; }
-        public void OnGet()
+        public List<CategoryDto> ChildCategories { get; set; }
+        public async Task OnGet(CancellationToken cancellationToken)
         {
-            ChildCategories = _categoryAppService.GetChildCategories();
+            ChildCategories = await _categoryAppService.GetChildCategories(cancellationToken);
         }
 
         public async Task<IActionResult> OnPost(CancellationToken cancellationToken)

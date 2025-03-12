@@ -13,7 +13,7 @@ public class Order
     public DateTime CompletionDate { get; set; }
     // ساعت اجرا
     public TimeOnly RunningTime { get; set; }
-    public DateTime? CreateAt { get; set; }
+    public DateTime CreateAt { get; set; }
     public StausServiceEnum StausService { get; set; }
     public bool IsDeleted { get; set; } = false;
     public bool? IsConfrim { get; set; } = false;

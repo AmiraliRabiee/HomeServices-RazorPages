@@ -3,10 +3,11 @@ using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
+using App.Infrastructure.Dapper;
 
 namespace App.Domain.Services.HomeService
 {
-    public class HouseWorkService(IHouseWorkRepository _houseWorkRepository) : IHouseWorkService
+    public class HouseWorkService(IHouseWorkRepository _houseWorkRepository,IHouseWorkDapperRepository _houseWorkDapperRepository) : IHouseWorkService
     {
         public async Task<Result> CreateService(SummHouseWorkDto service, CancellationToken cancellationToken)
             => await _houseWorkRepository.CreateService(service, cancellationToken);
@@ -14,8 +15,8 @@ namespace App.Domain.Services.HomeService
         public async Task<Result> DeleteHomeService(int id, CancellationToken cancellationToken)
             => await _houseWorkRepository.DeleteHomeService(id, cancellationToken);
 
-        public async Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken)
-            => await _houseWorkRepository.GetHomeServices(cancellationToken);
+        public async Task<List<SummHouseWorkDto>> GetAll( CancellationToken cancellationToken)
+            => await _houseWorkDapperRepository.GetAllAsync(cancellationToken);
 
         public HouseWork GetById(int id)
             => _houseWorkRepository.GetHomeServiceById(id);

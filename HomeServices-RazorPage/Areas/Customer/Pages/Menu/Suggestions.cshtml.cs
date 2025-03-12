@@ -1,5 +1,6 @@
 using App.Domain.AppServices.User;
 using App.Domain.Core.Contracts.AppService;
+using App.Domain.Core.Contracts.Repository.HomeServices;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.User;
@@ -13,7 +14,7 @@ using System.Threading;
 namespace HomeServices_RazorPage.Areas.Customer.Pages.Menu
 {
     [Authorize(Roles = "Customer")]
-    public class SuggestionsModel(ISuggestionAppService _suggestionAppService,IOrderAppService _orderAppService) : PageModel
+    public class SuggestionsModel(ISuggestionAppService _suggestionAppService,IOrderAppService _orderAppService , ISuggestionRepository _suggestionRepository) : PageModel
     {
         [BindProperty]
         public List<SummSuggestionDto> SuggestionDtos { get; set; }
@@ -25,11 +26,6 @@ namespace HomeServices_RazorPage.Areas.Customer.Pages.Menu
         public async Task OnGet(int oId,CancellationToken cancellationToken)
         {
             SuggestionDtos = await _suggestionAppService.CheckSuggestions(oId, cancellationToken);
-            //if (SuggestionDtos.Count == 0)
-            //{
-            //    var suggestion = await _suggestionAppService.GetSuggestionAccepted(oId, cancellationToken);
-            //    SuggestionDtos.Add(suggestion);
-            //}
         }
 
         public async Task<IActionResult> OnGetAccept(int id, int orderNumber, CancellationToken cancellationToken)

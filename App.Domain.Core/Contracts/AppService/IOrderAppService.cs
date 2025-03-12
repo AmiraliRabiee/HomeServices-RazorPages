@@ -21,6 +21,6 @@ namespace App.Domain.Core.Contracts.AppService
         Task<SummOrderDto> GetOrderById(int id, CancellationToken cancellationToken);
         Task<List<SummOrderDto>> GetCustomerOrders(int customerId, CancellationToken cancellationToken);
         Task<Result> Delete(int id, CancellationToken cancellationToken);
-
+        Task<List<SummOrderDto>> GetReserveOrders(AppUser user, CancellationToken cancellationToken);
     }
 }

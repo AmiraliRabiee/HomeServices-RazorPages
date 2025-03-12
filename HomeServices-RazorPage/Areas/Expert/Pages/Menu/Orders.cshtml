@@ -1,6 +1,7 @@
 ﻿@page
 @using HomeServices_RazorPage.Areas.Expert.Pages.Menu
-@model Areas_Expert_Pages_Menu_Orders
+@using Framework
+@model OrdersModel
 @{
 
 }
@@ -15,8 +16,7 @@
                 <ul data-submenu-title="منو">
                     <li><a asp-page="ExpertDashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
                     <li><a asp-page="orders"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
-@*                     <li><a asp-page="createSuggestion"><i class="lni lni-add-files ms-2"></i>ثبت پیشنهاد</a></li>
- *@                    <li><a asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
+                    <li><a asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
                 </ul>
                 <ul data-submenu-title="حساب کاربری">
                     <li><a asp-page="Profile"><i class="lni lni-user ms-2"></i> تنظیمات </a></li>
@@ -54,110 +54,29 @@
 
                         <div class="dashboard-list-wraps-body py-3 px-3">
                             <div class="dashboard-bookings-wraps">
-
-                                <!-- Single booking List -->
-                                <div class="dsd-single-bookings-wraps">
-                                    <div class="dsd-single-book-thumb"><img src="assets/img/t-1.png" class="img-fluid circle" alt="" /></div>
-                                    <div class="dsd-single-book-caption">
-                                        <div class="dsd-single-book-title">
-                                            <h5 style="display: inline-block; margin: 0;">محمد قنبرزاده</h5>
-                                            <div class="ico-content" style="display: inline-block; margin-left: 10px;">
-                                                <ul style="list-style: none; padding: 0; margin: 0;">
-                                                    <li><div class="px-2 py-1 medium bg-light-danger rounded text-danger">در انتظار</div></li>
-                                                </ul>
+                                @foreach (var order in Model.OrderDtos)
+                                {
+                                    <!-- Single booking List -->
+                                    <div class="dsd-single-bookings-wraps">
+                                        <div class="dsd-single-book-thumb"><img src="@order.ImagePath" class="img-fluid circle" alt="" /></div>
+                                        <div class="dsd-single-book-caption">
+                                            <div class="dsd-single-book-title">
+                                                <h5>@order.CustomerName <span class="bko-dates">@order.CreationDate.ToPersianString("dddd, dd MMMM yyyy")</span></h5>
                                             </div>
-                                        </div>
-                                        <div class="dsd-single-descr">
-                                            <div class="dsd-single-item"><span class="dsd-item-title">عنوان سرویس:</span><span class="dsd-item-info">پارک آبی اُپارک</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">تاریخ اجرا:</span><span class="dsd-item-info">10 اردیبهشت 1401 - 22 اردیبهشت 1401</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">شماره تماس:</span><span class="dsd-item-info">09379833476</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">مبلغ:</span><span class="dsd-item-info">۱۲۷,۵۰۰ تومان</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">روش پرداخت:</span><span class="dsd-item-info">پرداخت آنلاین</span></div>
-                                        </div>
-                                        <div class="dsd-single-book-footer">
-                                            <a href="javascript:void(0);" class="btn btn-aprd mr-1"><i class="fas fa-check-circle ms-1"></i>تایید</a>
-                                            <a href="javascript:void(0);" class="btn btn-reject mr-1"><i class="fas fa-trash ms-1"></i>رد کردن</a>
+                                            <div class="dsd-single-descr">
+                                                <div class="dsd-single-item"><span class="dsd-item-title">عنوان سرویس:</span><span class="dsd-item-info">@order.HouseWork</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">تاریخ اجرا:</span><span class="dsd-item-info">@order.CompletionDate.ToPersianString()</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">ساعت اجرا:</span><span class="dsd-item-info">@order.RunningTime</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">توضیحات:</span><span class="dsd-item-info">@order.Description</span></div>
+                                            </div>
+
+                                            <div class="dsd-single-book-footer" style="position: absolute; left: 10px; bottom: 10px;">
+                                                <a asp-page="createsuggestion" asp-route-orderId="@order.Id" class="btn btn-aprd mr-1"><i class="fas fa-check-circle ms-1"></i>تایید</a>
+@*                                                 <a href="javascript:void(0);" class="btn btn-reject mr-1"><i class="fas fa-trash ms-1"></i>رد کردن</a>
+ *@                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <!-- Single booking List -->
-                                <div class="dsd-single-bookings-wraps">
-                                    <div class="dsd-single-book-thumb"><img src="assets/img/t-1.png" class="img-fluid circle" alt="" /></div>
-                                    <div class="dsd-single-book-caption">
-                                        <div class="dsd-single-book-title">
-                                            <h5 style="display: inline-block; margin: 0;">محمد قنبرزاده</h5>
-                                            <div class="ico-content" style="display: inline-block; margin-left: 10px;">
-                                                <ul style="list-style: none; padding: 0; margin: 0;">
-                                                    <li><div class="px-2 py-1 medium bg-light-danger rounded text-danger">در انتظار</div></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="dsd-single-descr">
-                                            <div class="dsd-single-item"><span class="dsd-item-title">عنوان سرویس:</span><span class="dsd-item-info">پارک آبی اُپارک</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">تاریخ اجرا:</span><span class="dsd-item-info">10 اردیبهشت 1401 - 22 اردیبهشت 1401</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">شماره تماس:</span><span class="dsd-item-info">09379833476</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">مبلغ:</span><span class="dsd-item-info">۱۲۷,۵۰۰ تومان</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">روش پرداخت:</span><span class="dsd-item-info">پرداخت آنلاین</span></div>
-                                        </div>
-                                        <div class="dsd-single-book-footer">
-                                            <a href="javascript:void(0);" class="btn btn-aprd mr-1"><i class="fas fa-check-circle ms-1"></i>تایید</a>
-                                            <a href="javascript:void(0);" class="btn btn-reject mr-1"><i class="fas fa-trash ms-1"></i>رد کردن</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single booking List -->
-                                <div class="dsd-single-bookings-wraps">
-                                    <div class="dsd-single-book-thumb"><img src="assets/img/t-1.png" class="img-fluid circle" alt="" /></div>
-                                    <div class="dsd-single-book-caption">
-                                        <div class="dsd-single-book-title">
-                                            <h5 style="display: inline-block; margin: 0;">محمد قنبرزاده</h5>
-                                            <div class="ico-content" style="display: inline-block; margin-left: 10px;">
-                                                <ul style="list-style: none; padding: 0; margin: 0;">
-                                                    <li><div class="px-2 py-1 medium bg-light-danger rounded text-danger">در انتظار</div></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="dsd-single-descr">
-                                            <div class="dsd-single-item"><span class="dsd-item-title">عنوان سرویس:</span><span class="dsd-item-info">پارک آبی اُپارک</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">تاریخ اجرا:</span><span class="dsd-item-info">10 اردیبهشت 1401 - 22 اردیبهشت 1401</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">شماره تماس:</span><span class="dsd-item-info">09379833476</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">مبلغ:</span><span class="dsd-item-info">۱۲۷,۵۰۰ تومان</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">روش پرداخت:</span><span class="dsd-item-info">پرداخت آنلاین</span></div>
-                                        </div>
-                                        <div class="dsd-single-book-footer">
-                                            <a href="javascript:void(0);" class="btn btn-aprd mr-1"><i class="fas fa-check-circle ms-1"></i>تایید</a>
-                                            <a href="javascript:void(0);" class="btn btn-reject mr-1"><i class="fas fa-trash ms-1"></i>رد کردن</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single booking List -->
-                                <div class="dsd-single-bookings-wraps">
-                                    <div class="dsd-single-book-thumb"><img src="assets/img/t-1.png" class="img-fluid circle" alt="" /></div>
-                                    <div class="dsd-single-book-caption">
-                                        <div class="dsd-single-book-title">
-                                            <h5 style="display: inline-block; margin: 0;">محمد قنبرزاده</h5>
-                                            <div class="ico-content" style="display: inline-block; margin-left: 10px;">
-                                                <ul style="list-style: none; padding: 0; margin: 0;">
-                                                    <li><div class="px-2 py-1 medium bg-light-danger rounded text-danger">در انتظار</div></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="dsd-single-descr">
-                                            <div class="dsd-single-item"><span class="dsd-item-title">عنوان سرویس:</span><span class="dsd-item-info">پارک آبی اُپارک</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">تاریخ اجرا:</span><span class="dsd-item-info">10 اردیبهشت 1401 - 22 اردیبهشت 1401</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">شماره تماس:</span><span class="dsd-item-info">09379833476</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">مبلغ:</span><span class="dsd-item-info">۱۲۷,۵۰۰ تومان</span></div>
-                                            <div class="dsd-single-item"><span class="dsd-item-title">روش پرداخت:</span><span class="dsd-item-info">پرداخت آنلاین</span></div>
-                                        </div>
-                                        <div class="dsd-single-book-footer">
-                                            <a href="javascript:void(0);" class="btn btn-aprd mr-1"><i class="fas fa-check-circle ms-1"></i>تایید</a>
-                                            <a href="javascript:void(0);" class="btn btn-reject mr-1"><i class="fas fa-trash ms-1"></i>رد کردن</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                }
 
                             </div>
                         </div>

@@ -19,9 +19,9 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Users
 
         public IdentityResult? Result { get; set; }
 
-        public async Task OnGet()
+        public async Task OnGet(CancellationToken cancellationToken)
         {
-            Cities = _baseDataAppService.GetCities();
+            Cities = await _baseDataAppService.GetCitiesAsync(cancellationToken);
         }
 
 

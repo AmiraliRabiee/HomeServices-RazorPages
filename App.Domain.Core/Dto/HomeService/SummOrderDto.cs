@@ -17,7 +17,7 @@ namespace App.Domain.Core.Dto.HomeService
         public string ImagePath { get; set; }
         public int HouseWorkId { get; set; }
         public string ExpertName { get; set; }
-        public int SuggestionId { get; set; }
-        public DateTime? CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
+        public string CustomerName { get; set; }
     }
 }

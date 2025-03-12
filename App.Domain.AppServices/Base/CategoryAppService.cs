@@ -34,8 +34,8 @@ namespace App.Domain.AppServices.Base
         public List<CategoryDto> GetCatyegoryByParent(int id)
             => _categoryService.GetCatyegoryByParent(id);
 
-        public List<Category> GetChildCategories()
-            => _categoryService.GetChildCategories();
+        public async Task<List<CategoryDto>> GetChildCategories(CancellationToken cancellationToken)
+            => await _categoryService.GetChildCategories(cancellationToken);
 
         public List<Category> GetChildCategoriesById(int id)
             => _categoryService.GetChildCategoriesById(id);
@@ -43,8 +43,8 @@ namespace App.Domain.AppServices.Base
         public async Task<int> GetChildCount(int categoryId)
             =>await  _categoryService.GetChildCount(categoryId);
 
-        public List<Category> GetParentCategories()
-            => _categoryService.GetParentCategories();
+        public async Task<List<CategoryDto>> GetParentCategories(CancellationToken cancellationToken)
+            => await _categoryService.GetParentCategories(cancellationToken);
 
         public async Task<Result> SoftDeleteCategoryAsync(Category category, CancellationToken cancellationToken)
             => await _categoryService.SoftDeleteComment(category, cancellationToken);

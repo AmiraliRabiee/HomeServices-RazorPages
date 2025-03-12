@@ -2,20 +2,15 @@
 using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Entites.User;
 
 namespace App.Domain.Services.HomeService
 {
     public class OrderService(IOrderRepository _orderRepository) : IOrderService
     {
 
-        public Task ChangeToExpertSelection(int id, CancellationToken cancellationToken)
-            => _orderRepository.ChangeToExpertSelection(id, cancellationToken);
-
-        public Task<Result> CheckIsConfrim(int id, CancellationToken cancellationToken)
-            => _orderRepository.CheckIsConfrim(id, cancellationToken);
-
-        public Task<Result> CheckIsFinish(int id, CancellationToken cancellationToken)
-            => _orderRepository.CheckIsFinish(id, cancellationToken);
+        public Task ChangeToExpertSelection(int id)
+            => _orderRepository.ChangeToExpertSelection(id);
 
         public async Task<List<SummOrderDto>> GetOrdersById(int id, CancellationToken cancellationToken)
             => await _orderRepository.GetOrdersById(id, cancellationToken);
@@ -39,7 +34,7 @@ namespace App.Domain.Services.HomeService
             => await _orderRepository.DeleteOrder(id, cancellationToken);
 
         public async Task<List<SummOrderDto>> GetAll()
-            => await _orderRepository.GetOrders();
+            => await _orderRepository.GetAll();
 
         public async Task<SummOrderDto> GetOrderById(int id, CancellationToken cancellationToken)
             => await _orderRepository.GetOrderById(id, cancellationToken);
@@ -61,5 +56,8 @@ namespace App.Domain.Services.HomeService
 
         public async Task ChangeToPayment(int id, CancellationToken cancellationToken)
             => await _orderRepository.ChangeToPayment(id, cancellationToken);
+
+        public Task<List<SummOrderDto>> GetReserveOrders(AppUser user, CancellationToken cancellationToken)
+            => _orderRepository.GetReserveOrders(user, cancellationToken);
     }
 }

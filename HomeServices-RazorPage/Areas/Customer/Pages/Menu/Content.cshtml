@@ -1,0 +1,65 @@
+﻿@page
+@model HomeServices_RazorPage.Areas.Customer.Pages.Menu.ContentModel
+@{
+}
+<div class="goodup-dashboard-wrap gray px-4 py-5">
+    <div class="dashboard-widg-bar d-block">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 order-xl-last order-lg-last order-md-last">
+                <div class="d-flex bg-white rounded px-3 py-3 mb-3">
+                    <div class="dash-figure">
+                        <div class="dash-figure-thumb"><img src="@Model.CustomerDto.ImagePath" class="img-fluid rounded" alt="" /></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12">
+                <form class="submit-form">
+                    <div class="dashboard-list-wraps bg-white rounded mb-4">
+                        <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
+                            <div class="dashboard-list-wraps-flx">
+                                <h4 class="mb-0 ft-medium fs-md"><i class="fa fa-user-check ms-2 theme-cl fs-sm"></i>مشخصات شخصی</h4>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-list-wraps-body py-3 px-3">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="mb-1">نام</label>
+                                        <input type="text" asp-for="@Model.CustomerDto.FirstName" class="form-control rounded" />
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="mb-1">نام خانوادگی</label>
+                                        <input type="text" class="form-control rounded" asp-for="@Model.CustomerDto.LastName" />
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="mb-1">شماره تماس</label>
+                                        <input type="text" class="form-control rounded" asp-for="@Model.CustomerDto.PhoneNumber" />
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="mb-1">شهر</label>
+                                        <input type="text" class="form-control rounded" asp-for="@Model.CustomerDto.CityName" />
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="mb-1">آدرس</label>
+                                        <input class="form-control rounded ht-150" asp-for="@Model.CustomerDto.Address">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -19,15 +19,15 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Users
         [BindProperty]
         public string Message { get; set; }
 
-        public void OnGet(int id)
+        public async Task OnGet(int id,CancellationToken cancellationToken)
         {
-            Cities = _baseDataAppService.GetCities();
+            Cities =await _baseDataAppService.GetCitiesAsync(cancellationToken);
             NewUser = _userAppService.GetDtoById(id);
         }
 
         public async Task<IActionResult> OnPost(CancellationToken cancellationToken , int id)
         {
-            Cities = _baseDataAppService.GetCities();
+            Cities = await _baseDataAppService.GetCitiesAsync(cancellationToken);
             var result = await _userAppService.UpdateInformation(NewUser, cancellationToken);
             if (result.IsSuccess)
             {

@@ -46,11 +46,13 @@ namespace App.Domain.AppServices.User
                 return IdentityResult.Failed(new IdentityError { Description = "این نام کاربری قبلا انتخاب شده ، لطفا نام دیگری را وارد کنید." });
             }
 
-            bool cityExists = _baseDataService.GetCities().Any(city => city.Id == model.CityId);
+
+            bool cityExists = (await _baseDataService.GetCitiesAsync(cancellationToken)).Any(city => city.Id == model.CityId);
             if (!cityExists)
             {
                 return IdentityResult.Failed(new IdentityError { Description = "شهر انتخابی معتبر نمی باشد." });
             }
+
 
             var user = new AppUser
             {
@@ -173,14 +175,26 @@ namespace App.Domain.AppServices.User
             }
         }
 
-        public async Task<Result> CustomerUplpadingImage(UpdateUser model, UserDto user, CancellationToken cancellationToken)
+        public async Task<Result> UpdateExpert(ExpertDto model, CancellationToken cancellationToken)
+        {
+            if (model.ExpertImage is not null)
+            {
+                model.ImagePath = await _baseDataService.UploadImage(model.ExpertImage!, "Profiles", cancellationToken);
+            }
+            var result = await _expertService.UpdateExpert(model, cancellationToken);
+            if (result.IsSuccess)
+                return new Result { IsSuccess = true, Message = result.Message };
+            return new Result { IsSuccess = false, Message = result.Message };
+        }
+
+        public async Task<Result> UplpadingImage(UpdateUser model, AppUser user, CancellationToken cancellationToken)
         {
             if (model.ProfileImage is not null)
             {
                 model.ImagePath = await _baseDataService.UploadImage(model.ProfileImage!, "Profiles", cancellationToken);
                 if (model.ImagePath is not null)
                     user.ImagePath = model.ImagePath;
-                _userService.UpdateCustomer2(user, cancellationToken);
+                await _userService.UpdateImage(user, cancellationToken);
                 return new Result { IsSuccess = true, Message = "با موفقیت آپلود شد" };
             }
             return new Result { IsSuccess = false, Message = "آپلود عکس با مشکل مواجه شد" };
@@ -228,7 +242,7 @@ namespace App.Domain.AppServices.User
             return new Result { IsSuccess = false, Message = "با خطا مواجه شد" };
         }
 
-        public async Task<Result> Receive(float price, CancellationToken cancellationToken)
+        public async Task<Result> AdminReceive(float price, CancellationToken cancellationToken)
         {
             var adminBalance = await _adminService.GetAdminBalance(cancellationToken);
             var profit = await _adminService.GetProfit(cancellationToken);
@@ -237,7 +251,36 @@ namespace App.Domain.AppServices.User
             var result = await _adminService.UpdateBalance(adminBalance, cancellationToken);
             if (result.IsSuccess)
                 return new Result { IsSuccess = true, Message = result.Message };
-            return new Result { IsSuccess = false,Message= result.Message};
+            return new Result { IsSuccess = false, Message = result.Message };
+        }
+
+
+        public async Task<Result> ExpertReceive(int id, float price, CancellationToken cancellationToken)
+        {
+            var balance = await _userService.GetBalance(id, cancellationToken);
+            var profit = await _adminService.GetProfit(cancellationToken);
+
+            price -= price * profit;
+            balance += price;
+            var result = await _expertService.UpdateBalance(id, balance, cancellationToken);
+            if (result.IsSuccess)
+                return new Result { IsSuccess = true, Message = result.Message };
+            return new Result { IsSuccess = false, Message = result.Message };
+        }
+
+        public async Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken)
+            => await _expertService.GetExpertDto(id, cancellationToken);
+
+        public async Task<List<int>> GetExpertSkills(int expertId, CancellationToken cancellationToken)
+            => await _expertService.GetExpertSkills(expertId, cancellationToken);
+
+        public async Task UpdateExpertSkills(int expertId, List<int> houseWorkIds, CancellationToken cancellationToken)
+        {
+            await _expertService.UpdateExpertSkills(expertId, houseWorkIds, cancellationToken);
+            //var existingSkills = await _expertService.GetExistingSkillsAsync(expertId, cancellationToken);
+
+            //await _expertService.RemoveUnwantedSkillsAsync(existingSkills, houseWorkIds, cancellationToken);
+            //await _expertService.AddNewSkillsAsync(expertId, existingSkills, houseWorkIds, cancellationToken);
         }
     }
 }

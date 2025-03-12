@@ -277,7 +277,8 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                 PhoneNumber = u.PhoneNumber,
                 RoleId = u.RoleId,
                 Customer = u.Customer,
-                ImagePath = u.ImagePath
+                ImagePath = u.ImagePath,
+                Expert = u.Expert
             }).FirstOrDefault(u => u.Id == id);
             return res;
         }
@@ -312,7 +313,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
             }
         }
 
-        public async Task<Result> UpdateCustomer2(UserDto model, CancellationToken cancellationToken)
+        public async Task<Result> UpdateImage(AppUser model, CancellationToken cancellationToken)
         {
             try
             {
@@ -333,7 +334,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
             }
         }
 
-        public async Task<float> GetCustomerBalance(int id,CancellationToken cancellationToken)
+        public async Task<float> GetBalance(int id,CancellationToken cancellationToken)
         {
             var balance = await _appDbContext.Users
                 .Where(e => e.Id == id)

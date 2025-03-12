@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using App.Domain.Core.Entites.User;
 using App.Domain.Core.Entites.OutputResult;
 using App.Infrastructure.EFCore.DataBase.Common;
+using App.Domain.Core.Dto.User;
 
 namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
 {
@@ -15,7 +16,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<Result> UpdateExpert(Expert model, CancellationToken cancellationToken)
+        public async Task<Result> UpdateExpert(ExpertDto model, CancellationToken cancellationToken)
         {
             try
             {
@@ -24,11 +25,15 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                 if (expert is null)
                     return new Result { IsSuccess = false, Message = "کارشناس یافت نشد" };
 
-                expert.Biographi = model.Biographi;
-                expert.Points = model.Points;
+                expert.Biographi = string.IsNullOrEmpty(model.Biographi) ? model.Biographi : model.Biographi;
+                expert.CityId = model.CityId;
+                expert.User.FirstName = model.FirstName;
+                expert.User.LastName = model.LastName;
+                expert.User.ImagePath = model.ImagePath;
+                expert.User.Balance = model.Balance;
 
                 _appDbContext.Experts.Update(expert);
-                await _appDbContext.SaveChangesAsync(cancellationToken);
+                var update = await _appDbContext.SaveChangesAsync(cancellationToken);
 
                 return new Result { IsSuccess = true, Message = "کارشناس به‌روزرسانی شد" };
             }
@@ -76,6 +81,37 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
             {
                 return new Result { IsSuccess = false, Message = $"{ex.Message}" };
             }
+        }
+
+        public async Task<ExpertDto> GetExpertDto(int id , CancellationToken cancellationToken)
+        {
+            var expert = await _appDbContext.Experts
+                .Select(e => new ExpertDto
+                {
+                    Id = e.Id,
+                    FirstName = e.User.FirstName,
+                    LastName = e.User.LastName,
+                    CityId = e.CityId,
+                    CityName = e.City.Name,
+                    ImagePath = e.User.ImagePath,
+                    Balance = e.User.Balance,
+                    Biographi = e.Biographi,
+                    PhoneNumber = e.User.PhoneNumber,
+                    AppUser = e.User
+                })
+                .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+            if (expert is null)
+                throw new Exception("کارشناس با این شناسه وجود ندارد");
+            return expert;
+        }
+
+        public async Task<Result> UpdateBalance(int id , float balance, CancellationToken cancellationToken)
+        {
+            var user = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
+            user.Balance = balance;
+            await _appDbContext.SaveChangesAsync(cancellationToken);
+
+            return new Result { IsSuccess = true };
         }
     }
 }
