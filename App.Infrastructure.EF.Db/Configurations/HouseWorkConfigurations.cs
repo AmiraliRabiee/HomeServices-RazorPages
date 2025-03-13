@@ -12,7 +12,7 @@ namespace App.Infrastructure.EFCore.Configurations
 
             builder.Property(h => h.Description).HasMaxLength(1000);
             builder.Property(h => h.ViewCount).HasDefaultValue(1);
-            builder.Property(h => h.BasePrice).HasColumnType("decimal(18,2)");
+            builder.Property(h => h.BasePrice);
 
             builder.HasOne(h => h.Category)
                 .WithMany()

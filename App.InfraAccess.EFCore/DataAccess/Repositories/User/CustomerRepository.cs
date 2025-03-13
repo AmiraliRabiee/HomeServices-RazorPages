@@ -5,6 +5,7 @@ using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
 using App.Infrastructure.EFCore.DataBase.Common;
 using Microsoft.EntityFrameworkCore;
+using System.Composition;
 
 namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
 {
@@ -66,9 +67,15 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                 if (customer is null)
                     return new Result { IsSuccess = false, Message = "کارشناس یافت نشد" };
 
+                customer.User.Balance = model.Balance;
+                customer.User.ImagePath = model.ImagePath;
+                customer.User.LastName = model.LastName;
+                customer.User.FirstName = model.FirstName;
                 customer.Address = string.IsNullOrEmpty(model.Address)? model.Address : model.Address;
                 customer.CityId = model.CityId;
+                customer.User.PhoneNumber = model.PhoneNumber;
 
+                _appDbContext.Customers.Update(customer);
                 await _appDbContext.SaveChangesAsync(cancellationToken);
 
                 return new Result { IsSuccess = true, Message = "کارشناس به‌روزرسانی شد" };
@@ -92,7 +99,9 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                    FirstName = c.User.FirstName,
                    LastName = c.User.LastName,
                    PhoneNumber = c.User.PhoneNumber,
-                   ImagePath  =c.User.ImagePath
+                   ImagePath  =c.User.ImagePath,
+                   User = c.User,
+                   Balance = c.User.Balance
                 }).FirstAsync(cancellationToken);
             if (customer is null)
                 throw new Exception(".مشتری با این شناسه وجود ندارد");

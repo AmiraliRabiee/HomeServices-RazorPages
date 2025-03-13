@@ -57,5 +57,11 @@ namespace App.Domain.Services.HomeService
 
         public async Task<List<SummSuggestionDto>> ActiveSuggestions(int expertId, CancellationToken cancellationToken)
             => await _suggestionRepository.ActiveSuggestions(expertId , cancellationToken);
+
+        public async Task<Suggestion?> GetLastSuggestion(int expertId, int orderId, CancellationToken cancellationToken)
+            => await _suggestionRepository.GetLastSuggestion(expertId, orderId ,cancellationToken);
+
+        public async Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken)
+            => await _suggestionRepository.GetExpertDto(id, cancellationToken);
     }
 }

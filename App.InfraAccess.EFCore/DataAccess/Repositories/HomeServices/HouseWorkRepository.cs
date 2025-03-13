@@ -6,6 +6,7 @@ using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
 using App.Infrastructure.EFCore.DataBase.Common;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
 {
@@ -123,7 +124,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return service;
         }
 
-        public async Task<List<SummHouseWorkDto>> GetHomeServices(CancellationToken cancellationToken)////////////////////////////
+        public async Task<List<SummHouseWorkDto>> GetHomeServices(CancellationToken cancellationToken)
         {
             var services = await _appDbContext.HouseWorks
              .Include(h => h.Image)
@@ -142,6 +143,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
 
             return services;
         }
+
 
         public UpdateHouseWork GetServiceDto(int id)
         {
@@ -165,11 +167,13 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return work;
         }
 
-        public async Task<List<SummHouseWorkDto>> GetServicesById(int id, CancellationToken cancellationToken)
+
+        public async Task<List<SummHouseWorkDto>> GetServicesByCategoryId(int id, CancellationToken cancellationToken)
         {
             var service = await _appDbContext.HouseWorks
             .Include(h => h.Category)
             .Where(h => h.Category.ParentId == id)
+            .OrderBy(h => h.Id)
             .Select(h => new SummHouseWorkDto
             {
                 Id = h.Id,
@@ -249,17 +253,17 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return service;
         }
 
-        public List<SummHouseWorkDto> GetServicesById()
+        public async Task<List<SummHouseWorkDto>> GetServicesById(int id, CancellationToken cancellationToken)
         {
-            var service = _appDbContext.HouseWorks
-            .Where(h => h.CategoryId == 9)
+            var service = await _appDbContext.HouseWorks
+            .Where(h => h.Id == id)
             .Select(h => new SummHouseWorkDto
             {
                 ImagePath = h.ImagePath,
                 Description = h.Description,
                 Title = h.Title,
                 BasePrice = h.BasePrice,
-            }).ToList();
+            }).ToListAsync();
 
             if (service is null)
                 throw new Exception(".سفارشی با این شناسه یافت نشد");
@@ -286,6 +290,15 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 throw new Exception(" با این شناسه یافت نشد");
 
             return service;
+        }
+
+        public async Task<List<HouseWork>> GetForSearch(string item)
+        {
+            var works = await _appDbContext.HouseWorks
+                .Where(c => c.Title.Contains(item))
+                .ToListAsync();
+
+            return works;
         }
         #endregion
     }

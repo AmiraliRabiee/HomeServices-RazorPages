@@ -4,6 +4,7 @@ using App.Domain.Core.Entites.User;
 using App.Domain.Core.Entites.OutputResult;
 using App.Infrastructure.EFCore.DataBase.Common;
 using App.Domain.Core.Dto.User;
+using App.Domain.Core.Entites.Service;
 
 namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
 {
@@ -112,6 +113,15 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
             await _appDbContext.SaveChangesAsync(cancellationToken);
 
             return new Result { IsSuccess = true };
+        }
+
+        public async Task<List<Expert>> GetForSearch(string item)
+        {
+            var experts = await _appDbContext.Experts
+                .Where(c => c.User.FirstName.Contains(item) || c.User.LastName.Contains(item))
+                .ToListAsync();
+
+            return experts;
         }
     }
 }

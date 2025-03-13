@@ -4,593 +4,251 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
 @inject IHouseWorkAppService workAppService
-<div class="home-banner margin-bottom-0" style="background:#f41b3b url() no-repeat;" data-overlay="5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="banner_caption text-center mb-5">
-                    <h1 class="banner_title ft-bold mb-1">دریافت خدمات و ثبت سفارش آنلاین</h1>
-                    <p class="fs-md ft-medium">با یک تیم حرفه ای</p>
-                </div>
-                <div class="Goodup-top-cates">
-                    <ul class="row align-items-center">
-                        @foreach (var category in Model.Cats)
-                        {
-                            var countSerivce = await workAppService.GetServiceCount(category.Id);
-                            <li class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-                                <a asp-page="/Subcategories/index" asp-area="" asp-route-id="@category.Id" class="Goodup-catg-wrap">
-                                    <div class="Goodup-tp-ico">
-                                        @if (category.Title == "تاسیسات")
-                                        {
-                                            <i class="fas fa-house-damage"></i>
-                                        }
-                                        else if (category.Title == "نظافت")
-                                        {
-                                            <i class="fas fa-building"></i>
-                                        }
-                                        else if (category.Title == "زیبایی")
-                                        {
-                                            <i class="fas fa-basketball-ball"></i>
-                                        }
-                                        else if (category.Title == "تعمیرات اشیا")
-                                        {
-                                            <i class="fas fa-screwdriver"></i>
-                                        }
-                                        else if (category.Title == "خودرو")
-                                        {
-                                            <i class="fas fa-car-alt"></i>
-                                        }
-                                        else if (category.Title == "سلامت")
-                                        {
-                                            <i class="fas fa-stethoscope"></i>
-                                        }
-                                        else
-                                        {
-                                            <i class="fas fa-question-circle"></i>
-                                        }
-                                    </div>
-                                    <div class="Goodup-tp-title"><h5>@category.Title</h5></div>
-                                </a>
-                            </li>
-                        }
-                    </ul>
+
+
+<div class="preloader"></div>
+
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
+
+
+    <!-- ============================================================== -->
+    <!-- ======================= Home Banner ======================== -->
+    <div class="home-banner home-8">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                    <div class="banner_caption text-center mb-5">
+                        <h1 class="banner_title_xxl ft-bold text-light mb-1"> دریافت خدمات و ثبت سفارش آنلاین</h1>
+                        <p class="fs-lg ft-medium text-light">در کوتاه ترین زمان خدمات و کارشناس مورد نظر خود را کاوش کنید</p>
+                    </div>
+
+
+                    <form class="main-search-wrap fl-wrap half-column">
+                        <div class="main-search-item">
+                            <span class="search-tag">سرویس</span>
+                            <input type="text" class="form-control radius" placeholder="مثلا برقکاری، کارواش">
+                        </div>
+                        <div class="main-search-item">
+                            <span class="search-tag">کارشناس</span>
+                            <input type="text" class="form-control" placeholder="مثلا علی حسینی">
+                        </div>
+                        <div class="main-search-button">
+                            <button class="btn full-width theme-bg text-white" type="button">جستجو<i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
+        </div>
+        @*                     <form class="searchForm">
+                        <div class="modernSearch">
+                            <div class="fieldWrap">
+                                <input type="text" class="form-control" placeholder="انتخاب شهر">
+                                <i class="ico lni lni-search-alt"></i>
+                            </div>
+                            <div class="buttonBox"><button type="button" class="btn theme-bg">برو</button></div>
+                        </div>
+                    </form> *@
+        <div class="slider-banner hideDots">
+            <div class="imgSlide">
+                <div class="singleSlide"><img src="~/assets/img/banner/technical.jpeg" class="img" alt="Img Slide"></div>
+                <div class="singleSlide"><img src="~/assets/img/banner/laptop.jpg" class="img" alt="Img Slide"></div>
+                <div class="singleSlide"><img src="~/assets/img/banner/health.jpg" class="img" alt="Img Slide"></div>
+                <div class="singleSlide"><img src="~/assets/img/banner/hair.jpg" class="img" alt="Img Slide"></div>
+            </div>
+            <img src="assets/img/hero-curve.png" alt="curve shape" class="position-absolute start-0 bottom-0 zindex-1 w-100">
         </div>
     </div>
-</div>
-<!-- ======================= Home Search ======================== -->
-<section class="p-0">
-    <div class="container">
+    <!-- ======================= Home Banner ======================== -->
+    <section class="space min white">
         <div class="row justify-content-center">
-            <div class="col-xl-11 col-lg-12 col-md-12 col-12">
-
-                <div class="Goodup-search-shadow">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade active show" id="placesseach" role="tabpanel" aria-labelledby="placesseach-tab">
-                            <form class="main-search-wrap fl-wrap">
-                                <div class="main-search-item">
-                                    <span class="search-tag"><i class="lni lni-keyboard"></i></span>
-                                    <input type="text" class="form-control radius" placeholder="دنبال چی میگردی؟">
-                                </div>
-                                <div class="main-search-item">
-                                    <span class="search-tag"><i class="lni lni-map-marker"></i></span>
-                                    <input type="text" class="form-control" placeholder="موقعیت مکانی">
-                                </div>
-                                <div class="main-search-item">
-                                    <span class="search-tag"><i class="lni lni-briefcase"></i></span>
-                                    <select class="form-control">
-                                        <option value="">دسته بندی</option>
-                                        <option value="1">تعمیرات ساختمان</option>
-                                        <option value="2">فناوری اطلاعات</option>
-                                        <option value="3">نظافت و پذیرایی</option>
-                                        <option value="4">پزشکی و درمانی</option>
-                                        <option value="5">زیبایی بانوان</option>
-                                        <option value="6">آزمایش در محل</option>
-                                        <option value="7">پیرایش آقایان</option>
-                                    </select>
-                                </div>
-                                <div class="main-search-button">
-                                    <button class="btn full-width theme-bg text-white" type="button">جستجو</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="carseach" role="tabpanel" aria-labelledby="carseach-tab">
-                            <form class="main-search-wrap fl-wrap">
-                                <div class="main-search-item">
-                                    <span class="search-tag"><i class="lni lni-keyboard"></i></span>
-                                    <input type="text" class="form-control radius" placeholder="جستجو براساس نوع یا نام">
-                                </div>
-                                <div class="main-search-item">
-                                    <span class="search-tag"><i class="lni lni-map-marker"></i></span>
-                                    <input type="text" class="form-control" placeholder="قیمت">
-                                </div>
-                                <div class="main-search-button">
-                                    <button class="btn full-width theme-bg text-white" type="button">جستجو</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="realseach" role="tabpanel" aria-labelledby="realseach-tab">
-                            <form class="main-search-wrap fl-wrap">
-                                <div class="main-search-item">
-                                    <span class="search-tag"><i class="lni lni-keyboard"></i></span>
-                                    <input type="text" class="form-control radius" placeholder="جستجو براساس عنوان">
-                                </div>
-                                <div class="main-search-item">
-                                    <span class="search-tag"><i class="lni lni-map-marker"></i></span>
-                                    <input type="text" class="form-control" placeholder="آدرس">
-                                </div>
-                                <div class="main-search-item">
-                                    <span class="search-tag"><i class="lni lni-briefcase"></i></span>
-                                    <select class="form-control">
-                                        <option value="">نوع ملک</option>
-                                        <option value="1">آپاتمان</option>
-                                        <option value="2">خانه و ویلا</option>
-                                        <option value="3">اداری</option>
-                                        <option value="4">سوییت</option>
-                                        <option value="5">زمین کلنگی</option>
-                                    </select>
-                                </div>
-                                <div class="main-search-button">
-                                    <button class="btn full-width theme-bg text-white" type="button">جستجو</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="eventseach" role="tabpanel" aria-labelledby="eventseach-tab">
-                            <form class="main-search-wrap fl-wrap">
-                                <div class="main-search-item">
-                                    <span class="search-tag"><i class="lni lni-keyboard"></i></span>
-                                    <input type="text" class="form-control radius" placeholder="جستجو براساس عنوان">
-                                </div>
-                                <div class="main-search-item">
-                                    <span class="search-tag"><i class="lni lni-map-marker"></i></span>
-                                    <input type="text" class="form-control" placeholder="آدرس">
-                                </div>
-                                <div class="main-search-item">
-                                    <span class="search-tag"><i class="lni lni-briefcase"></i></span>
-                                    <select class="form-control">
-                                        <option value="">دسته بندی</option>
-                                        <option value="1">تعمیرات ساختمان</option>
-                                        <option value="2">فناوری اطلاعات</option>
-                                        <option value="3">نظافت و پذیرایی</option>
-                                        <option value="4">پزشکی و درمانی</option>
-                                        <option value="5">زیبایی بانوان</option>
-                                        <option value="6">آزمایش در محل</option>
-                                        <option value="7">پیرایش آقایان</option>
-                                    </select>
-                                </div>
-                                <div class="main-search-button">
-                                    <button class="btn full-width theme-bg text-white" type="button">جستجو</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ======================= Home Search End ======================== -->
-<!-- ===========================  Featured Listing ======================= -->
-<section class="space min">
-    <div class="container">
-
-        <div class="row">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-12">
-                <div class="sec_title position-relative text-center mb-5">
-                    <h3 class="ft-bold theme-cl">آگهی های جدید </h3>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="sec_title position-relative text-center mb-3">
+                    <!-- Reduced margin-bottom -->
+                    <h4 class="ft-bold">انتخاب دسته بندی</h4>
                 </div>
             </div>
         </div>
-
-        <!-- row -->
-        <div class="row justify-content-center">
-            <!-- Single Item 1 -->
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                <div class="Goodup-grid-wrap">
-                    <div class="Goodup-grid-upper">
-                        <div class="Goodup-bookmark-btn"><button type="button"><i class="lni lni-heart-filled position-absolute"></i></button></div>
-                        <div class="Goodup-grid-thumb">
-                            <a href="single-listing-detail-1.html" class="d-block text-center m-auto">
-                                <img src="~/Images/HomeServices/10h.jpg" class="img-fluid" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="Goodup-grid-fl-wrap">
-                        <div class="Goodup-caption px-3 py-2">
-                            <div class="Goodup-cates multi">
-                                <a href="half-map-search-1.html" class="cats-1">ورزشگاه</a>
-                                <a href="half-map-search-1.html" class="cats-2">تناسب اندام</a>
+        <div class="Goodup-top-cates mt-3">
+            <!-- Added margin-top -->
+            <ul class="row align-items-center">
+                @foreach (var category in Model.Cats)
+                {
+                    var countSerivce = await workAppService.GetServiceCount(category.Id);
+                    <li class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                        <a asp-page="/Subcategories/index" asp-area="" asp-route-id="@category.Id" class="Goodup-catg-wrap">
+                            <div>
+                                @if (category.Title == "تاسیسات")
+                                {
+                                    <div class="Goodup-catg-icon"><i class="fas fa-house-damage"></i></div>
+                                }
+                                else if (category.Title == "نظافت")
+                                {
+                                    <div class="Goodup-catg-icon"><i class="fas fa-building"></i></div>
+                                }
+                                else if (category.Title == "زیبایی")
+                                {
+                                    <div class="Goodup-catg-icon"><i class="fas fa-basketball-ball"></i></div>
+                                }
+                                else if (category.Title == "تعمیرات اشیا")
+                                {
+                                    <div class="Goodup-catg-icon"><i class="fas fa-screwdriver"></i></div>
+                                }
+                                else if (category.Title == "خودرو")
+                                {
+                                    <div class="Goodup-catg-icon"><i class="fas fa-car-alt"></i></div>
+                                }
+                                else if (category.Title == "سلامت")
+                                {
+                                    <div class="Goodup-catg-icon"><i class="fas fa-stethoscope"></i></div>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-question-circle"></i>
+                                }
                             </div>
-                            <h4 class="mb-0 ft-medium medium">
-                                <a href="single-listing-detail-1.html" class="text-dark fs-md">
-                                    مکانیکی خودرو <span class="verified-badge"><i class="fas fa-check-circle"></i></span>
-                                </a>
-                            </h4>
-                            <div class="Goodup-middle-caption mt-3">
-                                <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i>سراسر کشور</div>
-                                <div class="Goodup-call"><i class="fas fa-phone-alt"></i>021-1111-2222</div>
-                            </div>
-                        </div>
-                        <div class="Goodup-grid-footer py-3 px-3">
-                            <div class="Goodup-ft-first">
-                                <div class="Goodup-rating">
-                                    <div class="Goodup-pr-average high">پرتقاضا</div>
-                                </div>
-                            </div>
-                            <div class="Goodup-ft-last">
-                                <span class="small">شبانه روزی</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Item 2 -->
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                <div class="Goodup-grid-wrap">
-                    <div class="Goodup-grid-upper">
-                        <div class="Goodup-bookmark-btn"><button type="button"><i class="lni lni-heart-filled position-absolute"></i></button></div>
-                        <div class="Goodup-grid-thumb">
-                            <a href="single-listing-detail-1.html" class="d-block text-center m-auto">
-                                <img src="~/assets/img/listing/l-2.jpg" class="img-fluid" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="Goodup-grid-fl-wrap">
-                        <div class="Goodup-caption px-3 py-2">
-                            <div class="Goodup-cates multi">
-                                <a href="half-map-search-1.html" class="cats-1">ورزشگاه</a>
-                                <a href="half-map-search-1.html" class="cats-2">تناسب اندام</a>
-                            </div>
-                            <h4 class="mb-0 ft-medium medium">
-                                <a href="single-listing-detail-1.html" class="text-dark fs-md">
-                                    مکانیکی خودرو <span class="verified-badge"><i class="fas fa-check-circle"></i></span>
-                                </a>
-                            </h4>
-                            <div class="Goodup-middle-caption mt-3">
-                                <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i>سراسر کشور</div>
-                                <div class="Goodup-call"><i class="fas fa-phone-alt"></i>021-1111-2222</div>
-                            </div>
-                        </div>
-                        <div class="Goodup-grid-footer py-3 px-3">
-                            <div class="Goodup-ft-first">
-                                <div class="Goodup-rating">
-                                    <div class="Goodup-pr-average high">پرتقاضا</div>
-                                </div>
-                            </div>
-                            <div class="Goodup-ft-last">
-                                <span class="small">شبانه روزی</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Item 3 -->
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                <div class="Goodup-grid-wrap">
-                    <div class="Goodup-grid-upper">
-                        <div class="Goodup-bookmark-btn"><button type="button"><i class="lni lni-heart-filled position-absolute"></i></button></div>
-                        <div class="Goodup-grid-thumb">
-                            <a href="single-listing-detail-1.html" class="d-block text-center m-auto">
-                                <img src="~/assets/img/listing/l-3.jpg" class="img-fluid" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="Goodup-grid-fl-wrap">
-                        <div class="Goodup-caption px-3 py-2">
-                            <div class="Goodup-cates multi">
-                                <a href="half-map-search-1.html" class="cats-1">ورزشگاه</a>
-                                <a href="half-map-search-1.html" class="cats-2">تناسب اندام</a>
-                            </div>
-                            <h4 class="mb-0 ft-medium medium">
-                                <a href="single-listing-detail-1.html" class="text-dark fs-md">
-                                    مکانیکی خودرو <span class="verified-badge"><i class="fas fa-check-circle"></i></span>
-                                </a>
-                            </h4>
-                            <div class="Goodup-middle-caption mt-3">
-                                <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i>سراسر کشور</div>
-                                <div class="Goodup-call"><i class="fas fa-phone-alt"></i>021-1111-2222</div>
-                            </div>
-                        </div>
-                        <div class="Goodup-grid-footer py-3 px-3">
-                            <div class="Goodup-ft-first">
-                                <div class="Goodup-rating">
-                                    <div class="Goodup-pr-average high">پرتقاضا</div>
-                                </div>
-                            </div>
-                            <div class="Goodup-ft-last">
-                                <span class="small">شبانه روزی</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Item 4 -->
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                <div class="Goodup-grid-wrap">
-                    <div class="Goodup-grid-upper">
-                        <div class="Goodup-bookmark-btn"><button type="button"><i class="lni lni-heart-filled position-absolute"></i></button></div>
-                        <div class="Goodup-grid-thumb">
-                            <a href="single-listing-detail-1.html" class="d-block text-center m-auto">
-                                <img src="~/Images/HomeServices/14h.jpg" class="img-fluid" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="Goodup-grid-fl-wrap">
-                        <div class="Goodup-caption px-3 py-2">
-                            <div class="Goodup-cates multi">
-                                <a href="half-map-search-1.html" class="cats-1">ورزشگاه</a>
-                                <a href="half-map-search-1.html" class="cats-2">تناسب اندام</a>
-                            </div>
-                            <h4 class="mb-0 ft-medium medium">
-                                <a href="single-listing-detail-1.html" class="text-dark fs-md">
-                                    مکانیکی خودرو <span class="verified-badge"><i class="fas fa-check-circle"></i></span>
-                                </a>
-                            </h4>
-                            <div class="Goodup-middle-caption mt-3">
-                                <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i>سراسر کشور</div>
-                                <div class="Goodup-call"><i class="fas fa-phone-alt"></i>021-1111-2222</div>
-                            </div>
-                        </div>
-                        <div class="Goodup-grid-footer py-3 px-3">
-                            <div class="Goodup-ft-first">
-                                <div class="Goodup-rating">
-                                    <div class="Goodup-pr-average high">پرتقاضا</div>
-                                </div>
-                            </div>
-                            <div class="Goodup-ft-last">
-                                <span class="small">شبانه روزی</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Item 5 -->
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                <div class="Goodup-grid-wrap">
-                    <div class="Goodup-grid-upper">
-                        <div class="Goodup-bookmark-btn"><button type="button"><i class="lni lni-heart-filled position-absolute"></i></button></div>
-                        <div class="Goodup-grid-thumb">
-                            <a href="single-listing-detail-1.html" class="d-block text-center m-auto">
-                                <img src="~/Images/HomeServices/21h.jpg" class="img-fluid" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="Goodup-grid-fl-wrap">
-                        <div class="Goodup-caption px-3 py-2">
-                            <div class="Goodup-cates multi">
-                                <a href="half-map-search-1.html" class="cats-1">ورزشگاه</a>
-                                <a href="half-map-search-1.html" class="cats-2">تناسب اندام</a>
-                            </div>
-                            <h4 class="mb-0 ft-medium medium">
-                                <a href="single-listing-detail-1.html" class="text-dark fs-md">
-                                    مکانیکی خودرو <span class="verified-badge"><i class="fas fa-check-circle"></i></span>
-                                </a>
-                            </h4>
-                            <div class="Goodup-middle-caption mt-3">
-                                <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i>سراسر کشور</div>
-                                <div class="Goodup-call"><i class="fas fa-phone-alt"></i>021-1111-2222</div>
-                            </div>
-                        </div>
-                        <div class="Goodup-grid-footer py-3 px-3">
-                            <div class="Goodup-ft-first">
-                                <div class="Goodup-rating">
-                                    <div class="Goodup-pr-average high">پرتقاضا</div>
-                                </div>
-                            </div>
-                            <div class="Goodup-ft-last">
-                                <span class="small">شبانه روزی</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Single Item 6 -->
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                <div class="Goodup-grid-wrap">
-                    <div class="Goodup-grid-upper">
-                        <div class="Goodup-bookmark-btn"><button type="button"><i class="lni lni-heart-filled position-absolute"></i></button></div>
-                        <div class="Goodup-grid-thumb">
-                            <a href="single-listing-detail-1.html" class="d-block text-center m-auto">
-                                <img src="~/Images/HomeServices/1h.jpg" class="img-fluid" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="Goodup-grid-fl-wrap">
-                        <div class="Goodup-caption px-3 py-2">
-                            <div class="Goodup-cates multi">
-                                <a href="half-map-search-1.html" class="cats-1">ورزشگاه</a>
-                                <a href="half-map-search-1.html" class="cats-2">تناسب اندام</a>
-                            </div>
-                            <h4 class="mb-0 ft-medium medium">
-                                <a href="single-listing-detail-1.html" class="text-dark fs-md">
-                                    مکانیکی خودرو <span class="verified-badge"><i class="fas fa-check-circle"></i></span>
-                                </a>
-                            </h4>
-                            <div class="Goodup-middle-caption mt-3">
-                                <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i>سراسر کشور</div>
-                                <div class="Goodup-call"><i class="fas fa-phone-alt"></i>021-1111-2222</div>
-                            </div>
-                        </div>
-                        <div class="Goodup-grid-footer py-3 px-3">
-                            <div class="Goodup-ft-first">
-                                <div class="Goodup-rating">
-                                    <div class="Goodup-pr-average high">پرتقاضا</div>
-                                </div>
-                            </div>
-                            <div class="Goodup-ft-last">
-                                <span class="small">شبانه روزی</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Single Item 7 -->
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                <div class="Goodup-grid-wrap">
-                    <div class="Goodup-grid-upper">
-                        <div class="Goodup-bookmark-btn"><button type="button"><i class="lni lni-heart-filled position-absolute"></i></button></div>
-                        <div class="Goodup-grid-thumb">
-                            <a href="single-listing-detail-1.html" class="d-block text-center m-auto">
-                                <img src="~/Images/HomeServices/18h.jpg" class="img-fluid" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="Goodup-grid-fl-wrap">
-                        <div class="Goodup-caption px-3 py-2">
-                            <div class="Goodup-cates multi">
-                                <a href="half-map-search-1.html" class="cats-1">ورزشگاه</a>
-                                <a href="half-map-search-1.html" class="cats-2">تناسب اندام</a>
-                            </div>
-                            <h4 class="mb-0 ft-medium medium">
-                                <a href="single-listing-detail-1.html" class="text-dark fs-md">
-                                    مکانیکی خودرو <span class="verified-badge"><i class="fas fa-check-circle"></i></span>
-                                </a>
-                            </h4>
-                            <div class="Goodup-middle-caption mt-3">
-                                <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i>سراسر کشور</div>
-                                <div class="Goodup-call"><i class="fas fa-phone-alt"></i>021-1111-2222</div>
-                            </div>
-                        </div>
-                        <div class="Goodup-grid-footer py-3 px-3">
-                            <div class="Goodup-ft-first">
-                                <div class="Goodup-rating">
-                                    <div class="Goodup-pr-average high">پرتقاضا</div>
-                                </div>
-                            </div>
-                            <div class="Goodup-ft-last">
-                                <span class="small">شبانه روزی</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Item 8 -->
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                <div class="Goodup-grid-wrap">
-                    <div class="Goodup-grid-upper">
-                        <div class="Goodup-bookmark-btn"><button type="button"><i class="lni lni-heart-filled position-absolute"></i></button></div>
-                        <div class="Goodup-grid-thumb">
-                            <a href="single-listing-detail-1.html" class="d-block text-center m-auto">
-                                <img src="~/Images/HomeServices/17h.jpg" class="img-fluid" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="Goodup-grid-fl-wrap">
-                        <div class="Goodup-caption px-3 py-2">
-                            <div class="Goodup-cates multi">
-                                <a href="half-map-search-1.html" class="cats-1">ورزشگاه</a>
-                                <a href="half-map-search-1.html" class="cats-2">تناسب اندام</a>
-                            </div>
-                            <h4 class="mb-0 ft-medium medium">
-                                <a href="single-listing-detail-1.html" class="text-dark fs-md">
-                                    مکانیکی خودرو <span class="verified-badge"><i class="fas fa-check-circle"></i></span>
-                                </a>
-                            </h4>
-                            <div class="Goodup-middle-caption mt-3">
-                                <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i>سراسر کشور</div>
-                                <div class="Goodup-call"><i class="fas fa-phone-alt"></i>021-1111-2222</div>
-                            </div>
-                        </div>
-                        <div class="Goodup-grid-footer py-3 px-3">
-                            <div class="Goodup-ft-first">
-                                <div class="Goodup-rating">
-                                    <div class="Goodup-pr-average high">پرتقاضا</div>
-                                </div>
-                            </div>
-                            <div class="Goodup-ft-last">
-                                <span class="small">شبانه روزی</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /row -->
+                            <div class="Goodup-tp-title"><h5>@category.Title</h5></div>
+                        </a>
+                    </li>
+                }
+            </ul>
         </div>
-    </div>
-</section>
-<!-- =========================== Featured Listing End ===================== -->
+    </section>
+    <!-- ====================== Top Restaurents ==================== -->
+    <section class="pt-0">
+        <div class="container">
 
-<section>
-    <div class="container">
-        <div class="row align-items-center justify-content-center g-4">
             <div class="row justify-content-center">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <div class="sec_title position-relative text-center mb-5">
-                        <h4 class="ft-bold">
-                            سه قدم تا دریافت سرویس در محل
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-6">
-                <div class="topFeatures">
-                    <div class="icoBox"><i class="fa-solid fa-magnifying-glass"></i><span class="num">01</span></div>
-                    <div class="capText">
-                        <h4 class="title">جستجو و انتخاب سرویس</h4>
+                        <h4 class="text-muted mb-0">خدمات محبوب</h4>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-4 col-md-6">
-                <div class="topFeatures">
-                    <div class="icoBox"><i class="fa-regular fa-file-lines"></i><span class="num">02</span></div>
-                    <div class="capText">
-                        <h4 class="title">انجام مراحل ثبت سفارش</h4>
+            <div class="row align-items-center justify-content-center g-4">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+                    <div class="newlistslider">
+                        @foreach (var work in Model.Works)
+                        {
+                            <!-- Single -->
+                            <div class="single-list">
+                                <div class="Goodup-grid-wrap">
+                                    <div class="Goodup-grid-upper">
+                                        <div class="Goodup-grid-thumb">
+                                            <a href="single-listing-detail-2.html" class="d-block text-center m-auto"><img src="@work.ImagePath" class="img-fluid" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="Goodup-grid-fl-wrap">
+                                        <div class="Goodup-caption px-3 py-2">
+                                            <h4 class="mb-0 ft-medium medium"><a href="single-listing-detail-2.html" class="text-dark fs-md">@work.Title</a></h4>
+                                            <div class="Goodup-location"><i class="fas fa-map-marker-alt ms-1 theme-cl"></i>سراسر کشور</div>
+                                            <div class="Goodup-middle-caption mt-3">
+                                                <p>@work.Description</p>
+                                            </div>
+                                        </div>
+                                        <div class="Goodup-grid-footer py-2 px-3">
+                                            <div class="Goodup-ft-first">
+                                                <div class="Goodup-rating">
+                                                    <div class="Goodup-pr-average high">پرتقاضا</div>
+                                                </div>
+                                            </div>
+                                            <div class="Goodup-ft-last">
+                                                <div class="Goodup-inline">
+                                                    <div class="Goodup-bookmark-btn"><button type="button"><i class="lni lni-envelope position-absolute"></i></button></div>
+                                                    <div class="Goodup-bookmark-btn"><button type="button"><i class="lni lni-heart-filled position-absolute"></i></button></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-4 col-md-6">
-                <div class="topFeatures">
-                    <div class="icoBox"><i class="fa-regular fa-circle-check"></i><span class="num">03</span></div>
-                    <div class="capText">
-                        <h4 class="title">دریافت سرویس در محل</h4>
+        </div>
+    </section>
+    <!-- ====================== Top Restaurents ==================== -->
+
+    <section>
+        <div class="container">
+            <div class="row align-items-center justify-content-center g-4">
+                <div class="row justify-content-center">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="sec_title position-relative text-center mb-5">
+                            <h4 class="ft-bold">
+                                سه قدم تا دریافت سرویس در محل
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="topFeatures">
+                        <div class="icoBox"><i class="fa-solid fa-magnifying-glass"></i><span class="num">01</span></div>
+                        <div class="capText">
+                            <h4 class="title">جستجو و انتخاب سرویس</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="topFeatures">
+                        <div class="icoBox"><i class="fa-regular fa-file-lines"></i><span class="num">02</span></div>
+                        <div class="capText">
+                            <h4 class="title">انجام مراحل ثبت سفارش</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="topFeatures">
+                        <div class="icoBox"><i class="fa-regular fa-circle-check"></i><span class="num">03</span></div>
+                        <div class="capText">
+                            <h4 class="title">دریافت سرویس در محل</h4>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!--------------------------------------->
+    </section>
+    <!--------------------------------------->
 
 
-<section class="space bg-cover" style="background:#03343b url(assets/img/landing-bg.png) no-repeat;">
-    <div class="container py-5">
+    <section class="space bg-cover" style="background:#03343b url(assets/img/landing-bg.png) no-repeat;">
+        <div class="container py-5">
 
-        <div class="row justify-content-center">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                <div class="sec_title position-relative text-center mb-5">
-                    <h6 class="text-light">عضویت</h6>
-                    <h3 class="ft-bold text-light ">برای شروع ثبت نام کنید</h3>
+            <div class="row justify-content-center">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="sec_title position-relative text-center mb-5">
+                        <h6 class="text-light">عضویت</h6>
+                        <h3 class="ft-bold text-light ">برای شروع ثبت نام کنید</h3>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row align-items-center justify-content-center">
-            <div class="col-xl-7 col-lg-10 col-md-12 col-sm-12 col-12">
-                <form class="bg-white rounded p-1">
-
-                    <div class="form-group mb-0 position-relative">
-                        <button class="btn full-width btn-height bg-dark text-white fs-md" type="button">عضویت</button>
-                    </div>
-
-                </form>
+            <div class="row align-items-center justify-content-center">
+                <div class="col-xl-7 col-lg-10 col-md-12 col-sm-12 col-12">
+                    <form class="bg-white rounded p-1">
+                        <div class="form-group mb-0 position-relative">
+                            <button type="button" onclick="window.location.href='/register'" class="btn full-width btn-height bg-dark text-white fs-md">عضویت</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+
         </div>
+    </section>
 
-    </div>
-</section>
 
+
+    <a id="tops-button" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
+
+
+</div>

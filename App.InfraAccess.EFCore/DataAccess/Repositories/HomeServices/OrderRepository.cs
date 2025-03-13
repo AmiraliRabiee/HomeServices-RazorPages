@@ -128,15 +128,21 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
         {
             var order = await _appDbContext.Orders
             .Where(o => o.Id == id)
-            .Select(o => new SummOrderDto
-            {
-                Id = o.Id,
-                StausService = o.StausService,
-                Description = o.Description,
-                HouseWork = o.HouseWork.Title,
-                RunningTime = o.RunningTime,
-                CompletionDate = o.CompletionDate,
-            }).FirstOrDefaultAsync(cancellationToken);
+               .Select(o => new SummOrderDto
+               {
+                   Id = o.Id,
+                   CustomerId = o.CustomerId,
+                   HouseWork = o.HouseWork.Title,
+                   ImagePath = o.Customer.User.ImagePath,
+                   StausService = o.StausService,
+                   CompletionDate = o.CompletionDate,
+                   RunningTime = o.RunningTime,
+                   Description = o.Description,
+                   CustomerName = o.Customer.User.FirstName + " " + o.Customer.User.LastName,
+                   BasePrice = o.HouseWork.BasePrice,
+                   CreationDate = o.CreateAt,
+                   IsConfrim = o.IsConfrim
+               }).FirstOrDefaultAsync(cancellationToken);
 
             if (order is null)
                 throw new Exception(".سفارشی با این شناسه یافت نشد");
@@ -271,20 +277,13 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return orders;
         }
 
-
-        //public async Task<List<Order>> GetReserveOrders(AppUser user, CancellationToken cancellationToken)
+        //public async Task<List<SummOrderDto>> GetReserveOrders(AppUser user, CancellationToken cancellationToken)
         //{
-        //    var expert = await GetExpertWithSkills(user.Id, cancellationToken);
-
-        //    return await GetOrdersMatchingSkills(expert.ExpertWorksSkills, cancellationToken);
+        //        var expert = await GetExpertWithSkillsAndCity(user.Id, cancellationToken);
+        //        return await GetOrdersMatchingExpert(expert, cancellationToken);
         //}
-        public async Task<List<SummOrderDto>> GetReserveOrders(AppUser user, CancellationToken cancellationToken)
-        {
-            var expert = await GetExpertWithSkillsAndCity(user.Id, cancellationToken);
-            return await GetOrdersMatchingExpert(expert, cancellationToken);
-        }
 
-        private async Task<Expert?> GetExpertWithSkillsAndCity(int userId, CancellationToken cancellationToken)
+        public async Task<Expert?> GetExpertWithSkillsAndCity(int userId, CancellationToken cancellationToken)
         {
             return await _appDbContext.Experts
                 .Where(e => e.User!.Id == userId)
@@ -300,12 +299,13 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 .FirstOrDefaultAsync(cancellationToken);
         }
 
-        private async Task<List<SummOrderDto>> GetOrdersMatchingExpert(Expert expert, CancellationToken cancellationToken)
+        public async Task<List<SummOrderDto>> GetOrdersMatchingExpert(Expert expert, CancellationToken cancellationToken)
         {
             var houseWorkIds = expert.ExpertWorksSkills.Select(eh => eh.HouseWorkId).ToList();
 
             return await _appDbContext.Orders
-                .Where(o => houseWorkIds.Contains(o.HouseWorkId) && o.Customer.CityId == expert.CityId)
+                .Where(o => houseWorkIds.Contains(o.HouseWorkId) && o.Customer.CityId == expert.CityId &&
+                    !o.Suggestions.Any(s => s.IsAccept))
                 .Select(o => new SummOrderDto
                 {
                     Id = o.Id,
@@ -323,6 +323,38 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 .ToListAsync(cancellationToken);
         }
 
+        public async Task<List<SummOrderDto>> GetOrdersAcceptExpert(Expert expert, CancellationToken cancellationToken)
+        {
+            var houseWorkIds = expert.ExpertWorksSkills.Select(eh => eh.HouseWorkId).ToList();
+
+            return await _appDbContext.Orders
+                .Where(o => houseWorkIds.Contains(o.HouseWorkId) && o.Customer.CityId == expert.CityId
+                && o.IsPayment == false)
+                .Select(o => new SummOrderDto
+                {
+                    Id = o.Id,
+                    CustomerId = o.CustomerId,
+                    HouseWork = o.HouseWork.Title,
+                    ImagePath = o.Customer.User.ImagePath,
+                    StausService = o.StausService,
+                    CompletionDate = o.CompletionDate,
+                    RunningTime = o.RunningTime,
+                    Description = o.Description,
+                    CustomerName = o.Customer.User.FirstName + " " + o.Customer.User.LastName,
+                    BasePrice = o.HouseWork.BasePrice,
+                    CreationDate = o.CreateAt,
+                })
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<float> GetSuggestPrice(int orderId ,CancellationToken cancellationToken)
+        {
+            var price = await _appDbContext.Suggestions
+                .Where(s => s.OrderId == orderId)
+                .Select(s => s.SuggestPrice)
+                .FirstOrDefaultAsync(cancellationToken);
+            return price;
+        }
         #endregion
     }
 }

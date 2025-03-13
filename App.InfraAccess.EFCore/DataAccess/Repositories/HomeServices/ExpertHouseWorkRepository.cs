@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Contracts.Repository.HomeServices;
+using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.Service;
 using App.Infrastructure.EFCore.DataBase.Common;
 using Microsoft.EntityFrameworkCore;
@@ -7,13 +8,26 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
 {
     public class ExpertHouseWorkRepository(AppDbContext _appDbContext) : IExpertHouseWorkRepository
     {
-
         public async Task<List<int>> GetExpertSkillsAsync(int expertId, CancellationToken cancellationToken)
         {
-            return await _appDbContext.ExpertHouseWorks
+            var skills = await _appDbContext.ExpertHouseWorks
                 .Where(eh => eh.ExpertId == expertId)
                 .Select(eh => eh.HouseWorkId)
                 .ToListAsync(cancellationToken);
+            return skills;
+        }
+
+        public async Task<List<ExpertWorkDto>> GetExpertSkillsNameAsync(int expertId, CancellationToken cancellationToken)
+        {
+            var skills = await _appDbContext.ExpertHouseWorks
+                .Where(eh => eh.ExpertId == expertId)
+                .Select(eh => new ExpertWorkDto
+                {
+                    ExpertName = eh.Expert.User.FirstName + " "  + eh.Expert.User.LastName,
+                    HouseWorkName = eh.HouseWork.Title,
+                })
+                .ToListAsync(cancellationToken);
+            return skills;
         }
 
         public async Task UpdateExpertSkillsAsync(int expertId, List<int> houseWorkIds, CancellationToken cancellationToken)
@@ -28,11 +42,13 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
 
         private async Task<List<ExpertHouseWork>> GetExistingSkillsAsync(int expertId, CancellationToken cancellationToken)
         {
-            return await _appDbContext.ExpertHouseWorks
+            var exist =  await _appDbContext.ExpertHouseWorks
                 .Where(ehw => ehw.ExpertId == expertId)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
+            return exist;
         }
+
 
         private async Task RemoveUnwantedSkillsAsync(List<ExpertHouseWork> existingSkills, List<int> newHouseWorkIds, CancellationToken cancellationToken)
         {

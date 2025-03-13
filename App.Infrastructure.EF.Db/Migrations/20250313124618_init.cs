@@ -18,7 +18,8 @@ namespace App.Infrastructure.EFCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProfitPercentage = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -144,7 +145,7 @@ namespace App.Infrastructure.EFCore.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     ViewCount = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
-                    BasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    BasePrice = table.Column<float>(type: "real", nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: true)
@@ -315,6 +316,39 @@ namespace App.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    CompletionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RunningTime = table.Column<TimeOnly>(type: "time", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StausService = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsConfrim = table.Column<bool>(type: "bit", nullable: true),
+                    IsFinish = table.Column<bool>(type: "bit", nullable: true),
+                    IsPayment = table.Column<bool>(type: "bit", nullable: true),
+                    HouseWorkId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Orders_HouseWorks_HouseWorkId",
+                        column: x => x.HouseWorkId,
+                        principalTable: "HouseWorks",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
@@ -369,44 +403,6 @@ namespace App.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
-                    CompletionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RunningTime = table.Column<TimeOnly>(type: "time", nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    StausService = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    IsConfrim = table.Column<bool>(type: "bit", nullable: true),
-                    IsFinish = table.Column<bool>(type: "bit", nullable: true),
-                    HouseWorkId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    ExpertId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Orders_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Orders_Expert_ExpertId",
-                        column: x => x.ExpertId,
-                        principalTable: "Expert",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Orders_HouseWorks_HouseWorkId",
-                        column: x => x.HouseWorkId,
-                        principalTable: "HouseWorks",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Suggestions",
                 columns: table => new
                 {
@@ -414,7 +410,10 @@ namespace App.Infrastructure.EFCore.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
                     SuggestPrice = table.Column<float>(type: "real", nullable: false),
+                    IsAccept = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsPresented = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     ExpertId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -448,9 +447,9 @@ namespace App.Infrastructure.EFCore.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ActivationUser", "AdminId", "Balance", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "ImagePath", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RegisterAt", "RoleId", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, 3, null, 1000f, "a48a1cca-8905-478f-be05-34d85810f6d7", "Admin@gmail.com", false, "Admin", null, false, "Admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEHcmKdUvop4wXHcq1Jy3vD7my+edJ3Wkjp0XZW12zbYCRbbaz2tBA6AHL/9uG1aljA==", null, false, new DateTime(2025, 3, 5, 16, 39, 0, 196, DateTimeKind.Local).AddTicks(2833), 1, "a9f0af26-a4ef-498e-b320-2c487d8c2e2b", false, "Admin@gmail.com" },
-                    { 2, 0, 3, null, 1000f, "bad1d0d9-65cb-4d09-bfc7-6255025e0515", "Customer@gmail.com", false, "Amir", null, false, "Amiri", false, null, "CUSTOMER@GMAIL.COM", "CUSTOMER@GMAIL.COM", "AQAAAAIAAYagAAAAECBjHgKNmpUDAO/Gdv0RPW/x/wciK2yWtLohgWmajexQZSZmSY72vBXALw2BL7aAVw==", null, false, new DateTime(2025, 3, 5, 16, 39, 0, 196, DateTimeKind.Local).AddTicks(2866), 2, "ea54b7d0-05c7-48fe-815e-dda8c88e9640", false, "Customer@gmail.com" },
-                    { 3, 0, 3, null, 1000f, "d83dc7aa-c5e0-4362-bff6-8fe3defb31aa", "Expert@gmail.com", false, "Amir", null, false, "Amiri", false, null, "EXPERT@GMAIL.COM", "EXPERT@GMAIL.COM", "AQAAAAIAAYagAAAAEMlFaGSs8EnkOoxDEG7J55ImqodavL3JkTmxFw7jxYvcTaxy3Zgd/9qZ8cuCScy8yw==", null, false, new DateTime(2025, 3, 5, 16, 39, 0, 196, DateTimeKind.Local).AddTicks(2884), 3, "6fb43307-1060-4bc9-adcf-c829b90c8e57", false, "Expert@gmail.com" }
+                    { 1, 0, 3, null, 1000f, "d1240e06-0fba-4c82-9296-342038e2a44d", "Admin@gmail.com", false, "Admin", null, false, "Admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEFdNmCy7qnFu9qKKsJIgEildm6xVMDhSHdtMhZaNHHf6KOxNILgYOk/cBozcFdtFiw==", null, false, new DateTime(2025, 3, 13, 16, 16, 18, 150, DateTimeKind.Local).AddTicks(8687), 1, "e4aa746a-11ef-4553-bd91-a4882bc07131", false, "Admin@gmail.com" },
+                    { 2, 0, 3, null, 1000f, "be9ba985-c039-4070-995c-1ff7f5a46de3", "Customer@gmail.com", false, "Amir", null, false, "Amiri", false, null, "CUSTOMER@GMAIL.COM", "CUSTOMER@GMAIL.COM", "AQAAAAIAAYagAAAAEESWoJDNDGWj9mHPCR9LBdjL9WQEbUduaLSuFH7/VNqrUg+7z12IemRtNL1afz2Tfw==", null, false, new DateTime(2025, 3, 13, 16, 16, 18, 150, DateTimeKind.Local).AddTicks(8715), 2, "8bf078df-0abf-43c6-81a4-9b3f8ecfb536", false, "Customer@gmail.com" },
+                    { 3, 0, 3, null, 1000f, "4ec494d1-0b49-45f7-b86c-8e4104448055", "Expert@gmail.com", false, "Amir", null, false, "Amiri", false, null, "EXPERT@GMAIL.COM", "EXPERT@GMAIL.COM", "AQAAAAIAAYagAAAAEOJIxDpSMDCbc7bi/a2Giph0Rz2eKFXMfxs4d6qXRbZE8xMNUzdVpwTCrn428RJetg==", null, false, new DateTime(2025, 3, 13, 16, 16, 18, 150, DateTimeKind.Local).AddTicks(8728), 3, "dedffc9d-2927-470c-89d7-28fad014ff68", false, "Expert@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -550,93 +549,93 @@ namespace App.Infrastructure.EFCore.Migrations
                 columns: new[] { "Id", "BasePrice", "CategoryId", "Description", "ImagePath", "IsDeleted", "Title" },
                 values: new object[,]
                 {
-                    { 1, 5000m, 10, "نیاز به توضیحات تکمیلی مشکل", "\\Images\\HomeServices\\1h.jpg", false, "تعمیر و سرویس پکیج" },
-                    { 2, 3000m, 10, "", "\\Images\\HomeServices\\2h.jpg", false, "تعمیر و سرویس آبگرمکن" },
-                    { 3, 3500m, 10, "", "\\Images\\HomeServices\\3h.jpg", false, "نصب و تعمیر رادیاتور شوفاژ" },
-                    { 4, 4000m, 10, "پرتقاضا", "\\Images\\HomeServices\\4h.jpg", false, "تعمیر و سرویس کولر آبی" },
-                    { 5, 2500m, 10, "", "\\Images\\HomeServices\\5h.jpg", false, "تعمیر و نصب کولر گازی" },
-                    { 6, 5000m, 9, "نیاز به توضیحات تکمیلی مشکل", "\\Images\\HomeServices\\6h.jpg", false, "نصب و تعمیر شیرآلات" },
-                    { 7, 4000m, 9, "", "\\Images\\HomeServices\\7h.jpg", false, "تخلیه چاه و لوله بازکنی" },
-                    { 8, 1000m, 9, "", "\\Images\\HomeServices\\8h.jpg", false, "نصب و تعمیر دستگاه تصفیه آب" },
-                    { 9, 2000m, 9, "", "\\Images\\HomeServices\\9h.jpg", false, "لوله کشی گاز" },
-                    { 10, 4000m, 9, "به صورت تخصصی", "\\Images\\HomeServices\\10h.jpg", false, "اتصال به شبکه فاضلاب شهری" },
-                    { 11, 1000m, 8, "به صورت تخصصی", "\\Images\\HomeServices\\11h.png", false, "سیم و کابل کشی" },
-                    { 12, 3500m, 8, "", "\\Images\\HomeServices\\12h.jpg", false, "رفع اتصالی" },
-                    { 13, 1000m, 8, "", "\\Images\\HomeServices\\13h.jpg", false, "کلید و پریز" },
-                    { 14, 3500m, 8, "", "\\Images\\HomeServices\\14h.jpg", false, "نصب و تعویض فیوز" },
-                    { 15, 2000m, 8, "", "\\Images\\HomeServices\\15h.jpg", false, "نصب و تعمیر دوربین مداربسته" },
-                    { 29, 1000m, 14, "", "\\Images\\HomeServices\\29h.jpg", false, "سرویس عادی نظافت" },
-                    { 30, 3500m, 14, "", "\\Images\\HomeServices\\30h.jpg", false, "سرویس لوکس نظافت" },
-                    { 31, 2000m, 14, "", "\\Images\\HomeServices\\31h.jpg", false, "پذیرایی" },
-                    { 32, 1000m, 14, "", "\\Images\\HomeServices\\32h.jpg", false, "کارگر ساده" },
-                    { 33, 3500m, 14, "", "\\Images\\HomeServices\\33h.jpg", false, "نظافت راه پله" },
-                    { 34, 1000m, 15, "(فرش ، موکت ، مبل)", "", false, "شستشو در منزل" },
-                    { 35, 3500m, 15, "", "", false, "قالیشویی" },
-                    { 36, 2000m, 15, "", "", false, "خشکشویی" },
-                    { 37, 1000m, 15, "", "", false, "پرده شویی" },
-                    { 38, 1000m, 16, "(آب ، نانو)", "", false, "کارواش" },
-                    { 39, 3500m, 16, "", "", false, "صفرشویی خودرو" },
-                    { 40, 2000m, 16, "جدید", "", false, "سرامیک حودرو" },
-                    { 41, 1000m, 16, "", "", false, "واکس و پولیش" },
-                    { 42, 3500m, 16, "به صورت تخصصی", "", false, "صافکاری و نقاشی" },
-                    { 43, 1000m, 17, "", null, false, "خدمات ناخن" },
-                    { 44, 3500m, 17, "", null, false, " رنگ مو در منزل" },
-                    { 45, 2000m, 17, "جدید", null, false, "پاکسازی و لایه برداری پوست" },
-                    { 46, 1000m, 17, "", null, false, "آرایش صورت در منزل" },
-                    { 47, 3500m, 17, "", null, false, "لیفت و لیمنت مژه" },
-                    { 48, 1000m, 18, "", null, false, "کوتاهی مو و اصلاح صورت" },
-                    { 49, 3500m, 18, "", null, false, "مراقب و زیبایی آقایان" },
-                    { 50, 2000m, 18, "", null, false, "گریم داماد" },
-                    { 51, 1000m, 19, "به صورت تخصصی", null, false, "برنامه ورزشی و تغذیه" },
-                    { 52, 3500m, 19, "", null, false, "کلاس یوگا در خانه" },
-                    { 53, 2000m, 19, "", null, false, "کلاس پیلاتس در خانه" },
-                    { 54, 1000m, 19, "جدید", null, false, "کلاس سی ایکس در خانه" },
-                    { 55, 3500m, 19, "", null, false, "حرکات اصلاحی" },
-                    { 56, 1000m, 20, "", null, false, "نصب و تعمیر یخچال فریزر" },
-                    { 57, 3500m, 20, "", null, false, " نصب و تعمیر ماشین ظرفشویی" },
-                    { 58, 2000m, 20, "", null, false, "نصب و تعمیر ماشین لباسشویی" },
-                    { 59, 1000m, 20, "", null, false, "نصب و تعمیر فر" },
-                    { 60, 3500m, 20, "", null, false, "نصب و تعمیر هود آشپرخانه" },
-                    { 61, 1000m, 20, "", null, false, "نصب و تعمیر اجاق گاز" },
-                    { 62, 3500m, 20, "به صورت تخصصی", null, false, " تعمیرات تلویزیون" },
-                    { 63, 2000m, 20, "جدید", null, false, "تعمیر چای ساز و قهوه ساز" },
-                    { 64, 1000m, 20, "", null, false, "تعمیر جاروبرقی" },
-                    { 65, 3500m, 20, "", null, false, "نصب و تعویض فیلتر آب" },
-                    { 66, 1000m, 21, "", null, false, "تعمیر کامپیوتر و لپتاپ" },
-                    { 67, 3500m, 21, "", null, false, " تعمیر ماشین های اداری" },
-                    { 68, 2000m, 21, "", null, false, "پشتیبانی شبکه وسرور" },
-                    { 69, 1000m, 21, "به صورت تخصصی", null, false, "طراحی سایت و لوگو" },
-                    { 70, 3500m, 21, "", null, false, "مودم و اینترنت" },
-                    { 71, 1000m, 22, "", null, false, "خدمات تاچ و ال سی دی" },
-                    { 72, 3500m, 22, "", null, false, " خدمات باتری" },
-                    { 73, 2000m, 22, "جدید", null, false, "خدمات نرم افزاری" },
-                    { 74, 1000m, 22, "", null, false, "خدمات اسپیکر" },
-                    { 75, 3500m, 22, "", null, false, "خدمات دوربین" },
-                    { 76, 1000m, 23, "زیر قیمت کارخانه", null, false, "تعویض باتری خودرو" },
-                    { 77, 3500m, 23, "", null, false, " برق و باتری خودرو" },
-                    { 78, 2000m, 23, "", null, false, "مکانیکی خودرو" },
-                    { 79, 1000m, 23, "", null, false, "امداد خودرو" },
-                    { 80, 3500m, 23, "", null, false, "پنچرگیری" },
-                    { 81, 1000m, 23, "", null, false, "کارشناسی خودرو" },
-                    { 82, 3500m, 23, "", null, false, "تعویض لاستیک" },
-                    { 83, 2000m, 23, "", null, false, "تعویض لنت خودرو" },
-                    { 84, 1000m, 23, "", null, false, "سوخت رسانی" },
-                    { 85, 3500m, 23, "", null, false, "تعمیر موتور سیکلت" },
-                    { 86, 1000m, 24, "", null, false, "اسباب کشی با خاور و کامیون" },
-                    { 87, 3500m, 24, "", null, false, " اسباب کشی با وانت و نیسان" },
-                    { 88, 2000m, 24, "نیاز به توضیح", null, false, "اسباب کشی و حمل بین شهری" },
-                    { 89, 1000m, 24, "", null, false, "کارگر جابجایی" },
-                    { 90, 3500m, 24, "", null, false, "حمل نخاله و ضایعات ساختمانی" },
-                    { 91, 1000m, 25, "", null, false, "مراقبت و نگهداری" },
-                    { 92, 3500m, 25, "", null, false, " پرستاری و تزریقات" },
-                    { 93, 2000m, 25, "", null, false, "معاینه پزشکی" },
-                    { 94, 1000m, 25, "", null, false, "پیراپزشکی" },
-                    { 95, 3500m, 25, "", null, false, "آزمایش و نمونه گیری" },
-                    { 96, 1000m, 26, "جدید", null, false, "هتل های حیوانات خانگی" },
-                    { 97, 3500m, 26, "", null, false, " خدماتدامپزشکی در محل" },
-                    { 98, 2000m, 26, "به صورت تخصصی", null, false, "خدمات تربیتی حیوانات خانگی" },
-                    { 99, 1000m, 26, "", null, false, "خدمات شستشو و آرایشی" },
-                    { 100, 3500m, 26, "", null, false, "پت شاپ" }
+                    { 1, 5000f, 10, "نیاز به توضیحات تکمیلی مشکل", "\\Images\\HomeServices\\1h.jpg", false, "تعمیر و سرویس پکیج" },
+                    { 2, 3000f, 10, "", "\\Images\\HomeServices\\2h.jpg", false, "تعمیر و سرویس آبگرمکن" },
+                    { 3, 3500f, 10, "", "\\Images\\HomeServices\\3h.jpg", false, "نصب و تعمیر رادیاتور شوفاژ" },
+                    { 4, 4000f, 10, "پرتقاضا", "\\Images\\HomeServices\\4h.jpg", false, "تعمیر و سرویس کولر آبی" },
+                    { 5, 2500f, 10, "", "\\Images\\HomeServices\\5h.jpg", false, "تعمیر و نصب کولر گازی" },
+                    { 6, 5000f, 9, "نیاز به توضیحات تکمیلی مشکل", "\\Images\\HomeServices\\6h.jpg", false, "نصب و تعمیر شیرآلات" },
+                    { 7, 4000f, 9, "", "\\Images\\HomeServices\\7h.jpg", false, "تخلیه چاه و لوله بازکنی" },
+                    { 8, 1000f, 9, "", "\\Images\\HomeServices\\8h.jpg", false, "نصب و تعمیر دستگاه تصفیه آب" },
+                    { 9, 2000f, 9, "", "\\Images\\HomeServices\\9h.jpg", false, "لوله کشی گاز" },
+                    { 10, 4000f, 9, "به صورت تخصصی", "\\Images\\HomeServices\\10h.jpg", false, "اتصال به شبکه فاضلاب شهری" },
+                    { 11, 1000f, 8, "به صورت تخصصی", "\\Images\\HomeServices\\11h.png", false, "سیم و کابل کشی" },
+                    { 12, 3500f, 8, "", "\\Images\\HomeServices\\12h.jpg", false, "رفع اتصالی" },
+                    { 13, 1000f, 8, "", "\\Images\\HomeServices\\13h.jpg", false, "کلید و پریز" },
+                    { 14, 3500f, 8, "", "\\Images\\HomeServices\\14h.jpg", false, "نصب و تعویض فیوز" },
+                    { 15, 2000f, 8, "", "\\Images\\HomeServices\\15h.jpg", false, "نصب و تعمیر دوربین مداربسته" },
+                    { 29, 1000f, 14, "", "\\Images\\HomeServices\\29h.jpg", false, "سرویس عادی نظافت" },
+                    { 30, 3500f, 14, "", "\\Images\\HomeServices\\30h.jpg", false, "سرویس لوکس نظافت" },
+                    { 31, 2000f, 14, "", "\\Images\\HomeServices\\31h.jpg", false, "پذیرایی" },
+                    { 32, 1000f, 14, "", "\\Images\\HomeServices\\32h.jpg", false, "کارگر ساده" },
+                    { 33, 3500f, 14, "", "\\Images\\HomeServices\\33h.jpg", false, "نظافت راه پله" },
+                    { 34, 1000f, 15, "(فرش ، موکت ، مبل)", "\\Images\\HomeServices\\34h.jpg", false, "شستشو در منزل" },
+                    { 35, 3500f, 15, "", "\\Images\\HomeServices\\35h.jpg", false, "قالیشویی" },
+                    { 36, 2000f, 15, "", "\\Images\\HomeServices\\36h.jpg", false, "خشکشویی" },
+                    { 37, 1000f, 15, "", "\\Images\\HomeServices\\37h.jpg", false, "پرده شویی" },
+                    { 38, 1000f, 16, "(آب ، نانو)", "\\Images\\HomeServices\\38h.jpg", false, "کارواش" },
+                    { 39, 3500f, 16, "", "\\Images\\HomeServices\\39h.jpg", false, "صفرشویی خودرو" },
+                    { 40, 2000f, 16, "جدید", "\\Images\\HomeServices\\40h.jpg", false, "سرامیک حودرو" },
+                    { 41, 1000f, 16, "", "\\Images\\HomeServices\\41h.jpg", false, "واکس و پولیش" },
+                    { 42, 3500f, 16, "به صورت تخصصی", "\\Images\\HomeServices\\42h.jpg", false, "صافکاری و نقاشی" },
+                    { 43, 1000f, 17, "", "\\Images\\HomeServices\\43h.jpg", false, "خدمات ناخن" },
+                    { 44, 3500f, 17, "", "\\Images\\HomeServices\\44h.jpg", false, " رنگ مو در منزل" },
+                    { 45, 2000f, 17, "جدید", "\\Images\\HomeServices\\45h.jpg", false, "پاکسازی و لایه برداری پوست" },
+                    { 46, 1000f, 17, "", "\\Images\\HomeServices\\46h.jpg", false, "آرایش صورت در منزل" },
+                    { 47, 3500f, 17, "", "\\Images\\HomeServices\\47h.jpg", false, "لیفت و لیمنت مژه" },
+                    { 48, 1000f, 18, "", "\\Images\\HomeServices\\48h.jpg", false, "کوتاهی مو و اصلاح صورت" },
+                    { 49, 3500f, 18, "", "\\Images\\HomeServices\\49h.jpg", false, "مراقب و زیبایی آقایان" },
+                    { 50, 2000f, 18, "", "\\Images\\HomeServices\\50h.jpg", false, "گریم داماد" },
+                    { 51, 1000f, 19, "به صورت تخصصی", "\\Images\\HomeServices\\51h.jpg", false, "برنامه ورزشی و تغذیه" },
+                    { 52, 3500f, 19, "", "\\Images\\HomeServices\\52h.jpg", false, "کلاس یوگا در خانه" },
+                    { 53, 2000f, 19, "", "\\Images\\HomeServices\\53h.jpg", false, "کلاس پیلاتس در خانه" },
+                    { 54, 1000f, 19, "جدید", "\\Images\\HomeServices\\54h.jpg", false, "کلاس سی ایکس در خانه" },
+                    { 55, 3500f, 19, "", "\\Images\\HomeServices\\55h.jpg", false, "حرکات اصلاحی" },
+                    { 56, 1000f, 20, "", "\\Images\\HomeServices\\56h.jpg", false, "نصب و تعمیر یخچال فریزر" },
+                    { 57, 3500f, 20, "", "\\Images\\HomeServices\\57h.jpg", false, " نصب و تعمیر ماشین ظرفشویی" },
+                    { 58, 2000f, 20, "", "\\Images\\HomeServices\\58h.jpg", false, "نصب و تعمیر ماشین لباسشویی" },
+                    { 59, 1000f, 20, "", "\\Images\\HomeServices\\59h (2).jpg", false, "نصب و تعمیر فر" },
+                    { 60, 3500f, 20, "", "\\Images\\HomeServices\\60h.jpg", false, "نصب و تعمیر هود آشپرخانه" },
+                    { 61, 1000f, 20, "", "\\Images\\HomeServices\\61h.jpg", false, "نصب و تعمیر اجاق گاز" },
+                    { 62, 3500f, 20, "به صورت تخصصی", "\\Images\\HomeServices\\62h.jpg", false, " تعمیرات تلویزیون" },
+                    { 63, 2000f, 20, "جدید", "\\Images\\HomeServices\\63h.jpg", false, "تعمیر چای ساز و قهوه ساز" },
+                    { 64, 1000f, 20, "", "\\Images\\HomeServices\\64h.jpg", false, "تعمیر جاروبرقی" },
+                    { 65, 3500f, 20, "", "\\Images\\HomeServices\\65h.jpg", false, "نصب و تعویض فیلتر آب" },
+                    { 66, 1000f, 21, "", "", false, "تعمیر کامپیوتر و لپتاپ" },
+                    { 67, 3500f, 21, "", "", false, " تعمیر ماشین های اداری" },
+                    { 68, 2000f, 21, "", "", false, "پشتیبانی شبکه وسرور" },
+                    { 69, 1000f, 21, "به صورت تخصصی", "", false, "طراحی سایت و لوگو" },
+                    { 70, 3500f, 21, "", "", false, "مودم و اینترنت" },
+                    { 71, 1000f, 22, "", "", false, "خدمات تاچ و ال سی دی" },
+                    { 72, 3500f, 22, "", "", false, " خدمات باتری" },
+                    { 73, 2000f, 22, "جدید", "", false, "خدمات نرم افزاری" },
+                    { 74, 1000f, 22, "", "", false, "خدمات اسپیکر" },
+                    { 75, 3500f, 22, "", "", false, "خدمات دوربین" },
+                    { 76, 1000f, 23, "زیر قیمت کارخانه", "", false, "تعویض باتری خودرو" },
+                    { 77, 3500f, 23, "", "", false, " برق و باتری خودرو" },
+                    { 78, 2000f, 23, "", "", false, "مکانیکی خودرو" },
+                    { 79, 1000f, 23, "", "", false, "امداد خودرو" },
+                    { 80, 3500f, 23, "", "", false, "پنچرگیری" },
+                    { 81, 1000f, 23, "", "", false, "کارشناسی خودرو" },
+                    { 82, 3500f, 23, "", "", false, "تعویض لاستیک" },
+                    { 83, 2000f, 23, "", "", false, "تعویض لنت خودرو" },
+                    { 84, 1000f, 23, "", "", false, "سوخت رسانی" },
+                    { 85, 3500f, 23, "", "", false, "تعمیر موتور سیکلت" },
+                    { 86, 1000f, 24, "", "", false, "اسباب کشی با خاور و کامیون" },
+                    { 87, 3500f, 24, "", "", false, " اسباب کشی با وانت و نیسان" },
+                    { 88, 2000f, 24, "نیاز به توضیح", "", false, "اسباب کشی و حمل بین شهری" },
+                    { 89, 1000f, 24, "", "", false, "کارگر جابجایی" },
+                    { 90, 3500f, 24, "", "", false, "حمل نخاله و ضایعات ساختمانی" },
+                    { 91, 1000f, 25, "", "", false, "مراقبت و نگهداری" },
+                    { 92, 3500f, 25, "", "", false, " پرستاری و تزریقات" },
+                    { 93, 2000f, 25, "", "", false, "معاینه پزشکی" },
+                    { 94, 1000f, 25, "", "", false, "پیراپزشکی" },
+                    { 95, 3500f, 25, "", "", false, "آزمایش و نمونه گیری" },
+                    { 96, 1000f, 26, "جدید", "", false, "هتل های حیوانات خانگی" },
+                    { 97, 3500f, 26, "", "", false, " خدماتدامپزشکی در محل" },
+                    { 98, 2000f, 26, "به صورت تخصصی", "", false, "خدمات تربیتی حیوانات خانگی" },
+                    { 99, 1000f, 26, "", "", false, "خدمات شستشو و آرایشی" },
+                    { 100, 3500f, 26, "", "", false, "پت شاپ" }
                 });
 
             migrationBuilder.InsertData(
@@ -650,18 +649,18 @@ namespace App.Infrastructure.EFCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Orders",
-                columns: new[] { "Id", "CompletionDate", "CreateAt", "CustomerId", "Description", "ExpertId", "HouseWorkId", "IsConfrim", "IsDeleted", "IsFinish", "RunningTime", "StausService" },
+                columns: new[] { "Id", "CompletionDate", "CreateAt", "CustomerId", "Description", "HouseWorkId", "IsConfrim", "IsDeleted", "IsFinish", "IsPayment", "RunningTime", "StausService" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 5, 16, 39, 0, 193, DateTimeKind.Local).AddTicks(4565), 1, "فوری", null, 5, false, false, false, new TimeOnly(0, 0, 0).Add(TimeSpan.FromTicks(11)), 1 },
-                    { 2, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 5, 16, 39, 0, 193, DateTimeKind.Local).AddTicks(4596), 1, "", null, 6, false, false, false, new TimeOnly(10, 30, 0), 1 },
-                    { 3, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 5, 16, 39, 0, 193, DateTimeKind.Local).AddTicks(4601), 1, "فوری", null, 30, false, false, false, new TimeOnly(4, 30, 0), 1 }
+                    { 1, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 13, 16, 16, 18, 148, DateTimeKind.Local).AddTicks(6764), 1, "فوری", 5, false, false, false, false, new TimeOnly(0, 0, 0).Add(TimeSpan.FromTicks(11)), 1 },
+                    { 2, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 13, 16, 16, 18, 148, DateTimeKind.Local).AddTicks(6781), 1, "", 6, false, false, false, false, new TimeOnly(10, 30, 0), 1 },
+                    { 3, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 13, 16, 16, 18, 148, DateTimeKind.Local).AddTicks(6783), 1, "فوری", 30, false, false, false, false, new TimeOnly(4, 30, 0), 1 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Suggestions",
-                columns: new[] { "Id", "Description", "ExpertId", "IsDeleted", "OrderId", "SuggestPrice" },
-                values: new object[] { 1, "آمادگی برای انجام کار با قیمت پایین تر", 1, false, 1, 1000f });
+                columns: new[] { "Id", "CreatedAt", "Description", "ExpertId", "IsAccept", "IsDeleted", "IsPresented", "OrderId", "SuggestPrice" },
+                values: new object[] { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "آمادگی برای انجام کار با قیمت پایین تر", 1, false, false, false, 1, 1000f });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -754,11 +753,6 @@ namespace App.Infrastructure.EFCore.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_ExpertId",
-                table: "Orders",
-                column: "ExpertId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Orders_HouseWorkId",
                 table: "Orders",
                 column: "HouseWorkId");
@@ -808,13 +802,13 @@ namespace App.Infrastructure.EFCore.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Expert");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Customers");
-
-            migrationBuilder.DropTable(
-                name: "Expert");
 
             migrationBuilder.DropTable(
                 name: "HouseWorks");

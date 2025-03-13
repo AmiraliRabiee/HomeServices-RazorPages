@@ -4,6 +4,7 @@ using App.Domain.Core.Contracts.AppService;
 using App.Domain.Core.Contracts.Service.BaseEntities;
 using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Contracts.Service.User;
+using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
@@ -202,6 +203,10 @@ namespace App.Domain.AppServices.User
 
         public async Task<Result> UpdateCustomer(CustomerDto model, CancellationToken cancellationToken)
         {
+            if (model.CustomerImage is not null)
+            {
+                model.ImagePath = await _baseDataService.UploadImage(model.CustomerImage!, "Profiles", cancellationToken);
+            }
             var result = await _customerService.UpdateCustomer(model, cancellationToken);
             if (result.IsSuccess)
             {
@@ -282,5 +287,8 @@ namespace App.Domain.AppServices.User
             //await _expertService.RemoveUnwantedSkillsAsync(existingSkills, houseWorkIds, cancellationToken);
             //await _expertService.AddNewSkillsAsync(expertId, existingSkills, houseWorkIds, cancellationToken);
         }
+
+        public async Task<List<ExpertWorkDto>> GetExpertSkillsNameAsync(int expertId, CancellationToken cancellationToken)
+            => await _expertService.GetExpertSkillsNameAsync(expertId, cancellationToken);
     }
 }

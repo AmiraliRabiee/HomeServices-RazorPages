@@ -83,12 +83,25 @@ namespace App.Domain.AppServices.HomeService
         public Task<Result> Delete(int id, CancellationToken cancellationToken)
             => _orderService.Delete(id, cancellationToken);
 
-        public Task ChangeToPayment(int id, CancellationToken cancellationToken)
+        public async Task ChangeToPayment(int id, CancellationToken cancellationToken)
+            => await _orderService.ChangeToPayment(id, cancellationToken);
+
+        public async Task<List<SummOrderDto>> GetReserveOrders(AppUser user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var expert = await _orderService.GetExpertWithSkillsAndCity(user.Id, cancellationToken);
+            var list = await _orderService.GetOrdersMatchingExpert(expert, cancellationToken);
+            if (list.Count == 0)
+            {
+                var result = await _orderService.GetOrdersAcceptExpert(expert, cancellationToken);
+                return result;
+            }
+            return list;
         }
 
-        public Task<List<SummOrderDto>> GetReserveOrders(AppUser user, CancellationToken cancellationToken)
-            => _orderService.GetReserveOrders(user, cancellationToken);
+        public async Task ChangeToDone(int id, CancellationToken cancellationToken)
+            => await _orderService.ChangeToDone(id, cancellationToken);
+
+        public async Task<float> GetSuggestPrice(int orderId, CancellationToken cancellationToken)
+            => await _orderService.GetSuggestPrice(orderId, cancellationToken);
     }
 }

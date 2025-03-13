@@ -35,7 +35,7 @@ namespace HomeServices_RazorPage.Pages.SubCategories
             CategoryDto = await _categoryAppService.GetCategoryDto(id);
             ChildCategory = _categoryAppService.GetChildCategoriesById(id);
             Categories = _categoryAppService.GetAllCategories();
-            Works = await _houseWorkAppService.GetServicesById(id, cancellationToken);
+            Works = await _houseWorkAppService.GetServicesByCategoryId(id, cancellationToken);
         }
 
         public async Task OnPost(int id ,CancellationToken cancellationToken)

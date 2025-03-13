@@ -10,7 +10,10 @@ namespace App.Domain.AppServices.Base
         IOrderService _orderService,
         ICommentService _commentService ,
         IUserService _userService ,
-        ISuggestionService _suggestionService) : IBaseDataAppService
+        ISuggestionService _suggestionService,
+        IExpertService _expertService,
+        IHouseWorkService _houseWorkService,
+        ICategoryService _categoryService) : IBaseDataAppService
     {
         public async Task<List<City>> GetCitiesAsync(CancellationToken cancellationToken)
             => await _baseDataService.GetCitiesAsync(cancellationToken);
@@ -44,6 +47,20 @@ namespace App.Domain.AppServices.Base
             model.ActiveCount = await _suggestionService.ActiveSuggestionsCount(id, cancellationToken); 
 
             return model;
+        }
+
+        public async Task<List<object>> Search(string item)
+        {
+            var result = new List<object>();
+
+            var categories = await _categoryService.GetForSearch(item);
+            var works = await _houseWorkService.GetForSearch(item);
+            var experts = await _expertService.GetForSearch(item);
+
+            result.AddRange(categories);
+            result.AddRange(works);
+            result.AddRange(experts);
+            return result;
         }
     }
 }

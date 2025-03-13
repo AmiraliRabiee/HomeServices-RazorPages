@@ -57,7 +57,19 @@ namespace App.Domain.Services.HomeService
         public async Task ChangeToPayment(int id, CancellationToken cancellationToken)
             => await _orderRepository.ChangeToPayment(id, cancellationToken);
 
-        public Task<List<SummOrderDto>> GetReserveOrders(AppUser user, CancellationToken cancellationToken)
-            => _orderRepository.GetReserveOrders(user, cancellationToken);
+        //public Task<List<SummOrderDto>> GetReserveOrders(AppUser user, CancellationToken cancellationToken)
+        //    => _orderRepository.GetReserveOrders(user, cancellationToken);
+
+        public async Task<List<SummOrderDto>> GetOrdersAcceptExpert(Expert expert, CancellationToken cancellationToken)
+            => await _orderRepository.GetOrdersAcceptExpert(expert, cancellationToken);
+
+        public async Task<List<SummOrderDto>> GetOrdersMatchingExpert(Expert expert, CancellationToken cancellationToken)
+            =>await _orderRepository.GetOrdersMatchingExpert(expert, cancellationToken);
+
+        public async Task<Expert?> GetExpertWithSkillsAndCity(int userId, CancellationToken cancellationToken)
+            => await _orderRepository.GetExpertWithSkillsAndCity(userId, cancellationToken);
+
+        public async Task<float> GetSuggestPrice(int orderId, CancellationToken cancellationToken)
+            => await _orderRepository.GetSuggestPrice(orderId, cancellationToken);
     }
 }

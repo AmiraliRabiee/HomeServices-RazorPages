@@ -18,6 +18,10 @@
 
     <!-- Custom CSS -->
     <link href="/assets/css/styles.css" rel="stylesheet">
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/slick.js"></script>
+    @await RenderSectionAsync("Styles" , required: false)
 </head>
 
 <body dir="rtl">
@@ -41,7 +45,7 @@
                 <nav id="navigation" class="navigation navigation-landscape">
                     <div class="nav-header">
                         <a class="nav-brand" href="#">
-                            <img src="/assets/img/logo.png" class="logo" alt="" />
+                            <img src="~/-2147483648_-210427.jpg" class="logo" alt="" />
                         </a>
                         <div class="nav-toggle"></div>
                         <div class="mobile_nav">
@@ -86,9 +90,9 @@
                                     <li>
                                         <a>پنل کاربری</a>
                                         <ul class="nav-dropdown nav-submenu">
-                                            <li><a asp-page="/menu/expertdashboard" asp-area="expert"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
-                                            <li><a asp-page="/menu/orders" asp-area="expert"><i class="lni lni-files ms-2"></i>سفارش های من</a></li>
-                                            <li><a asp-page="/menu/createsuggestion" asp-area="expert"><i class="lni lni-add-files ms-2"></i>ثبت سفارش</a></li>
+                                            <li><a asp-page="/menu/dashboard" asp-area="expert"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                                            <li><a asp-page="/menu/reservations" asp-area="expert"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
+                                            <li><a asp-page="/menu/comments" asp-area="expert"><i class="lni lni-add-files ms-2"></i>نظرات کاربران</a></li>
                                         </ul>
                                     </li>
                                 }
@@ -274,16 +278,15 @@
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/popper.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/slick.js"></script>
+    <script src="/assets/js/slick.js"></script> <!-- ✅ Ensure this is included -->
     <script src="/assets/js/jquery.magnific-popup.min.js"></script>
     <script src="/assets/js/dropzone.js"></script>
     <script src="/assets/js/counterup.js"></script>
-    <script src="/assets/js/lightbox.js"></script>
+    <script src="/assets/js/lightbox.js"></script> <!-- ✅ Remove duplicate -->
     <script src="/assets/js/moment.min.js"></script>
     <script src="/assets/js/daterangepicker.js"></script>
-    <script src="/assets/js/lightbox.js"></script>
     <script src="/assets/js/jQuery.style.switcher.js"></script>
-    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/custom.js"></script> <!-- ✅ Keep this last -->
     <!-- ============================================================== -->
     <!-- This page plugins -->
     <!-- ============================================================== -->

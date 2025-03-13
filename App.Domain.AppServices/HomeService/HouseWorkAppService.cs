@@ -65,6 +65,53 @@ namespace App.Domain.AppServices.HomeService
         public async Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken)//////////////////////
             => await _houseWorkDapperRepository.GetAllAsync(cancellationToken);
 
+
+        public async Task<List<GetHouseWorkDto>> GetServicesByIds(List<int> categoryIds, CancellationToken cancellationToken)
+        {
+            var result = new List<GetHouseWorkDto>();
+
+            foreach (var categoryId in categoryIds)
+            {
+                var services = await _houseWorkService.GetServicesByCategoryId(categoryId, cancellationToken);
+                foreach (var service in services)
+                {
+                    result.Add(new GetHouseWorkDto
+                    {
+                        Id = service.Id,
+                        Title = service.Title,
+                        CategoryName = service.CategoryName,
+                    });
+                }
+            }
+
+            return result;
+        }
+
+        public async Task<List<SummHouseWorkDto>> GetFavoriteServices(List<int> Ids, CancellationToken cancellationToken)
+        {
+            var result = new List<SummHouseWorkDto>();
+
+            foreach (var id in Ids)
+            {
+                var services = await _houseWorkService.GetServicesById(id, cancellationToken);
+
+                foreach (var service in services)
+                {
+                    result.Add(new SummHouseWorkDto
+                    {
+                        Id = service.Id,
+                        Title = service.Title,
+                        BasePrice= service.BasePrice,
+                        CategoryName = service.CategoryName,
+                        Description = service.Description,
+                        ImagePath = service.ImagePath,
+                    });
+                }
+            }
+
+            return result;
+        }
+
         public async Task<SummHouseWorkDto> GetHouseWorkDto(int id , CancellationToken cancellationToken)
         {
             var work = await _houseWorkService.GetServiceByChildId(id, cancellationToken);
@@ -80,11 +127,11 @@ namespace App.Domain.AppServices.HomeService
         public UpdateHouseWork GetServiceDto(int id)
             => _houseWorkService.GetServiceDto(id);
 
-        public async Task<List<SummHouseWorkDto>> GetServicesById(int id , CancellationToken cancellationToken)
-            => await _houseWorkService.GetServicesById(id , cancellationToken);
+        //public async Task<List<SummHouseWorkDto>> GetServicesById(int id , CancellationToken cancellationToken)
+        //    => await _houseWorkService.GetServicesById(id , cancellationToken);
 
-        public List<SummHouseWorkDto> GetServices()
-            => _houseWorkService.GetServicesById();
+        //public List<SummHouseWorkDto> GetServices()
+        //    => _houseWorkService.GetServicesById();
 
         public async Task<int> GetServiceCount(int categoryId)
             => await _houseWorkService.GetServiceCount(categoryId);
@@ -97,5 +144,8 @@ namespace App.Domain.AppServices.HomeService
 
         public Task<SummHouseWorkDto> GetServiceById(int id, CancellationToken cancellationToken)
             => _houseWorkService.GetServiceById(id, cancellationToken);
+
+        public async Task<List<SummHouseWorkDto>> GetServicesByCategoryId(int id, CancellationToken cancellationToken)
+            => await _houseWorkService.GetServicesByCategoryId(id, cancellationToken);
     }
 }

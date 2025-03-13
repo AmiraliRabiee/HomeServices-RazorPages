@@ -18,5 +18,8 @@ namespace App.Domain.Core.Contracts.Repository.BaseEntities
         List<CategoryDto> GetCatyegoryByParent(int id);
         Task<int> GetChildCount(int categoryId);
         List<Category> GetChildCategoriesById(int id);
+        Task<List<int>> GetCategoryNumbersAsync(CancellationToken cancellationToken);
+        Task<Category> GetChildCategoryById(int id);
+        Task<List<Category>> GetForSearch(string item);
     }
 }

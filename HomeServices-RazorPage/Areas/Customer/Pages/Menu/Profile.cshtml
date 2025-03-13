@@ -45,84 +45,88 @@
         <div class="dashboard-widg-bar d-block">
             <div class="row">
                 <form class="submit-form" enctype="multipart/form-data" method="post">
-                    <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12">
-                        <div class="dashboard-list-wraps bg-white rounded mb-4">
-                            <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
-
-                                <div class="dashboard-list-wraps-flx">
-                                    <h4 class="mb-0 ft-medium fs-md"><i class="fa fa-user-check ms-2 theme-cl fs-sm"></i>مشخصات شخصی</h4>
-                                </div>
-                            </div>
-
+                    <div class="dashboard-widg-bar d-block">
+                        <div class="row">
+                            <!-- ✅ Profile Image Upload Section Inside the Form -->
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 order-xl-last order-lg-last order-md-last">
                                 <div class="d-flex bg-white rounded px-3 py-3 mb-3">
                                     <div class="dash-figure">
                                         <div class="dash-figure-thumb">
-                                            <img src="@Model.UserDto.ImagePath"
-                                                 class="img-fluid rounded" alt="Profile Image">
+                                            <img src="@Model.CustomerDto.ImagePath" class="img-fluid rounded" alt="Profile Image" />
                                         </div>
                                         <div class="upload-photo-btn">
-                                            <div class="Uploadphoto" >
-                                                <input asp-for="UserUploadImage.ProfileImage" type="file" class="upload"/>آپلود عکس
+                                            <div class="Uploadphoto" style="background:#03343b">
+                                                <span><i class="fas fa-upload"></i> آپلود تصویر</span>
+                                                <input asp-for="@Model.CustomerDto.CustomerImage" type="file" class="upload">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <input type="hidden" asp-for="UserDto.Id" />
-                            <input type="hidden" asp-for="CustomerDto.Id" />
-                            <input type="hidden" asp-for="UserDto.RoleId" />
-                            <input type="hidden" asp-for="UserUploadImage.Id" />
+                            <input type="hidden" asp-for="CustomerDto.ImagePath" id="oldImagePath" />
 
-                            <div class="dashboard-list-wraps-body py-3 px-3">
-                                <div class="row">
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="mb-1">نام</label>
-                                            <input asp-for="UserDto.FirstName" type="text" class="form-control rounded" />
+                            <!-- ✅ Other Profile Fields -->
+                            <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12">
+                                <div class="dashboard-list-wraps bg-white rounded mb-4">
+                                    <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
+                                        <div class="dashboard-list-wraps-flx">
+                                            <h4 class="mb-0 ft-medium fs-md"><i class="fa fa-user-check ms-2 theme-cl fs-sm"></i>مشخصات شخصی</h4>
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="mb-1">نام خانوادگی</label>
-                                            <input type="text" asp-for="UserDto.LastName" class="form-control rounded" />
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="mb-1">شماره تماس</label>
-                                            <input asp-for="UserDto.PhoneNumber" type="text" class="form-control rounded" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="mb-1">شهر</label>
-                                            <select asp-for="CustomerDto.CityId" class="form-select" required>
-                                                @foreach (var city in Model.Cities)
-                                                {
-                                                    <option value="@city.Id">@city.Name</option>
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="mb-1">آدرس</label>
-                                            <input asp-for="CustomerDto.Address" type="text" class="form-control rounded" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="mb-1">موجودی(تومان)</label>
-                                            <input asp-for="UserDto.Balance" type="text" class="form-control rounded">
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center justify-content-center">
-                                        <div class="col-xl-7 col-lg-10 col-md-12 col-sm-12 col-12">
-                                            <div class="bg-white rounded p-1">
-                                                <div class="form-group mb-0 position-relative">
-                                                    <button class="btn full-width btn-height text-white fs-md" type="submit" style="background:#03343b">ذخیره تغییرات</button>
+
+                                    <div class="dashboard-list-wraps-body py-3 px-3">
+                                        <div class="row">
+                                            <input type="hidden" asp-for="@Model.CustomerDto.Id" />
+
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">نام</label>
+                                                    <input asp-for="CustomerDto.FirstName" type="text" class="form-control rounded" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">نام خانوادگی</label>
+                                                    <input type="text" asp-for="CustomerDto.LastName" class="form-control rounded" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">شماره تماس</label>
+                                                    <input asp-for="CustomerDto.PhoneNumber" type="text" class="form-control rounded" placeholder="" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">شهر</label>
+                                                    <select asp-for="CustomerDto.CityId" class="form-select" required>
+                                                        @foreach (var city in Model.Cities)
+                                                        {
+                                                            <option value="@city.Id">@city.Name</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">آدرس</label>
+                                                    <input asp-for="CustomerDto.Address" type="text" class="form-control rounded" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">موجودی(تومان)</label>
+                                                    <input asp-for="@Model.CustomerDto.Balance" type="text" class="form-control rounded">
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col-xl-7 col-lg-10 col-md-12 col-sm-12 col-12">
+                                                    <div class="bg-white rounded p-1">
+                                                        <div class="form-group mb-0 position-relative">
+                                                            <button class="btn full-width btn-height text-white fs-md" type="submit" style="background:#03343b">ذخیره تغییرات</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

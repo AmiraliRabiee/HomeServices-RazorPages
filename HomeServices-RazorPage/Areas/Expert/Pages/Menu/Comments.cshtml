@@ -14,8 +14,8 @@
                         <div class="goodup-dashboard-nav sticky-top">
                             <div class="goodup-dashboard-inner">
                                 <ul data-submenu-title="منو">
-                                    <li><a asp-page="ExpertDashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
-                                    <li><a asp-page="orders"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
+                                    <li><a asp-page="Dashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                                    <li><a asp-page="reservations"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
                                     <li><a asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
                                 </ul>
                                 <ul data-submenu-title="حساب کاربری">
@@ -94,7 +94,8 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12">
                                     <div class="_dashboard_content bg-white rounded mb-4">
                                         <div class="_dashboard_content_body">
-                                            <div class="reviews-comments-wrap">
+                                            @if (Model.Comments != null && Model.Comments.Any())
+                                            {
                                                 @foreach (var comment in Model.Comments)
                                                 {
                                                     <div class="reviews-comments-item border p-3 mb-3 rounded">
@@ -119,15 +120,19 @@
                                                         </div>
                                                     </div>
                                                 }
-                                            </div>
+                                            }else{
+                                                <div class="alert alert-warning">
+                                                    نظری وجود ندارد
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div> <!-- End Comments Section -->
-                    </div>
-                </div> <!-- End Main Content -->
-            </div>
+                        </div>
+                    </div> <!-- End Comments Section -->
+                </div>
+            </div> <!-- End Main Content -->
         </div>
     </div>
 </section>

@@ -24,7 +24,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 newSuggestion.SuggestPrice = suggestion.SuggestPrice;
                 newSuggestion.OrderId = suggestion.OrderId;
                 newSuggestion.ExpertId = suggestion.ExpertId;
-                newSuggestion.CreateAt = DateTime.Now;
+                newSuggestion.CreatedAt = DateTime.Now;
                 newSuggestion.IsPresented = true;
 
 
@@ -331,7 +331,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             try
             {
                 var suggestionsCount = await _appDbContext.Suggestions
-                    .Where(s => s.Order.IsPayment == true && s.ExpertId == expertId && s.Order.StausService == StausServiceEnum.Payment)
+                    .Where(s => s.Order.IsPayment == true && s.ExpertId == expertId)
                     .Select(s => new SummSuggestionDto
                     {
                         Id = s.Id,
@@ -346,7 +346,9 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                         CityName = s.Expert.City.Name,
                         CustomerName = s.Order.Customer.User.FirstName + " " + s.Order.Customer.User,
                         StausService = s.Order.StausService,
-                        CusomerId = s.Order.CustomerId
+                        CusomerId = s.Order.CustomerId,
+                        CustomerImagePath = s.Order.Customer.User.ImagePath,
+                        ImagePath = s.Order.Customer.User.ImagePath,
                     })
                     .ToListAsync(cancellationToken);
                 return suggestionsCount;
@@ -384,6 +386,14 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task<Suggestion?> GetLastSuggestion(int expertId,int orderId, CancellationToken cancellationToken)
+        {
+            return await _appDbContext.Suggestions
+                .Where(s => s.ExpertId == expertId && s.OrderId == orderId)
+                .OrderByDescending(s => s.CreatedAt)
+                .FirstOrDefaultAsync(cancellationToken);
         }
         #endregion
     }

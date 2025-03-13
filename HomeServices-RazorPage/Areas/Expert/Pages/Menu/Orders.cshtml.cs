@@ -14,13 +14,16 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
         [BindProperty]
         public AppUser AppUser { get; set; }
         [BindProperty]
-        public List<SummOrderDto> OrderDtos { get; set; }
+        public SummOrderDto OrderDto { get; set; }
+        [BindProperty]
+        public float SuggestPrice { get; set; }
         public int MyProperty { get; set; }
         public async Task OnGetAsync(int id , CancellationToken cancellationToken)
         {
-            AppUser = await _userManager.GetUserAsync(User);
-            OrderDtos = await _orderAppService.GetReserveOrders(AppUser, cancellationToken);
-
+            AppUser = await _userManager.GetUserAsync(User); 
+            OrderDto = await _orderAppService.GetOrderById(id ,cancellationToken);
+            SuggestPrice = await _orderAppService.GetSuggestPrice(id ,cancellationToken);
         }
+
     }
 }

@@ -31,6 +31,10 @@ namespace App.Domain.AppServices.Base
 
         public async Task<CategoryDto> GetCategoryDto(int? id)
             => await _categoryService.GetCategoryDto(id);
+
+        public async Task<List<int>> GetCategoryNumbersAsync(CancellationToken cancellationToken)
+            => await _categoryService.GetCategoryNumbersAsync(cancellationToken);
+
         public List<CategoryDto> GetCatyegoryByParent(int id)
             => _categoryService.GetCatyegoryByParent(id);
 

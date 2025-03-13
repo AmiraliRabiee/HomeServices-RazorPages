@@ -22,7 +22,8 @@ namespace App.Domain.Core.Dto.HomeService
         public string CityName { get; set; }
         public string CustomerName { get; set; }
         public int CusomerId { get; set; }
-
+        public string CustomerImagePath { get; set; }
+        public string ImagePath { get; set; }
         public float SuggestPrice { get; set; }
         public string CustomerAddress { get; set; }
         public List<ExpertHouseWork>? ExpertHouseWorks { get; set; }

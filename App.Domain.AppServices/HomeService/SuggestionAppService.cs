@@ -18,13 +18,20 @@ namespace App.Domain.AppServices.HomeService
             return new Result { IsSuccess = false ,Message = result.Message };
         }
 
-        public async Task<Result> Create(Suggestion suggestion, CancellationToken cancellationToken)
+        public async Task<Result> Create(Suggestion suggestion,float basePrice, CancellationToken cancellationToken)
         {
             if (suggestion is null)
                 return new Result { IsSuccess = false, Message = "پیشنهادی برای ثبت وجود ندارد" };
+
+            if (suggestion.SuggestPrice < basePrice)
+                return new Result { IsSuccess = false, Message = " مبلغ پیشنهادی شما باید بیشتر از قیمت پایه باشد " };
+
             var result = await _suggestionService.Create(suggestion, cancellationToken);
             if (result.IsSuccess)
+            {
+                await _orderService.ChangeToExpertSelection(suggestion.ExpertId);
                 return new Result { IsSuccess = true, Message = result.Message };
+            }
             return new Result { Message = result.Message };
         }
 
@@ -78,5 +85,11 @@ namespace App.Domain.AppServices.HomeService
 
         public async  Task<int> DoneSuggestionsCount(int expertId, CancellationToken cancellationToken)
             => await _suggestionService.DoneSuggestionsCount(expertId, cancellationToken);
+
+        public async Task<Suggestion?> GetLastSuggestion(int expertId, int orderId, CancellationToken cancellationToken)
+            => await _suggestionService.GetLastSuggestion(expertId, orderId, cancellationToken);
+
+        public async Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken)
+            => await _suggestionService.GetExpertDto(id, cancellationToken);
     }
 }

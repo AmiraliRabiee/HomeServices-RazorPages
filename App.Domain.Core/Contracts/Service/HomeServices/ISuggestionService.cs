@@ -23,5 +23,7 @@ namespace App.Domain.Core.Contracts.Service.HomeServices
         Task<int> DoneSuggestionsCount(int expertId, CancellationToken cancellationToken);
         Task<List<SummSuggestionDto>> DoneSuggestions(int expertId, CancellationToken cancellationToken);
         Task<List<SummSuggestionDto>> ActiveSuggestions(int expertId, CancellationToken cancellationToken);
+        Task<Suggestion?> GetLastSuggestion(int expertId, int orderId, CancellationToken cancellationToken);
+        Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken);
     }
 }

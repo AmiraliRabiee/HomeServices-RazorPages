@@ -139,7 +139,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
         public async Task<List<CommentDto>> GetCommentsById(int expertId, CancellationToken cancellationToken)
         {
             var comments = await _appDbContext.Comments
-                .Where(c => c.ExpertId == expertId && c.IsPlayable)
+                .Where(c => c.ExpertId == expertId && c.IsPlayable == true)
                 .Select(c => new CommentDto
                 {
                     Id = c.Id,

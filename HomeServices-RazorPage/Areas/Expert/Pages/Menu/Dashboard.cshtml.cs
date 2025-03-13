@@ -16,8 +16,6 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
         [BindProperty]
         public List<SummSuggestionDto> DoneSuggestions { get; set; }
         [BindProperty]
-        public List<SummSuggestionDto> ActiveSuggestions { get; set; }
-        [BindProperty]
         public StatisticsExpertDto statisticsExpert { get; set; }
 
         public async Task OnGetAsync(CancellationToken cancellationToken)
@@ -25,7 +23,6 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
             var expertId = UserTools.GetExpertId(User.Claims);
             statisticsExpert = await _baseDataAppService.GetStatisticsExpert(expertId, cancellationToken);
             DoneSuggestions = await _suggestionAppService.DoneSuggestions(expertId, cancellationToken);
-            ActiveSuggestions = await _suggestionAppService.ActiveSuggestions(expertId, cancellationToken);
         }
     }
 }

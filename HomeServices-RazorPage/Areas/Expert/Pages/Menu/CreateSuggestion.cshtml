@@ -12,8 +12,8 @@
         <div class="goodup-dashboard-nav sticky-top">
             <div class="goodup-dashboard-inner">
                 <ul data-submenu-title="منو">
-                    <li><a asp-page="ExpertDashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
-                    <li><a asp-page="orders"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
+                    <li><a asp-page="Dashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                    <li><a asp-page="reservations"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
                     <li><a asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
                 </ul>
                 <ul data-submenu-title="حساب کاربری">
@@ -53,6 +53,10 @@
 
                 <div class="dashboard-list-wraps-body py-3 px-3">
                     <div class="row">
+                        @if (!string.IsNullOrEmpty(Model.Message))
+                        {
+                            <div class="alert alert-info">@Model.Message</div>
+                        }
                         <!-- Title -->
                         <div class="col-12">
                             <div class="form-group">
@@ -94,6 +98,8 @@
                     <!-- Form for Fillable Items -->
                     <form method="post" asp-page-handler="create">
                         <div class="row">
+                            <input type="hidden" asp-for="OrderDto.Id" />
+
                             <!-- Bid Price -->
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                 <div class="form-group">

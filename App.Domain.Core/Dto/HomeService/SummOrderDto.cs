@@ -12,12 +12,13 @@ namespace App.Domain.Core.Dto.HomeService
         public StausServiceEnum StausService { get; set; }
         public string HouseWork { get; set; }
         public int CustomerId { get; set; }
-        public decimal? BasePrice { get; set; }
+        public float BasePrice { get; set; }
         public string CityName { get; set; }
         public string ImagePath { get; set; }
         public int HouseWorkId { get; set; }
         public string ExpertName { get; set; }
         public DateTime CreationDate { get; set; }
         public string CustomerName { get; set; }
+        public bool? IsConfrim { get; set; }
     }
 }

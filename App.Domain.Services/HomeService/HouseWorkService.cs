@@ -7,7 +7,7 @@ using App.Infrastructure.Dapper;
 
 namespace App.Domain.Services.HomeService
 {
-    public class HouseWorkService(IHouseWorkRepository _houseWorkRepository,IHouseWorkDapperRepository _houseWorkDapperRepository) : IHouseWorkService
+    public class HouseWorkService(IHouseWorkRepository _houseWorkRepository, IHouseWorkDapperRepository _houseWorkDapperRepository) : IHouseWorkService
     {
         public async Task<Result> CreateService(SummHouseWorkDto service, CancellationToken cancellationToken)
             => await _houseWorkRepository.CreateService(service, cancellationToken);
@@ -35,16 +35,21 @@ namespace App.Domain.Services.HomeService
         public async Task<List<SummHouseWorkDto>> GetServicesByChildId(int id, CancellationToken cancellationToken)
             => await _houseWorkRepository.GetServicesByChildId(id, cancellationToken);
 
-        public async Task<List<SummHouseWorkDto>> GetServicesById(int id ,CancellationToken cancellationToken)
-            => await _houseWorkRepository.GetServicesById(id , cancellationToken);
+        public async Task<List<SummHouseWorkDto>> GetServicesByCategoryId(int id ,CancellationToken cancellationToken)
+            => await _houseWorkRepository.GetServicesByCategoryId(id , cancellationToken);
 
-        public List<SummHouseWorkDto> GetServicesById()
-            => _houseWorkRepository.GetServicesById();
+
 
         public async Task<Result> SoftDeleteHomeService(HouseWork service, CancellationToken cancellationToken)
             => await _houseWorkRepository.SoftDeleteHomeService(service, cancellationToken);
 
         public async Task<Result> UpdateHomeService(UpdateHouseWork service, CancellationToken cancellationToken)
             => await _houseWorkRepository.UpdateHomeService(service, cancellationToken);
+
+        public async Task<List<SummHouseWorkDto>> GetServicesById(int id, CancellationToken cancellationToken)
+            => await _houseWorkRepository.GetServicesById(id, cancellationToken);
+
+        public async  Task<List<HouseWork>> GetForSearch(string item)
+            => await _houseWorkRepository.GetForSearch(item);
     }
 }

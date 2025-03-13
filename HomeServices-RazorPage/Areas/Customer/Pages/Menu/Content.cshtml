@@ -6,9 +6,44 @@
     <div class="dashboard-widg-bar d-block">
         <div class="row">
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 order-xl-last order-lg-last order-md-last">
-                <div class="d-flex bg-white rounded px-3 py-3 mb-3">
-                    <div class="dash-figure">
-                        <div class="dash-figure-thumb"><img src="@Model.CustomerDto.ImagePath" class="img-fluid rounded" alt="" /></div>
+                <!-- Combined Frame for Photo and Contact Info -->
+                <div class="bg-white rounded p-3">
+                    <!-- Single frame with padding -->
+                    <!-- Profile Image -->
+                    <div class="dash-figure text-center mb-3">
+                        <!-- Center the image and add margin-bottom -->
+                        <div class="dash-figure-thumb">
+                            <img src="@(string.IsNullOrEmpty(Model.CustomerDto.ImagePath) ? Url.Content("~/images/profiles/base (3).png") : Model.CustomerDto.ImagePath)"
+                                 class="img-fluid rounded"
+                                 alt="Profile Image" />
+                        </div>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="uli-list-info">
+                        <ul class="list-unstyled mb-0">
+                            <!-- Remove default list styling -->
+                            <li class="mb-3">
+                                <!-- Add spacing between items -->
+                                <div class="list-uiyt d-flex align-items-center">
+                                    <div class="list-iobk me-3"><i class="fas fa-envelope"></i></div>
+                                    <div class="list-uiyt-capt">
+                                        <h5 class="mb-0">پست الکترونیک</h5>
+                                        <p class="mb-0">support@example.com</p>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="list-uiyt d-flex align-items-center">
+                                    <div class="list-iobk me-3"><i class="fas fa-phone"></i></div>
+                                    <div class="list-uiyt-capt">
+                                        <h5 class="mb-0">شماره تماس</h5>
+                                        <p class="mb-0">02155555555</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -37,8 +72,8 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label class="mb-1">شماره تماس</label>
-                                        <input type="text" class="form-control rounded" asp-for="@Model.CustomerDto.PhoneNumber" />
+                                        <label class="mb-1">آدرس</label>
+                                        <input type="text" class="form-control rounded" asp-for="@Model.CustomerDto.Address" />
                                     </div>
                                 </div>
 
@@ -48,18 +83,59 @@
                                         <input type="text" class="form-control rounded" asp-for="@Model.CustomerDto.CityName" />
                                     </div>
                                 </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                    <div class="form-group">
-                                        <label class="mb-1">آدرس</label>
-                                        <input class="form-control rounded ht-150" asp-for="@Model.CustomerDto.Address">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                </form><div class="bg-white rounded mb-4">
+                    <div class="jbd-01 px-4 py-4">
+                        <div class="jbd-details">
+                            <h5 class="ft-bold fs-lg">درباره حقوق مشتری</h5>
+
+                            <div class="d-block mt-3">
+                                <p>طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+                                <p class="p-0 m-0">در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 </div>
+@* @section Styles{
+    <style>
+        .dash-figure-thumb img {
+            width: 100%; /* Ensure the image takes full width */
+            max-width: 150px; /* Limit the maximum width of the image */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Ensure the image is centered */
+            margin: 0 auto; /* Center the image horizontally */
+        }
+
+        .jb-apply-form {
+            margin-top: 20px; /* Add space between the image and contact info */
+        }
+
+        .list-uiyt {
+            display: flex;
+            align-items: center;
+        }
+
+        .list-iobk {
+            font-size: 1.2rem; /* Increase icon size */
+            color: #03343b; /* Custom icon color */
+        }
+
+        .list-uiyt-capt h5 {
+            font-size: 1rem; /* Adjust heading size */
+            font-weight: bold; /* Make the heading bold */
+        }
+
+        .list-uiyt-capt p {
+            font-size: 0.9rem; /* Adjust paragraph size */
+            color: #666; /* Custom text color */
+        }
+    </style>
+} *@

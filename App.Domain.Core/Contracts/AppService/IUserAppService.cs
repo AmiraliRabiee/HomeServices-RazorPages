@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using App.Domain.Core.Entites.User;
 using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Dto.HomeService;
 
 namespace App.Domain.Core.Contracts.AppService
 {
@@ -26,5 +27,6 @@ namespace App.Domain.Core.Contracts.AppService
         Task UpdateExpertSkills(int expertId, List<int> houseWorkIds, CancellationToken cancellationToken);
         Task<Result> ExpertReceive(int id, float price, CancellationToken cancellationToken);
         Task<List<int>> GetExpertSkills(int expertId, CancellationToken cancellationToken);
+        Task<List<ExpertWorkDto>> GetExpertSkillsNameAsync(int expertId, CancellationToken cancellationToken);
     }
 }

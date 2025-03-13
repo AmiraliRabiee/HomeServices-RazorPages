@@ -7,7 +7,7 @@ using App.Infrastructure.Dapper;
 
 namespace App.Domain.Services.Base
 {
-    public class CategoryService(ICategoryRepository _categoryRepository,ICategoryDapperRepository _categoryDapperRepository) : ICategoryService
+    public class CategoryService(ICategoryRepository _categoryRepository, ICategoryDapperRepository _categoryDapperRepository) : ICategoryService
     {
         public Task<Result> CreateCategpry(CategoryDto category, CancellationToken cancellationToken)
             => _categoryRepository.CreateCategpry(category, cancellationToken);
@@ -24,6 +24,9 @@ namespace App.Domain.Services.Base
         public async Task<CategoryDto> GetCategoryDto(int? id)
             => await _categoryRepository.GetCategoryDto(id);
 
+        public async Task<List<int>> GetCategoryNumbersAsync(CancellationToken cancellationToken)
+            => await _categoryRepository.GetCategoryNumbersAsync(cancellationToken);
+
         public List<CategoryDto> GetCatyegoryByParent(int id)
             => _categoryRepository.GetCatyegoryByParent((int)id);
         public async Task<List<CategoryDto>> GetChildCategories(CancellationToken cancellationToken)
@@ -32,8 +35,15 @@ namespace App.Domain.Services.Base
         public List<Category> GetChildCategoriesById(int id)
             => _categoryRepository.GetChildCategoriesById(id);
 
+        public async Task<Category> GetChildCategoryById(int id)
+            =>await _categoryRepository.GetChildCategoryById(id);
+
         public async Task<int> GetChildCount(int categoryId)
             =>await _categoryRepository.GetChildCount(categoryId);
+
+        public async Task<List<Category>> GetForSearch(string item)
+            => await _categoryRepository.GetForSearch(item);
+
         public async Task<List<CategoryDto>> GetParentCategories(CancellationToken cancellationToken)
             => await _categoryDapperRepository.GetCategoriesAsync(cancellationToken);
 

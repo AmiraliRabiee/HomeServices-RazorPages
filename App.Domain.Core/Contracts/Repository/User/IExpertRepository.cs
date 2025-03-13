@@ -12,5 +12,6 @@ namespace App.Domain.Core.Contracts.Repository.User
         Task<Result> SoftDeleteExpert(int expertId, CancellationToken cancellationToken);
         Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken);
         Task<Result> UpdateBalance(int id, float balance, CancellationToken cancellationToken);
+        Task<List<Expert>> GetForSearch(string item);
     }
 }

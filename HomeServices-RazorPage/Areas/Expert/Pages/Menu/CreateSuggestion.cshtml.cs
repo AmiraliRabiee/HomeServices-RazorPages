@@ -1,4 +1,4 @@
-using App.Domain.Core.Contracts.AppService;
+﻿using App.Domain.Core.Contracts.AppService;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.User;
 using App.Domain.Core.Helpers;
@@ -27,15 +27,28 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
         {
             var expertId = UserTools.GetExpertId(User.Claims);
             int orderId = (int)TempData["OrderId"];
-            
+            TempData.Keep("OrderId");
+
+            OrderDto = await _orderAppService.GetOrderById(orderId, cancellationToken);
+
             NewSuggestion.OrderId = orderId;
             NewSuggestion.ExpertId = expertId;
 
-            var result = await _suggestionAppService.Create(NewSuggestion, cancellationToken);
+
+            var lastSuggestion = await _suggestionAppService.GetLastSuggestion(expertId, orderId, cancellationToken);
+
+            if (lastSuggestion != null && (DateTime.UtcNow - lastSuggestion.CreatedAt).TotalHours < 24)
+            {
+                ModelState.AddModelError(string.Empty, "شما فقط یک پیشنهاد در روز می‌توانید ثبت کنید.");
+                return Page();
+            }
+
+            var result = await _suggestionAppService.Create(NewSuggestion ,OrderDto.BasePrice, cancellationToken);
             if (result.IsSuccess)
             {
                 Message = result.Message;
-                return RedirectToPage("dashboard");
+                TempData["Success"] = "پیشنهاد با موفقیت ثبت شد";
+                return RedirectToPage("reservations");
             }
             Message = result.Message;
             return Page();

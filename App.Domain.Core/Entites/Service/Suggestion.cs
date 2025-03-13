@@ -15,7 +15,7 @@ public class Suggestion
     public bool IsAccept { get; set; }
     public bool IsDeleted { get; set; } = false;
     public bool IsPresented { get; set; }
-    public DateTime CreateAt { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     public int OrderId { get; set; }
     public int ExpertId { get; set; }

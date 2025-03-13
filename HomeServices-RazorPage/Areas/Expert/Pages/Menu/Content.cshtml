@@ -49,7 +49,7 @@
                                     <a asp-page="/menu/comments" asp-area="expert" class="adv-btn full-width">خواندن نظرات</a>
                                 </div>
                                 <div class="col-6">
-                                    <a asp-page="/addcomment/index" asp-area="" class="adv-btn full-width">ثبت نظر</a>
+                                    <a asp-page="/addcomment/index" asp-area="" asp-route-id="@Model.Expert.Id" class="adv-btn full-width">ثبت نظر</a>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +90,10 @@
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <label class="mb-1">مهارت ها</label>
-                                        <input type="text" class="form-control rounded" asp-for="Expert.Skills" readonly />
+                                        @foreach (var skill in Model.Skills)
+                                        {
+                                            <input type="text" class="form-control rounded" asp-for="@skill.HouseWorkName" readonly />
+                                        }
                                     </div>
                                 </div>
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">

@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Dto.User;
+﻿using App.Domain.Core.Dto.HomeService;
+using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
 using App.Domain.Core.Entites.User;
@@ -13,11 +14,10 @@ namespace App.Domain.Core.Contracts.Service.User
         Task<Result> SoftDeleteExpert(int expertId, CancellationToken cancellationToken);
         Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken);
         Task<Result> UpdateBalance(int id, float balance, CancellationToken cancellationToken);
-        //Task AddNewSkillsAsync(int expertId, List<ExpertHouseWork> existingSkills, List<int> newHouseWorkIds, CancellationToken cancellationToken);
-        //Task RemoveUnwantedSkillsAsync(List<ExpertHouseWork> existingSkills, List<int> newHouseWorkIds, CancellationToken cancellationToken);
-        //Task<List<ExpertHouseWork>> GetExistingSkillsAsync(int expertId, CancellationToken cancellationToken);
+        Task<List<ExpertWorkDto>> GetExpertSkillsNameAsync(int expertId, CancellationToken cancellationToken);
+
         Task<List<int>> GetExpertSkills(int expertId, CancellationToken cancellationToken);
         Task UpdateExpertSkills(int expertId, List<int> houseWorkIds, CancellationToken cancellationToken);
-
+        Task<List<Expert>> GetForSearch(string item);
     }
 }

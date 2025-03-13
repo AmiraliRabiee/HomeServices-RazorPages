@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250305130900_init")]
+    [Migration("20250313124618_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -263,9 +263,8 @@ namespace App.Infrastructure.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal?>("BasePrice")
-                        .IsRequired()
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("BasePrice")
+                        .HasColumnType("real");
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
@@ -300,7 +299,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 1,
-                            BasePrice = 5000m,
+                            BasePrice = 5000f,
                             CategoryId = 10,
                             Description = "نیاز به توضیحات تکمیلی مشکل",
                             ImagePath = "\\Images\\HomeServices\\1h.jpg",
@@ -310,7 +309,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 2,
-                            BasePrice = 3000m,
+                            BasePrice = 3000f,
                             CategoryId = 10,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\2h.jpg",
@@ -320,7 +319,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 3,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 10,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\3h.jpg",
@@ -330,7 +329,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 4,
-                            BasePrice = 4000m,
+                            BasePrice = 4000f,
                             CategoryId = 10,
                             Description = "پرتقاضا",
                             ImagePath = "\\Images\\HomeServices\\4h.jpg",
@@ -340,7 +339,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 5,
-                            BasePrice = 2500m,
+                            BasePrice = 2500f,
                             CategoryId = 10,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\5h.jpg",
@@ -350,7 +349,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 6,
-                            BasePrice = 5000m,
+                            BasePrice = 5000f,
                             CategoryId = 9,
                             Description = "نیاز به توضیحات تکمیلی مشکل",
                             ImagePath = "\\Images\\HomeServices\\6h.jpg",
@@ -360,7 +359,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 7,
-                            BasePrice = 4000m,
+                            BasePrice = 4000f,
                             CategoryId = 9,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\7h.jpg",
@@ -370,7 +369,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 8,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 9,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\8h.jpg",
@@ -380,7 +379,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 9,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 9,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\9h.jpg",
@@ -390,7 +389,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 10,
-                            BasePrice = 4000m,
+                            BasePrice = 4000f,
                             CategoryId = 9,
                             Description = "به صورت تخصصی",
                             ImagePath = "\\Images\\HomeServices\\10h.jpg",
@@ -400,7 +399,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 11,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 8,
                             Description = "به صورت تخصصی",
                             ImagePath = "\\Images\\HomeServices\\11h.png",
@@ -410,7 +409,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 12,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 8,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\12h.jpg",
@@ -420,7 +419,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 13,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 8,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\13h.jpg",
@@ -430,7 +429,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 14,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 8,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\14h.jpg",
@@ -440,7 +439,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 15,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 8,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\15h.jpg",
@@ -450,7 +449,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 29,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 14,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\29h.jpg",
@@ -460,7 +459,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 30,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 14,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\30h.jpg",
@@ -470,7 +469,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 31,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 14,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\31h.jpg",
@@ -480,7 +479,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 32,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 14,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\32h.jpg",
@@ -490,7 +489,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 33,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 14,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\33h.jpg",
@@ -500,612 +499,670 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 34,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 15,
                             Description = "(فرش ، موکت ، مبل)",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\34h.jpg",
                             IsDeleted = false,
                             Title = "شستشو در منزل"
                         },
                         new
                         {
                             Id = 35,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 15,
                             Description = "",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\35h.jpg",
                             IsDeleted = false,
                             Title = "قالیشویی"
                         },
                         new
                         {
                             Id = 36,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 15,
                             Description = "",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\36h.jpg",
                             IsDeleted = false,
                             Title = "خشکشویی"
                         },
                         new
                         {
                             Id = 37,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 15,
                             Description = "",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\37h.jpg",
                             IsDeleted = false,
                             Title = "پرده شویی"
                         },
                         new
                         {
                             Id = 38,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 16,
                             Description = "(آب ، نانو)",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\38h.jpg",
                             IsDeleted = false,
                             Title = "کارواش"
                         },
                         new
                         {
                             Id = 39,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 16,
                             Description = "",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\39h.jpg",
                             IsDeleted = false,
                             Title = "صفرشویی خودرو"
                         },
                         new
                         {
                             Id = 40,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 16,
                             Description = "جدید",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\40h.jpg",
                             IsDeleted = false,
                             Title = "سرامیک حودرو"
                         },
                         new
                         {
                             Id = 41,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 16,
                             Description = "",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\41h.jpg",
                             IsDeleted = false,
                             Title = "واکس و پولیش"
                         },
                         new
                         {
                             Id = 42,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 16,
                             Description = "به صورت تخصصی",
-                            ImagePath = "",
+                            ImagePath = "\\Images\\HomeServices\\42h.jpg",
                             IsDeleted = false,
                             Title = "صافکاری و نقاشی"
                         },
                         new
                         {
                             Id = 43,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 17,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\43h.jpg",
                             IsDeleted = false,
                             Title = "خدمات ناخن"
                         },
                         new
                         {
                             Id = 44,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 17,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\44h.jpg",
                             IsDeleted = false,
                             Title = " رنگ مو در منزل"
                         },
                         new
                         {
                             Id = 45,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 17,
                             Description = "جدید",
+                            ImagePath = "\\Images\\HomeServices\\45h.jpg",
                             IsDeleted = false,
                             Title = "پاکسازی و لایه برداری پوست"
                         },
                         new
                         {
                             Id = 46,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 17,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\46h.jpg",
                             IsDeleted = false,
                             Title = "آرایش صورت در منزل"
                         },
                         new
                         {
                             Id = 47,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 17,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\47h.jpg",
                             IsDeleted = false,
                             Title = "لیفت و لیمنت مژه"
                         },
                         new
                         {
                             Id = 48,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 18,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\48h.jpg",
                             IsDeleted = false,
                             Title = "کوتاهی مو و اصلاح صورت"
                         },
                         new
                         {
                             Id = 49,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 18,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\49h.jpg",
                             IsDeleted = false,
                             Title = "مراقب و زیبایی آقایان"
                         },
                         new
                         {
                             Id = 50,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 18,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\50h.jpg",
                             IsDeleted = false,
                             Title = "گریم داماد"
                         },
                         new
                         {
                             Id = 51,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 19,
                             Description = "به صورت تخصصی",
+                            ImagePath = "\\Images\\HomeServices\\51h.jpg",
                             IsDeleted = false,
                             Title = "برنامه ورزشی و تغذیه"
                         },
                         new
                         {
                             Id = 52,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 19,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\52h.jpg",
                             IsDeleted = false,
                             Title = "کلاس یوگا در خانه"
                         },
                         new
                         {
                             Id = 53,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 19,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\53h.jpg",
                             IsDeleted = false,
                             Title = "کلاس پیلاتس در خانه"
                         },
                         new
                         {
                             Id = 54,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 19,
                             Description = "جدید",
+                            ImagePath = "\\Images\\HomeServices\\54h.jpg",
                             IsDeleted = false,
                             Title = "کلاس سی ایکس در خانه"
                         },
                         new
                         {
                             Id = 55,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 19,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\55h.jpg",
                             IsDeleted = false,
                             Title = "حرکات اصلاحی"
                         },
                         new
                         {
                             Id = 56,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\56h.jpg",
                             IsDeleted = false,
                             Title = "نصب و تعمیر یخچال فریزر"
                         },
                         new
                         {
                             Id = 57,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\57h.jpg",
                             IsDeleted = false,
                             Title = " نصب و تعمیر ماشین ظرفشویی"
                         },
                         new
                         {
                             Id = 58,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\58h.jpg",
                             IsDeleted = false,
                             Title = "نصب و تعمیر ماشین لباسشویی"
                         },
                         new
                         {
                             Id = 59,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\59h (2).jpg",
                             IsDeleted = false,
                             Title = "نصب و تعمیر فر"
                         },
                         new
                         {
                             Id = 60,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\60h.jpg",
                             IsDeleted = false,
                             Title = "نصب و تعمیر هود آشپرخانه"
                         },
                         new
                         {
                             Id = 61,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\61h.jpg",
                             IsDeleted = false,
                             Title = "نصب و تعمیر اجاق گاز"
                         },
                         new
                         {
                             Id = 62,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 20,
                             Description = "به صورت تخصصی",
+                            ImagePath = "\\Images\\HomeServices\\62h.jpg",
                             IsDeleted = false,
                             Title = " تعمیرات تلویزیون"
                         },
                         new
                         {
                             Id = 63,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 20,
                             Description = "جدید",
+                            ImagePath = "\\Images\\HomeServices\\63h.jpg",
                             IsDeleted = false,
                             Title = "تعمیر چای ساز و قهوه ساز"
                         },
                         new
                         {
                             Id = 64,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\64h.jpg",
                             IsDeleted = false,
                             Title = "تعمیر جاروبرقی"
                         },
                         new
                         {
                             Id = 65,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 20,
                             Description = "",
+                            ImagePath = "\\Images\\HomeServices\\65h.jpg",
                             IsDeleted = false,
                             Title = "نصب و تعویض فیلتر آب"
                         },
                         new
                         {
                             Id = 66,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 21,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "تعمیر کامپیوتر و لپتاپ"
                         },
                         new
                         {
                             Id = 67,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 21,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = " تعمیر ماشین های اداری"
                         },
                         new
                         {
                             Id = 68,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 21,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "پشتیبانی شبکه وسرور"
                         },
                         new
                         {
                             Id = 69,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 21,
                             Description = "به صورت تخصصی",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "طراحی سایت و لوگو"
                         },
                         new
                         {
                             Id = 70,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 21,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "مودم و اینترنت"
                         },
                         new
                         {
                             Id = 71,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 22,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "خدمات تاچ و ال سی دی"
                         },
                         new
                         {
                             Id = 72,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 22,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = " خدمات باتری"
                         },
                         new
                         {
                             Id = 73,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 22,
                             Description = "جدید",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "خدمات نرم افزاری"
                         },
                         new
                         {
                             Id = 74,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 22,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "خدمات اسپیکر"
                         },
                         new
                         {
                             Id = 75,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 22,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "خدمات دوربین"
                         },
                         new
                         {
                             Id = 76,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 23,
                             Description = "زیر قیمت کارخانه",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "تعویض باتری خودرو"
                         },
                         new
                         {
                             Id = 77,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = " برق و باتری خودرو"
                         },
                         new
                         {
                             Id = 78,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "مکانیکی خودرو"
                         },
                         new
                         {
                             Id = 79,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "امداد خودرو"
                         },
                         new
                         {
                             Id = 80,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "پنچرگیری"
                         },
                         new
                         {
                             Id = 81,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "کارشناسی خودرو"
                         },
                         new
                         {
                             Id = 82,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "تعویض لاستیک"
                         },
                         new
                         {
                             Id = 83,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "تعویض لنت خودرو"
                         },
                         new
                         {
                             Id = 84,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "سوخت رسانی"
                         },
                         new
                         {
                             Id = 85,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 23,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "تعمیر موتور سیکلت"
                         },
                         new
                         {
                             Id = 86,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 24,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "اسباب کشی با خاور و کامیون"
                         },
                         new
                         {
                             Id = 87,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 24,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = " اسباب کشی با وانت و نیسان"
                         },
                         new
                         {
                             Id = 88,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 24,
                             Description = "نیاز به توضیح",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "اسباب کشی و حمل بین شهری"
                         },
                         new
                         {
                             Id = 89,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 24,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "کارگر جابجایی"
                         },
                         new
                         {
                             Id = 90,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 24,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "حمل نخاله و ضایعات ساختمانی"
                         },
                         new
                         {
                             Id = 91,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 25,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "مراقبت و نگهداری"
                         },
                         new
                         {
                             Id = 92,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 25,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = " پرستاری و تزریقات"
                         },
                         new
                         {
                             Id = 93,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 25,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "معاینه پزشکی"
                         },
                         new
                         {
                             Id = 94,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 25,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "پیراپزشکی"
                         },
                         new
                         {
                             Id = 95,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 25,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "آزمایش و نمونه گیری"
                         },
                         new
                         {
                             Id = 96,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 26,
                             Description = "جدید",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "هتل های حیوانات خانگی"
                         },
                         new
                         {
                             Id = 97,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 26,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = " خدماتدامپزشکی در محل"
                         },
                         new
                         {
                             Id = 98,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 26,
                             Description = "به صورت تخصصی",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "خدمات تربیتی حیوانات خانگی"
                         },
                         new
                         {
                             Id = 99,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 26,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "خدمات شستشو و آرایشی"
                         },
                         new
                         {
                             Id = 100,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 26,
                             Description = "",
+                            ImagePath = "",
                             IsDeleted = false,
                             Title = "پت شاپ"
                         });
@@ -1118,6 +1175,9 @@ namespace App.Infrastructure.EFCore.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<float>("ProfitPercentage")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -1231,7 +1291,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "a48a1cca-8905-478f-be05-34d85810f6d7",
+                            ConcurrencyStamp = "d1240e06-0fba-4c82-9296-342038e2a44d",
                             Email = "Admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -1240,11 +1300,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHcmKdUvop4wXHcq1Jy3vD7my+edJ3Wkjp0XZW12zbYCRbbaz2tBA6AHL/9uG1aljA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFdNmCy7qnFu9qKKsJIgEildm6xVMDhSHdtMhZaNHHf6KOxNILgYOk/cBozcFdtFiw==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 3, 5, 16, 39, 0, 196, DateTimeKind.Local).AddTicks(2833),
+                            RegisterAt = new DateTime(2025, 3, 13, 16, 16, 18, 150, DateTimeKind.Local).AddTicks(8687),
                             RoleId = 1,
-                            SecurityStamp = "a9f0af26-a4ef-498e-b320-2c487d8c2e2b",
+                            SecurityStamp = "e4aa746a-11ef-4553-bd91-a4882bc07131",
                             TwoFactorEnabled = false,
                             UserName = "Admin@gmail.com"
                         },
@@ -1254,7 +1314,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "bad1d0d9-65cb-4d09-bfc7-6255025e0515",
+                            ConcurrencyStamp = "be9ba985-c039-4070-995c-1ff7f5a46de3",
                             Email = "Customer@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Amir",
@@ -1263,11 +1323,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER@GMAIL.COM",
                             NormalizedUserName = "CUSTOMER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECBjHgKNmpUDAO/Gdv0RPW/x/wciK2yWtLohgWmajexQZSZmSY72vBXALw2BL7aAVw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEESWoJDNDGWj9mHPCR9LBdjL9WQEbUduaLSuFH7/VNqrUg+7z12IemRtNL1afz2Tfw==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 3, 5, 16, 39, 0, 196, DateTimeKind.Local).AddTicks(2866),
+                            RegisterAt = new DateTime(2025, 3, 13, 16, 16, 18, 150, DateTimeKind.Local).AddTicks(8715),
                             RoleId = 2,
-                            SecurityStamp = "ea54b7d0-05c7-48fe-815e-dda8c88e9640",
+                            SecurityStamp = "8bf078df-0abf-43c6-81a4-9b3f8ecfb536",
                             TwoFactorEnabled = false,
                             UserName = "Customer@gmail.com"
                         },
@@ -1277,7 +1337,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "d83dc7aa-c5e0-4362-bff6-8fe3defb31aa",
+                            ConcurrencyStamp = "4ec494d1-0b49-45f7-b86c-8e4104448055",
                             Email = "Expert@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Amir",
@@ -1286,11 +1346,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "EXPERT@GMAIL.COM",
                             NormalizedUserName = "EXPERT@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMlFaGSs8EnkOoxDEG7J55ImqodavL3JkTmxFw7jxYvcTaxy3Zgd/9qZ8cuCScy8yw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOJIxDpSMDCbc7bi/a2Giph0Rz2eKFXMfxs4d6qXRbZE8xMNUzdVpwTCrn428RJetg==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 3, 5, 16, 39, 0, 196, DateTimeKind.Local).AddTicks(2884),
+                            RegisterAt = new DateTime(2025, 3, 13, 16, 16, 18, 150, DateTimeKind.Local).AddTicks(8728),
                             RoleId = 3,
-                            SecurityStamp = "6fb43307-1060-4bc9-adcf-c829b90c8e57",
+                            SecurityStamp = "dedffc9d-2927-470c-89d7-28fad014ff68",
                             TwoFactorEnabled = false,
                             UserName = "Expert@gmail.com"
                         });
@@ -1767,7 +1827,7 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<DateTime>("CompletionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("CreateAt")
+                    b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CustomerId")
@@ -1777,9 +1837,6 @@ namespace App.Infrastructure.EFCore.Migrations
                         .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
-
-                    b.Property<int?>("ExpertId")
-                        .HasColumnType("int");
 
                     b.Property<int>("HouseWorkId")
                         .HasColumnType("int");
@@ -1793,6 +1850,9 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<bool?>("IsFinish")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("IsPayment")
+                        .HasColumnType("bit");
+
                     b.Property<TimeOnly>("RunningTime")
                         .HasColumnType("time");
 
@@ -1803,8 +1863,6 @@ namespace App.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("ExpertId");
-
                     b.HasIndex("HouseWorkId");
 
                     b.ToTable("Orders");
@@ -1814,13 +1872,14 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 1,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 3, 5, 16, 39, 0, 193, DateTimeKind.Local).AddTicks(4565),
+                            CreateAt = new DateTime(2025, 3, 13, 16, 16, 18, 148, DateTimeKind.Local).AddTicks(6764),
                             CustomerId = 1,
                             Description = "فوری",
                             HouseWorkId = 5,
                             IsConfrim = false,
                             IsDeleted = false,
                             IsFinish = false,
+                            IsPayment = false,
                             RunningTime = new TimeOnly(0, 0, 0).Add(TimeSpan.FromTicks(11)),
                             StausService = 1
                         },
@@ -1828,13 +1887,14 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 2,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 3, 5, 16, 39, 0, 193, DateTimeKind.Local).AddTicks(4596),
+                            CreateAt = new DateTime(2025, 3, 13, 16, 16, 18, 148, DateTimeKind.Local).AddTicks(6781),
                             CustomerId = 1,
                             Description = "",
                             HouseWorkId = 6,
                             IsConfrim = false,
                             IsDeleted = false,
                             IsFinish = false,
+                            IsPayment = false,
                             RunningTime = new TimeOnly(10, 30, 0),
                             StausService = 1
                         },
@@ -1842,13 +1902,14 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 3,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 3, 5, 16, 39, 0, 193, DateTimeKind.Local).AddTicks(4601),
+                            CreateAt = new DateTime(2025, 3, 13, 16, 16, 18, 148, DateTimeKind.Local).AddTicks(6783),
                             CustomerId = 1,
                             Description = "فوری",
                             HouseWorkId = 30,
                             IsConfrim = false,
                             IsDeleted = false,
                             IsFinish = false,
+                            IsPayment = false,
                             RunningTime = new TimeOnly(4, 30, 0),
                             StausService = 1
                         });
@@ -1862,6 +1923,9 @@ namespace App.Infrastructure.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(2000)
@@ -1870,7 +1934,13 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.Property<int>("ExpertId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsAccept")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPresented")
                         .HasColumnType("bit");
 
                     b.Property<int>("OrderId")
@@ -1891,9 +1961,12 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "آمادگی برای انجام کار با قیمت پایین تر",
                             ExpertId = 1,
+                            IsAccept = false,
                             IsDeleted = false,
+                            IsPresented = false,
                             OrderId = 1,
                             SuggestPrice = 1000f
                         });
@@ -2074,10 +2147,6 @@ namespace App.Infrastructure.EFCore.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("App.Domain.Core.Entites.User.Expert", "Expert")
-                        .WithMany()
-                        .HasForeignKey("ExpertId");
-
                     b.HasOne("App.Domain.Core.Entites.Service.HouseWork", "HouseWork")
                         .WithMany("Orders")
                         .HasForeignKey("HouseWorkId")
@@ -2085,8 +2154,6 @@ namespace App.Infrastructure.EFCore.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
-
-                    b.Navigation("Expert");
 
                     b.Navigation("HouseWork");
                 });

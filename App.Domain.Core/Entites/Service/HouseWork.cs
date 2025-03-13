@@ -19,7 +19,7 @@ namespace App.Domain.Core.Entites.Service
 
         [Required(ErrorMessage = "Base price is required.")]
         [Range(0.01, 5000000, ErrorMessage = "Base price must be between 0.01 and 5,000,000.")]
-        public decimal? BasePrice { get; set; }
+        public float BasePrice { get; set; }
         public string? ImagePath { get; set; }
         public bool IsDeleted { get; set; } = false;
 

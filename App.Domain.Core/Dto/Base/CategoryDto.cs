@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using App.Domain.Core.Entites.Service;
+using Microsoft.AspNetCore.Http;
 
 namespace App.Domain.Core.Dto.Dashboard
 {
@@ -11,5 +12,7 @@ namespace App.Domain.Core.Dto.Dashboard
         public string? ParentName { get; set; }
         public string? ImagePath { get; set; }
         public string? HouseWorkName { get; set; }
+        public string? ChildName { get; set; }
+        public int? CategoryId { get; set; }
     }
 }

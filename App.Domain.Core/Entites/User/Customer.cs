@@ -14,6 +14,6 @@ namespace App.Domain.Core.Entites.User
         public AppUser? User { get; set; }
         public City? City { get; set; }
         public List<Order> Orders { get; set; }
-        public List<Comment>? Comments { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

@@ -260,9 +260,8 @@ namespace App.Infrastructure.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal?>("BasePrice")
-                        .IsRequired()
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("BasePrice")
+                        .HasColumnType("real");
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
@@ -297,7 +296,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 1,
-                            BasePrice = 5000m,
+                            BasePrice = 5000f,
                             CategoryId = 10,
                             Description = "نیاز به توضیحات تکمیلی مشکل",
                             ImagePath = "\\Images\\HomeServices\\1h.jpg",
@@ -307,7 +306,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 2,
-                            BasePrice = 3000m,
+                            BasePrice = 3000f,
                             CategoryId = 10,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\2h.jpg",
@@ -317,7 +316,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 3,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 10,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\3h.jpg",
@@ -327,7 +326,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 4,
-                            BasePrice = 4000m,
+                            BasePrice = 4000f,
                             CategoryId = 10,
                             Description = "پرتقاضا",
                             ImagePath = "\\Images\\HomeServices\\4h.jpg",
@@ -337,7 +336,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 5,
-                            BasePrice = 2500m,
+                            BasePrice = 2500f,
                             CategoryId = 10,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\5h.jpg",
@@ -347,7 +346,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 6,
-                            BasePrice = 5000m,
+                            BasePrice = 5000f,
                             CategoryId = 9,
                             Description = "نیاز به توضیحات تکمیلی مشکل",
                             ImagePath = "\\Images\\HomeServices\\6h.jpg",
@@ -357,7 +356,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 7,
-                            BasePrice = 4000m,
+                            BasePrice = 4000f,
                             CategoryId = 9,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\7h.jpg",
@@ -367,7 +366,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 8,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 9,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\8h.jpg",
@@ -377,7 +376,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 9,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 9,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\9h.jpg",
@@ -387,7 +386,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 10,
-                            BasePrice = 4000m,
+                            BasePrice = 4000f,
                             CategoryId = 9,
                             Description = "به صورت تخصصی",
                             ImagePath = "\\Images\\HomeServices\\10h.jpg",
@@ -397,7 +396,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 11,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 8,
                             Description = "به صورت تخصصی",
                             ImagePath = "\\Images\\HomeServices\\11h.png",
@@ -407,7 +406,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 12,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 8,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\12h.jpg",
@@ -417,7 +416,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 13,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 8,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\13h.jpg",
@@ -427,7 +426,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 14,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 8,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\14h.jpg",
@@ -437,7 +436,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 15,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 8,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\15h.jpg",
@@ -447,7 +446,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 29,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 14,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\29h.jpg",
@@ -457,7 +456,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 30,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 14,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\30h.jpg",
@@ -467,7 +466,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 31,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 14,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\31h.jpg",
@@ -477,7 +476,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 32,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 14,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\32h.jpg",
@@ -487,7 +486,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 33,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 14,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\33h.jpg",
@@ -497,7 +496,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 34,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 15,
                             Description = "(فرش ، موکت ، مبل)",
                             ImagePath = "\\Images\\HomeServices\\34h.jpg",
@@ -507,7 +506,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 35,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 15,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\35h.jpg",
@@ -517,7 +516,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 36,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 15,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\36h.jpg",
@@ -527,7 +526,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 37,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 15,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\37h.jpg",
@@ -537,7 +536,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 38,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 16,
                             Description = "(آب ، نانو)",
                             ImagePath = "\\Images\\HomeServices\\38h.jpg",
@@ -547,7 +546,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 39,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 16,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\39h.jpg",
@@ -557,7 +556,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 40,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 16,
                             Description = "جدید",
                             ImagePath = "\\Images\\HomeServices\\40h.jpg",
@@ -567,7 +566,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 41,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 16,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\41h.jpg",
@@ -577,7 +576,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 42,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 16,
                             Description = "به صورت تخصصی",
                             ImagePath = "\\Images\\HomeServices\\42h.jpg",
@@ -587,7 +586,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 43,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 17,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\43h.jpg",
@@ -597,7 +596,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 44,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 17,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\44h.jpg",
@@ -607,7 +606,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 45,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 17,
                             Description = "جدید",
                             ImagePath = "\\Images\\HomeServices\\45h.jpg",
@@ -617,7 +616,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 46,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 17,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\46h.jpg",
@@ -627,7 +626,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 47,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 17,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\47h.jpg",
@@ -637,7 +636,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 48,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 18,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\48h.jpg",
@@ -647,7 +646,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 49,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 18,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\49h.jpg",
@@ -657,7 +656,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 50,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 18,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\50h.jpg",
@@ -667,7 +666,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 51,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 19,
                             Description = "به صورت تخصصی",
                             ImagePath = "\\Images\\HomeServices\\51h.jpg",
@@ -677,7 +676,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 52,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 19,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\52h.jpg",
@@ -687,7 +686,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 53,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 19,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\53h.jpg",
@@ -697,7 +696,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 54,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 19,
                             Description = "جدید",
                             ImagePath = "\\Images\\HomeServices\\54h.jpg",
@@ -707,7 +706,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 55,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 19,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\55h.jpg",
@@ -717,7 +716,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 56,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 20,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\56h.jpg",
@@ -727,7 +726,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 57,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 20,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\57h.jpg",
@@ -737,7 +736,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 58,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 20,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\58h.jpg",
@@ -747,7 +746,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 59,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 20,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\59h (2).jpg",
@@ -757,7 +756,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 60,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 20,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\60h.jpg",
@@ -767,7 +766,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 61,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 20,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\61h.jpg",
@@ -777,7 +776,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 62,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 20,
                             Description = "به صورت تخصصی",
                             ImagePath = "\\Images\\HomeServices\\62h.jpg",
@@ -787,7 +786,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 63,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 20,
                             Description = "جدید",
                             ImagePath = "\\Images\\HomeServices\\63h.jpg",
@@ -797,7 +796,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 64,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 20,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\64h.jpg",
@@ -807,7 +806,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 65,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 20,
                             Description = "",
                             ImagePath = "\\Images\\HomeServices\\65h.jpg",
@@ -817,7 +816,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 66,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 21,
                             Description = "",
                             ImagePath = "",
@@ -827,7 +826,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 67,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 21,
                             Description = "",
                             ImagePath = "",
@@ -837,7 +836,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 68,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 21,
                             Description = "",
                             ImagePath = "",
@@ -847,7 +846,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 69,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 21,
                             Description = "به صورت تخصصی",
                             ImagePath = "",
@@ -857,7 +856,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 70,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 21,
                             Description = "",
                             ImagePath = "",
@@ -867,7 +866,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 71,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 22,
                             Description = "",
                             ImagePath = "",
@@ -877,7 +876,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 72,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 22,
                             Description = "",
                             ImagePath = "",
@@ -887,7 +886,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 73,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 22,
                             Description = "جدید",
                             ImagePath = "",
@@ -897,7 +896,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 74,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 22,
                             Description = "",
                             ImagePath = "",
@@ -907,7 +906,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 75,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 22,
                             Description = "",
                             ImagePath = "",
@@ -917,7 +916,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 76,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 23,
                             Description = "زیر قیمت کارخانه",
                             ImagePath = "",
@@ -927,7 +926,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 77,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 23,
                             Description = "",
                             ImagePath = "",
@@ -937,7 +936,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 78,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 23,
                             Description = "",
                             ImagePath = "",
@@ -947,7 +946,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 79,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 23,
                             Description = "",
                             ImagePath = "",
@@ -957,7 +956,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 80,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 23,
                             Description = "",
                             ImagePath = "",
@@ -967,7 +966,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 81,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 23,
                             Description = "",
                             ImagePath = "",
@@ -977,7 +976,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 82,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 23,
                             Description = "",
                             ImagePath = "",
@@ -987,7 +986,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 83,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 23,
                             Description = "",
                             ImagePath = "",
@@ -997,7 +996,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 84,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 23,
                             Description = "",
                             ImagePath = "",
@@ -1007,7 +1006,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 85,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 23,
                             Description = "",
                             ImagePath = "",
@@ -1017,7 +1016,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 86,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 24,
                             Description = "",
                             ImagePath = "",
@@ -1027,7 +1026,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 87,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 24,
                             Description = "",
                             ImagePath = "",
@@ -1037,7 +1036,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 88,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 24,
                             Description = "نیاز به توضیح",
                             ImagePath = "",
@@ -1047,7 +1046,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 89,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 24,
                             Description = "",
                             ImagePath = "",
@@ -1057,7 +1056,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 90,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 24,
                             Description = "",
                             ImagePath = "",
@@ -1067,7 +1066,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 91,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 25,
                             Description = "",
                             ImagePath = "",
@@ -1077,7 +1076,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 92,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 25,
                             Description = "",
                             ImagePath = "",
@@ -1087,7 +1086,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 93,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 25,
                             Description = "",
                             ImagePath = "",
@@ -1097,7 +1096,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 94,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 25,
                             Description = "",
                             ImagePath = "",
@@ -1107,7 +1106,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 95,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 25,
                             Description = "",
                             ImagePath = "",
@@ -1117,7 +1116,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 96,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 26,
                             Description = "جدید",
                             ImagePath = "",
@@ -1127,7 +1126,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 97,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 26,
                             Description = "",
                             ImagePath = "",
@@ -1137,7 +1136,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 98,
-                            BasePrice = 2000m,
+                            BasePrice = 2000f,
                             CategoryId = 26,
                             Description = "به صورت تخصصی",
                             ImagePath = "",
@@ -1147,7 +1146,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 99,
-                            BasePrice = 1000m,
+                            BasePrice = 1000f,
                             CategoryId = 26,
                             Description = "",
                             ImagePath = "",
@@ -1157,7 +1156,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 100,
-                            BasePrice = 3500m,
+                            BasePrice = 3500f,
                             CategoryId = 26,
                             Description = "",
                             ImagePath = "",
@@ -1289,7 +1288,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "0267e665-b6c5-4558-bb72-4bea965431b0",
+                            ConcurrencyStamp = "d1240e06-0fba-4c82-9296-342038e2a44d",
                             Email = "Admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -1298,11 +1297,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENS3bzZftavKPTkgdQgZcUEH1jyvbMZTapNTw4TThgTT133F+lixGYVyirhMRIGEgQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFdNmCy7qnFu9qKKsJIgEildm6xVMDhSHdtMhZaNHHf6KOxNILgYOk/cBozcFdtFiw==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 3, 10, 10, 33, 44, 439, DateTimeKind.Local).AddTicks(7095),
+                            RegisterAt = new DateTime(2025, 3, 13, 16, 16, 18, 150, DateTimeKind.Local).AddTicks(8687),
                             RoleId = 1,
-                            SecurityStamp = "95fabc62-7c57-4cba-955c-9018434ca9fa",
+                            SecurityStamp = "e4aa746a-11ef-4553-bd91-a4882bc07131",
                             TwoFactorEnabled = false,
                             UserName = "Admin@gmail.com"
                         },
@@ -1312,7 +1311,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "b31228ac-cdc7-4553-b55f-571a65c7009a",
+                            ConcurrencyStamp = "be9ba985-c039-4070-995c-1ff7f5a46de3",
                             Email = "Customer@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Amir",
@@ -1321,11 +1320,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER@GMAIL.COM",
                             NormalizedUserName = "CUSTOMER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPIUU2CpMozIKQplJQMxGF/Eah+6VaU5yEbTUcvgmI74Q6+CI5BNiOwLxsNFN2lCNA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEESWoJDNDGWj9mHPCR9LBdjL9WQEbUduaLSuFH7/VNqrUg+7z12IemRtNL1afz2Tfw==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 3, 10, 10, 33, 44, 439, DateTimeKind.Local).AddTicks(7118),
+                            RegisterAt = new DateTime(2025, 3, 13, 16, 16, 18, 150, DateTimeKind.Local).AddTicks(8715),
                             RoleId = 2,
-                            SecurityStamp = "6a6c34fe-75d1-4be1-8d10-a6103a51ae16",
+                            SecurityStamp = "8bf078df-0abf-43c6-81a4-9b3f8ecfb536",
                             TwoFactorEnabled = false,
                             UserName = "Customer@gmail.com"
                         },
@@ -1335,7 +1334,7 @@ namespace App.Infrastructure.EFCore.Migrations
                             AccessFailedCount = 0,
                             ActivationUser = 3,
                             Balance = 1000f,
-                            ConcurrencyStamp = "e46584dc-5d29-4694-a9f9-a4a9d1710d11",
+                            ConcurrencyStamp = "4ec494d1-0b49-45f7-b86c-8e4104448055",
                             Email = "Expert@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Amir",
@@ -1344,11 +1343,11 @@ namespace App.Infrastructure.EFCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "EXPERT@GMAIL.COM",
                             NormalizedUserName = "EXPERT@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJtLjXlvkCOf7TmB9zzjuKcMsLaeNzqIS8eYCsoWYTYFbZ5yQANNS9zwcsbefsE0jg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOJIxDpSMDCbc7bi/a2Giph0Rz2eKFXMfxs4d6qXRbZE8xMNUzdVpwTCrn428RJetg==",
                             PhoneNumberConfirmed = false,
-                            RegisterAt = new DateTime(2025, 3, 10, 10, 33, 44, 439, DateTimeKind.Local).AddTicks(7144),
+                            RegisterAt = new DateTime(2025, 3, 13, 16, 16, 18, 150, DateTimeKind.Local).AddTicks(8728),
                             RoleId = 3,
-                            SecurityStamp = "0f5a7253-345c-48c3-8bcc-688b45ea0f2c",
+                            SecurityStamp = "dedffc9d-2927-470c-89d7-28fad014ff68",
                             TwoFactorEnabled = false,
                             UserName = "Expert@gmail.com"
                         });
@@ -1618,41 +1617,6 @@ namespace App.Infrastructure.EFCore.Migrations
                     b.HasIndex("ExpertId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreateAt = new DateTime(2025, 3, 10, 10, 33, 44, 437, DateTimeKind.Local).AddTicks(9096),
-                            CustomerId = 4,
-                            ExpertId = 1,
-                            IsDeleted = false,
-                            IsPlayable = false,
-                            Opinion = "بسیار تمیز و بادقت",
-                            Points = 9
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreateAt = new DateTime(2025, 3, 10, 10, 33, 44, 437, DateTimeKind.Local).AddTicks(9104),
-                            CustomerId = 4,
-                            ExpertId = 1,
-                            IsDeleted = false,
-                            IsPlayable = false,
-                            Opinion = "تحویل به موقع",
-                            Points = 9
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreateAt = new DateTime(2025, 3, 10, 10, 33, 44, 437, DateTimeKind.Local).AddTicks(9106),
-                            CustomerId = 4,
-                            ExpertId = 1,
-                            IsDeleted = false,
-                            IsPlayable = false,
-                            Opinion = "پاسخگویی بد",
-                            Points = 6
-                        });
                 });
 
             modelBuilder.Entity("Image", b =>
@@ -1905,7 +1869,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 1,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 3, 10, 10, 33, 44, 437, DateTimeKind.Local).AddTicks(4415),
+                            CreateAt = new DateTime(2025, 3, 13, 16, 16, 18, 148, DateTimeKind.Local).AddTicks(6764),
                             CustomerId = 1,
                             Description = "فوری",
                             HouseWorkId = 5,
@@ -1920,7 +1884,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 2,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 3, 10, 10, 33, 44, 437, DateTimeKind.Local).AddTicks(4435),
+                            CreateAt = new DateTime(2025, 3, 13, 16, 16, 18, 148, DateTimeKind.Local).AddTicks(6781),
                             CustomerId = 1,
                             Description = "",
                             HouseWorkId = 6,
@@ -1935,7 +1899,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         {
                             Id = 3,
                             CompletionDate = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateAt = new DateTime(2025, 3, 10, 10, 33, 44, 437, DateTimeKind.Local).AddTicks(4438),
+                            CreateAt = new DateTime(2025, 3, 13, 16, 16, 18, 148, DateTimeKind.Local).AddTicks(6783),
                             CustomerId = 1,
                             Description = "فوری",
                             HouseWorkId = 30,
@@ -1956,7 +1920,7 @@ namespace App.Infrastructure.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -1994,7 +1958,7 @@ namespace App.Infrastructure.EFCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "آمادگی برای انجام کار با قیمت پایین تر",
                             ExpertId = 1,
                             IsAccept = false,

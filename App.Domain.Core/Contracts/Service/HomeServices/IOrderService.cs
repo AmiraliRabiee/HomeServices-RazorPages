@@ -22,6 +22,9 @@ namespace App.Domain.Core.Contracts.Service.HomeServices
         Task<int> GetActiveServicesCount(int id, CancellationToken cancellationToken);
         Task<int> GetDoneServicesCount(int id, CancellationToken cancellationToken);
         Task<List<SummOrderDto>> GetCustomerOrders(int customerId, CancellationToken cancellationToken);
-        Task<List<SummOrderDto>> GetReserveOrders(AppUser user, CancellationToken cancellationToken);
+        Task<List<SummOrderDto>> GetOrdersAcceptExpert(Expert expert, CancellationToken cancellationToken);
+        Task<List<SummOrderDto>> GetOrdersMatchingExpert(Expert expert, CancellationToken cancellationToken);
+        Task<Expert?> GetExpertWithSkillsAndCity(int userId, CancellationToken cancellationToken);
+        Task<float> GetSuggestPrice(int orderId, CancellationToken cancellationToken);
     }
 }

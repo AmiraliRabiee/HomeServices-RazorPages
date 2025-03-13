@@ -16,10 +16,9 @@
         <div class="goodup-dashboard-nav sticky-top">
             <div class="goodup-dashboard-inner">
                 <ul data-submenu-title="منو">
-                    <li><a asp-page="ExpertDashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
-                    <li><a asp-page="orders"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
-                    @*                     <li><a asp-page="createSuggestion"><i class="lni lni-add-files ms-2"></i>ثبت پیشنهاد</a></li>
- *@                    <li><a asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
+                    <li><a asp-page="Dashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                    <li><a asp-page="reservations"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
+                    <li><a asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
                 </ul>
                 <ul data-submenu-title="حساب کاربری">
                     <li><a asp-page="Profile"><i class="lni lni-user ms-2"></i> تنظیمات </a></li>
@@ -47,7 +46,6 @@
         <form class="submit-form" method="post" enctype="multipart/form-data">
             <div class="dashboard-widg-bar d-block">
                 <div class="row">
-                    <!-- ✅ Profile Image Upload Section Inside the Form -->
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 order-xl-last order-lg-last order-md-last">
                         <div class="d-flex bg-white rounded px-3 py-3 mb-3">
                             <div class="dash-figure">
@@ -66,7 +64,6 @@
                     
                     <input type="hidden" asp-for="OnlineExpert.ImagePath" id="oldImagePath" />
 
-                    <!-- ✅ Other Profile Fields -->
                     <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12">
                         <div class="dashboard-list-wraps bg-white rounded mb-4">
                             <div class="dashboard-list-wraps-body py-3 px-3">
@@ -124,8 +121,8 @@
 
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label class="mb-1">توضیحات</label>
-                                            <textarea class="form-control rounded ht-150" asp-for="OnlineExpert.Biographi"></textarea>
+                                            <label class="mb-1">بیوگرافی</label>
+                                            <textarea class="form-control rounded ht-150" asp-for="OnlineExpert.Biographi" placeholder="برای معرفی خود به مشتری بیوگرافی بنویسید... "></textarea>
                                         </div>
                                     </div>
 
@@ -144,7 +141,6 @@
                             </div>
                         </div>
 
-                        <!-- ✅ Hidden input to ensure selected skills are submitted -->
                         <input type="hidden" asp-for="OnlineExpert.SelectedHouseWorkIds" />
                     </div>
                 </div>

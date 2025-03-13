@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace HomeServices_RazorPage.Areas.Customer.Pages.Menu
 {
     public class FinallyModel(IBaseDataAppService _baseDataAppService , ISuggestionAppService _suggestionAppService 
-        , IUserAppService _userAppService , UserManager<AppUser> _userManager , ICommentAppService _commentAppService) : PageModel
+        , IUserAppService _userAppService , UserManager<AppUser> _userManager , ICommentAppService _commentAppService,IOrderAppService _orderAppService) : PageModel
     {
         [BindProperty]
         public SummSuggestionDto SuggestionDto { get; set; }
@@ -35,13 +35,14 @@ namespace HomeServices_RazorPage.Areas.Customer.Pages.Menu
             if (TempData["OrderId"] is int orderId)
             {
                 var expertId = (int)TempData["ExpertId"];
+
                 OnlineUser = await _userManager.GetUserAsync(User);
                 var payment = await _userAppService.Payment(OnlineUser, orderId, price, cancellationToken);
                 var recive = await _userAppService.ExpertReceive(expertId, price, cancellationToken);
                 var result = await _userAppService.AdminReceive(price, cancellationToken);
                 if (result.IsSuccess)
                 {
-
+                    await _orderAppService.ChangeToPayment(orderId, cancellationToken);
                     Message = result.Message;
                     TempData["Successfull"] = "پرداخت با موفقیت انجام شد";
                     return RedirectToPage("myorders");

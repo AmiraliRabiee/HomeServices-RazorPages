@@ -1,5 +1,6 @@
 using App.Domain.Core.Contracts.AppService;
 using App.Domain.Core.Dto.Dashboard;
+using App.Domain.Core.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -19,8 +20,15 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
         public int DoneSuggestions { get; set; }
         public async Task OnGet(int expertId, CancellationToken cancellationToken)
         {
-            Comments = await _commentAppService.GetCommentsById(expertId, cancellationToken);
-
+            if (User.IsInRole("Expert"))
+            {
+                var id = UserTools.GetExpertId(User.Claims);
+                Comments = await _commentAppService.GetCommentsById(id, cancellationToken);
+            }
+            else
+            {
+                Comments = await _commentAppService.GetCommentsById(expertId, cancellationToken);
+            }
             AverageScore = await _commentAppService.GetAvg(expertId, cancellationToken);
             CommentCount = await _commentAppService.GetCount(expertId, cancellationToken);
             DoneSuggestions = await _suggestionAppService.DoneSuggestionsCount(expertId, cancellationToken);
