@@ -76,11 +76,9 @@ builder.Services.AddScoped<IDataService, DataWorkService>();
 builder.Services.AddScoped<IDataService, DataCategoryService>();
 
 
-builder.Services.AddScoped<ICityRepository, CityRepository>();
+builder.Services.AddScoped<ICityRepository, CityDapperRepository>();
 
 builder.Services.AddScoped<IDashboardAppService, DashboardAppService>();
-
-builder.Services.AddScoped<ICityRepository, CityRepository>();
 
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
@@ -94,7 +92,7 @@ builder.Services.AddScoped<ICategoryAppService, CategoryAppService>();
 
 #region Dapper Injects
 builder.Services.AddScoped<ICategoryDapperRepository, CategoryDapperRepository>();
-builder.Services.AddScoped<ICityDapperRepository, CityDapperRepository>();
+//builder.Services.AddScoped<ICityDapperRepository, CityDapperRepository>();
 builder.Services.AddScoped<IHouseWorkDapperRepository, HouseWorkDapperRepository>();
 #endregion
 

@@ -46,10 +46,10 @@
                         <div class="author-wrap-yuio-ngh mt-5">
                             <div class="row g-4">
                                 <div class="col-6">
-                                    <a asp-page="/menu/comments" asp-area="expert" class="adv-btn full-width">خواندن نظرات</a>
+                                    <a asp-page="/menu/comments" asp-area="expert" asp-route-expertId="@Model.Expert.Id" class="adv-btn full-width">خواندن نظرات</a>
                                 </div>
                                 <div class="col-6">
-                                    <a asp-page="/addcomment/index" asp-area="" asp-route-id="@Model.Expert.Id" class="adv-btn full-width">ثبت نظر</a>
+                                    <a asp-page="/addcomment/index" asp-area="" asp-route-id="@Model.Expert.SuggestionId" class="adv-btn full-width">ثبت نظر</a>
                                 </div>
                             </div>
                         </div>

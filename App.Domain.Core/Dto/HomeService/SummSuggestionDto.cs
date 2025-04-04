@@ -25,7 +25,6 @@ namespace App.Domain.Core.Dto.HomeService
         public string CustomerImagePath { get; set; }
         public string ImagePath { get; set; }
         public float SuggestPrice { get; set; }
-        public string CustomerAddress { get; set; }
-        public List<ExpertHouseWork>? ExpertHouseWorks { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

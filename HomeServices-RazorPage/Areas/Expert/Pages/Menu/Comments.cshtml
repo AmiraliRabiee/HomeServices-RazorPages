@@ -1,8 +1,10 @@
 ﻿@page
 @using Framework
 @model HomeServices_RazorPage.Areas.Expert.Pages.Menu.CommentsModel
+@* @using App.Domain.Core.Helpers
 @{
-}
+    int id = UserTools.GetExpertId(User.Claims);
+} *@
 <section class="gray">
     <div class="goodup-dashboard-wrap gray px-4 py-5">
         <div class="container-fluid">
@@ -37,7 +39,7 @@
                                 <div class="author-wrap-ngh">
                                     <div class="author-wrap-head-ngh">
                                         <div class="author-wrap-ngh-thumb">
-                                            <img src="" class="img-fluid circle" alt="">
+                                            <img src="@Model.ExpertDto.ImagePath" class="img-fluid circle" alt="">
                                         </div>
                                         <div class="author-wrap-ngh-info">
                                             <h5></h5>
@@ -73,7 +75,7 @@
                                         <div class="author-wrap-yuio-ngh mt-5">
                                             <div class="row g-4">
                                                 <div class="col-6">
-                                                    <a asp-page="/menu/comments" asp-area="expert" class="adv-btn full-width">خواندن نظرات</a>
+                                                    <a asp-page="/menu/dashboard" asp-area="customer" class="adv-btn full-width">خواندن نظرات</a>
                                                 </div>
                                                 <div class="col-6">
                                                     <a asp-page="/addcomment/index" asp-area="" class="adv-btn full-width">ثبت نظر</a>

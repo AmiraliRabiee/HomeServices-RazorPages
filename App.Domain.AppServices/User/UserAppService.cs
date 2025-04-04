@@ -262,11 +262,22 @@ namespace App.Domain.AppServices.User
 
         public async Task<Result> ExpertReceive(int id, float price, CancellationToken cancellationToken)
         {
+            if (price <= 0)
+            {
+                return new Result { IsSuccess = false, Message = "Invalid price value." };
+            }
             var balance = await _userService.GetBalance(id, cancellationToken);
-            var profit = await _adminService.GetProfit(cancellationToken);
+            var profitPercentage = await _adminService.GetProfit(cancellationToken);
 
-            price -= price * profit;
-            balance += price;
+            if (profitPercentage < 0 || profitPercentage >= 1)
+            {
+                return new Result { IsSuccess = false, Message = "Invalid profit percentage." };
+            }
+
+            var deductedAmount = price * profitPercentage;
+            var amountToDeposit = price - deductedAmount;
+            balance += amountToDeposit;
+
             var result = await _expertService.UpdateBalance(id, balance, cancellationToken);
             if (result.IsSuccess)
                 return new Result { IsSuccess = true, Message = result.Message };
@@ -280,13 +291,7 @@ namespace App.Domain.AppServices.User
             => await _expertService.GetExpertSkills(expertId, cancellationToken);
 
         public async Task UpdateExpertSkills(int expertId, List<int> houseWorkIds, CancellationToken cancellationToken)
-        {
-            await _expertService.UpdateExpertSkills(expertId, houseWorkIds, cancellationToken);
-            //var existingSkills = await _expertService.GetExistingSkillsAsync(expertId, cancellationToken);
-
-            //await _expertService.RemoveUnwantedSkillsAsync(existingSkills, houseWorkIds, cancellationToken);
-            //await _expertService.AddNewSkillsAsync(expertId, existingSkills, houseWorkIds, cancellationToken);
-        }
+            => await _expertService.UpdateExpertSkills(expertId, houseWorkIds, cancellationToken);
 
         public async Task<List<ExpertWorkDto>> GetExpertSkillsNameAsync(int expertId, CancellationToken cancellationToken)
             => await _expertService.GetExpertSkillsNameAsync(expertId, cancellationToken);

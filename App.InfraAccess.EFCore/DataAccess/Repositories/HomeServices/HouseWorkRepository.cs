@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.Contracts.Repository;
 using App.Domain.Core.Contracts.Repository.HomeServices;
+using App.Domain.Core.Dto;
 using App.Domain.Core.Dto.Dashboard;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
@@ -204,7 +205,8 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 Description = h.Description,
                 Title = h.Title,
                 BasePrice = h.BasePrice,
-                SubCategoryId = h.CategoryId
+                SubCategoryId = h.CategoryId,
+                CategoryName = h.Category.Title
             }).ToListAsync(cancellationToken);
 
             if (service is null)
@@ -292,10 +294,16 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return service;
         }
 
-        public async Task<List<HouseWork>> GetForSearch(string item)
+        public async Task<List<SearchResultDto>> GetForSearch(string item)
         {
             var works = await _appDbContext.HouseWorks
                 .Where(c => c.Title.Contains(item))
+                .Select(c => new SearchResultDto
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Type = "HouseWork",
+                })
                 .ToListAsync();
 
             return works;

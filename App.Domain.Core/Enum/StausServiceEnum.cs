@@ -10,7 +10,7 @@ namespace App.Domain.Core.Enum
         ExpertSelectionQueue,
         [Display(Name = "تایید برای حضور در محل")]
         WaitingForService,
-        [Display(Name = "انجام شده")]
+        [Display(Name = "در انتظار پرداخت")]
         Done,
         [Display(Name = "پرداخت شده")]
         Payment

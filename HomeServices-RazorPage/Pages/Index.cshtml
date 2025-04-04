@@ -6,14 +6,12 @@
 }
 @inject IHouseWorkAppService workAppService
 
-
 <div class="preloader"></div>
 
 <!-- ============================================================== -->
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
 <div id="main-wrapper">
-
 
     <!-- ============================================================== -->
     <!-- ======================= Home Banner ======================== -->
@@ -23,45 +21,61 @@
                 <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12">
 
                     <div class="banner_caption text-center mb-5">
-                        <h1 class="banner_title_xxl ft-bold text-light mb-1"> دریافت خدمات و ثبت سفارش آنلاین</h1>
-                        <p class="fs-lg ft-medium text-light">در کوتاه ترین زمان خدمات و کارشناس مورد نظر خود را کاوش کنید</p>
+                        <h1 class="banner_title_xxl ft-bold text-light mb-1">دریافت خدمات و ثبت سفارش آنلاین</h1>
+                        <p class="fs-lg ft-medium text-light">در کوتاه‌ترین زمان خدمات و کارشناس مورد نظر خود را کاوش کنید</p>
                     </div>
 
-
-                    <form class="main-search-wrap fl-wrap half-column">
-                        <div class="main-search-item">
-                            <span class="search-tag">سرویس</span>
-                            <input type="text" class="form-control radius" placeholder="مثلا برقکاری، کارواش">
-                        </div>
-                        <div class="main-search-item">
-                            <span class="search-tag">کارشناس</span>
-                            <input type="text" class="form-control" placeholder="مثلا علی حسینی">
-                        </div>
-                        <div class="main-search-button">
-                            <button class="btn full-width theme-bg text-white" type="button">جستجو<i class="fas fa-search"></i></button>
+                    <!-- Search Form -->
+                    <form method="post">
+                        <div class="modernSearch">
+                            <div class="fieldWrap">
+                                <input type="text" class="form-control" name="ServiceInput" placeholder="نام خدمات را جستجو کنید" value="@Model.ServiceInput">
+                                <i class="ico lni lni-search-alt"></i>
+                            </div>
+                            <div class="buttonBox">
+                                <button type="submit" class="btn theme-bg">برو</button>
+                            </div>
                         </div>
                     </form>
+
+                    <!-- Search Results -->
+                    @if (Model.IsSearchSubmitted)
+                    {
+                        <div id="searchResultsContainer" class="mt-5" style="max-height: 250px; overflow-y: auto;">
+                            <h3 class="text-light">نتایج جستجو:</h3>
+                            @if (Model.SearchResults != null && Model.SearchResults.Any())
+                            {
+                                <ul class="list-group">
+                                    @foreach (var result in Model.SearchResults)
+                                    {
+                                        <li class="list-group-item">
+                                            <a asp-page="/client/index" asp-route-id="@result.Id">
+                                                <h6>@result.Title</h6>
+                                                <h6>@result.FullName</h6>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p class="text-light">نتیجه‌ای یافت نشد.</p>
+                            }
+                        </div>
+                    }
 
                 </div>
             </div>
         </div>
-        @*                     <form class="searchForm">
-                        <div class="modernSearch">
-                            <div class="fieldWrap">
-                                <input type="text" class="form-control" placeholder="انتخاب شهر">
-                                <i class="ico lni lni-search-alt"></i>
-                            </div>
-                            <div class="buttonBox"><button type="button" class="btn theme-bg">برو</button></div>
-                        </div>
-                    </form> *@
+
         <div class="slider-banner hideDots">
             <div class="imgSlide">
-                <div class="singleSlide"><img src="~/assets/img/banner/technical.jpeg" class="img" alt="Img Slide"></div>
-                <div class="singleSlide"><img src="~/assets/img/banner/laptop.jpg" class="img" alt="Img Slide"></div>
-                <div class="singleSlide"><img src="~/assets/img/banner/health.jpg" class="img" alt="Img Slide"></div>
-                <div class="singleSlide"><img src="~/assets/img/banner/hair.jpg" class="img" alt="Img Slide"></div>
+                <div class="singleSlide"><img src="@Url.Content("~/assets/img/banner/technical.jpeg")" class="img" alt="Img Slide"></div>
+                <div class="singleSlide"><img src="@Url.Content("~/assets/img/banner/laptop.jpg")" class="img" alt="Img Slide"></div>
+                <div class="singleSlide"><img src="@Url.Content("~/assets/img/banner/health.jpg")" class="img" alt="Img Slide"></div>
+                <div class="singleSlide"><img src="@Url.Content("~/assets/img/banner/hair.jpg")" class="img" alt="Img Slide"></div>
             </div>
-            <img src="assets/img/hero-curve.png" alt="curve shape" class="position-absolute start-0 bottom-0 zindex-1 w-100">
+            <img src="@Url.Content("~/assets/img/hero-curve.png")" alt="curve shape" class="position-absolute start-0 bottom-0 zindex-1 w-100">
         </div>
     </div>
     <!-- ======================= Home Banner ======================== -->
@@ -141,7 +155,7 @@
                                 <div class="Goodup-grid-wrap">
                                     <div class="Goodup-grid-upper">
                                         <div class="Goodup-grid-thumb">
-                                            <a href="single-listing-detail-2.html" class="d-block text-center m-auto"><img src="@work.ImagePath" class="img-fluid" alt=""></a>
+                                            <a href="" class="d-block text-center m-auto"><img src="@work.ImagePath" class="img-fluid" alt=""></a>
                                         </div>
                                     </div>
                                     <div class="Goodup-grid-fl-wrap">
@@ -249,6 +263,38 @@
 
 
     <a id="tops-button" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
-
-
 </div>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let results = document.querySelectorAll(".search-item");
+            let resultsContainer = document.getElementById("searchResultsContainer");
+            let currentIndex = 3; // Initial visible items
+
+            // Hide extra results initially
+            results.forEach((item, index) => {
+                if (index >= currentIndex) item.classList.add("d-none");
+            });
+
+            // Detect scrolling inside results container
+            resultsContainer.addEventListener("scroll", function () {
+                let threshold = resultsContainer.scrollTop + resultsContainer.clientHeight;
+                if (threshold >= resultsContainer.scrollHeight - 10) { // Near bottom
+                    loadMoreResults();
+                }
+            });
+
+            function loadMoreResults() {
+                let remainingItems = results.length - currentIndex;
+                let itemsToLoad = Math.min(3, remainingItems); // Load 3 more at a time
+
+                for (let i = 0; i < itemsToLoad; i++) {
+                    if (results[currentIndex]) {
+                        results[currentIndex].classList.remove("d-none");
+                        currentIndex++;
+                    }
+                }
+            }
+        });
+    </script>
+}

@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Dto.HomeService;
+﻿using App.Domain.Core.Dto;
+using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
 
@@ -19,6 +20,6 @@ namespace App.Domain.Core.Contracts.Service.HomeServices
         Task<SummHouseWorkDto> GetServiceByChildId(int id, CancellationToken cancellationToken);
         Task<SummHouseWorkDto> GetServiceById(int id, CancellationToken cancellationToken);
         Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken);
-        Task<List<HouseWork>> GetForSearch(string item);
+        Task<List<SearchResultDto>> GetForSearch(string item);
     }
 }

@@ -127,7 +127,7 @@ namespace App.Infrastructure.EFCore.Configurations
                 new HouseWork { Id = 75 , Title = "خدمات دوربین" , BasePrice  = 3500 , Description = "" , CategoryId = 22 ,ImagePath=""},
 
                 // خدمات و تعمیرات خودرو
-                new HouseWork { Id = 76 , Title = "تعویض باتری خودرو" , BasePrice  = 1000 , Description = "زیر قیمت کارخانه" , CategoryId = 23 ,ImagePath=""},
+                new HouseWork { Id = 76 , Title = "تعویض باتری خودرو" , BasePrice  = 1000 , Description = "زیر قیمت کارخانه" , CategoryId = 23 ,ImagePath="\\Images\\HomeServices\\76h.JPG"},
                 new HouseWork { Id = 77 , Title = " برق و باتری خودرو" , BasePrice  = 3500 , Description = "" , CategoryId = 23 ,ImagePath=""},
                 new HouseWork { Id = 78 , Title = "مکانیکی خودرو" , BasePrice  = 2000 , Description = "" , CategoryId = 23 ,ImagePath=""},
                 new HouseWork { Id = 79 , Title = "امداد خودرو" , BasePrice  = 1000 , Description = "" , CategoryId = 23 , ImagePath = ""},
@@ -141,7 +141,7 @@ namespace App.Infrastructure.EFCore.Configurations
                 //خدمات باربری
                 new HouseWork { Id = 86 , Title = "اسباب کشی با خاور و کامیون" , BasePrice  = 1000 , Description = "" , CategoryId = 24 , ImagePath = ""},
                 new HouseWork { Id = 87 , Title = " اسباب کشی با وانت و نیسان" , BasePrice  = 3500 , Description = "" , CategoryId = 24 ,ImagePath=""},
-                new HouseWork { Id = 88 , Title = "اسباب کشی و حمل بین شهری" , BasePrice  = 2000 , Description = "نیاز به توضیح" , CategoryId = 24 , ImagePath = ""},
+                new HouseWork { Id = 88 , Title = "اسباب کشی و حمل بین شهری" , BasePrice  = 2000 , Description = "نیاز به توضیح" , CategoryId = 24 , ImagePath = "\\Images\\HomeServices\\88h.jpg"},
                 new HouseWork { Id = 89 , Title = "کارگر جابجایی" , BasePrice  = 1000 , Description = "" , CategoryId = 24 ,ImagePath=""},
                 new HouseWork { Id = 90 , Title = "حمل نخاله و ضایعات ساختمانی" , BasePrice  = 3500 , Description = "" , CategoryId = 24 , ImagePath = ""},
 

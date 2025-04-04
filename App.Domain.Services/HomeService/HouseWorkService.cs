@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.Contracts.Repository.HomeServices;
 using App.Domain.Core.Contracts.Service.HomeServices;
+using App.Domain.Core.Dto;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
@@ -49,7 +50,7 @@ namespace App.Domain.Services.HomeService
         public async Task<List<SummHouseWorkDto>> GetServicesById(int id, CancellationToken cancellationToken)
             => await _houseWorkRepository.GetServicesById(id, cancellationToken);
 
-        public async  Task<List<HouseWork>> GetForSearch(string item)
+        public async  Task<List<SearchResultDto>> GetForSearch(string item)
             => await _houseWorkRepository.GetForSearch(item);
     }
 }

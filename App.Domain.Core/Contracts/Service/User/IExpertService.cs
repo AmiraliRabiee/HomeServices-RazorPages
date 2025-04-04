@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Dto.HomeService;
+﻿using App.Domain.Core.Dto;
+using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
@@ -18,6 +19,6 @@ namespace App.Domain.Core.Contracts.Service.User
 
         Task<List<int>> GetExpertSkills(int expertId, CancellationToken cancellationToken);
         Task UpdateExpertSkills(int expertId, List<int> houseWorkIds, CancellationToken cancellationToken);
-        Task<List<Expert>> GetForSearch(string item);
+        Task<List<SearchResultDto>> GetForSearch(string item);
     }
 }

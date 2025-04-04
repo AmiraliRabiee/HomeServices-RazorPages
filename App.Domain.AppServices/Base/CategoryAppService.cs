@@ -35,14 +35,14 @@ namespace App.Domain.AppServices.Base
         public async Task<List<int>> GetCategoryNumbersAsync(CancellationToken cancellationToken)
             => await _categoryService.GetCategoryNumbersAsync(cancellationToken);
 
-        public List<CategoryDto> GetCatyegoryByParent(int id)
-            => _categoryService.GetCatyegoryByParent(id);
+        public async Task<List<CategoryDto>> GetCatyegoryByParent(int id,CancellationToken cancellationToken)
+            => await _categoryService.GetCatyegoryByParent(id ,cancellationToken);
 
         public async Task<List<CategoryDto>> GetChildCategories(CancellationToken cancellationToken)
             => await _categoryService.GetChildCategories(cancellationToken);
 
-        public List<Category> GetChildCategoriesById(int id)
-            => _categoryService.GetChildCategoriesById(id);
+        public async Task<List<Category>> GetChildCategoriesById(int id,CancellationToken cancellationToken)
+            => await _categoryService.GetChildCategoriesById(id, cancellationToken);
 
         public async Task<int> GetChildCount(int categoryId)
             =>await  _categoryService.GetChildCount(categoryId);

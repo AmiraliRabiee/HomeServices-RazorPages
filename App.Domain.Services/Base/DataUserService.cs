@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Services.Base
 {
-    public class DataUserService(ICityRepository _cityRepository,ICityDapperRepository _cityDapperRepository) : IBaseDataService
+    public class DataUserService(ICityRepository _cityRepository) : IBaseDataService
     {
         public async Task<List<City>> GetCitiesAsync(CancellationToken cancellationToken)
-            => await _cityDapperRepository.GetCitiesAsync(cancellationToken);
+            => await _cityRepository.GetCities(cancellationToken);
 
         public async Task<string> UploadImage(IFormFile FormFile, string folderName, CancellationToken cancellationToken)
         {

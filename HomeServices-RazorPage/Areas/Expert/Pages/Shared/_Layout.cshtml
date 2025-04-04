@@ -1,5 +1,11 @@
-﻿@using HomeServices_RazorPage.Areas.Expert.Pages
+﻿@using App.Domain.Core.Entites.User
+@using App.Domain.Core.Helpers
+@using HomeServices_RazorPage.Areas.Expert.Pages
+@using Microsoft.AspNetCore.Identity
+   @inject SignInManager<AppUser> SignInManager
 
+@{
+}
 <!DOCTYPE html>
 <html lang="fa">
 
@@ -15,7 +21,7 @@
 
     <!-- Custom CSS -->
     <link href="~/assets/css/styles.css" rel="stylesheet">
-    @RenderSection("Styles", required:false)
+    @RenderSection("Styles", required: false)
 </head>
 
 <body dir="rtl">
@@ -55,24 +61,57 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="nav-menus-wrapper" style="transition-property: none;">
-                        <ul class="nav-menu">
 
+                    <div class="nav-menus-wrapper" style="transition-property: none;">
+                        <!-- Main Navigation Menu -->
+                        <ul class="nav-menu">
                             <li>
-                                <a asp-page="/index" asp-area="" ;">صفحه اصلی</a>
+                                <a asp-page="/index" asp-area="">صفحه اصلی</a>
                             </li>
 
                             <li>
                                 <a asp-page="/categories/index" asp-area="">دسته بندی خدمات</a>
-                            <li>
-                                <a href="javascript:void(0);">پنل کاربری</a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li><a asp-page="dashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
-                                    <li><a asp-page="orders"><i class="lni lni-files ms-2"></i>سفارش های رزررو</a></li>
-                                    <li><a asp-page="profile"><i class="lni lni-add-files ms-2"></i>نظرات کاربران</a></li>
-                                </ul>
                             </li>
 
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                @if (User.IsInRole("Expert"))
+                                {
+                                    <li>
+                                        <a href="javascript:void(0);">پنل کاربری</a>
+                                        <ul class="nav-dropdown nav-submenu">
+                                            <li><a asp-page="/menu/dashboard" asp-area="expert"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                                            <li><a asp-page="/menu/reservations" asp-area="expert"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
+                                            <li><a asp-route-expertId="" asp-page="comments"><i class="lni lni-add-files ms-2"></i>نظرات کاربران</a></li>
+                                        </ul>
+                                    </li>
+                                }
+
+                                @if (User.IsInRole("Customer"))
+                                {
+                                    <li>
+                                        <a href="javascript:void(0);">پنل کاربری</a>
+                                        <ul class="nav-dropdown nav-submenu">
+                                            <li><a asp-page="/menu/dashboard" asp-area="customer"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                                            <li><a asp-page="/menu/myorders" asp-area="customer"><i class="lni lni-files ms-2"></i>سفارش های من</a></li>
+                                            <li><a asp-page="/categories/index" asp-area=""><i class="lni lni-add-files ms-2"></i>ثبت سفارش</a></li>
+                                        </ul>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="javascript:void(0);">پنل کاربری</a>
+                                    <ul class="nav-dropdown nav-submenu">
+                                        <li><a asp-page="/login"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                                        <li><a asp-page="/login"><i class="lni lni-files ms-2"></i>سفارش های من</a></li>
+                                        <li><a asp-page="/login"><i class="lni lni-add-files ms-2"></i>ثبت سفارش</a></li>
+                                    </ul>
+                                </li>
+                            }
+
+                            <!-- General Pages -->
                             <li>
                                 <a href="javascript:void(0);">صفحات</a>
                                 <ul class="nav-dropdown nav-submenu">
@@ -82,16 +121,15 @@
                                     <li><a asp-page="/soalat" asp-area="">سوالات متداول</a></li>
                                 </ul>
                             </li>
-
-                        </ul>
-
+                        </ul> <!-- Closing the main nav-menu -->
+                        <!-- Social Navigation Menu -->
                         <ul class="nav-menu nav-menu-social align-to-left">
                             <li>
-                                <a asp-page="/logout" asp-area="" data-bs-toggle="modal" data-bs-target="#login" class="ft-bold">
+                                <a asp-page="/logout" asp-area="" class="ft-bold">
                                     <i class="fas fa-sign-in-alt ms-1 theme-cl"></i>خروج
                                 </a>
                             </li>
-                        </ul>
+                        </ul> <!-- Closing the social nav-menu -->
                     </div>
                 </nav>
             </div>

@@ -1,4 +1,5 @@
 ﻿
+using App.Domain.Core.Contracts.Repository.BaseEntities;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -6,7 +7,7 @@ using System.Data;
 
 namespace App.Infrastructure.Dapper
 {
-    public class CityDapperRepository : ICityDapperRepository
+    public class CityDapperRepository : ICityRepository
     {
         private readonly string connectionString;
 
@@ -14,7 +15,7 @@ namespace App.Infrastructure.Dapper
         {
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
-        public async Task<List<City>> GetCitiesAsync(CancellationToken cancellationToken)
+        public async Task<List<City>> GetCities(CancellationToken cancellationToken)
         {
             using(IDbConnection dbConnection = new SqlConnection(connectionString))
             {

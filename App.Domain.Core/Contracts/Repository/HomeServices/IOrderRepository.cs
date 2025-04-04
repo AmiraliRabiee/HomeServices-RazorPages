@@ -18,7 +18,6 @@ namespace App.Domain.Core.Contracts.Repository.HomeServices
         Task ChangeToWaitingForService(int id, CancellationToken cancellationToken);
         Task ChangeToDone(int id, CancellationToken cancellationToken);
         Task ChangeToPayment(int id, CancellationToken cancellationToken);
-
         Task<Result> IsExistSuggestion(int id);
         Task<List<SummOrderDto>> GetOrdersById(int id, CancellationToken cancellationToken);
         Task<int> GetActiveServicesCount(int id, CancellationToken cancellationToken);

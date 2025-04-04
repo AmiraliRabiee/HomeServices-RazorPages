@@ -16,7 +16,7 @@ namespace HomeServices_RazorPage.Pages.Categories
         public async Task OnGet(int id,CancellationToken cancellationToken)
         {
             Cats = await _categoryAppService.GetParentCategories(cancellationToken);
-            CatDtos = _categoryAppService.GetCatyegoryByParent(id);
+            CatDtos =await _categoryAppService.GetCatyegoryByParent(id, cancellationToken);
         }
     }
 }

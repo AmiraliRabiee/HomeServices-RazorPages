@@ -1,6 +1,7 @@
 ﻿using App.Domain.Core.Contracts.Repository.HomeServices;
 using App.Domain.Core.Contracts.Repository.User;
 using App.Domain.Core.Contracts.Service.User;
+using App.Domain.Core.Dto;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.OutputResult;
@@ -26,7 +27,7 @@ namespace App.Domain.Services.User
         public async Task<List<ExpertWorkDto>> GetExpertSkillsNameAsync(int expertId, CancellationToken cancellationToken)
             => await _expertHouseWorkRepository.GetExpertSkillsNameAsync(expertId, cancellationToken);
 
-        public async Task<List<Expert>> GetForSearch(string item)
+        public async Task<List<SearchResultDto>> GetForSearch(string item)
             => await _expertRepository.GetForSearch(item);
 
         public Task<Result> SoftDeleteExpert(int expertId, CancellationToken cancellationToken)

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
@@ -15,8 +15,8 @@
 		<ProjectReference Include="..\App.Domain.AppServices\App.Domain.AppServices.csproj" />
 		<ProjectReference Include="..\App.Domain.Core\App.Domain.Core.csproj" />
 		<ProjectReference Include="..\App.Domain.Services\App.Domain.Services.csproj" />
-		<ProjectReference Include="..\App.InfraAccess.EFCore\App.InfraAccess.EFCore.csproj" />
 		<ProjectReference Include="..\App.Infrastructure.Dapper\App.Infrastructure.Dapper.csproj" />
+		<ProjectReference Include="..\App.Infrastructure.EF.Db\App.Infrastructure.EFCore.csproj" />
 		<ProjectReference Include="..\Framework\Framework.csproj" />
 	</ItemGroup>
 

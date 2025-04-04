@@ -1,4 +1,5 @@
 ﻿@using App.Domain.Core.Entites.User
+@using App.Domain.Core.Helpers
 @using Microsoft.AspNetCore.Identity
    @inject SignInManager<AppUser> SignInManager
 
@@ -21,7 +22,7 @@
 
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/slick.js"></script>
-    @await RenderSectionAsync("Styles" , required: false)
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 
 <body dir="rtl">
@@ -73,7 +74,8 @@
                             <li>
                                 <a asp-page="/categories/index">دسته بندی خدمات</a>
                             </li>
-                            @if(SignInManager.IsSignedIn(User)){
+                            @if (SignInManager.IsSignedIn(User))
+                            {
                                 @if (User.IsInRole("Customer"))
                                 {
                                     <li>
@@ -92,12 +94,11 @@
                                         <ul class="nav-dropdown nav-submenu">
                                             <li><a asp-page="/menu/dashboard" asp-area="expert"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
                                             <li><a asp-page="/menu/reservations" asp-area="expert"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
-                                            <li><a asp-page="/menu/comments" asp-area="expert"><i class="lni lni-add-files ms-2"></i>نظرات کاربران</a></li>
                                         </ul>
                                     </li>
                                 }
                             }
- 
+
                             else
                             {
                                 <li>
@@ -129,9 +130,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="Account" asp-page="/Profile" title="پروفایل">خوش آمدید  @User.Identity?.Name</a>
                                 </li>
-                                <li class="nav-item">
+                                <li>
                                     <form class="form-inline">
-                                        <button asp-page="/logout" asp-area="" class="nav-link btn-danger btn-link text-dark"><i class="fas fa-plus ms-2"></i>خروج </button>
+                                        <a asp-page="/logout" asp-area="" class="ft-bold">
+                                            <i class="fas fa-sign-in-alt ms-1 theme-cl"></i>خروج
+                                        </a>
                                         @if (User.IsInRole("Admin"))
                                         {
                                             <button asp-area="Admin" asp-page="Index" class="nav-link btn btn-link text-dark">پنل ادمین</button>

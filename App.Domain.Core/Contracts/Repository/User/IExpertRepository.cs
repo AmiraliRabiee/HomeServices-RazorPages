@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Dto.User;
+﻿using App.Domain.Core.Dto;
+using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
 
@@ -12,6 +13,6 @@ namespace App.Domain.Core.Contracts.Repository.User
         Task<Result> SoftDeleteExpert(int expertId, CancellationToken cancellationToken);
         Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken);
         Task<Result> UpdateBalance(int id, float balance, CancellationToken cancellationToken);
-        Task<List<Expert>> GetForSearch(string item);
+        Task<List<SearchResultDto>> GetForSearch(string item);
     }
 }

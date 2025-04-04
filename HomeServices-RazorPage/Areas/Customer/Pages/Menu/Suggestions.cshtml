@@ -74,7 +74,7 @@
                                                 <td>
                                                     <div class="ground ground-list-single">
                                                         <a asp-page="/menu/content" asp-area="expert" asp-route-id="@suggestion.ExpertId">
-                                                            <img class="ground-avatar" src="/assets/img/t-1.png" alt="...">
+                                                            <img class="ground-avatar" src="@(string.IsNullOrEmpty(suggestion.ImagePath) ? Url.Content("~/images/profiles/base (3).png") : @suggestion.ImagePath)" alt="...">
                                                             <span class="profile-status bg-online pull-right"></span>
                                                             @suggestion.ExpertName
                                                         </a>

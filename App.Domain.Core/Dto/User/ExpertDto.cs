@@ -21,5 +21,6 @@ namespace App.Domain.Core.Dto.User
         public string PhoneNumber { get; set; }
         public List<int> SelectedHouseWorkIds { get; set; } = new();
         public AppUser AppUser { get; set; }
+        public int SuggestionId { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace HomeServices_RazorPage.Pages.SubCategories
         {
             ParentCategories = await _categoryAppService.GetParentCategories(cancellationToken);
             CategoryDto = await _categoryAppService.GetCategoryDto(id);
-            ChildCategory = _categoryAppService.GetChildCategoriesById(id);
+            ChildCategory = await _categoryAppService.GetChildCategoriesById(id,cancellationToken);
             Categories = _categoryAppService.GetAllCategories();
             Works = await _houseWorkAppService.GetServicesByCategoryId(id, cancellationToken);
         }
@@ -41,7 +41,7 @@ namespace HomeServices_RazorPage.Pages.SubCategories
         public async Task OnPost(int id ,CancellationToken cancellationToken)
         {
             CategoryDto = await _categoryAppService.GetCategoryDto(id);
-            ChildCategory = _categoryAppService.GetChildCategoriesById(id);
+            ChildCategory =await _categoryAppService.GetChildCategoriesById(id, cancellationToken);
             Works = new List<SummHouseWorkDto>();
 
             foreach (var categoryId in SelectedCategories)

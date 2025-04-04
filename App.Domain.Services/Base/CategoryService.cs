@@ -27,13 +27,13 @@ namespace App.Domain.Services.Base
         public async Task<List<int>> GetCategoryNumbersAsync(CancellationToken cancellationToken)
             => await _categoryRepository.GetCategoryNumbersAsync(cancellationToken);
 
-        public List<CategoryDto> GetCatyegoryByParent(int id)
-            => _categoryRepository.GetCatyegoryByParent((int)id);
+        public async Task<List<CategoryDto>> GetCatyegoryByParent(int id,CancellationToken cancellationToken)
+            => await _categoryRepository.GetCatyegoryByParent((int)id , cancellationToken);
         public async Task<List<CategoryDto>> GetChildCategories(CancellationToken cancellationToken)
             => await _categoryDapperRepository.GetChildCategoriesAsync(cancellationToken);
 
-        public List<Category> GetChildCategoriesById(int id)
-            => _categoryRepository.GetChildCategoriesById(id);
+        public async Task<List<Category>> GetChildCategoriesById(int id,CancellationToken cancellationToken)
+            => await _categoryRepository.GetChildCategoriesById(id,cancellationToken);
 
         public async Task<Category> GetChildCategoryById(int id)
             =>await _categoryRepository.GetChildCategoryById(id);

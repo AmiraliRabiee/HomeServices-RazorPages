@@ -29,7 +29,7 @@ namespace App.Domain.AppServices.HomeService
             var result = await _suggestionService.Create(suggestion, cancellationToken);
             if (result.IsSuccess)
             {
-                await _orderService.ChangeToExpertSelection(suggestion.ExpertId);
+                await _orderService.ChangeToExpertSelection(suggestion.OrderId);
                 return new Result { IsSuccess = true, Message = result.Message };
             }
             return new Result { Message = result.Message };

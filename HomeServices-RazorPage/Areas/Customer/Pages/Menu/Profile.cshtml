@@ -2,6 +2,7 @@
 @using HomeServices_RazorPage.Areas.Customer.Pages.Menu
 @model ProfileModel
 @{
+
 }
 <div class="goodup-dashboard-wrap gray px-4 py-5">
     <!-- Sidebar Toggle Button -->
@@ -47,7 +48,6 @@
                 <form class="submit-form" enctype="multipart/form-data" method="post">
                     <div class="dashboard-widg-bar d-block">
                         <div class="row">
-                            <!-- ✅ Profile Image Upload Section Inside the Form -->
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 order-xl-last order-lg-last order-md-last">
                                 <div class="d-flex bg-white rounded px-3 py-3 mb-3">
                                     <div class="dash-figure">
@@ -56,7 +56,7 @@
                                         </div>
                                         <div class="upload-photo-btn">
                                             <div class="Uploadphoto" style="background:#03343b">
-                                                <span><i class="fas fa-upload"></i> آپلود تصویر</span>
+                                                <span><i class="fas fa-upload"></i> انتخاب تصویر</span>
                                                 <input asp-for="@Model.CustomerDto.CustomerImage" type="file" class="upload">
                                             </div>
                                         </div>

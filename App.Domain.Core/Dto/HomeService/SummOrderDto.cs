@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Enum;
+﻿using App.Domain.Core.Entites.User;
+using App.Domain.Core.Enum;
 using System.Globalization;
 
 namespace App.Domain.Core.Dto.HomeService
@@ -20,5 +21,6 @@ namespace App.Domain.Core.Dto.HomeService
         public DateTime CreationDate { get; set; }
         public string CustomerName { get; set; }
         public bool? IsConfrim { get; set; }
+        public string Address { get; set; }
     }
 }

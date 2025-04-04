@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Dto.Dashboard;
+﻿using App.Domain.Core.Dto;
+using App.Domain.Core.Dto.Dashboard;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
@@ -12,7 +13,7 @@ namespace App.Domain.Core.Contracts.Repository.HomeServices
         Task<Result> SoftDeleteHomeService(HouseWork service, CancellationToken cancellationToken);
         Task<Result> UpdateHomeService(UpdateHouseWork service, CancellationToken cancellationToken);
         HouseWork GetHomeServiceById(int id);
-        Task<List<SummHouseWorkDto>> GetHomeServices(CancellationToken cancellationToken);
+        //Task<List<SummHouseWorkDto>> GetHomeServices(CancellationToken cancellationToken);
         UpdateHouseWork GetServiceDto(int id);
         Task<List<SummHouseWorkDto>> GetServicesByCategoryId(int id, CancellationToken cancellationToken);
         Task<List<SummHouseWorkDto>> GetServicesById(int id, CancellationToken cancellationToken);
@@ -21,6 +22,6 @@ namespace App.Domain.Core.Contracts.Repository.HomeServices
         Task<SummHouseWorkDto> GetServiceByChildId(int id, CancellationToken cancellationToken);
         Task<CategoryDto> GetCategoryByServiceId(int id, CancellationToken cancellationToken);
         Task<SummHouseWorkDto> GetServiceById(int id, CancellationToken cancellationToken);
-        Task<List<HouseWork>> GetForSearch(string item);
+        Task<List<SearchResultDto>> GetForSearch(string item);
     }
 }

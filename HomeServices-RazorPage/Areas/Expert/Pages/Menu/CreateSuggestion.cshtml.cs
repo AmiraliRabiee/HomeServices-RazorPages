@@ -39,7 +39,7 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
 
             if (lastSuggestion != null && (DateTime.UtcNow - lastSuggestion.CreatedAt).TotalHours < 24)
             {
-                ModelState.AddModelError(string.Empty, "شما فقط یک پیشنهاد در روز می‌توانید ثبت کنید.");
+                TempData["TimeError"] = "شما فقط یک پیشنهاد در روز می‌توانید ثبت کنید.";
                 return Page();
             }
 
