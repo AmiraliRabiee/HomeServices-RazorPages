@@ -4,6 +4,7 @@ using App.Domain.AppServices.Base;
 using App.Domain.AppServices.HomeService;
 using App.Domain.AppServices.User;
 using App.Domain.Core.Contracts.AppService;
+using App.Domain.Core.Contracts.Dapper.Repository;
 using App.Domain.Core.Contracts.Repository.BaseEntities;
 using App.Domain.Core.Contracts.Repository.HomeServices;
 using App.Domain.Core.Contracts.Repository.User;

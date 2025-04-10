@@ -24,5 +24,6 @@ namespace App.Domain.Core.Contracts.AppService
         Task<List<SummOrderDto>> GetReserveOrders(AppUser user, CancellationToken cancellationToken);
         Task ChangeToDone(int id, CancellationToken cancellationToken);
         Task<float> GetSuggestPrice(int orderId, CancellationToken cancellationToken);
+        Task<List<SummOrderDto>> GetAcceptedOrders(AppUser user, CancellationToken cancellationToken);
     }
 }

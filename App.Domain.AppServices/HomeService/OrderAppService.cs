@@ -90,12 +90,14 @@ namespace App.Domain.AppServices.HomeService
         {
             var expert = await _orderService.GetExpertWithSkillsAndCity(user.Id, cancellationToken);
             var list = await _orderService.GetOrdersMatchingExpert(expert, cancellationToken);
-            if (list.Count == 0)
-            {
-                var result = await _orderService.GetOrdersAcceptExpert(expert, cancellationToken);
-                return result;
-            }
             return list;
+        }
+
+        public async Task<List<SummOrderDto>> GetAcceptedOrders(AppUser user, CancellationToken cancellationToken)
+        {
+            var expert = await _orderService.GetExpertWithSkillsAndCity(user.Id, cancellationToken);
+            var orders = await _orderService.GetOrdersAcceptExpert(expert, cancellationToken);
+            return orders;
         }
 
         public async Task ChangeToDone(int id, CancellationToken cancellationToken)

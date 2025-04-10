@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Contracts.Repository.BaseEntities;
+﻿using App.Domain.Core.Contracts.Dapper.Repository;
+using App.Domain.Core.Contracts.Repository.BaseEntities;
 using App.Domain.Core.Dto.Dashboard;
 using App.Domain.Core.Dto.HomeService;
 using Dapper;

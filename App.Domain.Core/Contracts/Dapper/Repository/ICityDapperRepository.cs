@@ -1,4 +1,4 @@
-﻿namespace App.Infrastructure.Dapper
+﻿namespace App.Domain.Core.Contracts.Dapper.Repository
 {
     public interface ICityDapperRepository
     {

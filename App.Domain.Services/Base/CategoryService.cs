@@ -1,9 +1,9 @@
-﻿using App.Domain.Core.Contracts.Repository.BaseEntities;
+﻿using App.Domain.Core.Contracts.Dapper.Repository;
+using App.Domain.Core.Contracts.Repository.BaseEntities;
 using App.Domain.Core.Contracts.Service.BaseEntities;
 using App.Domain.Core.Dto.Dashboard;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
-using App.Infrastructure.Dapper;
 
 namespace App.Domain.Services.Base
 {

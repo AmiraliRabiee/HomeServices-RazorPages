@@ -4,6 +4,7 @@ using App.Domain.Core.Dto.HomeService;
 using App.Infrastructure.Dapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
+using App.Domain.Core.Contracts.Dapper.Repository;
 
 namespace Infrastructure.Repositories
 {

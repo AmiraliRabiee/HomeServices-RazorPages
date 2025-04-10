@@ -29,6 +29,5 @@ namespace App.Domain.Core.Entites.Service
         public List<ExpertHouseWork>? ExpertHouseWorks { get; set; } = new();
         public Category Category { get; set; }
         public List<Order> Orders { get; set; }
-        public Image Image { get; set; }
     }
 }

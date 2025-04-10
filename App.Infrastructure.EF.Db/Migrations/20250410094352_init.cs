@@ -297,25 +297,6 @@ namespace App.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Images",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Path = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    HouseWorkId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Images", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Images_HouseWorks_HouseWorkId",
-                        column: x => x.HouseWorkId,
-                        principalTable: "HouseWorks",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -403,6 +384,25 @@ namespace App.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Path = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Suggestions",
                 columns: table => new
                 {
@@ -447,9 +447,9 @@ namespace App.Infrastructure.EFCore.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ActivationUser", "AdminId", "Balance", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "ImagePath", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RegisterAt", "RoleId", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, 3, null, 1000f, "d1240e06-0fba-4c82-9296-342038e2a44d", "Admin@gmail.com", false, "Admin", null, false, "Admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEFdNmCy7qnFu9qKKsJIgEildm6xVMDhSHdtMhZaNHHf6KOxNILgYOk/cBozcFdtFiw==", null, false, new DateTime(2025, 3, 13, 16, 16, 18, 150, DateTimeKind.Local).AddTicks(8687), 1, "e4aa746a-11ef-4553-bd91-a4882bc07131", false, "Admin@gmail.com" },
-                    { 2, 0, 3, null, 1000f, "be9ba985-c039-4070-995c-1ff7f5a46de3", "Customer@gmail.com", false, "Amir", null, false, "Amiri", false, null, "CUSTOMER@GMAIL.COM", "CUSTOMER@GMAIL.COM", "AQAAAAIAAYagAAAAEESWoJDNDGWj9mHPCR9LBdjL9WQEbUduaLSuFH7/VNqrUg+7z12IemRtNL1afz2Tfw==", null, false, new DateTime(2025, 3, 13, 16, 16, 18, 150, DateTimeKind.Local).AddTicks(8715), 2, "8bf078df-0abf-43c6-81a4-9b3f8ecfb536", false, "Customer@gmail.com" },
-                    { 3, 0, 3, null, 1000f, "4ec494d1-0b49-45f7-b86c-8e4104448055", "Expert@gmail.com", false, "Amir", null, false, "Amiri", false, null, "EXPERT@GMAIL.COM", "EXPERT@GMAIL.COM", "AQAAAAIAAYagAAAAEOJIxDpSMDCbc7bi/a2Giph0Rz2eKFXMfxs4d6qXRbZE8xMNUzdVpwTCrn428RJetg==", null, false, new DateTime(2025, 3, 13, 16, 16, 18, 150, DateTimeKind.Local).AddTicks(8728), 3, "dedffc9d-2927-470c-89d7-28fad014ff68", false, "Expert@gmail.com" }
+                    { 1, 0, 3, null, 1000f, "701eb923-a11e-435a-a581-af16472206f1", "Admin@gmail.com", false, "Admin", null, false, "Admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEKypwbD+VvaLwRnLn77Fk8Ats900Oem6ReH8GNyYtH2RBE5EHhMPWZOwi5cSRuitJQ==", null, false, new DateTime(2025, 4, 10, 13, 13, 51, 928, DateTimeKind.Local).AddTicks(9914), 1, "69abf1ce-9c8d-41c0-bc2a-15fa4ca56e1e", false, "Admin@gmail.com" },
+                    { 2, 0, 3, null, 1000f, "73612e99-e542-407a-addc-cf65c4314ff3", "Customer@gmail.com", false, "Amir", null, false, "Amiri", false, null, "CUSTOMER@GMAIL.COM", "CUSTOMER@GMAIL.COM", "AQAAAAIAAYagAAAAEJ6uTqabVjyr4abpqrUlG8f+KRYJI6SHd5MB02k2zGLeyRZq86mGd+GL4NHVt7cE0w==", null, false, new DateTime(2025, 4, 10, 13, 13, 51, 928, DateTimeKind.Local).AddTicks(9936), 2, "a88a2eeb-b63e-4fcd-8418-cbb4356b1136", false, "Customer@gmail.com" },
+                    { 3, 0, 3, null, 1000f, "0ba58cda-a648-4623-9917-187acd6fc2af", "Expert@gmail.com", false, "Amir", null, false, "Amiri", false, null, "EXPERT@GMAIL.COM", "EXPERT@GMAIL.COM", "AQAAAAIAAYagAAAAENoSVGWywo9b0tUqoVDX1xIfmDN1gmvXTHSyKdYSRZEN7qL6oXLzKt8BKsTJ9fzEZA==", null, false, new DateTime(2025, 4, 10, 13, 13, 51, 928, DateTimeKind.Local).AddTicks(9949), 3, "cc87fb52-63f0-41f0-9a77-f313e651a9d6", false, "Expert@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -611,7 +611,7 @@ namespace App.Infrastructure.EFCore.Migrations
                     { 73, 2000f, 22, "جدید", "", false, "خدمات نرم افزاری" },
                     { 74, 1000f, 22, "", "", false, "خدمات اسپیکر" },
                     { 75, 3500f, 22, "", "", false, "خدمات دوربین" },
-                    { 76, 1000f, 23, "زیر قیمت کارخانه", "", false, "تعویض باتری خودرو" },
+                    { 76, 1000f, 23, "زیر قیمت کارخانه", "\\Images\\HomeServices\\76h.JPG", false, "تعویض باتری خودرو" },
                     { 77, 3500f, 23, "", "", false, " برق و باتری خودرو" },
                     { 78, 2000f, 23, "", "", false, "مکانیکی خودرو" },
                     { 79, 1000f, 23, "", "", false, "امداد خودرو" },
@@ -623,7 +623,7 @@ namespace App.Infrastructure.EFCore.Migrations
                     { 85, 3500f, 23, "", "", false, "تعمیر موتور سیکلت" },
                     { 86, 1000f, 24, "", "", false, "اسباب کشی با خاور و کامیون" },
                     { 87, 3500f, 24, "", "", false, " اسباب کشی با وانت و نیسان" },
-                    { 88, 2000f, 24, "نیاز به توضیح", "", false, "اسباب کشی و حمل بین شهری" },
+                    { 88, 2000f, 24, "نیاز به توضیح", "\\Images\\HomeServices\\88h.jpg", false, "اسباب کشی و حمل بین شهری" },
                     { 89, 1000f, 24, "", "", false, "کارگر جابجایی" },
                     { 90, 3500f, 24, "", "", false, "حمل نخاله و ضایعات ساختمانی" },
                     { 91, 1000f, 25, "", "", false, "مراقبت و نگهداری" },
@@ -652,9 +652,9 @@ namespace App.Infrastructure.EFCore.Migrations
                 columns: new[] { "Id", "CompletionDate", "CreateAt", "CustomerId", "Description", "HouseWorkId", "IsConfrim", "IsDeleted", "IsFinish", "IsPayment", "RunningTime", "StausService" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 13, 16, 16, 18, 148, DateTimeKind.Local).AddTicks(6764), 1, "فوری", 5, false, false, false, false, new TimeOnly(0, 0, 0).Add(TimeSpan.FromTicks(11)), 1 },
-                    { 2, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 13, 16, 16, 18, 148, DateTimeKind.Local).AddTicks(6781), 1, "", 6, false, false, false, false, new TimeOnly(10, 30, 0), 1 },
-                    { 3, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 13, 16, 16, 18, 148, DateTimeKind.Local).AddTicks(6783), 1, "فوری", 30, false, false, false, false, new TimeOnly(4, 30, 0), 1 }
+                    { 1, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 10, 13, 13, 51, 924, DateTimeKind.Local).AddTicks(9346), 1, "فوری", 5, false, false, false, false, new TimeOnly(0, 0, 0).Add(TimeSpan.FromTicks(11)), 1 },
+                    { 2, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 10, 13, 13, 51, 924, DateTimeKind.Local).AddTicks(9368), 1, "", 6, false, false, false, false, new TimeOnly(10, 30, 0), 1 },
+                    { 3, new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 10, 13, 13, 51, 924, DateTimeKind.Local).AddTicks(9371), 1, "فوری", 30, false, false, false, false, new TimeOnly(4, 30, 0), 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -742,10 +742,9 @@ namespace App.Infrastructure.EFCore.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Images_HouseWorkId",
+                name: "IX_Images_OrderId",
                 table: "Images",
-                column: "HouseWorkId",
-                unique: true);
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",

@@ -8,6 +8,6 @@ public class Image
     [MaxLength(500, ErrorMessage = "Image path cannot exceed 500 characters.")]
     public string? Path { get; set; }
 
-    public HouseWork HouseWork { get; set; }
-    public int HouseWorkId { get; set; }
+    public Order Order { get; set; }
+    public int OrderId { get; set; }
 }

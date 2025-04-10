@@ -1,7 +1,7 @@
 ﻿using App.Domain.Core.Dto.Dashboard;
 using System.Threading;
 
-namespace App.Infrastructure.Dapper
+namespace App.Domain.Core.Contracts.Dapper.Repository
 {
     public interface ICategoryDapperRepository
     {

@@ -1,6 +1,5 @@
 ﻿using App.Domain.Core.Contracts.Repository.BaseEntities;
 using App.Domain.Core.Contracts.Service.BaseEntities;
-using App.Infrastructure.Dapper;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

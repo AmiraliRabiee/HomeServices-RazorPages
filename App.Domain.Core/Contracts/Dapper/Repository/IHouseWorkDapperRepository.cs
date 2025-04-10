@@ -1,6 +1,6 @@
 ﻿using App.Domain.Core.Dto.HomeService;
 
-namespace App.Infrastructure.Dapper
+namespace App.Domain.Core.Contracts.Dapper.Repository
 {
     public interface IHouseWorkDapperRepository
     {

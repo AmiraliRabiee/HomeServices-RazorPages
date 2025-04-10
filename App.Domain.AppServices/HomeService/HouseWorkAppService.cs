@@ -1,10 +1,10 @@
 ﻿using App.Domain.Core.Contracts.AppService;
+using App.Domain.Core.Contracts.Dapper.Repository;
 using App.Domain.Core.Contracts.Service.BaseEntities;
 using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
-using App.Infrastructure.Dapper;
 
 namespace App.Domain.AppServices.HomeService
 {
