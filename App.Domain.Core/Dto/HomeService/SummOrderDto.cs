@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.Entites.User;
 using App.Domain.Core.Enum;
+using Microsoft.AspNetCore.Http;
 using System.Globalization;
 
 namespace App.Domain.Core.Dto.HomeService
@@ -22,5 +23,8 @@ namespace App.Domain.Core.Dto.HomeService
         public string CustomerName { get; set; }
         public bool? IsConfrim { get; set; }
         public string Address { get; set; }
+        public List<IFormFile>? Images { get; set; }
+        public string ImagePathOfOrder { get; set; }
+        public List<Image> UploadImages { get; set; }
     }
 }

@@ -67,38 +67,30 @@
                     <div class="nav-menus-wrapper" style="transition-property: none;">
                         <ul class="nav-menu">
 
-                            <li>
-                                <a asp-page="/index">صفحه اصلی</a>
-                            </li>
+                            <li><a asp-page="/index">صفحه اصلی</a></li>
+                            <li><a asp-page="/categories/index">دسته بندی خدمات</a></li>
 
-                            <li>
-                                <a asp-page="/categories/index">دسته بندی خدمات</a>
-                            </li>
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                @if (User.IsInRole("Customer"))
-                                {
-                                    <li>
-                                        <a>پنل کاربری</a>
-                                        <ul class="nav-dropdown nav-submenu">
+                                <li>
+                                    <a>پنل کاربری</a>
+                                    <ul class="nav-dropdown nav-submenu">
+                                        @if (User.IsInRole("Customer"))
+                                        {
                                             <li><a asp-page="/menu/dashboard" asp-area="customer"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
                                             <li><a asp-page="/menu/myorders" asp-area="customer"><i class="lni lni-files ms-2"></i>سفارش های من</a></li>
-                                            <li><a asp-page="/categories/index" asp-area=""><i class="lni lni-add-files ms-2"></i>ثبت سفارش</a></li>
-                                        </ul>
-                                    </li>
-                                }
-                                @if (User.IsInRole("Expert"))
-                                {
-                                    <li>
-                                        <a>پنل کاربری</a>
-                                        <ul class="nav-dropdown nav-submenu">
+                                            <li><a asp-page="/categories/index"><i class="lni lni-add-files ms-2"></i>ثبت سفارش</a></li>
+                                        }
+                                        else if (User.IsInRole("Expert"))
+                                        {
                                             <li><a asp-page="/menu/dashboard" asp-area="expert"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
                                             <li><a asp-page="/menu/reservations" asp-area="expert"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
-                                        </ul>
-                                    </li>
-                                }
+                                            <li><a asp-page="/menu/accepted" asp-area="expert"><i class="lni lni-files ms-2"></i>سفارش های پذیرفته شده</a></li>
+                                            <li><a asp-page="/menu/Comments" asp-area="expert"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
+                                        }
+                                    </ul>
+                                </li>
                             }
-
                             else
                             {
                                 <li>
@@ -111,7 +103,6 @@
                                 </li>
                             }
 
-
                             <li>
                                 <a>صفحات</a>
                                 <ul class="nav-dropdown nav-submenu">
@@ -121,28 +112,26 @@
                                     <li><a asp-page="/soalat">سوالات متداول</a></li>
                                 </ul>
                             </li>
-
                         </ul>
 
                         <ul class="nav-menu nav-menu-social align-to-left">
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="Account" asp-page="/Profile" title="پروفایل">خوش آمدید  @User.Identity?.Name</a>
-                                </li>
-                                <li>
-                                    <form class="form-inline">
-                                        <a asp-page="/logout" asp-area="" class="ft-bold">
-                                            <i class="fas fa-sign-in-alt ms-1 theme-cl"></i>خروج
+                                <li class="nav-item d-flex align-items-center gap-3">
+                                    <span class="text-dark">خوش آمدید @User.Identity?.Name</span>
+
+                                    <a asp-page="/logout" class="ft-bold btn btn-link text-dark">
+                                        <i class="fas fa-sign-out-alt ms-1 theme-cl"></i>خروج
+                                    </a>
+
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a asp-area="Admin" asp-page="/Index" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-cogs ms-1"></i>پنل ادمین
                                         </a>
-                                        @if (User.IsInRole("Admin"))
-                                        {
-                                            <button asp-area="Admin" asp-page="Index" class="nav-link btn btn-link text-dark">پنل ادمین</button>
-                                        }
-                                    </form>
+                                    }
                                 </li>
                             }
-
                             else
                             {
                                 <li>
@@ -157,8 +146,10 @@
                                 </li>
                             }
                         </ul>
+
                     </div>
                 </nav>
+
             </div>
         </div>
 

@@ -17,6 +17,16 @@ namespace App.Domain.Core.Helpers
 
             return displayAttribute?.Name ?? enumValue.ToString();
         }
+
+        public static string GetDisplayNameActivate(this ActivationEnum enumValue)
+        {
+            var displayAttribute = enumValue.GetType()
+                .GetMember(enumValue.ToString())
+                .First()
+                .GetCustomAttribute<DisplayAttribute>();
+
+            return displayAttribute?.Name ?? enumValue.ToString();
+        }
         public static string GetStatusEnumItems(this StausServiceEnum enumValue)
         {
             switch (enumValue)

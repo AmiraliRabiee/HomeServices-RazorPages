@@ -1,27 +1,50 @@
 ﻿using App.Domain.Core.Contracts.AppService;
+using App.Domain.Core.Contracts.Service.BaseEntities;
 using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
 using App.Domain.Core.Enum;
+using App.Domain.Core.Exceptions;
 using Microsoft.AspNetCore.Identity;
+using System.Threading;
 
 namespace App.Domain.AppServices.HomeService
 {
     public class OrderAppService(IOrderService _orderService
         , ISuggestionService _suggestionService
-        , IUserAppService userAppService) : IOrderAppService
+        , IUserAppService userAppService
+        , IBaseDataService _baseDataService) : IOrderAppService
     {
 
         public async Task<List<SummOrderDto>> GetAll()
             => await _orderService.GetAll();
 
-        public async Task<Result> CreateOrder(AppUser user, SummOrderDto order, CancellationToken cancellationToken)
+        public async Task<Result> CreateOrder(SummOrderDto order, CancellationToken cancellationToken)
         {
-            var result = await _orderService.Create(order, cancellationToken);
-            if (result.IsSuccess)
-                return new Result { IsSuccess = true, Message = result.Message };
-            return result;
+            try
+            {
+                var create = await _orderService.Create(order, cancellationToken);
+                if (order.Images is not null)
+                {
+                    var imagesPath = new List<string>();
+                    foreach (var image in order.Images)
+                    {
+                        var imagepath = await _baseDataService.UploadImage(image, "Profiles", cancellationToken);
+                        imagesPath.Add(imagepath);
+                    }
+                    var result = await _baseDataService.AddImages(imagesPath, create, cancellationToken);
+                    if (result.IsSuccess)
+                    {
+                        return new Result { IsSuccess = true, Message = result.Message };
+                    }
+                }
+                return new Result { IsSuccess = true, Message = "سفارش بدون عکس ثبت شده است" };
+            }
+            catch (Exception ex)
+            {
+                return new Result { IsSuccess = false, Message = ex.Message };
+            }
         }
 
         public async Task<Result> ChangeStatus(int id, CancellationToken cancellationToken)
@@ -68,8 +91,13 @@ namespace App.Domain.AppServices.HomeService
         public async Task<List<SummOrderDto>> GetOrdersById(int id, CancellationToken cancellationToken)
             => await _orderService.GetOrdersById(id, cancellationToken);
 
-        public async Task<SummOrderDto> GetOrderById(int id, CancellationToken cancellationToken)
-            => await _orderService.GetOrderById(id, cancellationToken);
+        public async Task<SummOrderDto?> GetOrderById(int id, CancellationToken cancellationToken)
+        {
+            var order = await _orderService.GetOrderById(id, cancellationToken);
+            if (order is null)
+                throw new NotFoundException("سفارش با این شناسه یافت نشئد");
+            return order;
+        }
 
         public Task<int> GetActiveServicesCount(int id, CancellationToken cancellationToken)
             => _orderService.GetActiveServicesCount(id, cancellationToken);

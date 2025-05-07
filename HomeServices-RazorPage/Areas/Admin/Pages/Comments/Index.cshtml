@@ -1,4 +1,6 @@
 ﻿@page
+@using App.Domain.Core.Enum
+@using App.Domain.Core.Helpers
 @model HomeServices_RazorPage.Areas.Admin.Pages.Comments.IndexModel
 @{
 }
@@ -13,7 +15,7 @@
             </div><!-- /.portlet-title -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-@*             <div class="top-buttons-box mb-2">
+            @*             <div class="top-buttons-box mb-2">
                 <a class="btn btn-success" asp-page="Create">
                     <i class="icon-plus"></i>
                     افزودن
@@ -31,7 +33,8 @@
                                 <th class="col-4">نظر</th>
                                 <th class="col-2">تاریخ ثبت</th>
                                 <th class="col-1">امتیاز</th>
-                                <th class="col-2">عملیات</th> <!-- Reduced width for action column -->
+                                <th class="col-1">وضعیت</th>
+                                <th class="col-2">عملیات</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,10 +47,11 @@
                                     <td style="word-wrap: break-word;">@comment.Opinion</td>
                                     <td>@comment.RegissterDate</td>
                                     <td>@comment.Points</td>
+                                    <td>@comment.Activation.GetDisplayNameActivate()</td>
                                     <td>
                                         <div class="d-flex gap-2">
                                             <a asp-page-handler="Accept" asp-route-Id="@comment.Id" class="btn btn-success btn-sm flex-grow-1">تایید<i class="fas fa-check-circle ms-1"></i> </a>
-                                            <a asp-page-handler="Delete" asp-route-Id="@comment.Id" class="btn btn-danger btn-sm flex-grow-1">رد <i class="fas fa-trash ms-1"></i></a>
+                                            <a asp-page-handler="Reject" asp-route-Id="@comment.Id" class="btn btn-danger btn-sm flex-grow-1">رد <i class="fas fa-trash ms-1"></i></a>
                                         </div>
                                     </td>
                                 </tr>

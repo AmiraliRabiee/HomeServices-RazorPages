@@ -6,7 +6,7 @@ namespace App.Domain.Core.Contracts.Service.HomeServices
 {
     public interface IOrderService
     {
-        Task<Result> Create(SummOrderDto order, CancellationToken cancellationToken);
+        Task<int> Create(SummOrderDto order, CancellationToken cancellationToken);
         Task<Result> Delete(int id, CancellationToken cancellationToken);
         Task<Result> SoftDelete(Order order, CancellationToken cancellationToken);
         Task<Result> Update(Order order, CancellationToken cancellationToken);

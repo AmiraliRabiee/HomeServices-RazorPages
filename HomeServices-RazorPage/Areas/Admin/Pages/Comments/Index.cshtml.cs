@@ -18,10 +18,10 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Comments
             CommntsList = _commentAppService.GetComments();
         }
 
-        public async Task OnGetDelete(int id,CancellationToken cancellationToken)
+        public async Task OnGetReject(int id,CancellationToken cancellationToken)
         {
             CommntsList = _commentAppService.GetComments();
-            var result = await _commentAppService.Delete(id , cancellationToken);
+            var result = await _commentAppService.RejectComment(id , cancellationToken);
             if(result.IsSuccess)
                 Message= result.Message;
             Message = result.Message;

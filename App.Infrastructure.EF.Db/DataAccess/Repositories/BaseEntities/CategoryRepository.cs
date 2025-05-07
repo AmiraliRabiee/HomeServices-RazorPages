@@ -103,9 +103,17 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
             return count;
         }
 
-        public List<Category> GetAllCategories()
+        public List<CategoryDto> GetAllCategories()
         {
-            var categories = _appDbContext.Categories.ToList();
+            var categories = _appDbContext.Categories
+                .Select(c => new CategoryDto
+                {
+                    Id = c.Id,
+                    ParentId = c.ParentId,
+                    ParentName = c.ParentCategory.Title,
+                    Title = c.Title,
+                    ImagePath = c.ImagePath
+                }).ToList();
             if (categories is null)
                 throw new Exception("دسته بندی ها خالی میباشد");
             return categories;

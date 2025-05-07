@@ -17,6 +17,8 @@
                 <ul data-submenu-title="منو">
                     <li><a asp-page="Dashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
                     <li><a asp-page="reservations"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
+                    <li><a asp-page="accepted"><i class="lni lni-files ms-2"></i>سفارش های فعال</a></li>
+
                     <li><a asp-route-expertId="" asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
                 </ul>
                 <ul data-submenu-title="حساب کاربری">
@@ -98,7 +100,6 @@
                         </h4>
                     </div>
                 </div>
-
                 <div class="dashboard-list-wraps-body py-3 px-3">
                     <form method="post" asp-page-handler="create">
                         <div class="row">
@@ -108,6 +109,15 @@
                                 <div class="form-group">
                                     <label class="mb-1">قیمت پیشنهادی</label>
                                     <input type="text" class="form-control rounded" asp-for="@Model.NewSuggestion.SuggestPrice" placeholder="قیمت پیشنهادی خود را وارد نمایید">
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label class="mb-1">قیمت پایه</label>
+                                    <div class="border p-2 rounded bg-light">
+                                        @Model.OrderDto.BasePrice.ToString("N0") تومان
+                                    </div>
                                 </div>
                             </div>
 
@@ -128,6 +138,7 @@
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

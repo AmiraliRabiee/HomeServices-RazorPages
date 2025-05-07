@@ -130,5 +130,49 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
 
             return experts;
         }
+
+        public async Task<int> GetSkillUpdateCount(int expertId, CancellationToken cancellationToken)
+        {
+            var expert = await _appDbContext.Experts.FirstOrDefaultAsync(e => e.Id == expertId);
+            return expert?.SkillUpdateCount ?? 0;
+        }
+
+        public async Task IncrementSkillUpdateCount(int expertId, CancellationToken cancellationToken)
+        {
+            var expert = await _appDbContext.Experts.FindAsync(expertId);
+            if (expert != null)
+            {
+                expert.SkillUpdateCount++;
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+
+        public async Task<DateTime?> GetLastSkillUpdateDate(int expertId, CancellationToken cancellationToken)
+        {
+            var expert = await _appDbContext.Experts.FindAsync(expertId);
+            return expert?.LastSkillUpdateDate;
+        }
+
+        public async Task UpdateLastSkillUpdateDate(int expertId, DateTime updateDate, CancellationToken cancellationToken)
+        {
+            var expert = await _appDbContext.Experts.FindAsync(expertId);
+            if (expert != null)
+            {
+                expert.LastSkillUpdateDate = updateDate;
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        public async Task ResetSkillUpdateCount(int expertId, CancellationToken cancellationToken)
+        {
+            var expert = await _appDbContext.Experts.FindAsync(expertId);
+            if (expert != null)
+            {
+                expert.SkillUpdateCount = 0;
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+            }
+        }
+
     }
 }

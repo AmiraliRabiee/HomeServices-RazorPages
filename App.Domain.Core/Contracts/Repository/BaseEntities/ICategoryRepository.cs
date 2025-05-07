@@ -11,7 +11,7 @@ namespace App.Domain.Core.Contracts.Repository.BaseEntities
         Task<Result> DeleteCategory(int id, CancellationToken cancellationToken);
         Task<Result> SoftDeleteCategory(Category category, CancellationToken cancellationToken);
         Category GetCategory(int id);
-        List<Category> GetAllCategories();
+        List<CategoryDto> GetAllCategories();
         //Task<List<Category>> GetParentCategories();
         //Task<List<Category>> GetChildCategories();
         Task<CategoryDto> GetCategoryDto(int? id);

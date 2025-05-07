@@ -1,7 +1,78 @@
 ﻿@page
-@model ClientIndexModel
+@using App.Domain.Core.Contracts.AppService
+@using App.Domain.Core.Entites.User
+@using Microsoft.AspNetCore.Identity
+@model IndexModel
 
-<div class="container mt-5">
-    <h2>@Model.Result.Title</h2>
-    <p>کارشناس: @Model.Result.FullName</p>
-</div>
+@inject IHouseWorkAppService workAppService
+@inject SignInManager<AppUser> SignInManager
+<!-- Search Results -->
+<section class="gray py-5">
+    @if (Model.Work != null)
+    {
+        <div class="d-block grouping-listings" style="border: 1px solid #ddd; padding: 10px;">
+            <div class="grouping-listings-single" style="margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+                <div class="vrt-list-wrap">
+                    <div class="row align-items-center">
+                        <!-- Business Thumbnail -->
+                        <div class="col-md-3">
+                            <div class="vrt-list-thumb" style="width: 200px; height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: #fff; border: 1px solid #ddd; padding: 10px;">
+                                <img src="@Model.Work.ImagePath" class="img-fluid" alt="@Model.Work.Title" style="max-width: 100%; max-height: 100%; object-fit: cover;" />
+                            </div>
+                        </div>
+
+                        <!-- Business Content -->
+                        <div class="col-md-6">
+                            <div class="vrt-list-content">
+                                <h4 class="mb-0 ft-medium">
+                                    <a href="listing-search-v1.html" class="text-dark fs-md">
+                                        @Model.Work.Title
+                                        <span class="verified-badge"><i class="fas fa-check-circle"></i></span>
+                                    </a>
+                                </h4>
+                                <p class="vrt-qgunke">@Model.Work.Description</p>
+                                <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i> سراسر کشور</div>
+                                <div class="Goodup-ft-first">
+                                    <span class="active">@Model.Work.BasePrice <i class="fas fa-dollar-sign"></i></span>
+                                </div>
+
+                                <!-- Working Hours & Categories -->
+                                <div class="Goodup-cates multi">
+                                    <p class="vrt-qgunke"><span class="ft-bold d14ixhs"> شبانه روزی</span></p>
+                                    <a class="cats-1">@Model.Work.CategoryName</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Button -->
+                        <div class="col-md-3 text-center d-flex justify-content-center align-items-end" style="height: 100px;">
+                            <div class="form-group">
+                                <div class="order-btn-container">
+                                    @if (SignInManager.IsSignedIn(User))
+                                    {
+                                        @if (User.IsInRole("Expert"))
+                                        {
+                                            <button type="button" class="btn btn-sm btn-light rounded">ثبت سفارش</button>
+                                        }
+                                        else
+                                        {
+                                            <a asp-page="/Menu/Create" asp-area="Customer" asp-route-serviceId="@Model.Work.Id" class="btn btn-sm btn-primary rounded">ثبت سفارش</a>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a asp-page="/login" asp-area="" class="btn btn-sm btn-danger rounded">ابتدا وارد شوید</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">هیچ نتیجه‌ای یافت نشد.</div>
+    }
+</section>

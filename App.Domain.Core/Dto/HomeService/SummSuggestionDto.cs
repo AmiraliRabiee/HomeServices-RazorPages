@@ -11,7 +11,6 @@ namespace App.Domain.Core.Dto.HomeService
         public StausServiceEnum StausService { get; set; }
         public string? City { get; set; }
         public string HouseWork { get; set; }
-        public int HouseWorkId { get; set; }
         public string ExpertName { get; set; }
         public TimeOnly RunungTimeOrder { get; set; }
         public DateTime CompletionDate { get; set; }

@@ -269,24 +269,22 @@
         document.addEventListener("DOMContentLoaded", function () {
             let results = document.querySelectorAll(".search-item");
             let resultsContainer = document.getElementById("searchResultsContainer");
-            let currentIndex = 3; // Initial visible items
+            let currentIndex = 3;
 
-            // Hide extra results initially
             results.forEach((item, index) => {
                 if (index >= currentIndex) item.classList.add("d-none");
             });
 
-            // Detect scrolling inside results container
             resultsContainer.addEventListener("scroll", function () {
                 let threshold = resultsContainer.scrollTop + resultsContainer.clientHeight;
-                if (threshold >= resultsContainer.scrollHeight - 10) { // Near bottom
+                if (threshold >= resultsContainer.scrollHeight - 10) {
                     loadMoreResults();
                 }
             });
 
             function loadMoreResults() {
                 let remainingItems = results.length - currentIndex;
-                let itemsToLoad = Math.min(3, remainingItems); // Load 3 more at a time
+                let itemsToLoad = Math.min(3, remainingItems); 
 
                 for (let i = 0; i < itemsToLoad; i++) {
                     if (results[currentIndex]) {

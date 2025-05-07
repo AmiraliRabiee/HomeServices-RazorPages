@@ -73,6 +73,8 @@ namespace App.Domain.AppServices.Base
             result.AddRange(works);
             return result;
         }
+        public async Task<List<string?>> GetImagesPath(int orderId)
+            => await _baseDataService.GetImagesPath(orderId);
 
     }
 }

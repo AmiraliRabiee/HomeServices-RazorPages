@@ -28,5 +28,10 @@ namespace App.Domain.Core.Contracts.AppService
         Task<Result> ExpertReceive(int id, float price, CancellationToken cancellationToken);
         Task<List<int>> GetExpertSkills(int expertId, CancellationToken cancellationToken);
         Task<List<ExpertWorkDto>> GetExpertSkillsNameAsync(int expertId, CancellationToken cancellationToken);
+        Task<int> GetSkillUpdateCount(int expertId, CancellationToken cancellationToken);
+        Task IncrementSkillUpdateCount(int expertId, CancellationToken cancellationToken);
+        Task<DateTime?> GetLastSkillUpdateDate(int expertId, CancellationToken cancellationToken);
+        Task UpdateLastSkillUpdateDate(int expertId, DateTime updateDate, CancellationToken cancellationToken);
+        Task ResetSkillUpdateCount(int expertId, CancellationToken cancellationToken);
     }
 }

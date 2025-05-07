@@ -53,11 +53,13 @@
                     </div>
 
                     <div class="dashboard-list-wraps-body py-3 px-3">
-                        <form method="post" asp-page-handler="Create">
+                        <form enctype="multipart/form-data" method="post" asp-page-handler="Create">
                             <div class="row">
                                 <!-- Hidden Fields -->
                                 <input type="hidden" asp-for="NewOrder.CustomerId" />
                                 <input type="hidden" asp-for="NewOrder.HouseWorkId" />
+                                <input type="hidden" asp-for="NewOrder.Id" />
+
 
                                 <div class="col-12">
                                     <div class="form-group">
@@ -75,7 +77,7 @@
                                         <label class="ft-medium small mb-1">انتخاب تاریخ</label>
                                         <div class="cld-box">
                                             <i class="ti-calendar"></i>
-                                            <input data-jdp-only-date data-jdp class="form-control" type="text" asp-for="NewOrder.CompletionDate" placeholder="تاریخ رزرو را انتخاب نمایید" value="">
+                                            <input data-jdp-only-date data-jdp class="form-control" type="text" asp-for="NewOrder.CompletionDate" placeholder="تاریخ رزرو را انتخاب نمایید" value="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +90,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">ساعت اجرا</label>
-                                        <select class="form-control chosen-select" asp-for="NewOrder.RunningTime">
+                                        <select class="form-control chosen-select" asp-for="NewOrder.RunningTime" required>
                                             <option value="">...</option>
                                             <option value="01:00">1:00 بامداد</option>
                                             <option value="02:00">2:00 بامداد</option>
@@ -118,11 +120,31 @@
                                     </div>
                                 </div>
 
+
+                                <div class="form-group">
+                                    <label class="mb-1">آپلود تصاویر</label>
+                                    <input type="file" class="form-control" asp-for="NewOrder.Images" multiple accept="image/*">
+                                </div>
+
+                                <!-- Preview Section -->
+                                @if (Model.NewOrder.Images != null && Model.NewOrder.Images.Count > 0)
+                                {
+                                    <div class="row mt-3">
+                                        @foreach (var image in Model.NewOrder.Images)
+                                        {
+                                            <div class="col-md-3">
+                                                <img src="@image.FileName" alt="Uploaded Image" class="img-fluid rounded">
+                                            </div>
+                                        }
+                                    </div>
+                                }
+
+
                                 <!-- Description -->
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label class="mb-1">توضیحات</label>
-                                        <textarea class="form-control rounded ht-150" asp-for="NewOrder.Description"></textarea>
+                                        <textarea class="form-control rounded ht-150" asp-for="NewOrder.Description" required></textarea>
                                     </div>
                                 </div>
                             </div>

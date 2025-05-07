@@ -24,6 +24,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
                     Opinion = comment.Opinion,
                     CustomerId = comment.CustomerId,
                 };
+                newComment.Activation = ActivationEnum.Pending;
 
                 await _appDbContext.Comments.AddAsync(newComment, cancellationToken);
                 await _appDbContext.SaveChangesAsync(cancellationToken);
@@ -42,8 +43,20 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
             if (comment == null)
                 return new Result { IsSuccess = false, Message = ".نظری با این شناسه یاقت نشد" };
             comment.IsPlayable = true;
+            comment.Activation = ActivationEnum.Active;
             await _appDbContext.SaveChangesAsync(cancellationToken);
             return new Result { IsSuccess = true, Message = ".تایید شد" };
+        }
+
+        public async Task<Result> RejectComment(int id, CancellationToken cancellationToken)
+        {
+            var comment = await _appDbContext.Comments.FindAsync(id);
+            if (comment == null)
+                return new Result { IsSuccess = false, Message = ".نظری با این شناسه یاقت نشد" };
+            comment.IsPlayable = false;
+            comment.Activation = ActivationEnum.InActive;
+            await _appDbContext.SaveChangesAsync(cancellationToken);
+            return new Result { IsSuccess = true, Message = ".رد شد" };
         }
 
         public async Task<Result> UpdateComment(Comment comment, CancellationToken cancellationToken)
@@ -105,14 +118,14 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
         public List<CommentDto> GetComments()
         {
             var comments = _appDbContext.Comments
-                 .Where(x => !x.IsPlayable)
                 .Select(x => new CommentDto
                 {
                     Id = x.Id,
-                    ExpertName = x.Expert.User.FirstName + x.Expert.User.LastName,
+                    ExpertName = x.Expert.User.FirstName +" " + x.Expert.User.LastName,
                     Opinion = x.Opinion,
                     Points = x.Points,
-                    RegissterDate = x.CreateAt
+                    RegissterDate = x.CreateAt,
+                    Activation = x.Activation
                 }).ToList();
             if (comments is null)
                 throw new Exception("کامنتی وجود ندارد");

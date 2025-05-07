@@ -1,6 +1,7 @@
 ﻿using App.Domain.Core.Entites.Service;
 using App.Domain.Core.Entites.User;
 using App.Domain.Core.Enum;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 public class Order
@@ -23,6 +24,7 @@ public class Order
     public int HouseWorkId { get; set; }
     public int CustomerId { get; set; }
 
+    public List<Image>? Images { get; set; }
     public HouseWork HouseWork { get; set; }
     public Customer Customer { get; set; }
     public List<Suggestion>? Suggestions { get; set; }

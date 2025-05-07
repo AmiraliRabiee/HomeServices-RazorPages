@@ -14,30 +14,23 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
     public class OrderRepository(AppDbContext _appDbContext) : IOrderRepository
     {
         #region OrderCrud
-        public async Task<Result> CreateOrder(SummOrderDto order, CancellationToken cancellationToken)
+        public async Task<int> CreateOrder(SummOrderDto order, CancellationToken cancellationToken)
         {
-            try
-            {
-                var newOrder = new Order
-                {
-                    Description = order.Description,
-                    CompletionDate = order.CompletionDate,
-                    RunningTime = order.RunningTime,
-                    CreateAt = DateTime.Now,
-                    StausService = StausServiceEnum.NewlyRegistered,
-                    CustomerId = order.CustomerId,
-                    HouseWorkId = order.HouseWorkId,
-                };
 
-                await _appDbContext.Orders.AddAsync(newOrder, cancellationToken);
-                await _appDbContext.SaveChangesAsync(cancellationToken);
-
-                return new Result { IsSuccess = true, Message = "با موفقیت افزوده شد" };
-            }
-            catch (Exception ex)
+            var newOrder = new Order
             {
-                return new Result { IsSuccess = false, Message = $"{ex.Message}" };
-            }
+                Description = order.Description,
+                CompletionDate = order.CompletionDate,
+                RunningTime = order.RunningTime,
+                CreateAt = DateTime.Now,
+                StausService = StausServiceEnum.NewlyRegistered,
+                CustomerId = order.CustomerId,
+                HouseWorkId = order.HouseWorkId,
+            };
+
+            await _appDbContext.Orders.AddAsync(newOrder, cancellationToken);
+            await _appDbContext.SaveChangesAsync(cancellationToken);
+            return newOrder.Id;
         }
 
         public async Task<Result> DeleteOrder(int id, CancellationToken cancellationToken)
@@ -143,7 +136,8 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                    BasePrice = o.HouseWork.BasePrice,
                    CreationDate = o.CreateAt,
                    IsConfrim = o.IsConfrim,
-                   Address = o.Customer.Address
+                   Address = o.Customer.Address,
+                   UploadImages = o.Images 
                }).FirstOrDefaultAsync(cancellationToken);
 
             if (order is null)
@@ -164,6 +158,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 CompletionDate = o.CompletionDate,
                 RunningTime = o.RunningTime,
                 StausService = o.StausService,
+                CustomerName = o.Customer.User.FirstName + " " + o.Customer.User.LastName
             }).ToListAsync();
 
             if (orders is null)
@@ -307,7 +302,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
         {
             var houseWorkIds = expert.ExpertWorksSkills.Select(eh => eh.HouseWorkId).ToList();
 
-            var orders =  await _appDbContext.Orders
+            var orders = await _appDbContext.Orders
                 .Where(o => houseWorkIds.Contains(o.HouseWorkId) && o.Customer.CityId == expert.CityId &&
                     !o.Suggestions.Any(s => s.IsAccept))
                 .Select(o => new SummOrderDto
@@ -358,7 +353,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return orders;
         }
 
-        public async Task<float> GetSuggestPrice(int orderId ,CancellationToken cancellationToken)
+        public async Task<float> GetSuggestPrice(int orderId, CancellationToken cancellationToken)
         {
             var price = await _appDbContext.Suggestions
                 .Where(s => s.OrderId == orderId)

@@ -295,5 +295,20 @@ namespace App.Domain.AppServices.User
 
         public async Task<List<ExpertWorkDto>> GetExpertSkillsNameAsync(int expertId, CancellationToken cancellationToken)
             => await _expertService.GetExpertSkillsNameAsync(expertId, cancellationToken);
+
+        public async Task<int> GetSkillUpdateCount(int expertId, CancellationToken cancellationToken)
+            => await _expertService.GetSkillUpdateCount(expertId, cancellationToken);
+
+        public async Task IncrementSkillUpdateCount(int expertId, CancellationToken cancellationToken)
+            => await _expertService.IncrementSkillUpdateCount(expertId, cancellationToken);
+
+        public async Task<DateTime?> GetLastSkillUpdateDate(int expertId, CancellationToken cancellationToken)
+            => await _expertService.GetLastSkillUpdateDate(expertId, cancellationToken);
+
+        public async Task UpdateLastSkillUpdateDate(int expertId, DateTime updateDate, CancellationToken cancellationToken)
+            => await _expertService.UpdateLastSkillUpdateDate(expertId, updateDate, cancellationToken);
+
+        public async Task ResetSkillUpdateCount(int expertId, CancellationToken cancellationToken)
+            => await _expertService.ResetSkillUpdateCount(expertId, cancellationToken); 
     }
 }

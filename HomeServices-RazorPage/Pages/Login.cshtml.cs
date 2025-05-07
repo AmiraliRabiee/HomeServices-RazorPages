@@ -26,7 +26,14 @@ namespace HomeServices_RazorPage.Pages
         {
             var result = await userAppService.Login(PageModel.Username, PageModel.Password);
             if (result.Succeeded)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToPage("/Index", new { area = "Admin" });
+                }
+
                 return RedirectToPage("Index");
+            }
             return Page();
         }
     }

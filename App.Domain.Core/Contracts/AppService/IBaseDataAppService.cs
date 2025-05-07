@@ -14,5 +14,6 @@ namespace App.Domain.Core.Contracts.AppService
         Task<StatisticsExpertDto> GetStatisticsExpert(int id, CancellationToken cancellationToken);
         Task<List<SearchResultDto>> SearchExperts(string item);
         Task<List<SearchResultDto>> SearchHouseWorkAndCategries(string item);
+        Task<List<string?>> GetImagesPath(int orderId);
     }
 }

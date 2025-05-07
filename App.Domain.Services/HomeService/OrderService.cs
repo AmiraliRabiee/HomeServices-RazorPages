@@ -27,7 +27,7 @@ namespace App.Domain.Services.HomeService
         public async Task ChangeToWaitingForService(int id, CancellationToken cancellationToken)
             => await _orderRepository.ChangeToWaitingForService(id, cancellationToken);
 
-        public async Task<Result> Create(SummOrderDto order, CancellationToken cancellationToken)
+        public async Task<int> Create(SummOrderDto order, CancellationToken cancellationToken)
             => await _orderRepository.CreateOrder(order, cancellationToken);
 
         public async Task<Result> Delete(int id, CancellationToken cancellationToken)

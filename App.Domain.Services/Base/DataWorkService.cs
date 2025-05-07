@@ -1,4 +1,6 @@
-﻿using App.Domain.Core.Contracts.Service.BaseEntities;
+﻿using App.Domain.Core.Contracts.Repository.BaseEntities;
+using App.Domain.Core.Contracts.Service.BaseEntities;
+using App.Domain.Core.Dto.HomeService;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Services.Base
 {
-    public class DataWorkService : IDataService
+    public class DataWorkService(IImageRepository _imageRepository) : IDataService
     {
 
         public async Task<string> UploadImage(IFormFile FormFile, string folderName, CancellationToken cancellationToken)
@@ -39,6 +41,9 @@ namespace App.Domain.Services.Base
 
             return fileName;
         }
+
+        public async Task AddImages(List<string> imgAddress, int orderId, CancellationToken cancellationToken)
+            => await _imageRepository.AddImages(imgAddress, orderId, cancellationToken);
     }
 }
 

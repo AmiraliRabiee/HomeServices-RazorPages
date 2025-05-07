@@ -11,7 +11,7 @@ namespace App.Domain.Core.Contracts.AppService
         Task<Result> DeleteCategoryAsync(int id, CancellationToken cancellationToken);
         Task<Result> SoftDeleteCategoryAsync(Category category, CancellationToken cancellationToken);
         Category GetCategory(int id);
-        List<Category> GetAllCategories();
+        List<CategoryDto> GetAllCategories();
         Task<List<CategoryDto>> GetParentCategories(CancellationToken cancellationToken);
         Task<List<CategoryDto>> GetChildCategories(CancellationToken cancellationToken);
         Task<CategoryDto> GetCategoryDto(int? id);

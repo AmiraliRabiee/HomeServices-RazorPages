@@ -12,6 +12,6 @@ namespace App.Domain.Core.Contracts.AppService
         Task<List<CommentDto>> GetCommentsById(int expertId, CancellationToken cancellationToken);
         Task<double?> GetAvg(int id, CancellationToken cancellationToken);
         Task<int> GetCount(int id, CancellationToken cancellationToken);
-
+        Task<Result> RejectComment(int id, CancellationToken cancellationToken);
     }
 }

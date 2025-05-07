@@ -26,11 +26,5 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
             AppUser = await _userManager.GetUserAsync(User);
             OrderDtos = await _orderAppService.GetReserveOrders(AppUser, cancellationToken);
         }
-
-        public async Task<IActionResult> OnPostChange(int id, CancellationToken cancellationToken)
-        {
-             await _orderAppService.ChangeToDone(id, cancellationToken);
-            return RedirectToPage("reservations");
-        }
     }
 }

@@ -30,6 +30,18 @@ namespace App.Domain.Services.User
         public async Task<List<SearchResultDto>> GetForSearch(string item)
             => await _expertRepository.GetForSearch(item);
 
+        public async Task<DateTime?> GetLastSkillUpdateDate(int expertId, CancellationToken cancellationToken)
+            => await _expertRepository.GetLastSkillUpdateDate(expertId, cancellationToken);
+
+        public async Task<int> GetSkillUpdateCount(int expertId, CancellationToken cancellationToken)
+            => await _expertRepository.GetSkillUpdateCount(expertId, cancellationToken);
+
+        public async Task IncrementSkillUpdateCount(int expertId, CancellationToken cancellationToken)
+            => await _expertRepository.IncrementSkillUpdateCount(expertId, cancellationToken);
+
+        public async Task ResetSkillUpdateCount(int expertId, CancellationToken cancellationToken)
+            => await _expertRepository.ResetSkillUpdateCount(expertId, cancellationToken);
+
         public Task<Result> SoftDeleteExpert(int expertId, CancellationToken cancellationToken)
             => _expertRepository.SoftDeleteExpert(expertId, cancellationToken);
 
@@ -41,5 +53,8 @@ namespace App.Domain.Services.User
 
         public async Task UpdateExpertSkills(int expertId, List<int> houseWorkIds, CancellationToken cancellationToken)
             => await _expertHouseWorkRepository.UpdateExpertSkillsAsync(expertId, houseWorkIds, cancellationToken);
+
+        public async Task UpdateLastSkillUpdateDate(int expertId, DateTime updateDate, CancellationToken cancellationToken)
+            => await _expertRepository.UpdateLastSkillUpdateDate(expertId, updateDate, cancellationToken);
     }
 }

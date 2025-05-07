@@ -33,5 +33,8 @@ namespace App.Domain.AppServices.Base
 
         public async  Task<int> GetCount(int id, CancellationToken cancellationToken)
             =>await _commentService.GetCount(id, cancellationToken);
+
+        public async Task<Result> RejectComment(int id, CancellationToken cancellationToken)
+            => await _commentService.RejectComment(id, cancellationToken);
     }
 }

@@ -19,16 +19,11 @@ namespace App.Domain.Core.Entites.User
         public float Balance { get; set; }
 
         public int RoleId { get; set; }
-        public ActivationUserEnum? ActivationUser { get; set; } = ActivationUserEnum.Pending;
+        public ActivationEnum? ActivationUser { get; set; } = ActivationEnum.Pending;
         public string? ImagePath { get; set; }
         public DateTime? RegisterAt { get; set; }
         public Customer? Customer { get; set; }
         public Expert? Expert { get; set; }
         public Admin? Admin { get; set; }
-
-        public static implicit operator AppUser(ClaimsPrincipal v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

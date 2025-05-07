@@ -20,5 +20,10 @@ namespace App.Domain.Core.Contracts.Service.User
         Task<List<int>> GetExpertSkills(int expertId, CancellationToken cancellationToken);
         Task UpdateExpertSkills(int expertId, List<int> houseWorkIds, CancellationToken cancellationToken);
         Task<List<SearchResultDto>> GetForSearch(string item);
+        Task<int> GetSkillUpdateCount(int expertId, CancellationToken cancellationToken);
+        Task IncrementSkillUpdateCount(int expertId, CancellationToken cancellationToken);
+        Task<DateTime?> GetLastSkillUpdateDate(int expertId, CancellationToken cancellationToken);
+        Task UpdateLastSkillUpdateDate(int expertId, DateTime updateDate, CancellationToken cancellationToken);
+        Task ResetSkillUpdateCount(int expertId, CancellationToken cancellationToken);
     }
 }

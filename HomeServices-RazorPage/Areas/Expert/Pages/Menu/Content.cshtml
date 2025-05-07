@@ -10,7 +10,7 @@
                 <div class="author-wrap-ngh">
                     <div class="author-wrap-head-ngh">
                         <div class="author-wrap-ngh-thumb">
-                            <img src="@Model.Expert.ImagePath" class="img-fluid circle" alt="">
+                            <img src="@(string.IsNullOrEmpty(Model.Expert.ImagePath) ? Url.Content("~/images/profiles/base (3).png") : Model.Expert.ImagePath)" class="img-fluid circle" alt="">
                         </div>
                         <div class="author-wrap-ngh-info">
                             <h5>@Model.Expert.FullName</h5>
@@ -90,10 +90,12 @@
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <label class="mb-1">مهارت ها</label>
-                                        @foreach (var skill in Model.Skills)
-                                        {
-                                            <input type="text" class="form-control rounded" asp-for="@skill.HouseWorkName" readonly />
-                                        }
+                                        <div class="form-control rounded overflow-auto" style="height: 38px; white-space: nowrap;">
+                                            @foreach (var skill in Model.Skills)
+                                            {
+                                                <span class="badge bg-primary me-1">@skill.HouseWorkName</span>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">

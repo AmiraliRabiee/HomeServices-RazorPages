@@ -56,7 +56,7 @@ namespace HomeServices_RazorPage.Areas.Customer.Pages.Menu
 
             NewOrder.CompletionDate = new DateTime(NewOrder.CompletionDate.Year, NewOrder.CompletionDate.Month, NewOrder.CompletionDate.Day, pc);
 
-            var result = await _orderAppService.CreateOrder(OnlineUser,NewOrder, cancellationToken);
+            var result = await _orderAppService.CreateOrder(NewOrder, cancellationToken);
             if (result.IsSuccess)
             {
                 Message = result.Message;

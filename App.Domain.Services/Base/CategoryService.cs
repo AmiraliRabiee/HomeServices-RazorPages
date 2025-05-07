@@ -15,7 +15,7 @@ namespace App.Domain.Services.Base
         public Task<Result> DeleteCategory(int id, CancellationToken cancellationToken)
             => _categoryRepository.DeleteCategory(id, cancellationToken);
 
-        public List<Category> GetAllCategories()
+        public List<CategoryDto> GetAllCategories()
             => _categoryRepository.GetAllCategories();
 
         public Category GetCategory(int id)

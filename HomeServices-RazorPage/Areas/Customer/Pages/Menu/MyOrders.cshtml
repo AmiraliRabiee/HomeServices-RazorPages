@@ -1,10 +1,12 @@
 ﻿@page
+@using App.Domain.Core.Contracts.AppService
 @using App.Domain.Core.Contracts.Service.HomeServices
 @using App.Domain.Core.Enum
 @using HomeServices_RazorPage.Areas.Customer.Pages.Menu
 @using App.Domain.Core.Helpers
 @model MyOrdersModel
 @inject IOrderService orderService
+@inject IBaseDataAppService _baseDataAppService
 @{
 }
 
@@ -60,149 +62,205 @@
                             <div class="alert alert-info">@Model.Message</div>
                         }
                         <div class="dashboard-list-wraps-body py-3 px-3">
-                            <div class="dashboard-listing-wraps">
-                                @if (Model.OrderDtos.Count > 0)
-                                {
-
-                                    @foreach (var order in Model.OrderDtos)
+                            <!-- Content Section (Left Side) -->
+                            <div class="d-flex flex-grow-1">
+                                <div class="dashboard-listing-wraps">
+                                    @if (Model.OrderDtos.Count > 0)
                                     {
-                                        @if (order.StausService == StausServiceEnum.NewlyRegistered)
+                                        @foreach (var order in Model.OrderDtos)
                                         {
-                                            var c = await orderService.IsExistSuggestion(@order.Id);
-                                            if (c.IsSuccess)
-                                            {
-                                                await orderService.ChangeToExpertSelection(@order.Id);
-                                            }
-                                        }
-
-                                        <!-- Single Listing Item -->
-                                        <div class="dsd-single-listing-wraps d-flex align-items-start justify-content-between">
-                                            <!-- Content Section (Left Side) -->
-                                            <div class="d-flex flex-grow-1">
-                                                <div class="dsd-single-lst-thumb">
-                                                    <img src="@order.ImagePath" class="img-fluid" alt="@order.HouseWork" />
-                                                </div>
-                                                <div class="dsd-single-lst-caption">
-                                                    <div class="ico-content">
-                                                        <ul>
-
-                                                            @if (order.StausService == StausServiceEnum.NewlyRegistered)
-                                                            {
-                                                                <li>
-                                                                    <div class="px-2 py-1 medium bg-light-danger rounded text-danger">@order.StausService.GetDisplayName()</div>
-                                                                </li>
-                                                            }
-                                                            @if (order.StausService == StausServiceEnum.ExpertSelectionQueue)
-                                                            {
-                                                                <li>
-                                                                    <div class="px-2 py-1 medium bg-light-info rounded text-info">@order.StausService.GetDisplayName()</div>
-                                                                </li>
-                                                            }
-                                                            @if (order.StausService == StausServiceEnum.WaitingForService)
-                                                            {
-                                                                <li>
-                                                                    <div class="px-2 py-1 medium bg-secondary rounded text-white">@order.StausService.GetDisplayName()</div>
-                                                                </li>
-                                                            }
-                                                            @if (order.StausService == StausServiceEnum.Done)
-                                                            {
-                                                                <li>
-                                                                    <div class="px-2 py-1 medium bg-light-warning rounded text-warning">@order.StausService.GetDisplayName()</div>
-                                                                </li>
-                                                            }
-                                                            @if (order.StausService == StausServiceEnum.Payment)
-                                                            {
-                                                                <li>
-                                                                    <div class="px-2 py-1 medium bg-light-success rounded text-success">@order.StausService.GetDisplayName()</div>
-                                                                </li>
-                                                            }
-                                                        </ul>
+                                            var images = await _baseDataAppService.GetImagesPath(order.Id);
+                                            <div class="dsd-single-listing-wraps d-flex align-items-start justify-content-between">
+                                                <div class="d-flex flex-grow-1">
+                                                    <div class="dsd-single-lst-thumb">
+                                                        @if (images.Any())
+                                                        {
+                                                            <div class="image-scroll-container">
+                                                                @foreach (var image in images)
+                                                                {
+                                                                    <img src="@image" class="img-fluid preview-image" alt="Order Image" onclick="openModal('@image')" />
+                                                                }
+                                                            </div>
+                                                        }
+                                                        else{
+                                                            <img src="@order.ImagePath" class="img-fluid preview-image" alt="Order Image" />
+                                                        }
                                                     </div>
-                                                    <div class="dsd-single-lst-title">
-                                                        <h5>@order.HouseWork</h5>
-                                                    </div>
-                                                    <span class="agd-location">
-                                                        <i class="lni lni-map-marker ms-1"></i>@order.CityName
-                                                    </span>
-                                                    <div class="ico-content">
-                                                        <div class="Goodup-ft-first">
-                                                            <span class="active">
-                                                                قیمت پایه <i class="fas fa-dollar-sign"></i>@order.BasePrice
-                                                            </span>
+                                                    <div class="dsd-single-lst-caption">
+                                                        <div class="ico-content">
+                                                            <ul>
+
+                                                                @if (order.StausService == StausServiceEnum.NewlyRegistered)
+                                                                {
+                                                                    <li>
+                                                                        <div class="px-2 py-1 medium bg-light-danger rounded text-danger">@order.StausService.GetDisplayName()</div>
+                                                                    </li>
+                                                                }
+                                                                @if (order.StausService == StausServiceEnum.ExpertSelectionQueue)
+                                                                {
+                                                                    <li>
+                                                                        <div class="px-2 py-1 medium bg-light-info rounded text-info">@order.StausService.GetDisplayName()</div>
+                                                                    </li>
+                                                                }
+                                                                @if (order.StausService == StausServiceEnum.WaitingForService)
+                                                                {
+                                                                    <li>
+                                                                        <div class="px-2 py-1 medium bg-secondary rounded text-white">@order.StausService.GetDisplayName()</div>
+                                                                    </li>
+                                                                }
+                                                                @if (order.StausService == StausServiceEnum.Done)
+                                                                {
+                                                                    <li>
+                                                                        <div class="px-2 py-1 medium bg-light-warning rounded text-warning">@order.StausService.GetDisplayName()</div>
+                                                                    </li>
+                                                                }
+                                                                @if (order.StausService == StausServiceEnum.Payment)
+                                                                {
+                                                                    <li>
+                                                                        <div class="px-2 py-1 medium bg-light-success rounded text-success">@order.StausService.GetDisplayName()</div>
+                                                                    </li>
+                                                                }
+                                                            </ul>
+                                                        </div>
+                                                        <div class="dsd-single-lst-title">
+                                                            <h5>@order.HouseWork</h5>
+                                                        </div>
+                                                        <span class="agd-location">
+                                                            <i class="lni lni-map-marker ms-1"></i>@order.CityName
+                                                        </span>
+                                                        <div class="ico-content">
+                                                            <div class="Goodup-ft-first">
+                                                                <span class="active">
+                                                                    قیمت پایه <i class="fas fa-dollar-sign"></i>@order.BasePrice
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="Goodup-middle-caption mt-3">
+                                                            <p>توضیحات : @(order.Description.Length > 60 ? order.Description.Substring(0, 60) + "..." : order.Description)</p>
                                                         </div>
                                                     </div>
-                                                    <div class="Goodup-middle-caption mt-3">
-                                                        <p>توضیحات : @order.Description</p>
-                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-column gap-1 ms-4" style="width: 140px;">
+
+                                                    <a asp-page="suggestions" asp-route-oId="@order.Id" class="btn btn-primary px-4 py-2 w-100 text-center custom-btn">
+                                                        <i class="fas fa-eye ms-1"></i>پیشنهادها
+                                                    </a>
+
+                                                    @if (order.StausService == StausServiceEnum.NewlyRegistered)
+                                                    {
+                                                        <a class="btn btn-gray px-4 py-2 w-100 text-center custom-btn">
+                                                            <i class="fas fa-credit-card ms-1"></i>پرداخت
+                                                        </a>
+                                                    }
+                                                    else if (order.StausService == StausServiceEnum.ExpertSelectionQueue)
+                                                    {
+                                                        <a class="btn btn-gray px-4 py-2 w-100 text-center custom-btn">
+                                                            <i class="fas fa-credit-card ms-1"></i>پرداخت
+                                                        </a>
+                                                    }
+                                                    else if (order.StausService == StausServiceEnum.WaitingForService)
+                                                    {
+                                                        <a class="btn btn-gray px-4 py-2 w-100 text-center custom-btn">
+                                                            <i class="fas fa-credit-card ms-1"></i>پرداخت
+                                                        </a>
+                                                    }
+                                                    else if (order.StausService == StausServiceEnum.Done)
+                                                    {
+                                                        <a asp-page="finally" asp-route-Id="@order.Id" class="btn btn-success px-4 py-2 w-100 text-center custom-btn">
+                                                            <i class="fas fa-credit-card ms-1"></i>پرداخت
+                                                        </a>
+                                                    }
                                                 </div>
                                             </div>
-                                            <div class="d-flex flex-column gap-1 ms-4" style="width: 140px;">
-
-                                                <a asp-page="suggestions" asp-route-oId="@order.Id" class="btn btn-primary px-4 py-2 w-100 text-center custom-btn">
-                                                    <i class="fas fa-eye ms-1"></i>پیشنهاد
-                                                </a>
-
-                                                @if (order.StausService == StausServiceEnum.NewlyRegistered)
-                                                {
-                                                    <a class="btn btn-gray px-4 py-2 w-100 text-center custom-btn">
-                                                        <i class="fas fa-credit-card ms-1"></i>پرداخت
-                                                    </a>
-                                                }
-                                                else if (order.StausService == StausServiceEnum.ExpertSelectionQueue)
-                                                {
-                                                    <a class="btn btn-gray px-4 py-2 w-100 text-center custom-btn">
-                                                        <i class="fas fa-credit-card ms-1"></i>پرداخت
-                                                    </a>
-                                                }
-                                                else if (order.StausService == StausServiceEnum.WaitingForService)
-                                                {
-                                                    <a class="btn btn-gray px-4 py-2 w-100 text-center custom-btn">
-                                                        <i class="fas fa-credit-card ms-1"></i>پرداخت
-                                                    </a>
-                                                }
-                                                else if (order.StausService == StausServiceEnum.Done)
-                                                {
-                                                    <a asp-page="finally" asp-route-Id="@order.Id" class="btn btn-success px-4 py-2 w-100 text-center custom-btn">
-                                                        <i class="fas fa-credit-card ms-1"></i>پرداخت
-                                                    </a>
-                                                }
-                                            </div>
-
-
-                                            <style>
-                                                .custom-btn {
-                                                    border-radius: 8px; /* Rounded edges */
-                                                    font-weight: 600; /* Slightly bold */
-                                                    transition: all 0.3s ease-in-out;
-                                                    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
-                                                }
-
-                                                    .custom-btn:hover {
-                                                        transform: translateY(-2px); /* Lift effect */
-                                                        box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow */
-                                                    }
-
-                                                    .custom-btn:active {
-                                                        transform: translateY(1px); /* Press-down effect */
-                                                        box-shadow: none; /* Remove shadow */
-                                                    }
-                                            </style>
-
-                                        </div>
-
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    <div class="alert alert-warning text-center">
-                                        هیچ سفارشی ثبت نشده است.
-                                    </div>
-                                }
+                                    else
+                                    {
+                                        <div class="alert alert-warning text-center">
+                                            هیچ سفارشی ثبت نشده است.
+                                        </div>
+                                    }
+                                </div>
                             </div>
+
+                            <style>
+                                .custom-btn {
+                                    border-radius: 8px; 
+                                    font-weight: 600; 
+                                    transition: all 0.3s ease-in-out;
+                                    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+                                }
+
+                                    .custom-btn:hover {
+                                        transform: translateY(-2px);
+                                        box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+                                    }
+
+                                    .custom-btn:active {
+                                        transform: translateY(1px); /* Press-down effect */
+                                        box-shadow: none; /* Remove shadow */
+                                    }
+                            </style>
+
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .image-scroll-container {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        max-width: 200px;
+        padding: 5px;
+        gap: 10px;
+    }
+
+        .image-scroll-container img
+    {
+        width: auto; 
+        height: 100px; 
+        max-width: 100%;
+        object-fit: contain;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .modal-content {
+        display: block;
+        max-width: 90%;
+        max-height: 90%;
+        margin: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>

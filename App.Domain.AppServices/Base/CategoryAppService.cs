@@ -23,7 +23,7 @@ namespace App.Domain.AppServices.Base
         public async Task<Result> DeleteCategoryAsync(int id, CancellationToken cancellationToken)
             => await _categoryService.DeleteCategory(id, cancellationToken);
 
-        public List<Category> GetAllCategories()
+        public List<CategoryDto> GetAllCategories()
             => _categoryService.GetAllCategories();
 
         public Category GetCategory(int id)

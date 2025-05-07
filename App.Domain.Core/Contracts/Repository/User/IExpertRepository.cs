@@ -14,5 +14,10 @@ namespace App.Domain.Core.Contracts.Repository.User
         Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken);
         Task<Result> UpdateBalance(int id, float balance, CancellationToken cancellationToken);
         Task<List<SearchResultDto>> GetForSearch(string item);
+        Task<int> GetSkillUpdateCount(int expertId, CancellationToken cancellationToken);
+        Task IncrementSkillUpdateCount(int expertId, CancellationToken cancellationToken);
+        Task<DateTime?> GetLastSkillUpdateDate(int expertId, CancellationToken cancellationToken);
+        Task UpdateLastSkillUpdateDate(int expertId, DateTime updateDate, CancellationToken cancellationToken);
+        Task ResetSkillUpdateCount(int expertId, CancellationToken cancellationToken);
     }
 }

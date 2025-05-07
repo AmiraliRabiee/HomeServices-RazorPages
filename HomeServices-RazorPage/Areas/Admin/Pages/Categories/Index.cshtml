@@ -33,7 +33,7 @@
                                 <th>#</th>
                                 <th>عکس</th>
                                 <th>عنوان</th>
-                                <th>زیرشاخه</th>
+                                <th>نام زیردسته</th>
                                 <th>عملیات</th>
                             </tr>
                         </thead>
@@ -43,18 +43,25 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>@category.Id</td>
-
                                     <td>
-                                        <img style="border-radius: 50%" src="@(string.IsNullOrEmpty(category.ImagePath) ? "~/AdminTemplate/images/user/placeholder.jpg"
-                                        : category.ImagePath)" width="80" height="80" />
+                                        <img style="border-radius: 50%"
+                                             src="@(string.IsNullOrEmpty(category.ImagePath) ? "/AdminTemplate/images/user/placeholder.jpg" : category.ImagePath)"
+                                             width="80"
+                                             height="80" />
                                     </td>
-
                                     <td>@category.Title</td>
-                                    <td>@category.ParentId</td>
-
                                     <td>
-                                        <a method="post" asp-page="update" asp-route-Id="@category.Id" class="btn btn-info">ویرایش</a>
-
+                                        @if (category.ParentName == null)
+                                        {
+                                            <span style="color: red; font-weight: bold;"> اصلی</span>
+                                        }
+                                        else
+                                        {
+                                            @category.ParentName
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-page="update" asp-route-Id="@category.Id" class="btn btn-info">ویرایش</a>
                                         <a onclick="return confirm('آیا از حذف این دسته بندی اطمینان دارید؟')"
                                            asp-page-handler="Delete"
                                            asp-route-id="@category.Id"

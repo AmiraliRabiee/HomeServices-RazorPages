@@ -7,7 +7,7 @@ namespace App.Domain.Core.Contracts.Repository.HomeServices
 {
     public interface IOrderRepository
     {
-        Task<Result> CreateOrder(SummOrderDto order, CancellationToken cancellationToken);
+        Task<int> CreateOrder(SummOrderDto order, CancellationToken cancellationToken);
         Task<Result> DeleteOrder(int id, CancellationToken cancellationToken);
         Task<Result> SoftDeleteOrder(Order order, CancellationToken cancellationToken);
         Task<Result> UpdateOrder(Order order, CancellationToken cancellationToken);

@@ -19,7 +19,7 @@ namespace HomeServices_RazorPage.Pages.SubCategories
         [BindProperty]
         public List<SummHouseWorkDto> Works { get; set; }
         [BindProperty]
-        public List<Category> Categories { get; set; }
+        public List<CategoryDto> Categories { get; set; }
         [BindProperty]
         public CategoryDto CategoryDto { get; set; }
 

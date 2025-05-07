@@ -1,7 +1,7 @@
 ﻿@page
+@using App.Domain.Core.Helpers
 @using HomeServices_RazorPage.Areas.Expert.Pages.Menu
 @model ProfileModel
-@using App.Domain.Core.Helpers
 @{
 }
 @section Styles {
@@ -19,6 +19,8 @@
                 <ul data-submenu-title="منو">
                     <li><a asp-page="Dashboard"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
                     <li><a asp-page="reservations"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
+                    <li><a asp-page="accepted"><i class="lni lni-files ms-2"></i>سفارش های فعال</a></li>
+
                     <li><a asp-route-expertId="" asp-page="Comments"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
                 </ul>
                 <ul data-submenu-title="حساب کاربری">
@@ -158,14 +160,12 @@
         $(document).ready(function () {
             let $select = $('.js-example-basic-multiple');
 
-            // Initialize Select2
             $select.select2({
                 placeholder: "مهارت‌های خود را انتخاب کنید",
                 allowClear: true,
                 width: '100%'
             });
 
-            // Ensure selected values are correctly sent with the form
             $('form').submit(function () {
                 let selectedValues = $select.val();
                 $('<input>').attr({
@@ -176,4 +176,31 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            let maxChanges = 3;
+            let skillChangeCount = @Model.SkillUpdateCount;
+            let lastUpdateTime = new Date("@(Model.LastSkillUpdate?.ToString("yyyy-MM-ddTHH:mm:ssZ") ?? "")");
+            let cooldownHours = 12;
+            let cooldownMilliseconds = cooldownHours * 60 * 60 * 1000;
+            let currentTime = new Date();
+
+            if (skillChangeCount >= maxChanges && (currentTime - lastUpdateTime) < cooldownMilliseconds) {
+                alert("شما بیش از حد مجاز مهارت‌های خود را تغییر داده‌اید. لطفا " + cooldownHours + " ساعت صبر کنید.");
+                $('form').submit(function (e) { e.preventDefault(); });
+            }
+
+            let isSubmitting = false;
+            $('form').submit(function (e) {
+                if (isSubmitting) {
+                    e.preventDefault();
+                    return false;
+                }
+                isSubmitting = true;
+                setTimeout(() => isSubmitting = false, 5000); // Prevents spam-clicking for 5 seconds
+            });
+        });
+    </script>
+
+
 }

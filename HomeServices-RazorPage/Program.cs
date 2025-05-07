@@ -19,6 +19,7 @@ using App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities;
 using App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices;
 using App.InfraAccess.EFCore.DataAccess.Repositories.User;
 using App.Infrastructure.Dapper;
+using App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities;
 using App.Infrastructure.EFCore.DataBase.Common;
 using Framework;
 using Infrastructure.Repositories;
@@ -82,6 +83,7 @@ builder.Services.AddScoped<IBaseDataService, DataUserService>();
 builder.Services.AddScoped<IDataService, DataWorkService>();
 builder.Services.AddScoped<IDataService, DataCategoryService>();
 
+builder.Services.AddScoped<IImageRepository, ImageRepository>();
 
 builder.Services.AddScoped<ICityRepository, CityDapperRepository>();
 

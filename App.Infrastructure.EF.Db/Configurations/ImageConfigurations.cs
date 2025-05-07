@@ -15,8 +15,8 @@ namespace App.Infrastructure.EFCore.Configurations
                 .HasMaxLength(500); 
 
             builder.HasOne(i => i.Order)
-                .WithMany(h => h.Images)
-                .HasForeignKey(i => i.OrderId)
+                .WithMany(o => o.Images)
+                .HasForeignKey(o => o.OrderId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

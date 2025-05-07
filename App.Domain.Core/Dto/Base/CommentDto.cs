@@ -1,4 +1,6 @@
-﻿namespace App.Domain.Core.Dto.Dashboard
+﻿using App.Domain.Core.Enum;
+
+namespace App.Domain.Core.Dto.Dashboard
 {
     public class CommentDto
     {
@@ -9,5 +11,6 @@
         public string Opinion { get; set; }
         public int? Points { get; set; }
         public string CustomerName { get; set; }
+        public ActivationEnum Activation { get; set; }
     }
 }

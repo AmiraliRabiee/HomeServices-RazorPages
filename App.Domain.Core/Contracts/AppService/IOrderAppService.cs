@@ -16,7 +16,7 @@ namespace App.Domain.Core.Contracts.AppService
         Task<List<SummOrderDto>> GetAll();
         Task<Result> ChangeStatus(int id, CancellationToken cancellationToken);
         Task ChangeToPayment(int id, CancellationToken cancellationToken);
-        Task<Result> CreateOrder(AppUser user, SummOrderDto order, CancellationToken cancellationToken);
+        Task<Result> CreateOrder(SummOrderDto order, CancellationToken cancellationToken);
         Task<List<SummOrderDto>> GetOrdersById(int id, CancellationToken cancellationToken);
         Task<SummOrderDto> GetOrderById(int id, CancellationToken cancellationToken);
         Task<List<SummOrderDto>> GetCustomerOrders(int customerId, CancellationToken cancellationToken);
