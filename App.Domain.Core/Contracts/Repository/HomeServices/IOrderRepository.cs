@@ -11,7 +11,7 @@ namespace App.Domain.Core.Contracts.Repository.HomeServices
         Task<Result> DeleteOrder(int id, CancellationToken cancellationToken);
         Task<Result> SoftDeleteOrder(Order order, CancellationToken cancellationToken);
         Task<Result> UpdateOrder(Order order, CancellationToken cancellationToken);
-        Task<SummOrderDto> GetOrderById(int id, CancellationToken cancellationToken);
+        Task<SummOrderDto?> GetOrderById(int id, CancellationToken cancellationToken);
         Task<List<SummOrderDto>> GetAll();
         Task ChangeToNewlyRegistered(int id, CancellationToken cancellationToken);
         Task ChangeToExpertSelection(int id);

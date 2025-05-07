@@ -2,6 +2,7 @@
 using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
+using App.Domain.Core.Enum;
 using App.Infrastructure.EFCore.DataBase.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -244,9 +245,19 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
             return experts;
         }
 
-        public List<AppUser> GetAll()
+        public async Task<List<UserDto>> GetAll(CancellationToken cancellationToken)
         {
-            var users = _appDbContext.Users.ToList();
+            var users = await _appDbContext.Users
+                .Select(u => new UserDto
+                {
+                    Id = u.Id,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    RoleId = u.RoleId,
+                    UserName =u.UserName,
+                    ImagePath = u.ImagePath,
+                    Activation = (ActivationEnum)u.ActivationUser
+                }).ToListAsync();
             if (users is null)
                 throw new Exception(".کاربری وجود ندارد");
             return users;
@@ -342,6 +353,22 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                 .FirstOrDefaultAsync(cancellationToken);
 
             return balance;
+        }
+
+        public async Task AcceptUser(int id)
+        {
+            var user = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+            user.ActivationUser = Domain.Core.Enum.ActivationEnum.Active;
+
+            await _appDbContext.SaveChangesAsync();
+        }
+
+        public async Task RejectUser(int id)
+        {
+            var user = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+            user.ActivationUser = Domain.Core.Enum.ActivationEnum.InActive;
+
+            await _appDbContext.SaveChangesAsync();
         }
     }
 }

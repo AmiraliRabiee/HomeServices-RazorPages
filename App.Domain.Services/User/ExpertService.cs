@@ -18,7 +18,7 @@ namespace App.Domain.Services.User
         public Task<Result> DeleteExpert(int expertId, CancellationToken cancellationToken)
             => _expertRepository.DeleteExpert(expertId, cancellationToken);
 
-        public async Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken)
+        public async Task<ExpertDto?> GetExpertDto(int id, CancellationToken cancellationToken)
             => await _expertRepository.GetExpertDto(id, cancellationToken);
 
         public async Task<List<int>> GetExpertSkills(int expertId, CancellationToken cancellationToken)

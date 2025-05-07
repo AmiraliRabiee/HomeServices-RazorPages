@@ -15,6 +15,7 @@ namespace App.Domain.Core.Dto.HomeService
         public string HouseWork { get; set; }
         public int CustomerId { get; set; }
         public float BasePrice { get; set; }
+        public float SuggestPrice { get; set; }
         public string CityName { get; set; }
         public string ImagePath { get; set; }
         public int HouseWorkId { get; set; }

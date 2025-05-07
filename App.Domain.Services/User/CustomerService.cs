@@ -14,7 +14,7 @@ namespace App.Domain.Services.User
         public Task<Result> DeleteCustomer(int customerId, CancellationToken cancellationToken)
             => _customerRepository.DeleteCustomer(customerId, cancellationToken);
 
-        public Task<CustomerDto> GetCustomerDto(int id, CancellationToken cancellationToken)
+        public Task<CustomerDto?> GetCustomerDto(int id, CancellationToken cancellationToken)
             => _customerRepository.GetCustomerDto(id, cancellationToken);
 
         public Task<Result> SoftDeleteCustomer(int customerId, CancellationToken cancellationToken)

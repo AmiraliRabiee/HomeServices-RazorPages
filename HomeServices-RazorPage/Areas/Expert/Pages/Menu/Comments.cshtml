@@ -44,7 +44,7 @@
                                             <img src="@Model.ExpertDto.ImagePath" class="img-fluid circle" alt="">
                                         </div>
                                         <div class="author-wrap-ngh-info">
-                                            <h5></h5>
+                                            <h5>@Model.ExpertDto.FullName</h5>
                                         </div>
                                     </div>
 
@@ -77,10 +77,10 @@
                                         <div class="author-wrap-yuio-ngh mt-5">
                                             <div class="row g-4">
                                                 <div class="col-6">
-                                                    <a asp-page="/menu/dashboard" asp-area="customer" class="adv-btn full-width">خواندن نظرات</a>
+                                                    <a asp-page="/menu/dashboard" asp-area="customer" class="adv-btn full-width">داشبورد</a>
                                                 </div>
                                                 <div class="col-6">
-                                                    <a asp-page="/addcomment/index" asp-area="" class="adv-btn full-width">ثبت نظر</a>
+                                                    <a asp-page="/addcomment/index" asp-area="" asp-route-id="@Model.ExpertDetails.SuggestionId" class="adv-btn full-width">ثبت نظر</a>
                                                 </div>
                                             </div>
                                         </div>

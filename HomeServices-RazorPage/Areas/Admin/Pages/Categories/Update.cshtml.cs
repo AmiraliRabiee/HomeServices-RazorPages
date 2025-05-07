@@ -11,7 +11,7 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Categories
     public class UpdateModel(ICategoryAppService _categoryAppService) : PageModel
     {
         [BindProperty]
-        public Category ExistCategory { get; set; }
+        public Category? ExistCategory { get; set; }
         [BindProperty]
         public CategoryDto Category { get; set; }
         [BindProperty]
@@ -19,7 +19,7 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Categories
 
         public async Task OnGet(int id)
         {
-            ExistCategory = _categoryAppService.GetCategory(id);
+            ExistCategory = await _categoryAppService.GetCategory(id);
             Category = await _categoryAppService.GetCategoryDto(id);
         }
 
@@ -29,7 +29,8 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Categories
             if (result.IsSuccess)
             {
                 Message = result.Message;
-                return Page();
+                TempData["Message"] = Message;
+                return RedirectToPage("/categories/index");
             }
             Message = result.Message;
             return Page();

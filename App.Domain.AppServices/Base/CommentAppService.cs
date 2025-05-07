@@ -3,6 +3,7 @@ using App.Domain.Core.Contracts.Repository.BaseEntities;
 using App.Domain.Core.Contracts.Service.BaseEntities;
 using App.Domain.Core.Dto.Dashboard;
 using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,12 @@ namespace App.Domain.AppServices.Base
             => _commentService.GetComments();
 
         public async Task<List<CommentDto>> GetCommentsById(int expertId, CancellationToken cancellationToken)
-            => await _commentService.GetCommentsById(expertId, cancellationToken);
+        {
+            var comments = await _commentService.GetCommentsById(expertId, cancellationToken);
+            if (comments == null)
+                throw new NotFoundException($"نظر با این کامنت یافت نشد");
+            return comments;
+        }
 
         public async  Task<int> GetCount(int id, CancellationToken cancellationToken)
             =>await _commentService.GetCount(id, cancellationToken);

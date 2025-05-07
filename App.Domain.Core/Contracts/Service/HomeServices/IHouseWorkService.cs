@@ -17,8 +17,8 @@ namespace App.Domain.Core.Contracts.Service.HomeServices
         Task<List<SummHouseWorkDto>> GetServicesById(int id, CancellationToken cancellationToken);
         Task<int> GetServiceCount(int categoryId);
         Task<List<SummHouseWorkDto>> GetServicesByChildId(int id, CancellationToken cancellationToken);
-        Task<SummHouseWorkDto> GetServiceByChildId(int id, CancellationToken cancellationToken);
-        Task<SummHouseWorkDto> GetServiceById(int id, CancellationToken cancellationToken);
+        Task<SummHouseWorkDto?> GetServiceByChildId(int id, CancellationToken cancellationToken);
+        Task<SummHouseWorkDto?> GetServiceById(int id, CancellationToken cancellationToken);
         Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken);
         Task<List<SearchResultDto>> GetForSearch(string item);
     }

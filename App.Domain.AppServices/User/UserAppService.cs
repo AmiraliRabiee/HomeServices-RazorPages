@@ -9,6 +9,7 @@ using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
 using App.Domain.Core.Enum;
+using App.Domain.Core.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Threading;
@@ -29,14 +30,23 @@ namespace App.Domain.AppServices.User
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                return IdentityResult.Failed(new IdentityError { Description = "نام کاربری و رمز عبور اجباری میباشد." });
+                return IdentityResult.Failed(new IdentityError { Description = "نام کاربری و رمز عبور اجباری می‌باشد." });
+            }
+
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "کاربری با این مشخصات یافت نشد." });
+            }
+
+            if (user.ActivationUser == ActivationEnum.Pending)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "حساب کاربری شما هنوز تایید نشده است. لطفا منتظر تایید مدیر باشید." });
             }
 
             var result = await _signInManager.PasswordSignInAsync(username, password, true, false);
-            return result.Succeeded ? IdentityResult.Success : IdentityResult.Failed(new IdentityError { Description = "با خطا مواجه شد" });
+            return result.Succeeded ? IdentityResult.Success : IdentityResult.Failed(new IdentityError { Description = "نام کاربری یا رمز عبور اشتباه است." });
         }
-
-
 
         public async Task<IdentityResult> Register(CreateUserDto
             model, CancellationToken cancellationToken)
@@ -112,6 +122,8 @@ namespace App.Domain.AppServices.User
                     await _userManager.AddClaimAsync(user, new Claim("ExpertId", user.Expert!.Id.ToString()));
                 }
 
+                user.ActivationUser = ActivationEnum.Pending;
+                await _userManager.AddClaimAsync(user, new Claim("ActivationUser", "Pending"));
                 var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, true, false);
             }
 
@@ -140,8 +152,15 @@ namespace App.Domain.AppServices.User
             }
         }
 
-        public async Task<CustomerDto> GetCustomerById(int id, CancellationToken cancellationToken)
-            => await _customerService.GetCustomerDto(id, cancellationToken);
+        public async Task<CustomerDto?> GetCustomerById(int id, CancellationToken cancellationToken)
+        {
+            var customer = await _customerService.GetCustomerDto(id, cancellationToken);
+
+            if (customer is null)
+                throw new NotFoundException($"مشتری با شناسه {id} یافت نشد.");
+
+            return customer;
+        }
 
 
         public async Task<Result> UpdateInformation(UserDto model, CancellationToken cancellationToken)
@@ -215,8 +234,8 @@ namespace App.Domain.AppServices.User
             return new Result { IsSuccess = false, Message = ".حذف کاربر با خطا مواجه شد" };
         }
 
-        public List<AppUser> GetAll()
-            => _userService.GetAll();
+        public async Task<List<UserDto>> GetAll(CancellationToken cancellationToken)
+            => await _userService.GetAll(cancellationToken);
 
         public AppUser GetById(int id)
             => _userService.GetById(id);
@@ -224,68 +243,34 @@ namespace App.Domain.AppServices.User
         public UserDto GetDtoById(int id)
             => _userService.GetUserDto(id);
 
-        public async Task<Result> Payment(AppUser user, int orderId, float price, CancellationToken cancellationToken)
+        public async Task<Result> Payment(AppUser user, int orderId, int expertId, float price, CancellationToken cancellationToken)
         {
-            var balance = await _userService.GetBalance(user, cancellationToken);
-
-            if (balance == 0)
-                return new Result { IsSuccess = false, Message = "موجودی حساب شما خالی میباشد" };
-            if (balance < price)
-                return new Result { IsSuccess = false, Message = "مبلغ سفارش بیشتر از مبلغ موجودی شما میباشد . لطفا افزایش موجودی انجام دهید" };
-            if (balance >= price)
+            var payment = await _userService.Payment(user, orderId, price, cancellationToken);
+            if (!payment.IsSuccess)
             {
-                user.Balance = balance - price;
-                var result = await _userService.UpdateBalance(user, cancellationToken);
-                if (result.IsSuccess)
-                {
-                    await _orderService.ChangeToPayment(orderId, cancellationToken);
-                    return new Result { IsSuccess = true, Message = "پرداخت با موفقیت انجام شد" };
-
-                }
-                return new Result { IsSuccess = false, Message = "در برداشت از حساب مشکلی پیش آمده است" };
+                // پیام دقیقی که از لایه سرویس برگشته رو مستقیماً برمی‌گردونیم
+                return payment;
             }
-            return new Result { IsSuccess = false, Message = "با خطا مواجه شد" };
-        }
 
-        public async Task<Result> AdminReceive(float price, CancellationToken cancellationToken)
-        {
-            var adminBalance = await _adminService.GetAdminBalance(cancellationToken);
-            var profit = await _adminService.GetProfit(cancellationToken);
+            var receive = await _userService.ExpertReceive(user, price, cancellationToken);
+            var result = await _userService.AdminReceive(price, cancellationToken);
 
-            adminBalance += price * profit;
-            var result = await _adminService.UpdateBalance(adminBalance, cancellationToken);
-            if (result.IsSuccess)
-                return new Result { IsSuccess = true, Message = result.Message };
-            return new Result { IsSuccess = false, Message = result.Message };
+            if (result.IsSuccess && receive.IsSuccess)
+            {
+                return new Result { IsSuccess = true, Message = "عملیات پرداخت با موفقیت انجام شد" };
+            }
+
+            return new Result { IsSuccess = false, Message = "پرداخت با خطا مواجه شد" };
         }
 
 
-        public async Task<Result> ExpertReceive(int id, float price, CancellationToken cancellationToken)
+        public async Task<ExpertDto?> GetExpertDto(int id, CancellationToken cancellationToken)
         {
-            if (price <= 0)
-            {
-                return new Result { IsSuccess = false, Message = "Invalid price value." };
-            }
-            var balance = await _userService.GetBalance(id, cancellationToken);
-            var profitPercentage = await _adminService.GetProfit(cancellationToken);
-
-            if (profitPercentage < 0 || profitPercentage >= 1)
-            {
-                return new Result { IsSuccess = false, Message = "Invalid profit percentage." };
-            }
-
-            var deductedAmount = price * profitPercentage;
-            var amountToDeposit = price - deductedAmount;
-            balance += amountToDeposit;
-
-            var result = await _expertService.UpdateBalance(id, balance, cancellationToken);
-            if (result.IsSuccess)
-                return new Result { IsSuccess = true, Message = result.Message };
-            return new Result { IsSuccess = false, Message = result.Message };
+            var expert = await _expertService.GetExpertDto(id, cancellationToken);
+            if (expert == null)
+                throw new NotFoundException("کارشناس با این شناسه یافت نشد.");
+            return expert;
         }
-
-        public async Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken)
-            => await _expertService.GetExpertDto(id, cancellationToken);
 
         public async Task<List<int>> GetExpertSkills(int expertId, CancellationToken cancellationToken)
             => await _expertService.GetExpertSkills(expertId, cancellationToken);
@@ -309,6 +294,12 @@ namespace App.Domain.AppServices.User
             => await _expertService.UpdateLastSkillUpdateDate(expertId, updateDate, cancellationToken);
 
         public async Task ResetSkillUpdateCount(int expertId, CancellationToken cancellationToken)
-            => await _expertService.ResetSkillUpdateCount(expertId, cancellationToken); 
+            => await _expertService.ResetSkillUpdateCount(expertId, cancellationToken);
+
+        public async Task AcceptUserAsync(int id)
+            => await _userService.AcceptUser(id);
+
+        public async Task RejectUserAsync(int id)
+            => await (_userService.RejectUser(id));
     }
 }

@@ -125,27 +125,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return service;
         }
 
-        //public async Task<List<SummHouseWorkDto>> GetHomeServices(CancellationToken cancellationToken)
-        //{
-        //    var services = await _appDbContext.HouseWorks
-        //     .Include(h => h.Image)
-        //    .Select(h => new SummHouseWorkDto
-        //    {
-        //        Id = h.Id,
-        //        Title = h.Title,
-        //        Description = h.Description,
-        //        BasePrice = h.BasePrice,
-        //        SubCategory = h.Category.Title,
-        //        ImagePath = h.ImagePath
-        //    }).ToListAsync(cancellationToken);
-
-        //    if (services is null)
-        //        throw new Exception(".لیست سفارش ها خالی میباشد");
-
-        //    return services;
-        //}
-
-
         public UpdateHouseWork GetServiceDto(int id)
         {
             var work = _appDbContext.HouseWorks
@@ -185,10 +164,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 SubCategoryId = h.Category.Id,
                 CategoryName = h.Category.Title,
             }).ToListAsync(cancellationToken);
-
-            if (service is null)
-                throw new Exception(".سفارشی با این شناسه یافت نشد");
-
             return service;
         }
 
@@ -215,7 +190,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return service;
         }
 
-        public async Task<SummHouseWorkDto> GetServiceById(int id, CancellationToken cancellationToken)
+        public async Task<SummHouseWorkDto?> GetServiceById(int id, CancellationToken cancellationToken)
         {
             var service = await _appDbContext.HouseWorks
             .Select(h => new SummHouseWorkDto
@@ -228,15 +203,11 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 CategoryName = h.Category.ParentCategory.Title,
                 CategoryId = h.Category.Id
             }).FirstOrDefaultAsync(h=> h.Id == id,cancellationToken);
-
-            if (service is null)
-                throw new Exception(".سفارشی با این شناسه یافت نشد");
-
             return service;
         }
 
 
-        public async Task<CategoryDto> GetCategoryByServiceId(int id, CancellationToken cancellationToken)
+        public async Task<CategoryDto?> GetCategoryByServiceId(int id, CancellationToken cancellationToken)
         {
             var service = await _appDbContext.HouseWorks
                 .Where(h => h.Id == id)
@@ -248,10 +219,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 ParentId = h.Category.ParentId,
                 HouseWorkName = h.Title
             }).FirstOrDefaultAsync( cancellationToken);
-
-            if (service is null)
-                throw new Exception(".سفارشی با این شناسه یافت نشد");
-
             return service;
         }
 
@@ -273,7 +240,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return service;
         }
 
-        public async Task<SummHouseWorkDto> GetServiceByChildId(int id, CancellationToken cancellationToken)
+        public async Task<SummHouseWorkDto?> GetServiceByChildId(int id, CancellationToken cancellationToken)
         {
             var service = await _appDbContext.HouseWorks
             .Where(h => h.Id == id)
@@ -287,10 +254,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 CategoryName = h.Category.ParentCategory.Title,
                 CategoryId = h.Category.Id
             }).FirstOrDefaultAsync(cancellationToken);
-
-            if (service is null)
-                throw new Exception(" با این شناسه یافت نشد");
-
             return service;
         }
 

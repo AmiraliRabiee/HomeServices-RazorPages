@@ -22,11 +22,7 @@ namespace HomeServices_RazorPage.Areas.Customer.Pages.Menu
 
         public async Task OnGet(CancellationToken cancellationToken)
         {
-
             var customerId = UserTools.GetCustomerId(User.Claims);
-
-            //var khar = await suggestionRepository.GetExpertName(customerId,cancellationToken);
-
             Data = await _baseDataAppService.GetStatisticData(customerId, cancellationToken);
             CustomerOrders = await _orderAppService.GetCustomerOrders(customerId, cancellationToken);
 

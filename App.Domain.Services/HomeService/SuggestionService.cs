@@ -25,7 +25,7 @@ namespace App.Domain.Services.HomeService
         public int GetCount(int id)
              => _suggestionRepository.GetCount(id);
 
-        public async Task<SummSuggestionDto> GetExpertBySuggestion(int id, CancellationToken cancellationToken)
+        public async Task<SummSuggestionDto?> GetExpertBySuggestion(int id, CancellationToken cancellationToken)
             => await _suggestionRepository.GetExpertBySuggestion(id, cancellationToken);
 
         public async Task<Suggestion> GetnById(int id, CancellationToken cancellationToken)
@@ -37,7 +37,7 @@ namespace App.Domain.Services.HomeService
         public async Task<List<SummSuggestionDto>> GetSuggestionDetails(int id, CancellationToken cancellationToken)
             => await _suggestionRepository.GetSuggestionDetails(id,cancellationToken);
 
-        public async Task<SummSuggestionDto> GetSuggestionDto(int id, CancellationToken cancellationToken)
+        public async Task<SummSuggestionDto?> GetSuggestionDto(int id, CancellationToken cancellationToken)
             => await _suggestionRepository.GetSuggestionDto(id, cancellationToken);
 
         public async Task<float> GetSuggestPrice(int id, CancellationToken cancellationToken)
@@ -61,7 +61,7 @@ namespace App.Domain.Services.HomeService
         public async Task<Suggestion?> GetLastSuggestion(int expertId, int orderId, CancellationToken cancellationToken)
             => await _suggestionRepository.GetLastSuggestion(expertId, orderId ,cancellationToken);
 
-        public async Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken)
+        public async Task<ExpertDto?> GetExpertDto(int id, CancellationToken cancellationToken)
             => await _suggestionRepository.GetExpertDto(id, cancellationToken);
     }
 }

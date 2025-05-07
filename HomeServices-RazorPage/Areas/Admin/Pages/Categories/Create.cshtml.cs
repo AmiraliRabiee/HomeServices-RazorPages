@@ -30,7 +30,8 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Categories
             if (result.IsSuccess)
             {
                 Message = result.Message;
-                return Page();
+                TempData["Message"] = Message;
+                return RedirectToPage("/categories/index");
             }
             Message = result.Message;
             return Page();

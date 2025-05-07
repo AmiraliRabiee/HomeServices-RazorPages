@@ -12,7 +12,7 @@ namespace HomeServices_RazorPage.Pages.Client
     public class IndexModel(ICategoryAppService _categoryAppService, IHouseWorkAppService _houseWorkAppService) : PageModel
     {
         [BindProperty]
-        public SummHouseWorkDto Work { get; set; }
+        public SummHouseWorkDto? Work { get; set; }
         public async Task OnGet(int id, CancellationToken cancellationToken)
         {
             Work = await _houseWorkAppService.GetServiceByChildId(id, cancellationToken);

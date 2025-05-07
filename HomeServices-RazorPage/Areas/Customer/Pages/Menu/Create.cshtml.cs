@@ -18,9 +18,9 @@ namespace HomeServices_RazorPage.Areas.Customer.Pages.Menu
         UserManager<AppUser> userManager, IHouseWorkRepository houseWorkRepository) : PageModel
     {
         [BindProperty]
-        public CategoryDto ThisCategory { get; set; }
+        public CategoryDto? ThisCategory { get; set; }
         [BindProperty]
-        public SummHouseWorkDto ThisWork { get; set; }
+        public SummHouseWorkDto? ThisWork { get; set; }
         [BindProperty]
         public SummOrderDto NewOrder { get; set; } = new SummOrderDto();
         [BindProperty]
@@ -33,7 +33,7 @@ namespace HomeServices_RazorPage.Areas.Customer.Pages.Menu
         public async Task OnGet(int serviceId, CancellationToken cancellationToken)
         {
             ThisCategory = await houseWorkRepository.GetCategoryByServiceId(serviceId, cancellationToken);
-            ParentCategory = await _categoryAppService.GetCategoryDto(ThisCategory.ParentId);            
+            ParentCategory = await _categoryAppService.GetCategoryDto(ThisCategory?.ParentId);            
             ThisWork = await _workAppService.GetServiceById(serviceId, cancellationToken);
             var user = await userManager.GetUserAsync(User);
             if (user != null)

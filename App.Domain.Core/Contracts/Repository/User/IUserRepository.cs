@@ -15,7 +15,7 @@ namespace App.Domain.Core.Contracts.Repository.User
         Task<UserDto> GetUserDetails(int id, CancellationToken cancellationToken);
         Task<List<Customer>> GetAllCustomers();
         Task<List<Expert>> GetAllExperts();
-        List<AppUser> GetAll();
+        Task<List<UserDto>> GetAll(CancellationToken cancellationToken);
         Task<Result> UpdateUserDto(int id, CancellationToken cancellationToken);
         AppUser GetById(int id);
         UserDto GetDtoById(int id);
@@ -24,5 +24,7 @@ namespace App.Domain.Core.Contracts.Repository.User
         Task<Result> UpdateImage(AppUser model, CancellationToken cancellationToken);
         Task<float> GetBalance(int id, CancellationToken cancellationToken);
         Task<float> GetBalance(AppUser user, CancellationToken cancellationToken);
+        Task AcceptUser(int id);
+        Task RejectUser(int id);
     }
 }

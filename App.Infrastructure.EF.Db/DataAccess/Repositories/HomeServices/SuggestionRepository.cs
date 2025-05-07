@@ -142,7 +142,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return suggestions;
         }
 
-        public async Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken)
+        public async Task<ExpertDto?> GetExpertDto(int id, CancellationToken cancellationToken)
         {
             var experts = await _appDbContext.Suggestions
                 .Where(s => s.ExpertId == id)
@@ -157,8 +157,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                     ImagePath = s.Expert.User.ImagePath,
                     SuggestionId = s.Id
                 }).FirstOrDefaultAsync(cancellationToken);
-            if (experts is null)
-                throw new Exception("با خظا مواجه شد");
             return experts;
         }
 
@@ -181,10 +179,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 CompletionDate = s.Order.CompletionDate,
                 RunungTimeOrder = s.Order.RunningTime,
             }).ToListAsync();
-
-            if (suggestions is null)
-                throw new Exception(".پیشنهادی برای این سفارش ثبت نشده است");
-
             return suggestions;
         }
 
@@ -208,7 +202,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return suggestion;
         }
 
-        public async Task<SummSuggestionDto> GetSuggestionDto(int id, CancellationToken cancellationToken)
+        public async Task<SummSuggestionDto?> GetSuggestionDto(int id, CancellationToken cancellationToken)
         {
             var suggestion = await _appDbContext.Suggestions
                 .Where(s => s.OrderId == id)
@@ -225,8 +219,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 ExpertId = s.ExpertId,
                 CompletionDate = s.Order.CompletionDate,
             }).FirstOrDefaultAsync();
-            if (suggestion is null)
-                throw new Exception(".سفارشی با این شناسه یافت نشد");
             return suggestion;
         }
 
@@ -282,7 +274,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             return price;
         }
 
-        public async Task<SummSuggestionDto> GetExpertBySuggestion(int id, CancellationToken cancellationToken)
+        public async Task<SummSuggestionDto?> GetExpertBySuggestion(int id, CancellationToken cancellationToken)
         {
             var result = await _appDbContext.Suggestions
                 .Where(s => s.Id == id)
@@ -292,8 +284,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                     ExpertName = s.Expert.User.FirstName + s.Expert.User.LastName,
                     ExpertId = s.ExpertId,
                 }).FirstOrDefaultAsync(cancellationToken);
-            if (result is null)
-                throw new Exception("موردی موجود نمیباشد");
             return result;
         }
 

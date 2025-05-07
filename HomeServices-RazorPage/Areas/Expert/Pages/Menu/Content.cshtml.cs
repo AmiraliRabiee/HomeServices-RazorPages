@@ -12,7 +12,7 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
         ,IUserAppService _userAppService) : PageModel
     {
         [BindProperty]
-        public ExpertDto Expert { get; set; }
+        public ExpertDto? Expert { get; set; }
         [BindProperty]
         public List<CommentDto> Comments { get; set; }
         [BindProperty]

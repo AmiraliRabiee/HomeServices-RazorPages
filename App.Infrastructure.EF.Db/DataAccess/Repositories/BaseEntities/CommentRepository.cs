@@ -162,9 +162,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
                     CustomerName = c.RegisteredCustomer.User.FirstName + " " + c.RegisteredCustomer.User.LastName
                 })
                 .ToListAsync(cancellationToken);
-            if (comments is null)
-                throw new Exception("برای کارشناس مورد نظر کامنتی وجود ندارد");
-
             return comments;
         }
 

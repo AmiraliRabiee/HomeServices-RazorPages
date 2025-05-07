@@ -28,5 +28,4 @@ public class Order
     public HouseWork HouseWork { get; set; }
     public Customer Customer { get; set; }
     public List<Suggestion>? Suggestions { get; set; }
-    public List<Image> Images { get; set; }
 }

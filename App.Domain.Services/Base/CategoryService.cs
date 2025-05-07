@@ -18,10 +18,10 @@ namespace App.Domain.Services.Base
         public List<CategoryDto> GetAllCategories()
             => _categoryRepository.GetAllCategories();
 
-        public Category GetCategory(int id)
-            => _categoryRepository.GetCategory(id);
+        public async Task<Category?> GetCategory(int id)
+            => await _categoryRepository.GetCategory(id);
 
-        public async Task<CategoryDto> GetCategoryDto(int? id)
+        public async Task<CategoryDto?> GetCategoryDto(int? id)
             => await _categoryRepository.GetCategoryDto(id);
 
         public async Task<List<int>> GetCategoryNumbersAsync(CancellationToken cancellationToken)
@@ -35,7 +35,7 @@ namespace App.Domain.Services.Base
         public async Task<List<Category>> GetChildCategoriesById(int id,CancellationToken cancellationToken)
             => await _categoryRepository.GetChildCategoriesById(id,cancellationToken);
 
-        public async Task<Category> GetChildCategoryById(int id)
+        public async Task<Category?> GetChildCategoryById(int id)
             =>await _categoryRepository.GetChildCategoryById(id);
 
         public async Task<int> GetChildCount(int categoryId)
@@ -47,11 +47,11 @@ namespace App.Domain.Services.Base
         public async Task<List<CategoryDto>> GetParentCategories(CancellationToken cancellationToken)
             => await _categoryDapperRepository.GetCategoriesAsync(cancellationToken);
 
-        public Task<Result> SoftDeleteComment(Category category, CancellationToken cancellationToken)
-            => _categoryRepository.SoftDeleteCategory(category, cancellationToken);
+        public async  Task<Result> SoftDeleteComment(Category category, CancellationToken cancellationToken)
+            => await _categoryRepository.SoftDeleteCategory(category, cancellationToken);
 
-        public Task<Result> UpdateCategory(CategoryDto category, CancellationToken cancellationToken)
-            => _categoryRepository.UpdateCategory(category, cancellationToken);
+        public async Task<Result> UpdateCategory(CategoryDto category, CancellationToken cancellationToken)
+            => await _categoryRepository.UpdateCategory(category, cancellationToken);
 
 
     }

@@ -10,7 +10,7 @@ namespace App.Domain.Core.Contracts.Service.HomeServices
         Task<Result> Delete(int id, CancellationToken cancellationToken);
         Task<Result> SoftDelete(Order order, CancellationToken cancellationToken);
         Task<Result> Update(Order order, CancellationToken cancellationToken);
-        Task<SummOrderDto> GetOrderById(int id, CancellationToken cancellationToken);
+        Task<SummOrderDto?> GetOrderById(int id, CancellationToken cancellationToken);
         Task<List<SummOrderDto>> GetAll();
         Task ChangeToNewlyRegistered(int id, CancellationToken cancellationToken);
         Task ChangeToExpertSelection(int id);

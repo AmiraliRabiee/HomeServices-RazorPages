@@ -1,4 +1,4 @@
-using App.Domain.Core.Contracts.AppService;
+﻿using App.Domain.Core.Contracts.AppService;
 using App.Domain.Core.Dto.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +17,6 @@ namespace HomeServices_RazorPage.Pages
         {
             Cities = await _baseDataAppService.GetCitiesAsync(cancellationToken);
         }
-
         public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
@@ -26,7 +25,7 @@ namespace HomeServices_RazorPage.Pages
 
                 if (result.Succeeded)
                 {
-                    return RedirectToPage("index");
+                    return RedirectToPage("/index", new { message = "approval_pending" });
                 }
 
                 foreach (var error in result.Errors)
@@ -36,5 +35,6 @@ namespace HomeServices_RazorPage.Pages
             }
             return Page();
         }
+
     }
 }

@@ -15,7 +15,7 @@ namespace App.Domain.Core.Contracts.Service.User
         Task<UserDto> GetUserDetails(int id, CancellationToken cancellationToken);
         Task<List<Customer>> GetAllCustomers();
         Task<List<Expert>> GetAllExperts();
-        List<AppUser> GetAll();
+        Task<List<UserDto>> GetAll(CancellationToken cancellationToken);
         AppUser GetById(int id);
         UserDto GetUserDto(int id);
         int GetCount();
@@ -24,5 +24,10 @@ namespace App.Domain.Core.Contracts.Service.User
         Task<float> GetBalance(int id, CancellationToken cancellationToken);
         Task<float> GetBalance(AppUser user, CancellationToken cancellationToken);
         Task<Result> UpdateImage(AppUser model, CancellationToken cancellationToken);
+        Task AcceptUser(int id);
+        Task RejectUser(int id);
+        Task<Result> ExpertReceive(AppUser user, float price, CancellationToken cancellationToken);
+        Task<Result> AdminReceive(float price, CancellationToken cancellationToken);
+        Task<Result> Payment(AppUser user, int orderId, float price, CancellationToken cancellationToken);
     }
 }

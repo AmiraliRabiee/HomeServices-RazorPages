@@ -13,7 +13,7 @@ namespace App.Domain.Core.Contracts.Service.User
         Task<Result> UpdateExpert(ExpertDto model, CancellationToken cancellationToken);
         Task<Result> DeleteExpert(int expertId, CancellationToken cancellationToken);
         Task<Result> SoftDeleteExpert(int expertId, CancellationToken cancellationToken);
-        Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken);
+        Task<ExpertDto?> GetExpertDto(int id, CancellationToken cancellationToken);
         Task<Result> UpdateBalance(int id, float balance, CancellationToken cancellationToken);
         Task<List<ExpertWorkDto>> GetExpertSkillsNameAsync(int expertId, CancellationToken cancellationToken);
 

@@ -47,3 +47,37 @@ section {
 div, section, header, footer {
     outline: 1px solid red; /* Debugging borders, remove after testing */
 }
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* جلوگیری از اسکرول افقی */
+}
+
+#main-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+.header, .navigation, .nav-menus-wrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.slick-track {
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+.slick-slider {
+    overflow: hidden !important;
+}
+
+.slick-track {
+    transform: none !important;
+}

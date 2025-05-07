@@ -116,9 +116,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
             }
         }
 
-
-
-        public async Task<SummOrderDto> GetOrderById(int id, CancellationToken cancellationToken)
+        public async Task<SummOrderDto?> GetOrderById(int id, CancellationToken cancellationToken)
         {
             var order = await _appDbContext.Orders
             .Where(o => o.Id == id)
@@ -139,10 +137,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                    Address = o.Customer.Address,
                    UploadImages = o.Images 
                }).FirstOrDefaultAsync(cancellationToken);
-
-            if (order is null)
-                throw new Exception(".سفارشی با این شناسه یافت نشد");
-
             return order;
         }
 
@@ -268,7 +262,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.HomeServices
                 BasePrice = o.HouseWork.BasePrice,
                 CompletionDate = o.CompletionDate,
                 CreationDate = o.CreateAt,
-                ExpertName = o.Customer.User.Expert.User.FirstName
+                ExpertName = o.Customer.User.Expert.User.FirstName,
             }).ToListAsync(cancellationToken);
 
             if (orders is null)

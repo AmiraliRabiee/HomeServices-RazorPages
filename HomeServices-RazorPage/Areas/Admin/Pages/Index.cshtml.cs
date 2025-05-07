@@ -22,6 +22,9 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages
 
         public void OnGet()
         {
+            TempData["Menu-Users"] = string.Empty;
+            TempData["Menu-Dashboard"] = "current";
+
             var data = User;
             DashboardData = _dashboardAppService.GetStatisticsData();
         }

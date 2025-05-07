@@ -1,5 +1,6 @@
 ﻿@page
 @using HomeServices_RazorPage.Areas.Admin.Pages.Users
+@using App.Domain.Core.Helpers
 @model IndexModel
 @{
     ViewData["Title"] = "دیوارچه > مدیریت کاربران > لیست کاربران";
@@ -14,12 +15,12 @@
             </div>
         </div>
         <div class="portlet-body">
-            <div class="top-buttons-box mb-2">
+@*             <div class="top-buttons-box mb-2">
                 <a class="btn btn-success" href="/Admin/Users/Create">
                     <i class="icon-plus"></i>
                     افزودن
                 </a>
-            </div>
+            </div> *@
             <div class="row">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped" id="data-table">
@@ -31,7 +32,8 @@
                                 <th>نام</th>
                                 <th>نام خانوادگی</th>
                                 <th>نام کاربری</th>
-                                <th>ایمیل</th>
+                                <th>نقش</th>
+                                <th>وضعیت</th>
                                 <th>عملیات</th>
                             </tr>
                         </thead>
@@ -49,14 +51,22 @@
                                     <td>@user.FirstName</td>
                                     <td>@user.LastName</td>
                                     <td>@user.UserName</td>
-                                    <td>@(!string.IsNullOrWhiteSpace(user.Email) ? user.Email : "-----")</td>
+                                    <td>
+                                        @(user.RoleId == 2 ? "مشتری" : user.RoleId == 3 ? "کارشناس" : "ادمین")
+                                    </td>
+                                    <td>@user.Activation.GetDisplayNameActivate()</td>
 
                                     <td>
+                                        <a asp-page-handler="Accept" asp-route-Id="@user.Id" class="btn btn-primary">فعال</a>
+
+                                        <a asp-page-handler="Reject" asp-route-Id="@user.Id" class="btn btn-danger">غیرفعال</a>
+
                                         <a asp-page="Update" asp-route-Id="@user.Id" class="btn btn-info">ویرایش</a>
 
-                                        <a asp-page-handler="Delete"
+
+@*                                         <a asp-page-handler="Delete"
                                         asp-route-Id="@user.Id" 
-                                        class="btn btn-danger">حذف</a>
+                                        class="btn btn-danger">حذف</a> *@
                                     </td>
                                 </tr>
                             }

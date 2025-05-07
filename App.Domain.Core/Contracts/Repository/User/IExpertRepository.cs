@@ -11,7 +11,7 @@ namespace App.Domain.Core.Contracts.Repository.User
         Task<Result> UpdateExpert(ExpertDto model, CancellationToken cancellationToken);
         Task<Result> DeleteExpert(int expertId, CancellationToken cancellationToken);
         Task<Result> SoftDeleteExpert(int expertId, CancellationToken cancellationToken);
-        Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken);
+        Task<ExpertDto?> GetExpertDto(int id, CancellationToken cancellationToken);
         Task<Result> UpdateBalance(int id, float balance, CancellationToken cancellationToken);
         Task<List<SearchResultDto>> GetForSearch(string item);
         Task<int> GetSkillUpdateCount(int expertId, CancellationToken cancellationToken);

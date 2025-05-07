@@ -24,5 +24,6 @@ namespace App.Domain.Core.Dto.User
         public List<Suggestion> Suggestions { get; set; }
         public string? ImagePath { get; set; }
         public string PhoneNumber { get; set; }
+        public ActivationEnum Activation { get; set; }
     }
 }

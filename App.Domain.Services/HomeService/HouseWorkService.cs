@@ -22,10 +22,10 @@ namespace App.Domain.Services.HomeService
         public HouseWork GetById(int id)
             => _houseWorkRepository.GetHomeServiceById(id);
 
-        public async Task<SummHouseWorkDto> GetServiceByChildId(int id, CancellationToken cancellationToken)
+        public async Task<SummHouseWorkDto?> GetServiceByChildId(int id, CancellationToken cancellationToken)
             => await _houseWorkRepository.GetServiceByChildId(id, cancellationToken);
 
-        public async Task<SummHouseWorkDto> GetServiceById(int id, CancellationToken cancellationToken)
+        public async Task<SummHouseWorkDto?> GetServiceById(int id, CancellationToken cancellationToken)
             =>await _houseWorkRepository.GetServiceById(id, cancellationToken);
         public async Task<int> GetServiceCount(int categoryId)
             => await _houseWorkRepository.GetServiceCount(categoryId);

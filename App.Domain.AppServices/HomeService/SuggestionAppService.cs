@@ -3,6 +3,7 @@ using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.OutputResult;
+using App.Domain.Core.Exceptions;
 
 namespace App.Domain.AppServices.HomeService
 {
@@ -45,13 +46,19 @@ namespace App.Domain.AppServices.HomeService
             return suggestions;
         }
 
-        public async Task<SummSuggestionDto> GetExpertBySuggestion(int id, CancellationToken cancellationToken)
-            =>await  _suggestionService.GetExpertBySuggestion(id, cancellationToken);
+        public async Task<SummSuggestionDto?> GetExpertBySuggestion(int id, CancellationToken cancellationToken)
+        {
+            var expert = await _suggestionService.GetExpertBySuggestion(id, cancellationToken);
+            if (expert is null)
+                throw new NotFoundException("کارشناس با این شناسه یافت نشد.");
+            return expert;
+        }
 
         public async Task<List<SummSuggestionDto>> CheckSuggestions(int id, CancellationToken cancellationToken)
         {
             var suggestions = await  _suggestionService.GetSuggestionDetails(id, cancellationToken);
-
+            if (suggestions is null)
+                throw new NotFoundException("");
             foreach (var item in suggestions)
             {
                 if(item.IsAccepted == true)
@@ -71,8 +78,13 @@ namespace App.Domain.AppServices.HomeService
         public Task<List<SummSuggestionDto>> GetSuggestionDetails(int id, CancellationToken cancellationToken)
             => _suggestionService.GetSuggestionDetails(id, cancellationToken);
 
-        public Task<SummSuggestionDto> GetSuggestionDto(int id, CancellationToken cancellationToken)
-            => _suggestionService.GetSuggestionDto(id, cancellationToken);
+        public async Task<SummSuggestionDto?> GetSuggestionDto(int id, CancellationToken cancellationToken)
+        {
+            var suggestion =await _suggestionService.GetSuggestionDto(id, cancellationToken);
+            if (suggestion is null)
+                throw new NotFoundException("");
+            return suggestion;
+        }
 
         public Task<int> ActiveSuggestionsCount(int expertId, CancellationToken cancellationToken)
             => _orderService.GetActiveServicesCount(expertId, cancellationToken);
@@ -89,7 +101,12 @@ namespace App.Domain.AppServices.HomeService
         public async Task<Suggestion?> GetLastSuggestion(int expertId, int orderId, CancellationToken cancellationToken)
             => await _suggestionService.GetLastSuggestion(expertId, orderId, cancellationToken);
 
-        public async Task<ExpertDto> GetExpertDto(int id, CancellationToken cancellationToken)
-            => await _suggestionService.GetExpertDto(id, cancellationToken);
+        public async Task<ExpertDto?> GetExpertDto(int id, CancellationToken cancellationToken)
+        {
+            var expert = await _suggestionService.GetExpertDto(id, cancellationToken);
+            if (expert == null)
+                throw new NotFoundException("کارشناس پیدا نشد");
+            return expert;
+        }
     }
 }

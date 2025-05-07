@@ -4,8 +4,6 @@
 @model HomeServices_RazorPage.Pages.LoginModel
 @{
 }
-<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-
 <!-- ======================= Login Detail ======================== -->
 <section class="gray">
 	@if(!User.Identity.IsAuthenticated)
@@ -13,7 +11,12 @@
 		<div class="container">
 			<div class="row align-items-start justify-content-center">
 				<div class="col-xl-5 col-lg-8 col-md-12">
-
+					@if (!ViewData.ModelState.IsValid)
+					{
+						<div class="alert alert-warning">
+							@Html.ValidationSummary(false)
+						</div>
+					}
 					<div class="signup-screen-wrap">
 						<div class="signup-screen-single">
 							<div class="text-center mb-4">

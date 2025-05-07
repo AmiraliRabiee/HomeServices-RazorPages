@@ -17,6 +17,10 @@
             </div><!-- /.portlet-title -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-info">@TempData["Message"]</div>
+            }
             <div class="top-buttons-box mb-2">
                 <a class="btn btn-success" href="/Admin/Categories/create">
                     <i class="icon-plus"></i>
@@ -33,7 +37,7 @@
                                 <th>#</th>
                                 <th>عکس</th>
                                 <th>عنوان</th>
-                                <th>نام زیردسته</th>
+                                <th>نام والد</th>
                                 <th>عملیات</th>
                             </tr>
                         </thead>

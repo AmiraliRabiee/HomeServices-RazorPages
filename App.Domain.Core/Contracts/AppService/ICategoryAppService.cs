@@ -10,7 +10,7 @@ namespace App.Domain.Core.Contracts.AppService
         Task<Result> UpdateCategoryAsync(CategoryDto category, CancellationToken cancellationToken);
         Task<Result> DeleteCategoryAsync(int id, CancellationToken cancellationToken);
         Task<Result> SoftDeleteCategoryAsync(Category category, CancellationToken cancellationToken);
-        Category GetCategory(int id);
+        Task<Category?> GetCategory(int id);
         List<CategoryDto> GetAllCategories();
         Task<List<CategoryDto>> GetParentCategories(CancellationToken cancellationToken);
         Task<List<CategoryDto>> GetChildCategories(CancellationToken cancellationToken);

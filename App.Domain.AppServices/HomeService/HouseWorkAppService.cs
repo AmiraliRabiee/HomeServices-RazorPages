@@ -5,6 +5,7 @@ using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Dto.HomeService;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
+using App.Domain.Core.Exceptions;
 
 namespace App.Domain.AppServices.HomeService
 {
@@ -139,13 +140,29 @@ namespace App.Domain.AppServices.HomeService
         public Task<List<SummHouseWorkDto>> GetServicesByChildId(int id, CancellationToken cancellationToken)
             => _houseWorkService.GetServicesByChildId(id, cancellationToken);
 
-        public async Task<SummHouseWorkDto> GetServiceByChildId(int id, CancellationToken cancellationToken)
-            => await _houseWorkService.GetServiceByChildId(id, cancellationToken);
+        public async Task<SummHouseWorkDto?> GetServiceByChildId(int id, CancellationToken cancellationToken)
+        {
+            var servcice = await _houseWorkService.GetServiceByChildId(id, cancellationToken);
+            if (servcice is null)
+                throw new NotFoundException("خدمت با این شناسه یافت نشد.");
+            return servcice;
+        }
 
-        public Task<SummHouseWorkDto> GetServiceById(int id, CancellationToken cancellationToken)
-            => _houseWorkService.GetServiceById(id, cancellationToken);
+        public async Task<SummHouseWorkDto?> GetServiceById(int id, CancellationToken cancellationToken)
+        {
+            var services = await _houseWorkService.GetServiceById(id, cancellationToken);
+            if (services is null)
+                throw new NotFoundException("سرویس با این شناسه یافت نشد.");
+            return services;
+        }
 
         public async Task<List<SummHouseWorkDto>> GetServicesByCategoryId(int id, CancellationToken cancellationToken)
-            => await _houseWorkService.GetServicesByCategoryId(id, cancellationToken);
+        {
+            var categories = await _houseWorkService.GetServicesByCategoryId(id, cancellationToken);
+            if (categories is null)
+                throw new NotFoundException("سرویس با این شناسه یافت نشد.");
+            return categories;
+        }
+
     }
 }

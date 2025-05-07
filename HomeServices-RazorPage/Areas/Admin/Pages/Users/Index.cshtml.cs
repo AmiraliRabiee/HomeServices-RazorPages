@@ -4,6 +4,7 @@ using App.Domain.Core.Entites.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading;
 
 namespace HomeServices_RazorPage.Areas.Admin.Pages.Users
 {
@@ -19,27 +20,39 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Users
         public AppUser CurrentUser { get; set; }
 
         [BindProperty]
-        public List<AppUser> Users { get; set; }
+        public List<UserDto> Users { get; set; }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet(CancellationToken cancellationToken)
         {
             var data = User;
 
-            Users = _userAppService.GetAll();
+            Users = await _userAppService.GetAll(cancellationToken);
             return Page();
         }
 
 
-        public async Task OnGetDelete(int id,CancellationToken cancellationToken)
+        public async Task OnGetAccept(int id,CancellationToken cancellationToken)
         {
-            Users = _userAppService.GetAll();
-            var result = await _userAppService.RemoveUser(id, cancellationToken);
-            if (result.IsSuccess)
-            {
-                Message = result.Message;
-            }
-            Message = result.Message;
+            Users = await _userAppService.GetAll(cancellationToken);
+            await _userAppService.AcceptUserAsync(id);
         }
+
+
+        public async Task OnGetReject(int id, CancellationToken cancellationToken)
+        {
+            Users = await _userAppService.GetAll(cancellationToken);
+            await _userAppService.RejectUserAsync(id);
+        }
+        //public async Task OnGetDelete(int id,CancellationToken cancellationToken)
+        //{
+        //    Users = await _userAppService.GetAll(cancellationToken);
+        //    var result = await _userAppService.RemoveUser(id, cancellationToken);
+        //    if (result.IsSuccess)
+        //    {
+        //        Message = result.Message;
+        //    }
+        //    Message = result.Message;
+        //}
 
     }
 }

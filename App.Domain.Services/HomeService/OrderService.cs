@@ -36,7 +36,7 @@ namespace App.Domain.Services.HomeService
         public async Task<List<SummOrderDto>> GetAll()
             => await _orderRepository.GetAll();
 
-        public async Task<SummOrderDto> GetOrderById(int id, CancellationToken cancellationToken)
+        public async Task<SummOrderDto?> GetOrderById(int id, CancellationToken cancellationToken)
             => await _orderRepository.GetOrderById(id, cancellationToken);
 
         public async Task<Result> SoftDelete(Order order, CancellationToken cancellationToken)

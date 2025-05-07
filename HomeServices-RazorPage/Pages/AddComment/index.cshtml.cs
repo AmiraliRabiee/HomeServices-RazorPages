@@ -1,6 +1,8 @@
 ﻿using App.Domain.AppServices.HomeService;
+using App.Domain.AppServices.User;
 using App.Domain.Core.Contracts.AppService;
 using App.Domain.Core.Dto.HomeService;
+using App.Domain.Core.Dto.User;
 using App.Domain.Core.Entites.User;
 using App.Domain.Core.Helpers;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +11,10 @@ using System.Threading;
 
 namespace HomeServices_RazorPage.Pages.AddComment
 {
-    public class IndexModel(ICommentAppService _commentAppService , ISuggestionAppService _suggestionAppService) : PageModel
+    public class IndexModel(ICommentAppService _commentAppService , ISuggestionAppService _suggestionAppService,IUserAppService _userAppService) : PageModel
     {
         [BindProperty]
-        public SummSuggestionDto SuggestionDto { get; set; }
+        public SummSuggestionDto? SuggestionDto { get; set; }
         [BindProperty]
         public string Message { get; set; }
         [BindProperty]
@@ -21,6 +23,7 @@ namespace HomeServices_RazorPage.Pages.AddComment
         public async Task OnGet(int id , CancellationToken cancellationToken)
         {
             SuggestionDto = await _suggestionAppService.GetExpertBySuggestion(id, cancellationToken);
+
             TempData["ExpertId"] = SuggestionDto.ExpertId;
         }
 

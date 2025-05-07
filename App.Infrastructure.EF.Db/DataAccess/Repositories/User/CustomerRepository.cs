@@ -86,7 +86,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
             }
         }
 
-        public async Task<CustomerDto> GetCustomerDto(int id ,CancellationToken cancellationToken)
+        public async Task<CustomerDto?> GetCustomerDto(int id ,CancellationToken cancellationToken)
         {
             var customer = await _appDbContext.Customers
                 .Where(c => c.Id == id)
@@ -102,9 +102,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                    ImagePath  =c.User.ImagePath,
                    User = c.User,
                    Balance = c.User.Balance
-                }).FirstAsync(cancellationToken);
-            if (customer is null)
-                throw new Exception(".مشتری با این شناسه وجود ندارد");
+                }).FirstOrDefaultAsync(cancellationToken);
             return customer;
         }
 

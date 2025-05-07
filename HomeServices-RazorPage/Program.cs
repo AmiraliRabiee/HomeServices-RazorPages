@@ -1,4 +1,4 @@
-
+﻿
 #region
 using App.Domain.AppServices.Base;
 using App.Domain.AppServices.HomeService;
@@ -22,6 +22,7 @@ using App.Infrastructure.Dapper;
 using App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities;
 using App.Infrastructure.EFCore.DataBase.Common;
 using Framework;
+using HomeServices_RazorPage.Middleware;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -127,6 +128,13 @@ builder.Host.ConfigureLogging(o => {
     config.WriteTo.Seq("http://localhost:5341", apiKey: "sM0Fu2RccNjXB7Z8fSCB");
 });
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // مدت زمان معتبر بودن سشن
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -137,6 +145,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseMiddleware<PendingApprovalMiddleware>();
+app.UseMiddleware<NotFoundHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -145,6 +155,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseSession();
 //app.MapStaticAssests();
 
 app.UseSerilogRequestLogging();

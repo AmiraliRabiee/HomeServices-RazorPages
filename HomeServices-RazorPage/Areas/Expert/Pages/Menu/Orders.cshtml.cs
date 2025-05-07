@@ -15,7 +15,7 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
         [BindProperty]
         public AppUser AppUser { get; set; }
         [BindProperty]
-        public SummOrderDto OrderDto { get; set; }
+        public SummOrderDto? OrderDto { get; set; }
         [BindProperty]
         public float SuggestPrice { get; set; }
         [BindProperty]

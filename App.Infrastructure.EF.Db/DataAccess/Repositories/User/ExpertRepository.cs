@@ -85,7 +85,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
             }
         }
 
-        public async Task<ExpertDto> GetExpertDto(int id , CancellationToken cancellationToken)
+        public async Task<ExpertDto?> GetExpertDto(int id , CancellationToken cancellationToken)
         {
             var expert = await _appDbContext.Experts
                 .Select(e => new ExpertDto
@@ -99,11 +99,10 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                     Balance = e.User.Balance,
                     Biographi = e.Biographi,
                     PhoneNumber = e.User.PhoneNumber,
-                    AppUser = e.User
+                    AppUser = e.User,
+                    FullName = e.User.FirstName + " " + e.User.LastName,
                 })
                 .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
-            if (expert is null)
-                throw new Exception("کارشناس با این شناسه وجود ندارد");
             return expert;
         }
 

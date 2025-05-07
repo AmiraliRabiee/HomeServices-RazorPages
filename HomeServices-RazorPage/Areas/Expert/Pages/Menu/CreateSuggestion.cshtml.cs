@@ -14,7 +14,7 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
         [BindProperty]
         public Suggestion NewSuggestion { get; set; } = new Suggestion();
         [BindProperty]
-        public SummOrderDto OrderDto { get; set; }
+        public SummOrderDto? OrderDto { get; set; }
         [BindProperty]
         public string Message { get; set; }
         public async Task OnGetAsync(int orderId, CancellationToken cancellationToken)

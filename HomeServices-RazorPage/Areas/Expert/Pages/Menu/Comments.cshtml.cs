@@ -13,7 +13,7 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
         ,IUserAppService _userAppService) : PageModel
     {
         [BindProperty]
-        public List<CommentDto> Comments { get; set; }
+        public List<CommentDto>? Comments { get; set; }
         [BindProperty]
         public double? AverageScore { get; set; }
         [BindProperty]
@@ -21,7 +21,9 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
         [BindProperty]
         public int DoneSuggestions { get; set; }
         [BindProperty]
-        public ExpertDto ExpertDto { get; set; }
+        public ExpertDto? ExpertDto { get; set; }
+        [BindProperty]
+        public ExpertDto? ExpertDetails { get; set; }
         public async Task OnGet(int expertId, CancellationToken cancellationToken)
         {
             if (User.IsInRole("Expert"))
@@ -29,12 +31,14 @@ namespace HomeServices_RazorPage.Areas.Expert.Pages.Menu
                 var id = UserTools.GetExpertId(User.Claims);
                 Comments = await _commentAppService.GetCommentsById(id, cancellationToken);
                 ExpertDto = await _userAppService.GetExpertDto(id, cancellationToken);
+                ExpertDetails = await _suggestionAppService.GetExpertDto(id, cancellationToken);
 
             }
             else
             {
                 ExpertDto = await _userAppService.GetExpertDto(expertId, cancellationToken);
                 Comments = await _commentAppService.GetCommentsById(expertId, cancellationToken);
+                ExpertDetails = await _suggestionAppService.GetExpertDto(expertId, cancellationToken);
             }
             AverageScore = await _commentAppService.GetAvg(expertId, cancellationToken);
             CommentCount = await _commentAppService.GetCount(expertId, cancellationToken);

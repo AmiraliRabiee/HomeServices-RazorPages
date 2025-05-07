@@ -72,21 +72,23 @@
 
                             @if (SignInManager.IsSignedIn(User))
                             {
+                                bool isPending = User.HasClaim(c => c.Type == "ActivationUser" && c.Value == "Pending");
+
                                 <li>
                                     <a>پنل کاربری</a>
                                     <ul class="nav-dropdown nav-submenu">
                                         @if (User.IsInRole("Customer"))
                                         {
-                                            <li><a asp-page="/menu/dashboard" asp-area="customer"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
-                                            <li><a asp-page="/menu/myorders" asp-area="customer"><i class="lni lni-files ms-2"></i>سفارش های من</a></li>
-                                            <li><a asp-page="/categories/index"><i class="lni lni-add-files ms-2"></i>ثبت سفارش</a></li>
+                                            <li><a asp-page="/menu/dashboard" asp-area="customer" class="@(isPending ? "disabled" : "")"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                                            <li><a asp-page="/menu/myorders" asp-area="customer" class="@(isPending ? "disabled" : "")"><i class="lni lni-files ms-2"></i>سفارش های من</a></li>
+                                            <li><a asp-page="/categories/index" class="@(isPending ? "disabled" : "")"><i class="lni lni-add-files ms-2"></i>ثبت سفارش</a></li>
                                         }
                                         else if (User.IsInRole("Expert"))
                                         {
-                                            <li><a asp-page="/menu/dashboard" asp-area="expert"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
-                                            <li><a asp-page="/menu/reservations" asp-area="expert"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
-                                            <li><a asp-page="/menu/accepted" asp-area="expert"><i class="lni lni-files ms-2"></i>سفارش های پذیرفته شده</a></li>
-                                            <li><a asp-page="/menu/Comments" asp-area="expert"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
+                                            <li><a asp-page="/menu/dashboard" asp-area="expert" class="@(isPending ? "disabled" : "")"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                                            <li><a asp-page="/menu/reservations" asp-area="expert" class="@(isPending ? "disabled" : "")"><i class="lni lni-files ms-2"></i>سفارش های رزرو</a></li>
+                                            <li><a asp-page="/menu/accepted" asp-area="expert" class="@(isPending ? "disabled" : "")"><i class="lni lni-files ms-2"></i>سفارش های پذیرفته شده</a></li>
+                                            <li><a asp-page="/menu/Comments" asp-area="expert" class="@(isPending ? "disabled" : "")"><i class="lni lni-envelope ms-2"></i> نظرات کاربران</a></li>
                                         }
                                     </ul>
                                 </li>
@@ -131,19 +133,20 @@
                                         </a>
                                     }
                                 </li>
+
                             }
                             else
                             {
-                                <li>
-                                    <a asp-page="/Login" class="ft-bold">
-                                        <i class="fas fa-sign-in-alt ms-1 theme-cl"></i>ورود
-                                    </a>
-                                </li>
-                                <li class="add-listing">
-                                    <a asp-page="/categories/index">
-                                        <i class="fas fa-plus ms-2"></i>ثبت سفارش
-                                    </a>
-                                </li>
+                            <li>
+                                <a asp-page="/Login" class="ft-bold">
+                                    <i class="fas fa-sign-in-alt ms-1 theme-cl"></i>ورود
+                                </a>
+                            </li>
+                            <li class="add-listing">
+                                <a asp-page="/categories/index">
+                                    <i class="fas fa-plus ms-2"></i>ثبت سفارش
+                                </a>
+                            </li>
                             }
                         </ul>
 
@@ -158,10 +161,7 @@
         <!-- ============================================================== -->
         <!-- Top header  -->
         <!-- ============================================================== -->
-
-        <div class="container">
             @RenderBody()
-        </div>
 
         <!-- ============================ Footer Start ================================== -->
         <footer class="light-footer skin-light-footer style-2">

@@ -19,6 +19,12 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12">
+                    @if (TempData["PendingApproval"] != null)
+                    {
+                        <div class="alert alert-warning">
+                            @TempData["PendingApproval"]
+                        </div>
+                    }
 
                     <div class="banner_caption text-center mb-5">
                         <h1 class="banner_title_xxl ft-bold text-light mb-1">دریافت خدمات و ثبت سفارش آنلاین</h1>
