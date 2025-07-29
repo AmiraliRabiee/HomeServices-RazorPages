@@ -54,15 +54,6 @@ namespace App.Domain.AppServices.HomeService
             return new Result {IsSuccess = false , Message = result.Message };
         }
 
-        public HouseWork GetByIdAsync(int id)
-        {
-            var result =  _houseWorkService.GetById(id);
-            if (result is null)
-                return null;
-            return result;
-
-        }
-
         public async Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken)//////////////////////
             => await _houseWorkDapperRepository.GetAllAsync(cancellationToken);
 
@@ -123,22 +114,15 @@ namespace App.Domain.AppServices.HomeService
                 return work;
             }
             return work;
-
         }
         public UpdateHouseWork GetServiceDto(int id)
             => _houseWorkService.GetServiceDto(id);
 
-        //public async Task<List<SummHouseWorkDto>> GetServicesById(int id , CancellationToken cancellationToken)
-        //    => await _houseWorkService.GetServicesById(id , cancellationToken);
-
-        //public List<SummHouseWorkDto> GetServices()
-        //    => _houseWorkService.GetServicesById();
-
         public async Task<int> GetServiceCount(int categoryId)
             => await _houseWorkService.GetServiceCount(categoryId);
 
-        public Task<List<SummHouseWorkDto>> GetServicesByChildId(int id, CancellationToken cancellationToken)
-            => _houseWorkService.GetServicesByChildId(id, cancellationToken);
+        public async Task<List<SummHouseWorkDto>> GetServicesByChildId(int id, CancellationToken cancellationToken)
+            => await _houseWorkService.GetServicesByChildId(id, cancellationToken);
 
         public async Task<SummHouseWorkDto?> GetServiceByChildId(int id, CancellationToken cancellationToken)
         {
@@ -164,5 +148,19 @@ namespace App.Domain.AppServices.HomeService
             return categories;
         }
 
+        //public async Task<List<SummHouseWorkDto>> GetServicesById(int id , CancellationToken cancellationToken)
+        //    => await _houseWorkService.GetServicesById(id , cancellationToken);
+
+        //public List<SummHouseWorkDto> GetServices()
+        //    => _houseWorkService.GetServicesById();
+
+        //public HouseWork GetByIdAsync(int id)
+        //{
+        //    var result = _houseWorkService.GetById(id);
+        //    if (result is null)
+        //        return null;
+        //    return result;
+
+        //}
     }
 }

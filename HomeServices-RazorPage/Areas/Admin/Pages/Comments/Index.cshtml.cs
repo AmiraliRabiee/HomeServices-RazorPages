@@ -13,14 +13,14 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Comments
         public string Message { get; set; }
         [BindProperty]
         public List<CommentDto> CommntsList { get; set; }
-        public void OnGet()
+        public async Task OnGet(CancellationToken cancellationToken)
         {
-            CommntsList = _commentAppService.GetComments();
+            CommntsList = await _commentAppService.GetComments(cancellationToken);
         }
 
         public async Task OnGetReject(int id,CancellationToken cancellationToken)
         {
-            CommntsList = _commentAppService.GetComments();
+            CommntsList = await _commentAppService.GetComments(cancellationToken);
             var result = await _commentAppService.RejectComment(id , cancellationToken);
             if(result.IsSuccess)
                 Message= result.Message;
@@ -28,7 +28,7 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Comments
         }
         public async Task<IActionResult> OnGetAccept(int id, CancellationToken cancellationToken)
         {
-            CommntsList = _commentAppService.GetComments();
+            CommntsList = await _commentAppService.GetComments(cancellationToken);
             var result = await _commentAppService.AcceptComment(id, cancellationToken);
             if (result.IsSuccess)
             {

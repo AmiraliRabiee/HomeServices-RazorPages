@@ -9,6 +9,7 @@ using App.Domain.Core.Contracts.Repository.BaseEntities;
 using App.Domain.Core.Contracts.Repository.HomeServices;
 using App.Domain.Core.Contracts.Repository.User;
 using App.Domain.Core.Contracts.Service.BaseEntities;
+using App.Domain.Core.Contracts.Service.Cache;
 using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Contracts.Service.User;
 using App.Domain.Core.Entites.User;
@@ -21,12 +22,14 @@ using App.InfraAccess.EFCore.DataAccess.Repositories.User;
 using App.Infrastructure.Dapper;
 using App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities;
 using App.Infrastructure.EFCore.DataBase.Common;
+using App.Infrastructure.RedisCache;
 using Framework;
 using HomeServices_RazorPage.Middleware;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using StackExchange.Redis;
 #endregion
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,11 +38,28 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages()
     .AddRazorRuntimeCompilation();
 
-builder.Services.AddMemoryCache();
+
+//builder.Services.AddMemoryCache();
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<ICacheService, CacheService>();
+//redis register
+builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect("localhost"));
+
 
 #region User Injects
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -53,7 +73,7 @@ builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IExpertRepository, ExpertRepository>();
 builder.Services.AddScoped<IExpertService, ExpertService>();
 
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+//builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IAdminService, AdminService>();
@@ -106,6 +126,7 @@ builder.Services.AddScoped<ICategoryDapperRepository, CategoryDapperRepository>(
 builder.Services.AddScoped<IHouseWorkDapperRepository, HouseWorkDapperRepository>();
 #endregion
 
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
 {
@@ -119,20 +140,9 @@ builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
     .AddEntityFrameworkStores<AppDbContext>()
     .AddErrorDescriber<PersianIdentityErrorDescriber>();
 
-
-builder.Host.ConfigureLogging(o => {
-    o.ClearProviders();
-    o.AddSerilog();
-}).UseSerilog((context, config) =>
+builder.Host.UseSerilog((context, config) =>
 {
-    config.WriteTo.Seq("http://localhost:5341", apiKey: "sM0Fu2RccNjXB7Z8fSCB");
-});
-
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // مدت زمان معتبر بودن سشن
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
+    config.ReadFrom.Configuration(context.Configuration);
 });
 
 var app = builder.Build();
@@ -153,6 +163,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();

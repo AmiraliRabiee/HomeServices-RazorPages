@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Infrastructure.Dapper",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeServices.Endpoints.WebApi", "HomeServices.Endpoints.WebApi\HomeServices.Endpoints.WebApi.csproj", "{05CAE9FF-DED7-4541-9857-F78E869D73DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Infrastructure.Cache.Redis", "App.Infrastructure.RedisCache\App.Infrastructure.Cache.Redis.csproj", "{C1A3648D-7C4E-453C-BD85-32BDC489CFF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{05CAE9FF-DED7-4541-9857-F78E869D73DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05CAE9FF-DED7-4541-9857-F78E869D73DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05CAE9FF-DED7-4541-9857-F78E869D73DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1A3648D-7C4E-453C-BD85-32BDC489CFF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1A3648D-7C4E-453C-BD85-32BDC489CFF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1A3648D-7C4E-453C-BD85-32BDC489CFF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1A3648D-7C4E-453C-BD85-32BDC489CFF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,5 +96,6 @@ Global
 		{9B3BFF11-048F-4FC9-AA96-1E5217714163} = {9A50934E-4030-4632-81ED-621812C26455}
 		{3D130F74-6024-4B30-AD37-099745D39B2A} = {813030AA-730C-4F2B-B2AA-DBD1B0115F3A}
 		{05CAE9FF-DED7-4541-9857-F78E869D73DE} = {9A50934E-4030-4632-81ED-621812C26455}
+		{C1A3648D-7C4E-453C-BD85-32BDC489CFF0} = {813030AA-730C-4F2B-B2AA-DBD1B0115F3A}
 	EndGlobalSection
 EndGlobal

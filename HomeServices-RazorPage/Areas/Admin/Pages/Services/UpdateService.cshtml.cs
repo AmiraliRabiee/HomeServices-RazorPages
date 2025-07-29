@@ -18,13 +18,13 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Services
         [BindProperty]
         public List<CategoryDto> ChildCategories { get; set; }
         [BindProperty]
-        public HouseWork ExistWork { get; set; }
+        public SummHouseWorkDto ExistWork { get; set; }
 
 
         public async Task OnGet(int id,CancellationToken cancellationToken)
         {
             ChildCategories =await _categoryAppService.GetChildCategories(cancellationToken);
-            ExistWork = _workAppService.GetByIdAsync(id);
+            ExistWork = await _workAppService.GetHouseWorkDto(id,cancellationToken);
             Work = _workAppService.GetServiceDto(id); 
         }
 

@@ -23,7 +23,7 @@ public class PendingApprovalMiddleware
             if (user != null && user.ActivationUser == ActivationEnum.Pending)
             {
                 await signInManager.SignOutAsync();
-                context.Response.Redirect("/index?message=approval_pending");
+                context.Response.Redirect("/login?message=approval_pending");
                 return;
             }
         }

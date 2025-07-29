@@ -24,35 +24,17 @@ namespace App.Domain.AppServices.Base
         public async Task<Result> DeleteCategoryAsync(int id, CancellationToken cancellationToken)
             => await _categoryService.DeleteCategory(id, cancellationToken);
 
-        public List<CategoryDto> GetAllCategories()
-            => _categoryService.GetAllCategories();
-
-        public async Task<Category?> GetCategory(int id)
-        {
-            var category = await _categoryService.GetCategory(id);
-            if (category is null)
-                throw new NotFoundException($"دسته با شناسه {id} یافت نشد.");
-            return category;
-        }
+        public async Task<List<CategoryDto>> GetAllCategories(CancellationToken cancellationToken)
+            => await _categoryService.GetAllCategories(cancellationToken);
 
         public async Task<CategoryDto> GetCategoryDto(int? id)
         {
             var categoryDto = await _categoryService.GetCategoryDto(id);
-            if (categoryDto is null)
-                throw new NotFoundException($"دسته با شناسه {id} یافت نشد.");
             return categoryDto;
         }
 
         public async Task<List<int>> GetCategoryNumbersAsync(CancellationToken cancellationToken)
             => await _categoryService.GetCategoryNumbersAsync(cancellationToken);
-
-        public async Task<List<CategoryDto>> GetCatyegoryByParent(int id, CancellationToken cancellationToken)
-        {
-            var categories = await _categoryService.GetCatyegoryByParent(id, cancellationToken);
-            if (categories is null)
-                throw new NotFoundException($"دسته با شناسه {id} یافت نشد.");
-            return categories;
-        }
 
         public async Task<List<CategoryDto>> GetChildCategories(CancellationToken cancellationToken)
             => await _categoryService.GetChildCategories(cancellationToken);
@@ -60,13 +42,8 @@ namespace App.Domain.AppServices.Base
         public async Task<List<Category>> GetChildCategoriesById(int id, CancellationToken cancellationToken)
         {
             var categories = await _categoryService.GetChildCategoriesById(id, cancellationToken);
-            if(categories is null)
-                throw new NotFoundException($"دسته با شناسه {id} یافت نشد.");
             return categories;
         }
-
-        public async Task<int> GetChildCount(int categoryId)
-            => await _categoryService.GetChildCount(categoryId);
 
         public async Task<List<CategoryDto>> GetParentCategories(CancellationToken cancellationToken)
             => await _categoryService.GetParentCategories(cancellationToken);
@@ -86,5 +63,21 @@ namespace App.Domain.AppServices.Base
             return new Result { IsSuccess = false, Message = "با خطا مواجه شد" };
         }
 
+        //public async Task<List<CategoryDto>> GetCatyegoryByParent(int id, CancellationToken cancellationToken)
+        //{
+        //    var categories = await _categoryService.GetCatyegoryByParent(id, cancellationToken);
+        //    return categories;
+        //}
+
+        //public async Task<Category?> GetCategory(int id)
+        //{
+        //    var category = await _categoryService.GetCategory(id);
+        //    if (category is null)
+        //        throw new NotFoundException($"دسته با شناسه {id} یافت نشد.");
+        //    return category;
+        //}
+
+        //public async Task<int> GetChildCount(int categoryId)
+        //    => await _categoryService.GetChildCount(categoryId);
     }
 }

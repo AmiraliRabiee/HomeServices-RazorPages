@@ -6,12 +6,12 @@ namespace App.Domain.Core.Contracts.AppService
     public interface ICommentAppService
     {
         Task<Result> Add(Comment comment, CancellationToken cancellationToken);
-        Task<Result> Delete(int id, CancellationToken cancellationToken);
         Task<Result> AcceptComment(int id, CancellationToken cancellationToken);
-        List<CommentDto> GetComments();
+        Task<List<CommentDto>> GetComments(CancellationToken cancellationToken);
         Task<List<CommentDto>> GetCommentsById(int expertId, CancellationToken cancellationToken);
         Task<double?> GetAvg(int id, CancellationToken cancellationToken);
         Task<int> GetCount(int id, CancellationToken cancellationToken);
         Task<Result> RejectComment(int id, CancellationToken cancellationToken);
+        //Task<Result> Delete(int id, CancellationToken cancellationToken);
     }
 }

@@ -10,13 +10,10 @@ namespace HomeServices_RazorPage.Pages.Categories
     public class IndexModel(ICategoryAppService _categoryAppService , IHouseWorkAppService _houseWorkAppService) : PageModel
     {
         [BindProperty]
-        public List<CategoryDto> CatDtos { get; set; }
-        [BindProperty]
         public List<CategoryDto> Cats { get; set; }
         public async Task OnGet(int id,CancellationToken cancellationToken)
         {
             Cats = await _categoryAppService.GetParentCategories(cancellationToken);
-            CatDtos =await _categoryAppService.GetCatyegoryByParent(id, cancellationToken);
         }
     }
 }

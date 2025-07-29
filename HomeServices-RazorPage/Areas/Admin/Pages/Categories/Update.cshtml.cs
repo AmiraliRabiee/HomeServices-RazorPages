@@ -11,15 +11,12 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Categories
     public class UpdateModel(ICategoryAppService _categoryAppService) : PageModel
     {
         [BindProperty]
-        public Category? ExistCategory { get; set; }
-        [BindProperty]
         public CategoryDto Category { get; set; }
         [BindProperty]
         public string Message { get; set; }
 
         public async Task OnGet(int id)
         {
-            ExistCategory = await _categoryAppService.GetCategory(id);
             Category = await _categoryAppService.GetCategoryDto(id);
         }
 

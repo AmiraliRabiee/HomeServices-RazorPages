@@ -20,20 +20,15 @@ namespace App.Domain.AppServices.Base
         public async  Task<Result> Add(Comment comment, CancellationToken cancellationToken)
             =>await _commentService.AddComment(comment, cancellationToken);
 
-        public async Task<Result> Delete(int id, CancellationToken cancellationToken)
-            =>await _commentService.DeleteComment(id, cancellationToken);
-
         public async Task<double?> GetAvg(int id, CancellationToken cancellationToken)
             => await _commentService.GetAvg(id, cancellationToken);
 
-        public List<CommentDto> GetComments()
-            => _commentService.GetComments();
+        public async Task<List<CommentDto>> GetComments(CancellationToken cancellationToken)
+            => await _commentService.GetComments(cancellationToken);
 
         public async Task<List<CommentDto>> GetCommentsById(int expertId, CancellationToken cancellationToken)
         {
             var comments = await _commentService.GetCommentsById(expertId, cancellationToken);
-            if (comments == null)
-                throw new NotFoundException($"نظر با این کامنت یافت نشد");
             return comments;
         }
 
@@ -42,5 +37,8 @@ namespace App.Domain.AppServices.Base
 
         public async Task<Result> RejectComment(int id, CancellationToken cancellationToken)
             => await _commentService.RejectComment(id, cancellationToken);
+
+        //public async Task<Result> Delete(int id, CancellationToken cancellationToken)
+        //    =>await _commentService.DeleteComment(id, cancellationToken);
     }
 }

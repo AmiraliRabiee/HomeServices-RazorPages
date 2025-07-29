@@ -101,9 +101,9 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
             return count;
         }
 
-        public List<CategoryDto> GetAllCategories()
+        public async Task<List<CategoryDto>> GetAllCategories(CancellationToken cancellationToken)
         {
-            var categories = _appDbContext.Categories
+            var categories = await _appDbContext.Categories
                 .Select(c => new CategoryDto
                 {
                     Id = c.Id,
@@ -111,7 +111,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
                     ParentName = c.ParentCategory.Title,
                     Title = c.Title,
                     ImagePath = c.ImagePath
-                }).ToList();
+                }).ToListAsync(cancellationToken);
             if (categories is null)
                 throw new Exception("دسته بندی ها خالی میباشد");
             return categories;
@@ -121,15 +121,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
             var categories = await _appDbContext.Categories
                 .Where(c => c.ParentId == id).ToListAsync(cancellationToken);
             return categories;
-        }
-
-        public async Task<Category> GetChildCategoryById(int id)
-        {
-            var category = await _appDbContext.Categories
-                .FirstOrDefaultAsync(c => c.ParentId == id);
-            if (category is null)
-                throw new Exception("دسته بندی ها خالی میباشد");
-            return category;
         }
 
         public async Task<CategoryDto?> GetCategoryDto(int? id)
@@ -148,19 +139,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
             return category;
         }
 
-
-        public async Task<List<CategoryDto>> GetCatyegoryByParent(int id,CancellationToken cancellationToken)
-        {
-            var categories = await _appDbContext.Categories
-                .Where(x => x.ParentId == id)
-                .Select(x => new CategoryDto
-                {
-                    Title = x.Title,
-                    ImagePath = x.ImagePath
-                }).ToListAsync(cancellationToken);
-            return categories;
-        }
-
         public async Task<List<int>> GetCategoryNumbersAsync(CancellationToken cancellationToken)
         {
             var categories = await _appDbContext.Categories
@@ -169,14 +147,37 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
             return categories;
         }
 
-        public async Task<List<Category>> GetForSearch(string item)
-        {
-            var categories = await _appDbContext.Categories
-                .Where(c => c.ParentId != null)
-                .Where(c => c.Title.Contains(item))
-                .ToListAsync();
+        //public async Task<List<Category>> GetForSearch(string item)
+        //{
+        //    var categories = await _appDbContext.Categories
+        //        .Where(c => c.ParentId != null)
+        //        .Where(c => c.Title.Contains(item))
+        //        .ToListAsync();
 
-            return categories;
-        }
+        //    return categories;
+        //}
+
+
+        //public async Task<List<CategoryDto>> GetCatyegoryByParent(int id,CancellationToken cancellationToken)
+        //{
+        //    var categories = await _appDbContext.Categories
+        //        .Where(x => x.ParentId == id)
+        //        .Select(x => new CategoryDto
+        //        {
+        //            Title = x.Title,
+        //            ImagePath = x.ImagePath
+        //        }).ToListAsync(cancellationToken);
+        //    return categories;
+        //}
+
+
+        //public async Task<Category> GetChildCategoryById(int id)
+        //{
+        //    var category = await _appDbContext.Categories
+        //        .FirstOrDefaultAsync(c => c.ParentId == id);
+        //    if (category is null)
+        //        throw new Exception("دسته بندی ها خالی میباشد");
+        //    return category;
+        //}
     }
 }

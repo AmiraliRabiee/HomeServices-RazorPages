@@ -39,7 +39,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
 
         }
 
-
         public async Task<Result> DeleteUser(int id, CancellationToken cancellationToken)
         {
             try
@@ -85,10 +84,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
             try
             {
                 var currentUser = await _appDbContext.Users
-                    .FirstOrDefaultAsync(u => u.Id == user.Id, cancellationToken);
-
-                if (currentUser is null)
-                    return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
+                    .FindAsync(user, cancellationToken);
 
                 currentUser.FirstName = user.FirstName;
                 currentUser.LastName = user.LastName;
@@ -105,7 +101,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
                 return new Result { IsSuccess = false, Message = $"{ex.Message}" };
             }
         }
-
 
         public async Task<Result> UpdateUserDto(int id, CancellationToken cancellationToken)
         {
@@ -141,9 +136,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
             {
                 var currentUser = await _appDbContext.Users
                     .FirstOrDefaultAsync(u => u.Id == user.Id, cancellationToken);
-
-                if (currentUser is null)
-                    return new Result { IsSuccess = false, Message = ".کاربری با این شناسه یافت نشد" };
 
                 currentUser.Balance = user.Balance;
 
@@ -216,7 +208,6 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.User
             }
             return null;
         }
-
 
         public async Task<float> GetBalance(AppUser user, CancellationToken cancellationToken)
         {

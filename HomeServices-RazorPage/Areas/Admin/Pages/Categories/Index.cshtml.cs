@@ -17,7 +17,13 @@ namespace HomeServices_RazorPage.Areas.Admin.Pages.Categories
         public CategoryDto Category { get; set; }
         [BindProperty]
         public string Message { get; set; }
+        [BindProperty]
+        public List<CategoryDto> ExistCategories { get; set; }
 
+        public async Task OnGet(CancellationToken cancellationToken)
+        {
+            ExistCategories = await _categoryAppService.GetAllCategories(cancellationToken);
+        }
 
         public async Task<IActionResult> OnGetDelete(int id, CancellationToken cancellationToken)
         {

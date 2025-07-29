@@ -29,6 +29,7 @@
     <ProjectReference Include="..\App.Domain.Services\App.Domain.Services.csproj" />
     <ProjectReference Include="..\App.Infrastructure.Dapper\App.Infrastructure.Dapper.csproj" />
     <ProjectReference Include="..\App.Infrastructure.EF.Db\App.Infrastructure.EFCore.csproj" />
+    <ProjectReference Include="..\App.Infrastructure.RedisCache\App.Infrastructure.Cache.Redis.csproj" />
     <ProjectReference Include="..\Framework\Framework.csproj" />
   </ItemGroup>
 

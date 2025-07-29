@@ -10,7 +10,7 @@ namespace App.Domain.Core.Contracts.AppService
         Task<Result> DeLeteServiceAsync(int id, CancellationToken cancellationToken);
         Task<Result> UpdateServiceAsync(UpdateHouseWork model, CancellationToken cancellationToken);
         Task<Result> SoftDeleteServiceAsync(HouseWork model, CancellationToken cancellationToken);
-        HouseWork GetByIdAsync(int id);
+        //HouseWork GetByIdAsync(int id);
         Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken);
         UpdateHouseWork GetServiceDto(int id);
         Task<List<SummHouseWorkDto>> GetServicesByCategoryId(int id, CancellationToken cancellationToken);

@@ -115,9 +115,9 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
             return new Result { IsSuccess = true, Message = ".با موفقیت حذف شد" };
         }
 
-        public List<CommentDto> GetComments()
+        public async Task<List<CommentDto>> GetComments(CancellationToken cancellationToken)
         {
-            var comments = _appDbContext.Comments
+            var comments =await  _appDbContext.Comments
                 .Select(x => new CommentDto
                 {
                     Id = x.Id,
@@ -126,7 +126,7 @@ namespace App.InfraAccess.EFCore.DataAccess.Repositories.BaseEntities
                     Points = x.Points,
                     RegissterDate = x.CreateAt,
                     Activation = x.Activation
-                }).ToList();
+                }).ToListAsync(cancellationToken);
             if (comments is null)
                 throw new Exception("کامنتی وجود ندارد");
             return comments;

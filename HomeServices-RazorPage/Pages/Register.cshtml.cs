@@ -25,7 +25,7 @@ namespace HomeServices_RazorPage.Pages
 
                 if (result.Succeeded)
                 {
-                    return RedirectToPage("/index", new { message = "approval_pending" });
+                    return RedirectToPage("/login", new { message = "approval_pending" });
                 }
 
                 foreach (var error in result.Errors)

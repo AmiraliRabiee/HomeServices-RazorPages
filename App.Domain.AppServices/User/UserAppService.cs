@@ -10,7 +10,9 @@ using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.User;
 using App.Domain.Core.Enum;
 using App.Domain.Core.Exceptions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 using System.Threading;
 
@@ -24,11 +26,14 @@ namespace App.Domain.AppServices.User
         , ICustomerService _customerService
         , ISuggestionService _suggestionService
         , IOrderService _orderService
-        , IAdminService _adminService) : IUserAppService
+        , IAdminService _adminService
+        ,IJwtService _jwtService
+        ,ILogger<UserAppService> _logger
+        , IHttpContextAccessor _httpContextAccessor) : IUserAppService
     {
         public async Task<IdentityResult> Login(string username, string password)
         {
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 return IdentityResult.Failed(new IdentityError { Description = "نام کاربری و رمز عبور اجباری می‌باشد." });
             }
@@ -41,29 +46,41 @@ namespace App.Domain.AppServices.User
 
             if (user.ActivationUser == ActivationEnum.Pending)
             {
+                _logger.LogInformation("کاربر {Username} تلاش برای ورود داشت اما حساب در حالت انتظار تایید است.", username);
                 return IdentityResult.Failed(new IdentityError { Description = "حساب کاربری شما هنوز تایید نشده است. لطفا منتظر تایید مدیر باشید." });
             }
 
-            var result = await _signInManager.PasswordSignInAsync(username, password, true, false);
-            return result.Succeeded ? IdentityResult.Success : IdentityResult.Failed(new IdentityError { Description = "نام کاربری یا رمز عبور اشتباه است." });
+            var result = await _signInManager.PasswordSignInAsync(username, password, isPersistent: true, lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("کاربر {Username} با موفقیت وارد شد.", username);
+                return IdentityResult.Success;
+            }
+            else
+            {
+                _logger.LogWarning("تلاش ناموفق برای ورود کاربر {Username}.", username);
+                return IdentityResult.Failed(new IdentityError { Description = "نام کاربری یا رمز عبور اشتباه است." });
+            }
         }
 
-        public async Task<IdentityResult> Register(CreateUserDto
-            model, CancellationToken cancellationToken)
+
+
+        public async Task<IdentityResult> Register(CreateUserDto model, CancellationToken cancellationToken)
         {
             var existingUser = await _userManager.FindByNameAsync(model.UserName);
             if (existingUser != null)
             {
+                _logger.LogWarning("ثبت‌نام ناموفق: نام کاربری {Username} تکراری است.", model.UserName);
                 return IdentityResult.Failed(new IdentityError { Description = "این نام کاربری قبلا انتخاب شده ، لطفا نام دیگری را وارد کنید." });
             }
-
 
             bool cityExists = (await _baseDataService.GetCitiesAsync(cancellationToken)).Any(city => city.Id == model.CityId);
             if (!cityExists)
             {
+                _logger.LogWarning("ثبت‌نام ناموفق: شهر با شناسه {CityId} یافت نشد.", model.CityId);
                 return IdentityResult.Failed(new IdentityError { Description = "شهر انتخابی معتبر نمی باشد." });
             }
-
 
             var user = new AppUser
             {
@@ -73,10 +90,8 @@ namespace App.Domain.AppServices.User
                 LastName = model.LastName,
                 RoleId = model.RoleId,
                 PhoneNumber = model.PhoneNumber,
+                ImagePath = model.ImagePath
             };
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.ImagePath = model.ImagePath;
 
             string role = model.RoleId switch
             {
@@ -90,27 +105,28 @@ namespace App.Domain.AppServices.User
                 user.Customer = new Customer()
                 {
                     Address = model.Address,
-                    CityId = model.CityId,
+                    CityId = model.CityId
                 };
             }
             else if (model.RoleId == 3)
             {
                 user.Expert = new Expert()
                 {
-                    CityId = model.CityId,
+                    CityId = model.CityId
                 };
             }
+
             user.RegisterAt = DateTime.Now;
 
             if (model.ProfileImgFile is not null)
             {
                 user.ImagePath = await _baseDataService.UploadImage(model.ProfileImgFile!, "Profiles", cancellationToken);
             }
+
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
-
                 await _userManager.AddToRoleAsync(user, role);
 
                 if (model.RoleId == 2)
@@ -125,6 +141,14 @@ namespace App.Domain.AppServices.User
                 user.ActivationUser = ActivationEnum.Pending;
                 await _userManager.AddClaimAsync(user, new Claim("ActivationUser", "Pending"));
                 var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, true, false);
+
+                _logger.LogInformation($"کاربر جدید با نام کاربری {user.Id} و نقش {user.RoleId} با موفقیت ثبت شد. شناسه کاربر",
+                    user.UserName, role, user.Id);
+            }
+            else
+            {
+                _logger.LogError("ثبت‌نام ناموفق برای کاربر {Username}. دلایل: {Errors}",
+                    model.UserName, string.Join(", ", result.Errors.Select(e => e.Description)));
             }
 
             return result;
@@ -133,9 +157,15 @@ namespace App.Domain.AppServices.User
 
         public async Task<IdentityResult> Logout()
         {
+            var username = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "ناشناس";
+
             await _signInManager.SignOutAsync();
+
+            _logger.LogInformation("کاربر {Username} خارج شد.", username);
+
             return IdentityResult.Success;
         }
+
 
         public async Task<Result> RemoveUser(int id, CancellationToken cancellationToken)
         {
@@ -248,7 +278,6 @@ namespace App.Domain.AppServices.User
             var payment = await _userService.Payment(user, orderId, price, cancellationToken);
             if (!payment.IsSuccess)
             {
-                // پیام دقیقی که از لایه سرویس برگشته رو مستقیماً برمی‌گردونیم
                 return payment;
             }
 

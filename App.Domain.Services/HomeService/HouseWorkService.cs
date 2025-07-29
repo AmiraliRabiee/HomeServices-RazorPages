@@ -1,14 +1,17 @@
 ﻿using App.Domain.Core.Contracts.Dapper.Repository;
 using App.Domain.Core.Contracts.Repository.HomeServices;
+using App.Domain.Core.Contracts.Service.Cache;
 using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Dto;
+using App.Domain.Core.Dto.Dashboard;
 using App.Domain.Core.Dto.HomeService;
+using App.Domain.Core.Entites;
 using App.Domain.Core.Entites.OutputResult;
 using App.Domain.Core.Entites.Service;
 
 namespace App.Domain.Services.HomeService
 {
-    public class HouseWorkService(IHouseWorkRepository _houseWorkRepository, IHouseWorkDapperRepository _houseWorkDapperRepository) : IHouseWorkService
+    public class HouseWorkService(IHouseWorkRepository _houseWorkRepository, IHouseWorkDapperRepository _houseWorkDapperRepository,ICacheService _cacheService) : IHouseWorkService
     {
         public async Task<Result> CreateService(SummHouseWorkDto service, CancellationToken cancellationToken)
             => await _houseWorkRepository.CreateService(service, cancellationToken);
@@ -16,7 +19,7 @@ namespace App.Domain.Services.HomeService
         public async Task<Result> DeleteHomeService(int id, CancellationToken cancellationToken)
             => await _houseWorkRepository.DeleteHomeService(id, cancellationToken);
 
-        public async Task<List<SummHouseWorkDto>> GetAll( CancellationToken cancellationToken)
+        public async Task<List<SummHouseWorkDto>> GetAll(CancellationToken cancellationToken)
             => await _houseWorkDapperRepository.GetAllAsync(cancellationToken);
 
         public HouseWork GetById(int id)
@@ -26,7 +29,7 @@ namespace App.Domain.Services.HomeService
             => await _houseWorkRepository.GetServiceByChildId(id, cancellationToken);
 
         public async Task<SummHouseWorkDto?> GetServiceById(int id, CancellationToken cancellationToken)
-            =>await _houseWorkRepository.GetServiceById(id, cancellationToken);
+            => await _houseWorkRepository.GetServiceById(id, cancellationToken);
         public async Task<int> GetServiceCount(int categoryId)
             => await _houseWorkRepository.GetServiceCount(categoryId);
 
@@ -36,10 +39,16 @@ namespace App.Domain.Services.HomeService
         public async Task<List<SummHouseWorkDto>> GetServicesByChildId(int id, CancellationToken cancellationToken)
             => await _houseWorkRepository.GetServicesByChildId(id, cancellationToken);
 
-        public async Task<List<SummHouseWorkDto>> GetServicesByCategoryId(int id ,CancellationToken cancellationToken)
-            => await _houseWorkRepository.GetServicesByCategoryId(id , cancellationToken);
-
-
+        public async Task<List<SummHouseWorkDto>> GetServicesByCategoryId(int id, CancellationToken cancellationToken)
+        {
+            var cacheKey = CacheKeys.AllWorks;
+            var cached = await _cacheService.GetAsync<List<SummHouseWorkDto>>(cacheKey);
+            if (cached is not null)
+                return cached;
+            var works = await _houseWorkRepository.GetServicesByCategoryId(id, cancellationToken);
+            await _cacheService.SetAsync(cacheKey, works, TimeSpan.FromMinutes(10));
+            return works;
+        }
 
         public async Task<Result> SoftDeleteHomeService(HouseWork service, CancellationToken cancellationToken)
             => await _houseWorkRepository.SoftDeleteHomeService(service, cancellationToken);
@@ -50,7 +59,7 @@ namespace App.Domain.Services.HomeService
         public async Task<List<SummHouseWorkDto>> GetServicesById(int id, CancellationToken cancellationToken)
             => await _houseWorkRepository.GetServicesById(id, cancellationToken);
 
-        public async  Task<List<SearchResultDto>> GetForSearch(string item)
+        public async Task<List<SearchResultDto>> GetForSearch(string item)
             => await _houseWorkRepository.GetForSearch(item);
     }
 }

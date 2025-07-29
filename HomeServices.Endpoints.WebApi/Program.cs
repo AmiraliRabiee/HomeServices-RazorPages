@@ -7,6 +7,7 @@ using App.Domain.Core.Contracts.Repository.BaseEntities;
 using App.Domain.Core.Contracts.Repository.HomeServices;
 using App.Domain.Core.Contracts.Repository.User;
 using App.Domain.Core.Contracts.Service.BaseEntities;
+using App.Domain.Core.Contracts.Service.Cache;
 using App.Domain.Core.Contracts.Service.HomeServices;
 using App.Domain.Core.Contracts.Service.User;
 using App.Domain.Core.Entites.User;
@@ -19,11 +20,13 @@ using App.InfraAccess.EFCore.DataAccess.Repositories.User;
 using App.Infrastructure.Dapper;
 using App.Infrastructure.EFCore.DataAccess.Repositories.BaseEntities;
 using App.Infrastructure.EFCore.DataBase.Common;
+using App.Infrastructure.RedisCache;
 using Framework;
 using HomeServices.Endpoints.WebApi.WebFramework;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +35,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<ApiKeyAuthenticationFilter>();
+builder.Services.AddScoped<ICacheService, CacheService>();
 
+//redis register
+builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect("localhost"));
 
 #region User Injects
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -46,7 +52,7 @@ builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IExpertRepository, ExpertRepository>();
 builder.Services.AddScoped<IExpertService, ExpertService>();
 
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+//builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IAdminService, AdminService>();
